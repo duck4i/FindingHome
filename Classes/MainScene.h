@@ -24,6 +24,7 @@ public:
 
 private:
 
+	bool firstBackgroundChange;
 	float backgroundTimer;
 	short lastUsedBackgroundIndex;
 	CCLayerGradient *gback;

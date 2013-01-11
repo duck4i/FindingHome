@@ -24,6 +24,7 @@ CCScene* MainScene::scene()
 bool MainScene::init()
 {	
 	lastUsedBackgroundIndex = 0;
+	firstBackgroundChange = true;
 	backgroundTimer = NULL;
 	gback = CCLayerGradient::create(
 		ccc4(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2], backgroundAlphaStart), 
@@ -112,23 +113,28 @@ void MainScene::tickBackground(float delta)
 
 	if (backgroundTimer >= timeToChange)
 	{
-		lastUsedBackgroundIndex++;
+		if (!firstBackgroundChange)
+			lastUsedBackgroundIndex++;
 		if (lastUsedBackgroundIndex > 2)
 			lastUsedBackgroundIndex = 0;
 		backgroundTimer = 0;
+		firstBackgroundChange = false;
 	}
 
-	ccColor3B currentColor = gback->getStartColor();
-	ccColor3B nextColor = lastUsedBackgroundIndex < 2 ? 
-		ccc3(backgroundMatrix[lastUsedBackgroundIndex + 1][0], backgroundMatrix[lastUsedBackgroundIndex + 1][1], backgroundMatrix[lastUsedBackgroundIndex + 1][2])
-		:
-		ccc3(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2]);
+	if (!firstBackgroundChange)
+	{
+		ccColor3B currentColor = gback->getStartColor();
+		ccColor3B nextColor = lastUsedBackgroundIndex < 2 ? 
+			ccc3(backgroundMatrix[lastUsedBackgroundIndex + 1][0], backgroundMatrix[lastUsedBackgroundIndex + 1][1], backgroundMatrix[lastUsedBackgroundIndex + 1][2])
+			:
+			ccc3(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2]);
 
-	short r = tweenColor(currentColor.r, nextColor.r);
-	short g = tweenColor(currentColor.g, nextColor.g);
-	short b = tweenColor(currentColor.b, nextColor.b);
+		short r = tweenColor(currentColor.r, nextColor.r);
+		short g = tweenColor(currentColor.g, nextColor.g);
+		short b = tweenColor(currentColor.b, nextColor.b);
 	
-	ccColor3B newColor = ccc3(r, g, b);
-	gback->setStartColor(newColor);
-	gback->setEndColor(newColor);
+		ccColor3B newColor = ccc3(r, g, b);
+		gback->setStartColor(newColor);
+		gback->setEndColor(newColor);
+	}
 }
