@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FindingHome.win32", "FindingHome.win32.vcxproj", "{23BB08A0-D2AF-4AE2-9636-1747D598B696}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23BB08A0-D2AF-4AE2-9636-1747D598B696}.Debug|Win32.ActiveCfg = Debug|Win32
+		{23BB08A0-D2AF-4AE2-9636-1747D598B696}.Debug|Win32.Build.0 = Debug|Win32
+		{23BB08A0-D2AF-4AE2-9636-1747D598B696}.Release|Win32.ActiveCfg = Release|Win32
+		{23BB08A0-D2AF-4AE2-9636-1747D598B696}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
