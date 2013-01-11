@@ -24,9 +24,16 @@ public:
 
 private:
 
+	float backgroundTimer;
+	short lastUsedBackgroundIndex;
+	CCLayerGradient *gback;
+
+	void update(float delta);
 	void tickKeyboard(float delta);
+	void tickBackground(float delta);
 
 	CCLayer* whiteBox;
+	CCLayer* blackBox;
 
 };
 
