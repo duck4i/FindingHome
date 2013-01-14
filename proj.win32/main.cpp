@@ -27,6 +27,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     AppDelegate app;
     CCEGLView* eglView = CCEGLView::sharedOpenGLView();
 	eglView->setFrameSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	eglView->setDesignResolutionSize(WINDOW_WIDTH, WINDOW_HEIGHT, kResolutionNoBorder);
 	
 	//	set window name
 	SetWindowText(eglView->getHWnd(), WINDOW_TITLE);
