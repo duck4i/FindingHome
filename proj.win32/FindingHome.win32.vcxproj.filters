@@ -46,6 +46,12 @@
     <ClInclude Include="..\Classes\Settings.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Physics.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GLES-Render.h">
+      <Filter>include\support</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -56,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MainScene.cpp">
       <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GLES-Render.cpp">
+      <Filter>source\support</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

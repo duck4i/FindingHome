@@ -5,9 +5,9 @@
 #include "Box2D/Box2D.h"
 #include "SimpleAudioEngine.h"
 #include "Settings.h"
+#include "GLES-Render.h"
 
 using namespace cocos2d;
-
 
 class MainScene : public CCLayer
 {
@@ -22,6 +22,8 @@ public:
     // implement the "static node()" method manually
 	CREATE_FUNC(MainScene);
 
+	void draw();
+
 private:
 
 	bool firstBackgroundChange;
@@ -35,6 +37,11 @@ private:
 
 	CCLayer* whiteBox;
 	CCLayer* blackBox;
+
+	b2World *boxWorld;
+	bool boxWorldSleep;
+
+	b2Body *boxWhite;
 
 };
 
