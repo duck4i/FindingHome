@@ -22,6 +22,7 @@ public:
     // implement the "static node()" method manually
 	CREATE_FUNC(MainScene);
 
+	GLESDebugDraw *debugDraw;
 	void draw();
 
 private:

@@ -53,13 +53,13 @@ bool MainScene::init()
 	this->boxWorld->SetAllowSleeping(this->boxWorldSleep);			
 	
 	//	setup debug drawing
-	GLESDebugDraw *deb =  new GLESDebugDraw(PTM_RATIO);
-	this->boxWorld->SetDebugDraw(deb);		
+	this->debugDraw =  new GLESDebugDraw(PTM_RATIO);
+	this->boxWorld->SetDebugDraw(this->debugDraw);		
 
-	deb->AppendFlags(GLESDebugDraw::e_shapeBit);
-	deb->AppendFlags(GLESDebugDraw::e_centerOfMassBit);
-	deb->AppendFlags(GLESDebugDraw::e_aabbBit);
-	//	<- ? does it work? seems not.
+	this->debugDraw->AppendFlags(GLESDebugDraw::e_shapeBit);
+	//this->debugDraw->AppendFlags(GLESDebugDraw::e_centerOfMassBit);
+	//this->debugDraw->AppendFlags(GLESDebugDraw::e_aabbBit);
+	//	<- ? does it work? seems not.	
 
 	//	setup ground shape
 	b2BodyDef bb;
@@ -88,7 +88,6 @@ bool MainScene::init()
 	//bfw.friction = 0.3f;
 	bfw.shape = &bpw;
 	boxWhite->CreateFixture(&bfw);	
-
 
 
 	//	process keydown	
@@ -160,12 +159,11 @@ void MainScene::update(float delta)
 
 void MainScene::draw()
 {
-	CCLayer::draw();
-	
-	glDisable(GL_TEXTURE_2D);
-	this->boxWorld->DrawDebugData();	
-	glEnable(GL_TEXTURE_2D);
-	
+	//	check http://asmak9.blogspot.com/2012/08/cocos2d-x-enable-box2d-debugger.html
+
+	CCLayer::draw();	  
+	this->boxWorld->DrawDebugData();
+
 }
 
 void MainScene::tickBackground(float delta)
