@@ -30,12 +30,12 @@ bool MainScene::init()
 		ccc4(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2], backgroundAlphaStart), 
 		ccc4(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2], backgroundAlphaEnd)
 		);
-	//this->addChild(gback);
+	this->addChild(gback);
 	
 	whiteBox = CCLayerColor::create(ccc4(255, 255, 255, 255));
 	whiteBox->setContentSize(CCSizeMake(100, 100));
 	whiteBox->setPosition(ccp(WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2 - 50));
-
+	whiteBox->setAnchorPoint(ccp(0, 0));
 	this->addChild(whiteBox);
 
 	blackBox = CCLayerColor::create(ccc4(0, 0, 0, 255));
@@ -44,7 +44,7 @@ bool MainScene::init()
 	blackBox->setAnchorPoint(ccp(0, 0));
 	this->addChild(blackBox);
 
-	//	setup Physics	
+	//	setup Physics
 	const b2Vec2 gravity(0.0f, -10.0f);
 	this->boxWorldSleep = true;
 
@@ -62,24 +62,22 @@ bool MainScene::init()
 	b2Body* bbb = this->boxWorld->CreateBody(&bb);
 
 	b2PolygonShape bpb;
-	bpb.SetAsBox((WINDOW_WIDTH / 2.0f) / PTM_RATIO, (50 / 2.0f) / PTM_RATIO);
+	bpb.SetAsBox(SCREEN_TO_WORLD(this->blackBox->getContentSize().width), SCREEN_TO_WORLD(this->blackBox->getContentSize().height));
 	bbb->CreateFixture(&bpb, 0.0f);
 
 	//	setup dynamic box
 	b2BodyDef bw;
 	bw.userData = this->whiteBox;
 	bw.type = b2_dynamicBody;
-	bw.position.Set(this->whiteBox->getPositionX(), this->whiteBox->getPositionY());			
-
+	bw.position.Set(SCREEN_TO_WORLD(this->whiteBox->getPositionX()), SCREEN_TO_WORLD(this->whiteBox->getPositionY()));			
 	boxWhite = this->boxWorld->CreateBody(&bw);
 	
 	b2PolygonShape bpw;
-	bpw.SetAsBox(50 / PTM_RATIO, 50 / PTM_RATIO);		
-	//bpw.SetAsBox(1.0f, 1.0f);
+	bpw.SetAsBox(SCREEN_TO_WORLD(this->whiteBox->getContentSize().width / 2), SCREEN_TO_WORLD(this->whiteBox->getContentSize().height / 2));	
 
 	b2FixtureDef bfw;
-	//bfw.density = 1.0f;
-	//bfw.friction = 0.3f;
+	bfw.density = 1.0f;
+	bfw.friction = 0.3f;
 	bfw.shape = &bpw;
 	boxWhite->CreateFixture(&bfw);	
 
@@ -144,7 +142,7 @@ void MainScene::update(float delta)
 		if (s != NULL)
 		{
 			b2Vec2 pos = b->GetPosition();
-			s->setPosition(ccp(pos.x, pos.y));
+			s->setPosition(ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y)));
 			s->setRotation(CC_RADIANS_TO_DEGREES(b->GetAngle()));
 			CCLog("New pos: %f %f", pos.x, pos.y);
 		}
