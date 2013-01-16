@@ -52,6 +52,9 @@
     <ClInclude Include="..\Classes\GLES-Render.h">
       <Filter>include\support</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\B2DebugDrawLayer.h">
+      <Filter>include\support</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -64,6 +67,9 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GLES-Render.cpp">
+      <Filter>source\support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\B2DebugDrawLayer.cpp">
       <Filter>source\support</Filter>
     </ClCompile>
   </ItemGroup>

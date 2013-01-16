@@ -22,7 +22,7 @@ CCScene* MainScene::scene()
 }
 
 bool MainScene::init()
-{	
+{
 	lastUsedBackgroundIndex = 0;
 	firstBackgroundChange = true;
 	backgroundTimer = NULL;
@@ -30,7 +30,7 @@ bool MainScene::init()
 		ccc4(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2], backgroundAlphaStart), 
 		ccc4(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2], backgroundAlphaEnd)
 		);
-	this->addChild(gback);
+	//this->addChild(gback);
 	
 	whiteBox = CCLayerColor::create(ccc4(255, 255, 255, 255));
 	whiteBox->setContentSize(CCSizeMake(100, 100));
@@ -44,7 +44,6 @@ bool MainScene::init()
 	blackBox->setAnchorPoint(ccp(0, 0));
 	this->addChild(blackBox);
 
-
 	//	setup Physics	
 	const b2Vec2 gravity(0.0f, -10.0f);
 	this->boxWorldSleep = true;
@@ -53,13 +52,7 @@ bool MainScene::init()
 	this->boxWorld->SetAllowSleeping(this->boxWorldSleep);			
 	
 	//	setup debug drawing
-	this->debugDraw =  new GLESDebugDraw(PTM_RATIO);
-	this->boxWorld->SetDebugDraw(this->debugDraw);		
-
-	this->debugDraw->AppendFlags(GLESDebugDraw::e_shapeBit);
-	//this->debugDraw->AppendFlags(GLESDebugDraw::e_centerOfMassBit);
-	//this->debugDraw->AppendFlags(GLESDebugDraw::e_aabbBit);
-	//	<- ? does it work? seems not.	
+	this->addChild(B2DebugDrawLayer::create(this->boxWorld, PTM_RATIO), 9999);	
 
 	//	setup ground shape
 	b2BodyDef bb;
@@ -69,8 +62,8 @@ bool MainScene::init()
 	b2Body* bbb = this->boxWorld->CreateBody(&bb);
 
 	b2PolygonShape bpb;
-	bpb.SetAsBox((WINDOW_WIDTH / 2) / PTM_RATIO, (50 / 2) / PTM_RATIO);
-	bbb->CreateFixture(&bpb, 0.0f);	
+	bpb.SetAsBox((WINDOW_WIDTH / 2.0f) / PTM_RATIO, (50 / 2.0f) / PTM_RATIO);
+	bbb->CreateFixture(&bpb, 0.0f);
 
 	//	setup dynamic box
 	b2BodyDef bw;
@@ -82,6 +75,7 @@ bool MainScene::init()
 	
 	b2PolygonShape bpw;
 	bpw.SetAsBox(50 / PTM_RATIO, 50 / PTM_RATIO);		
+	//bpw.SetAsBox(1.0f, 1.0f);
 
 	b2FixtureDef bfw;
 	//bfw.density = 1.0f;
@@ -157,14 +151,6 @@ void MainScene::update(float delta)
 	}	
 }
 
-void MainScene::draw()
-{
-	//	check http://asmak9.blogspot.com/2012/08/cocos2d-x-enable-box2d-debugger.html
-
-	CCLayer::draw();	  
-	this->boxWorld->DrawDebugData();
-
-}
 
 void MainScene::tickBackground(float delta)
 {
