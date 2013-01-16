@@ -40,7 +40,7 @@ bool MainScene::init()
 
 	blackBox = CCLayerColor::create(ccc4(0, 0, 0, 255));
 	blackBox->setContentSize(CCSizeMake(WINDOW_WIDTH, 50));
-	blackBox->setPosition(ccp(0, 0));
+	blackBox->setPosition(ccp(0, 100));
 	blackBox->setAnchorPoint(ccp(0, 0));
 	this->addChild(blackBox);
 
@@ -57,7 +57,7 @@ bool MainScene::init()
 	//	setup ground shape
 	b2BodyDef bb;
 	bb.userData = this->blackBox;
-	bb.position.Set(this->blackBox->getPositionX(), this->blackBox->getPositionY());
+	bb.position.Set(SCREEN_TO_WORLD(this->blackBox->getPositionX()), SCREEN_TO_WORLD(this->blackBox->getPositionY()));
 
 	b2Body* bbb = this->boxWorld->CreateBody(&bb);
 
@@ -78,7 +78,7 @@ bool MainScene::init()
 	b2FixtureDef bfw;
 	bfw.density = 1.0f;
 	bfw.friction = 0.3f;
-	bfw.shape = &bpw;
+	bfw.shape = &bpw;	
 	boxWhite->CreateFixture(&bfw);	
 
 
