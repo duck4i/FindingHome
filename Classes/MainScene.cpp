@@ -130,6 +130,7 @@ void MainScene::updateKeyboard(float delta)
 
 	short zoomIn = GetKeyState(VK_OEM_PLUS);
 	short zoomOut = GetKeyState(VK_OEM_MINUS);
+	short zoomReset = GetKeyState(VK_BACK);
 	
 	long down = 0x8000; // hi bit
 	short step = 30.0f;
@@ -178,6 +179,11 @@ void MainScene::updateKeyboard(float delta)
 	{
 		this->sceneScale -= scaleStep;
 		this->worldLayer->setScale(sceneScale);
+	}
+	else if (zoomReset & down)
+	{
+		this->sceneScale = 1.0f;
+		this->worldLayer->setScale(this->sceneScale);
 	}
 
 }
