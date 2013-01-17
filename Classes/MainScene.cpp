@@ -179,6 +179,7 @@ void MainScene::updateKeyboard(float delta)
 	else if (zoomOut & down)
 	{
 		this->sceneScale -= scaleStep;
+		this->sceneScale = max(this->sceneScale, 0.01f); // no less than 0.01
 		this->worldLayer->setScale(sceneScale);
 	}
 	else if (zoomReset & down)
