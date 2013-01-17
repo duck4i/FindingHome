@@ -6,7 +6,7 @@
 #include "SimpleAudioEngine.h"
 #include "Settings.h"
 #include "B2DebugDrawLayer.h"
-
+#include "LevelLoader.h"
 
 using namespace cocos2d;
 

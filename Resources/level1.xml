@@ -12,11 +12,11 @@
                     <Width>1411</Width>
                     <Height>67</Height>
                     <FillColor>
-                        <R>192</R>
-                        <G>0</G>
-                        <B>192</B>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>0</B>
                         <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
+                        <PackedValue>2449473280</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0002" Visible="true">
@@ -40,7 +40,11 @@
                         <X>-512</X>
                         <Y>64</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Player" Type="bool" Description="">
+                            <boolean>false</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0.0121597648</Rotation>
                     <Scale>
                         <X>1</X>
@@ -79,12 +83,12 @@
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0029" Visible="true">
                     <Position>
-                        <X>725</X>
-                        <Y>447</Y>
+                        <X>755</X>
+                        <Y>460</Y>
                     </Position>
                     <CustomProperties />
-                    <Width>1729</Width>
-                    <Height>69</Height>
+                    <Width>1292</Width>
+                    <Height>75</Height>
                     <FillColor>
                         <R>192</R>
                         <G>0</G>
@@ -165,11 +169,11 @@
                     <CustomProperties />
                     <Radius>39</Radius>
                     <FillColor>
-                        <R>255</R>
-                        <G>0</G>
-                        <B>0</B>
+                        <R>153</R>
+                        <G>180</G>
+                        <B>209</B>
                         <A>145</A>
-                        <PackedValue>2449408000</PackedValue>
+                        <PackedValue>2442769617</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="CircleItem" Name="Circle_0035" Visible="true">
@@ -192,14 +196,18 @@
                         <X>4045</X>
                         <Y>-123</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="dynamic" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Radius>39</Radius>
                     <FillColor>
-                        <R>255</R>
+                        <R>0</R>
                         <G>0</G>
-                        <B>0</B>
+                        <B>255</B>
                         <A>145</A>
-                        <PackedValue>2449408000</PackedValue>
+                        <PackedValue>2432696575</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0037" Visible="true">
@@ -220,11 +228,11 @@
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0038" Visible="true">
                     <Position>
-                        <X>5406</X>
+                        <X>5451</X>
                         <Y>-853</Y>
                     </Position>
                     <CustomProperties />
-                    <Width>120</Width>
+                    <Width>75</Width>
                     <Height>916</Height>
                     <FillColor>
                         <R>192</R>
@@ -236,18 +244,22 @@
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Finish" Visible="true">
                     <Position>
-                        <X>4897</X>
+                        <X>5130</X>
                         <Y>-117</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Finish" Type="bool" Description="">
+                            <boolean>false</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Width>103</Width>
                     <Height>170</Height>
                     <FillColor>
-                        <R>192</R>
-                        <G>0</G>
-                        <B>192</B>
+                        <R>128</R>
+                        <G>128</G>
+                        <B>128</B>
                         <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
+                        <PackedValue>2441117824</PackedValue>
                     </FillColor>
                 </Item>
             </Items>
@@ -256,14 +268,21 @@
                 <Y>1</Y>
             </ScrollSpeed>
         </Layer>
+        <Layer Name="background" Visible="true">
+            <Items />
+            <ScrollSpeed>
+                <X>1</X>
+                <Y>1</Y>
+            </ScrollSpeed>
+        </Layer>
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>41</NextItemNumber>
+        <NextItemNumber>44</NextItemNumber>
         <ContentRootFolder>C:\</ContentRootFolder>
         <CameraPosition>
-            <X>1771.264</X>
-            <Y>-280.8334</Y>
+            <X>2615.416</X>
+            <Y>23.333252</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>
