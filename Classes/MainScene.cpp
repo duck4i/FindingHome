@@ -31,56 +31,10 @@ bool MainScene::init()
 		ccc4(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2], backgroundAlphaEnd)
 		);
 	this->addChild(gback);
-	
-	whiteBox = CCLayerColor::create(ccc4(255, 255, 255, 255));
-	whiteBox->setContentSize(CCSizeMake(100, 100));
-	whiteBox->setPosition(ccp(WINDOW_WIDTH / 2 - 50, WINDOW_HEIGHT / 2 - 50));
-	whiteBox->setAnchorPoint(ccp(0, 0));
-	this->addChild(whiteBox);
 
-	blackBox = CCLayerColor::create(ccc4(0, 0, 0, 255));
-	blackBox->setContentSize(CCSizeMake(WINDOW_WIDTH, 50));
-	blackBox->setPosition(ccp(0, 100));
-	blackBox->setAnchorPoint(ccp(0, 0));
-	this->addChild(blackBox);
-
-	//	setup Physics
-	const b2Vec2 gravity(0.0f, -10.0f);
-	this->boxWorldSleep = true;
-
-	this->boxWorld = new b2World(gravity);
-	this->boxWorld->SetAllowSleeping(this->boxWorldSleep);			
-	
-	//	setup debug drawing
-	this->addChild(B2DebugDrawLayer::create(this->boxWorld, PTM_RATIO), 9999);	
-
-	//	setup ground shape
-	b2BodyDef bb;
-	bb.userData = this->blackBox;
-	bb.position.Set(SCREEN_TO_WORLD(this->blackBox->getPositionX()), SCREEN_TO_WORLD(this->blackBox->getPositionY()));
-
-	b2Body* bbb = this->boxWorld->CreateBody(&bb);
-
-	b2PolygonShape bpb;
-	bpb.SetAsBox(SCREEN_TO_WORLD(this->blackBox->getContentSize().width), SCREEN_TO_WORLD(this->blackBox->getContentSize().height));
-	bbb->CreateFixture(&bpb, 0.0f);
-
-	//	setup dynamic box
-	b2BodyDef bw;
-	bw.userData = this->whiteBox;
-	bw.type = b2_dynamicBody;
-	bw.position.Set(SCREEN_TO_WORLD(this->whiteBox->getPositionX()), SCREEN_TO_WORLD(this->whiteBox->getPositionY()));			
-	boxWhite = this->boxWorld->CreateBody(&bw);
-	
-	b2PolygonShape bpw;
-	bpw.SetAsBox(SCREEN_TO_WORLD(this->whiteBox->getContentSize().width / 2), SCREEN_TO_WORLD(this->whiteBox->getContentSize().height / 2));	
-
-	b2FixtureDef bfw;
-	bfw.density = 1.0f;
-	bfw.friction = 0.3f;
-	bfw.shape = &bpw;	
-	boxWhite->CreateFixture(&bfw);	
-
+	//	setup physics object
+	this->setupPhysics();
+	this->addBodies();
 
 	//	process keydown	
 	this->schedule(schedule_selector(MainScene::tickKeyboard));
@@ -92,6 +46,61 @@ bool MainScene::init()
 	return true;
 }
 
+void MainScene::addBodies()
+{
+	//	setup ground shape
+	blackBox = CCLayerColor::create(ccc4(0, 0, 0, 255));
+	blackBox->setContentSize(CCSizeMake(WINDOW_WIDTH, 50));
+	blackBox->setPosition(ccp(0, 100));
+	blackBox->setAnchorPoint(ccp(0, 0));
+	this->addChild(blackBox);
+
+	b2BodyDef bb;
+	bb.userData = this->blackBox;
+	bb.position.Set(SCREEN_TO_WORLD(this->blackBox->getPositionX()), SCREEN_TO_WORLD(this->blackBox->getPositionY()));
+
+	b2Body* bbb = this->boxWorld->CreateBody(&bb);
+
+	b2PolygonShape bpb;
+	bpb.SetAsBox(SCREEN_TO_WORLD(this->blackBox->getContentSize().width), SCREEN_TO_WORLD(this->blackBox->getContentSize().height));
+	bbb->CreateFixture(&bpb, 0.0f);
+
+	//	setup dynamic box
+	whiteBox = CCSprite::create("..\\Resources\\dog.png");
+	
+	b2Vec2 whiteBoxPos(WINDOW_WIDTH / 2 - whiteBox->getContentSize().width / 2, WINDOW_HEIGHT / 2 - whiteBox->getContentSize().height / 2);
+	
+	this->addChild(whiteBox);
+
+	b2BodyDef bw;
+	bw.userData = this->whiteBox;
+	bw.type = b2_dynamicBody;
+	bw.position.Set(SCREEN_TO_WORLD(whiteBoxPos.x), SCREEN_TO_WORLD(whiteBoxPos.y));
+	boxWhite = this->boxWorld->CreateBody(&bw);
+	
+	b2PolygonShape bpw;	
+	bpw.SetAsBox(SCREEN_TO_WORLD(whiteBox->getContentSize().width / 2), SCREEN_TO_WORLD(whiteBox->getContentSize().height / 2));
+
+	b2FixtureDef bfw;
+	bfw.density = 1.0f;
+	bfw.friction = 0.3f;
+	bfw.shape = &bpw;	
+	boxWhite->CreateFixture(&bfw);	
+}
+
+void MainScene::setupPhysics()
+{
+	//	setup Physics
+	const b2Vec2 gravity(0.0f, -10.0f);
+	this->boxWorldSleep = true;
+
+	this->boxWorld = new b2World(gravity);
+	this->boxWorld->SetAllowSleeping(this->boxWorldSleep);			
+	
+	//	setup debug drawing
+	this->addChild(B2DebugDrawLayer::create(this->boxWorld, PTM_RATIO), 9999);	
+}
+
 void MainScene::tickKeyboard(float delta)
 {
 	//CCLog("Tick keyboard");
@@ -101,7 +110,7 @@ void MainScene::tickKeyboard(float delta)
 	short u = GetKeyState(VK_UP);
 
 	long down = 0x8000; // hi bit
-	short step = 50.0f;
+	short step = 20.0f;
 
 	float x = whiteBox->getPositionX();
 	float y = whiteBox->getPositionY();
@@ -116,7 +125,7 @@ void MainScene::tickKeyboard(float delta)
 		y += step;	
 
 	//whiteBox->setPosition(x, y);
-	boxWhite->ApplyForce(b2Vec2(x - whiteBox->getPositionX(), y - whiteBox->getPositionY()), b2Vec2(0, 0));
+	boxWhite->ApplyForce(b2Vec2(x - whiteBox->getPositionX(), y - whiteBox->getPositionY()), b2Vec2(SCREEN_TO_WORLD(0), SCREEN_TO_WORLD(20)));
 }
 
 short tweenColor(short start, short end)
@@ -143,7 +152,7 @@ void MainScene::update(float delta)
 		{
 			b2Vec2 pos = b->GetPosition();
 			s->setPosition(ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y)));
-			s->setRotation(CC_RADIANS_TO_DEGREES(b->GetAngle()));
+			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
 			CCLog("New pos: %f %f", pos.x, pos.y);
 		}
 	}	

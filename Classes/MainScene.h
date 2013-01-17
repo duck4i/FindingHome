@@ -33,13 +33,17 @@ private:
 	void tickKeyboard(float delta);
 	void tickBackground(float delta);
 
-	CCLayer* whiteBox;
+	CCNode* whiteBox;
 	CCLayer* blackBox;
+	b2Body *boxWhite;
 
+	void addBodies();
+	
 	b2World *boxWorld;
 	bool boxWorldSleep;
-
-	b2Body *boxWhite;
+	
+	void setupPhysics();
+	
 
 };
 
