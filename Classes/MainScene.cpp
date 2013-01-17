@@ -154,7 +154,7 @@ void MainScene::updateKeyboard(float delta)
 
 	if (y && !midAir)
 		playerBody->ApplyLinearImpulse(b2Vec2(0, step), playerBody->GetWorldCenter());
-	if (x && !topSpeed)
+	if (x && !midAir && !topSpeed)
 		playerBody->ApplyForce(b2Vec2(x, 0), playerBody->GetWorldCenter());	
 	
 	//	Check player direction
@@ -169,7 +169,7 @@ void MainScene::updateKeyboard(float delta)
 		player->runAction(CCFlipX::create(false));
 	}
 
-	//	now check for scaling
+	//	now check for scaling keys
 	float scaleStep = 0.01f;
 	if (zoomIn & down)
 	{
