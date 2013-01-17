@@ -9,6 +9,12 @@
 
 using namespace cocos2d;
 
+enum PlayerDirection
+{
+	PlayerDirectionLeft,
+	PlayerDirectionRight
+};
+
 class MainScene : public CCLayer
 {
 
@@ -22,12 +28,7 @@ public:
     // implement the "static node()" method manually
 	CREATE_FUNC(MainScene);
 
-	~MainScene()
-	{
-		CCLog("MainScene destructor called");
-		if (boxWorld)
-			delete boxWorld;
-	}
+	~MainScene();
 
 private:
 
@@ -40,7 +41,9 @@ private:
 	void tickKeyboard(float delta);
 	void tickBackground(float delta);
 
-	CCNode* whiteBox;
+	CCNode* player;
+	PlayerDirection direction;
+
 	CCLayer* blackBox;
 	b2Body *boxWhite;
 

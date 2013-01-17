@@ -21,6 +21,13 @@ CCScene* MainScene::scene()
 	return scene;
 }
 
+MainScene::~MainScene()
+{
+	CCLog("MainScene destructor called");
+	if (boxWorld)
+		delete boxWorld;	
+}
+
 bool MainScene::init()
 {
 	lastUsedBackgroundIndex = 0;
@@ -35,6 +42,8 @@ bool MainScene::init()
 	//	setup physics object
 	this->setupPhysics();
 	this->addBodies();
+
+	direction = PlayerDirectionRight;
 
 	//	process keydown	
 	//this->schedule(schedule_selector(MainScene::tickKeyboard));	
@@ -67,20 +76,20 @@ void MainScene::addBodies()
 	bbb->CreateFixture(&bpb, 0.0f);
 
 	//	setup dynamic box
-	whiteBox = CCSprite::create("..\\Resources\\dog.png");
+	player = CCSprite::create("..\\Resources\\dog.png");
 	
-	b2Vec2 whiteBoxPos(WINDOW_WIDTH / 2 - whiteBox->getContentSize().width / 2, WINDOW_HEIGHT / 2 - whiteBox->getContentSize().height / 2);
+	b2Vec2 playerPos(WINDOW_WIDTH / 2 - player->getContentSize().width / 2, WINDOW_HEIGHT / 2 - player->getContentSize().height / 2);
 	
-	this->addChild(whiteBox);
+	this->addChild(player);
 
 	b2BodyDef bw;
-	bw.userData = this->whiteBox;
+	bw.userData = this->player;
 	bw.type = b2_dynamicBody;
-	bw.position.Set(SCREEN_TO_WORLD(whiteBoxPos.x), SCREEN_TO_WORLD(whiteBoxPos.y));
+	bw.position.Set(SCREEN_TO_WORLD(playerPos.x), SCREEN_TO_WORLD(playerPos.y));
 	boxWhite = this->boxWorld->CreateBody(&bw);
 	
 	b2PolygonShape bpw;	
-	bpw.SetAsBox(SCREEN_TO_WORLD(whiteBox->getContentSize().width / 2), SCREEN_TO_WORLD(whiteBox->getContentSize().height / 2));
+	bpw.SetAsBox(SCREEN_TO_WORLD(player->getContentSize().width / 2), SCREEN_TO_WORLD(player->getContentSize().height / 2));
 
 	b2FixtureDef bfw;
 	bfw.density = 1.0f;
@@ -128,12 +137,26 @@ void MainScene::tickKeyboard(float delta)
 	b2Vec2 vel = boxWhite->GetLinearVelocity();
 	bool midAir = abs(vel.y) >= 0.01f;
 	bool topSpeed = abs(vel.x) >= 5.0f;
-	CCLog("Velocity x: %f y: %f Y: %f", vel.x, vel.y, y);
+	//CCLog("Velocity x: %f y: %f Y: %f", vel.x, vel.y, y);
 
 	if (y && !midAir)
 		boxWhite->ApplyLinearImpulse(b2Vec2(0, step), boxWhite->GetWorldCenter());
 	if (x && !topSpeed)
 		boxWhite->ApplyForce(b2Vec2(x, 0), boxWhite->GetWorldCenter());	
+		
+
+	//	Check player direction
+	if (x < 0 && direction == PlayerDirectionRight)
+	{
+		direction = PlayerDirectionLeft;
+		player->runAction(CCFlipX::create(true));
+	}
+	else if (x > 0 && direction == PlayerDirectionLeft)
+	{
+		direction = PlayerDirectionRight;
+		player->runAction(CCFlipX::create(false));
+	}
+
 }
 
 short tweenColor(short start, short end)
