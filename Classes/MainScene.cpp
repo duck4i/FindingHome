@@ -110,22 +110,27 @@ void MainScene::tickKeyboard(float delta)
 	short u = GetKeyState(VK_UP);
 
 	long down = 0x8000; // hi bit
-	short step = 20.0f;
+	short step = 30.0f;
 
-	float x = whiteBox->getPositionX();
-	float y = whiteBox->getPositionY();
+	float x = 0;
+	float y = 0;
 	
-	if (l & down)	
+	if (l & down)
 		x -= step;	
 	if (r & down)	
 		x += step;	
-	if (d & down && y > blackBox->getContentSize().height)	
-		y -= step;	
+	//if (d & down)	
+	//	y -= step;	
 	if (u & down)	
 		y += step;	
+	
+	b2Vec2 vel = boxWhite->GetLinearVelocity();
+	CCLog("Velocity x: %f y: %f Y: %f", vel.x, vel.y, y);
 
-	//whiteBox->setPosition(x, y);
-	boxWhite->ApplyForce(b2Vec2(x - whiteBox->getPositionX(), y - whiteBox->getPositionY()), b2Vec2(SCREEN_TO_WORLD(0), SCREEN_TO_WORLD(20)));
+	if (y && abs(boxWhite->GetLinearVelocity().y) <= 0.0f)
+		boxWhite->ApplyLinearImpulse(b2Vec2(0, step), boxWhite->GetWorldCenter());
+	else
+		boxWhite->ApplyForce(b2Vec2(x, 0), boxWhite->GetWorldCenter());	
 }
 
 short tweenColor(short start, short end)
