@@ -7,6 +7,7 @@
 #include "Settings.h"
 #include "B2DebugDrawLayer.h"
 
+
 using namespace cocos2d;
 
 enum PlayerDirection
@@ -28,7 +29,7 @@ public:
     // implement the "static node()" method manually
 	CREATE_FUNC(MainScene);
 
-	~MainScene();
+	~MainScene();	
 
 private:
 
@@ -38,8 +39,11 @@ private:
 	CCLayerGradient *gback;
 
 	void update(float delta);
-	void tickKeyboard(float delta);
-	void tickBackground(float delta);
+	
+	void updateBackground(float delta);
+
+	float sceneScale;
+	void updateKeyboard(float delta);
 
 	CCNode* player;
 	PlayerDirection direction;
@@ -52,8 +56,13 @@ private:
 	b2World *boxWorld;
 	bool boxWorldSleep;
 	
-	void setupPhysics();
-	
+	void setupPhysics();		
+
+	//	touch events
+	//void ccTouchesBegan(
+	void ccTouchesBegan(CCSet* touches, CCEvent* event);
+	void ccTouchesEnded(CCSet* touches, CCEvent* event);
+	void ccTouchesMoved(CCSet* touches, CCEvent* event);
 
 };
 

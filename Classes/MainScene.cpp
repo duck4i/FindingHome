@@ -44,14 +44,16 @@ bool MainScene::init()
 	this->addBodies();
 
 	direction = PlayerDirectionRight;
+	sceneScale = this->getScale();
 
 	//	process keydown	
 	//this->schedule(schedule_selector(MainScene::tickKeyboard));	
 
 	this->scheduleUpdate();
-	this->schedule(schedule_selector(MainScene::tickBackground));
+	this->schedule(schedule_selector(MainScene::updateBackground));
 
 	this->setKeypadEnabled(true);
+	this->setTouchEnabled(true);
 
 	return true;
 }
@@ -111,14 +113,17 @@ void MainScene::setupPhysics()
 	this->addChild(B2DebugDrawLayer::create(this->boxWorld, PTM_RATIO), 9999);	
 }
 
-void MainScene::tickKeyboard(float delta)
+void MainScene::updateKeyboard(float delta)
 {
 	//CCLog("Tick keyboard");
 	short l = GetKeyState(VK_LEFT);
 	short r = GetKeyState(VK_RIGHT);
 	short d = GetKeyState(VK_DOWN);
-	short u = GetKeyState(VK_UP);
+	short u = GetKeyState(VK_UP);	
 
+	short zoomIn = GetKeyState(VK_OEM_PLUS);
+	short zoomOut = GetKeyState(VK_OEM_MINUS);
+	
 	long down = 0x8000; // hi bit
 	short step = 30.0f;
 
@@ -132,19 +137,18 @@ void MainScene::tickKeyboard(float delta)
 	//if (d & down)	
 	//	y -= step;	
 	if (u & down)	
-		y += step;	
+		y += step;
+	
 	
 	b2Vec2 vel = boxWhite->GetLinearVelocity();
 	bool midAir = abs(vel.y) >= 0.01f;
 	bool topSpeed = abs(vel.x) >= 5.0f;
-	//CCLog("Velocity x: %f y: %f Y: %f", vel.x, vel.y, y);
 
 	if (y && !midAir)
 		boxWhite->ApplyLinearImpulse(b2Vec2(0, step), boxWhite->GetWorldCenter());
 	if (x && !topSpeed)
 		boxWhite->ApplyForce(b2Vec2(x, 0), boxWhite->GetWorldCenter());	
-		
-
+	
 	//	Check player direction
 	if (x < 0 && direction == PlayerDirectionRight)
 	{
@@ -155,6 +159,19 @@ void MainScene::tickKeyboard(float delta)
 	{
 		direction = PlayerDirectionRight;
 		player->runAction(CCFlipX::create(false));
+	}
+
+	//	now check for scaling
+	float scaleStep = 0.01;
+	if (zoomIn & down)
+	{
+		this->sceneScale += scaleStep;
+		this->setScale(sceneScale);		
+	}
+	else if (zoomOut & down)
+	{
+		this->sceneScale -= scaleStep;
+		this->setScale(sceneScale);
 	}
 
 }
@@ -183,16 +200,15 @@ void MainScene::update(float delta)
 			b2Vec2 pos = b->GetPosition();
 			s->setPosition(ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y)));
 			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
-			CCLog("New pos: %f %f", pos.x, pos.y);
+			//CCLog("New pos: %f %f", pos.x, pos.y);
 		}
 	}
 
 	//	Now keyboard update
-	tickKeyboard(0);
+	updateKeyboard(0);
 }
 
-
-void MainScene::tickBackground(float delta)
+void MainScene::updateBackground(float delta)
 {
 	//	update background color
 	short timeToChange = 15;
@@ -225,4 +241,29 @@ void MainScene::tickBackground(float delta)
 		gback->setStartColor(newColor);
 		gback->setEndColor(newColor);
 	}
+}
+
+void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
+{
+	CCLog("Touches began");
+}
+
+void MainScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
+{
+	CCLog("Touches ended");
+}
+
+void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
+{
+	CCLog("Touch moved");
+	CCTouch *t = (CCTouch*) touches->anyObject();
+	if (!t)
+		return;
+	
+	CCPoint loc = t->getLocationInView();
+	CCPoint locPrev = t->getPreviousLocationInView();
+
+	CCPoint diff = ccpSub(loc, locPrev);
+	diff.y *= -1;
+	this->setPosition(ccpAdd(this->getPosition(), diff));
 }
