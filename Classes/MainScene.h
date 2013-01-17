@@ -22,6 +22,13 @@ public:
     // implement the "static node()" method manually
 	CREATE_FUNC(MainScene);
 
+	~MainScene()
+	{
+		CCLog("MainScene destructor called");
+		if (boxWorld)
+			delete boxWorld;
+	}
+
 private:
 
 	bool firstBackgroundChange;

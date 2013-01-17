@@ -25,8 +25,20 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     // create the application instance
     AppDelegate app;
-    CCEGLView* eglView = CCEGLView::sharedOpenGLView();
-	eglView->setFrameSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    CCEGLView* eglView = CCEGLView::sharedOpenGLView();		
+
+	bool fullScreen = false;
+	if (fullScreen)
+	{
+		HWND desktop = GetDesktopWindow();
+		RECT r; 
+		GetClientRect(desktop, &r);
+		eglView->setFrameSize(r.right, r.bottom);
+	}
+	else
+		eglView->setFrameSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	//	no matter what resolution design size is the same.
 	eglView->setDesignResolutionSize(WINDOW_WIDTH, WINDOW_HEIGHT, kResolutionNoBorder);
 	
 	//	set window name

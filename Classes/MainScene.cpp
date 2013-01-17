@@ -126,7 +126,7 @@ void MainScene::tickKeyboard(float delta)
 		y += step;	
 	
 	b2Vec2 vel = boxWhite->GetLinearVelocity();
-	bool midAir = vel.y != 0;
+	bool midAir = abs(vel.y) >= 0.01f;
 	bool topSpeed = abs(vel.x) >= 5.0f;
 	CCLog("Velocity x: %f y: %f Y: %f", vel.x, vel.y, y);
 
