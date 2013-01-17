@@ -55,6 +55,9 @@
     <ClInclude Include="..\Classes\B2DebugDrawLayer.h">
       <Filter>include\support</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\LevelLoader.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -71,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\B2DebugDrawLayer.cpp">
       <Filter>source\support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LevelLoader.cpp">
+      <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

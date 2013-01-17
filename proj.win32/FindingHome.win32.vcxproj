@@ -127,6 +127,7 @@
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\B2DebugDrawLayer.h" />
     <ClInclude Include="..\Classes\GLES-Render.h" />
+    <ClInclude Include="..\Classes\LevelLoader.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\Physics.h" />
     <ClInclude Include="..\Classes\Settings.h" />
@@ -137,6 +138,7 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\B2DebugDrawLayer.cpp" />
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\LevelLoader.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
