@@ -39,15 +39,16 @@ bool MainScene::init()
 		);
 	this->addChild(gback);
 
-	//	setup physics object
-	this->setupPhysics();
-	this->addBodies();
+	this->worldLayer = CCLayer::create();
+	this->addChild(worldLayer);
 
+	this->debugLayer = NULL;
 	direction = PlayerDirectionRight;
 	sceneScale = this->getScale();
 
-	//	process keydown	
-	//this->schedule(schedule_selector(MainScene::tickKeyboard));	
+	//	setup physics object
+	this->setupPhysics();
+	this->addBodies();
 
 	this->scheduleUpdate();
 	this->schedule(schedule_selector(MainScene::updateBackground));
@@ -56,48 +57,6 @@ bool MainScene::init()
 	this->setTouchEnabled(true);
 
 	return true;
-}
-
-void MainScene::addBodies()
-{
-	//	setup ground shape
-	blackBox = CCLayerColor::create(ccc4(0, 0, 0, 255));
-	blackBox->setContentSize(CCSizeMake(WINDOW_WIDTH, 50));
-	blackBox->setPosition(ccp(0, 100));
-	blackBox->setAnchorPoint(ccp(0, 0));
-	this->addChild(blackBox);
-
-	b2BodyDef bb;
-	bb.userData = this->blackBox;
-	bb.position.Set(SCREEN_TO_WORLD(this->blackBox->getPositionX()), SCREEN_TO_WORLD(this->blackBox->getPositionY()));
-
-	b2Body* bbb = this->boxWorld->CreateBody(&bb);
-
-	b2PolygonShape bpb;
-	bpb.SetAsBox(SCREEN_TO_WORLD(this->blackBox->getContentSize().width), SCREEN_TO_WORLD(this->blackBox->getContentSize().height));
-	bbb->CreateFixture(&bpb, 0.0f);
-
-	//	setup dynamic box
-	player = CCSprite::create("..\\Resources\\dog.png");
-	
-	b2Vec2 playerPos(WINDOW_WIDTH / 2 - player->getContentSize().width / 2, WINDOW_HEIGHT / 2 - player->getContentSize().height / 2);
-	
-	this->addChild(player);
-
-	b2BodyDef bw;
-	bw.userData = this->player;
-	bw.type = b2_dynamicBody;
-	bw.position.Set(SCREEN_TO_WORLD(playerPos.x), SCREEN_TO_WORLD(playerPos.y));
-	boxWhite = this->boxWorld->CreateBody(&bw);
-	
-	b2PolygonShape bpw;	
-	bpw.SetAsBox(SCREEN_TO_WORLD(player->getContentSize().width / 2), SCREEN_TO_WORLD(player->getContentSize().height / 2));
-
-	b2FixtureDef bfw;
-	bfw.density = 1.0f;
-	bfw.friction = 0.3f;
-	bfw.shape = &bpw;	
-	boxWhite->CreateFixture(&bfw);	
 }
 
 void MainScene::setupPhysics()
@@ -109,9 +68,57 @@ void MainScene::setupPhysics()
 	this->boxWorld = new b2World(gravity);
 	this->boxWorld->SetAllowSleeping(this->boxWorldSleep);			
 	
-	//	setup debug drawing
-	this->addChild(B2DebugDrawLayer::create(this->boxWorld, PTM_RATIO), 9999);	
+	//	setup debug drawing	
+	if (true)
+	{
+		this->debugLayer = B2DebugDrawLayer::create(this->boxWorld, PTM_RATIO);
+		this->worldLayer->addChild(this->debugLayer, 9999);	
+	}
 }
+
+void MainScene::addBodies()
+{
+	//	setup ground shape
+	CCLayer *blackBox = CCLayerColor::create(ccc4(0, 0, 0, 255));
+	blackBox->setContentSize(CCSizeMake(WINDOW_WIDTH, 50));
+	blackBox->setPosition(ccp(0, 100));
+	blackBox->setAnchorPoint(ccp(0, 0));
+	worldLayer->addChild(blackBox);
+
+	b2BodyDef bb;
+	bb.userData = blackBox;
+	bb.position.Set(SCREEN_TO_WORLD(blackBox->getPositionX()), SCREEN_TO_WORLD(blackBox->getPositionY()));
+
+	b2Body* bbb = this->boxWorld->CreateBody(&bb);
+
+	b2PolygonShape bpb;
+	bpb.SetAsBox(SCREEN_TO_WORLD(blackBox->getContentSize().width), SCREEN_TO_WORLD(blackBox->getContentSize().height));
+	bbb->CreateFixture(&bpb, 0.0f);
+
+	//	setup dynamic box
+	player = CCSprite::create("..\\Resources\\dog.png");
+	
+	b2Vec2 playerPos(WINDOW_WIDTH / 2 - player->getContentSize().width / 2, WINDOW_HEIGHT / 2 - player->getContentSize().height / 2);
+	
+	worldLayer->addChild(player);
+
+	b2BodyDef bw;
+	bw.userData = this->player;
+	bw.type = b2_dynamicBody;
+	bw.position.Set(SCREEN_TO_WORLD(playerPos.x), SCREEN_TO_WORLD(playerPos.y));
+	playerBody = this->boxWorld->CreateBody(&bw);
+	
+	b2PolygonShape bpw;	
+	bpw.SetAsBox(SCREEN_TO_WORLD(player->getContentSize().width / 2), SCREEN_TO_WORLD(player->getContentSize().height / 2));
+
+	b2FixtureDef bfw;
+	bfw.density = 1.0f;
+	bfw.friction = 0.3f;
+	bfw.shape = &bpw;	
+	playerBody->CreateFixture(&bfw);	
+}
+
+
 
 void MainScene::updateKeyboard(float delta)
 {
@@ -137,17 +144,16 @@ void MainScene::updateKeyboard(float delta)
 	//if (d & down)	
 	//	y -= step;	
 	if (u & down)	
-		y += step;
+		y += step;	
 	
-	
-	b2Vec2 vel = boxWhite->GetLinearVelocity();
+	b2Vec2 vel = playerBody->GetLinearVelocity();
 	bool midAir = abs(vel.y) >= 0.01f;
 	bool topSpeed = abs(vel.x) >= 5.0f;
 
 	if (y && !midAir)
-		boxWhite->ApplyLinearImpulse(b2Vec2(0, step), boxWhite->GetWorldCenter());
+		playerBody->ApplyLinearImpulse(b2Vec2(0, step), playerBody->GetWorldCenter());
 	if (x && !topSpeed)
-		boxWhite->ApplyForce(b2Vec2(x, 0), boxWhite->GetWorldCenter());	
+		playerBody->ApplyForce(b2Vec2(x, 0), playerBody->GetWorldCenter());	
 	
 	//	Check player direction
 	if (x < 0 && direction == PlayerDirectionRight)
@@ -162,16 +168,16 @@ void MainScene::updateKeyboard(float delta)
 	}
 
 	//	now check for scaling
-	float scaleStep = 0.01;
+	float scaleStep = 0.01f;
 	if (zoomIn & down)
 	{
 		this->sceneScale += scaleStep;
-		this->setScale(sceneScale);		
+		this->worldLayer->setScale(sceneScale);
 	}
 	else if (zoomOut & down)
 	{
 		this->sceneScale -= scaleStep;
-		this->setScale(sceneScale);
+		this->worldLayer->setScale(sceneScale);
 	}
 
 }
@@ -198,9 +204,9 @@ void MainScene::update(float delta)
 		if (s != NULL)
 		{
 			b2Vec2 pos = b->GetPosition();
+			
 			s->setPosition(ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y)));
-			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
-			//CCLog("New pos: %f %f", pos.x, pos.y);
+			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));			
 		}
 	}
 
@@ -265,5 +271,6 @@ void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 
 	CCPoint diff = ccpSub(loc, locPrev);
 	diff.y *= -1;
-	this->setPosition(ccpAdd(this->getPosition(), diff));
+	this->worldLayer->setPosition(ccpAdd(this->worldLayer->getPosition(), diff));
+	//this->debugLayer->setPosition
 }

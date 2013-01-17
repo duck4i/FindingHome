@@ -18,19 +18,6 @@ enum PlayerDirection
 
 class MainScene : public CCLayer
 {
-
-public:
-    // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
-    virtual bool init();  
-
-    // there's no 'id' in cpp, so we recommand to return the exactly class pointer
-    static CCScene* scene();
-
-    // implement the "static node()" method manually
-	CREATE_FUNC(MainScene);
-
-	~MainScene();	
-
 private:
 
 	bool firstBackgroundChange;
@@ -45,18 +32,20 @@ private:
 	float sceneScale;
 	void updateKeyboard(float delta);
 
+	//	player
 	CCNode* player;
-	PlayerDirection direction;
-
-	CCLayer* blackBox;
-	b2Body *boxWhite;
-
-	void addBodies();
+	b2Body *playerBody;
+	PlayerDirection direction;	
 	
+	
+	//	world
+	CCNode *worldLayer;
 	b2World *boxWorld;
+	B2DebugDrawLayer *debugLayer;
 	bool boxWorldSleep;
 	
-	void setupPhysics();		
+	void setupPhysics();
+	void addBodies();
 
 	//	touch events
 	//void ccTouchesBegan(
@@ -64,6 +53,17 @@ private:
 	void ccTouchesEnded(CCSet* touches, CCEvent* event);
 	void ccTouchesMoved(CCSet* touches, CCEvent* event);
 
+public:
+    // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
+    virtual bool init();  
+
+    // there's no 'id' in cpp, so we recommand to return the exactly class pointer
+    static CCScene* scene();
+
+    // implement the "static node()" method manually
+	CREATE_FUNC(MainScene);
+
+	~MainScene();
 };
 
 #endif
