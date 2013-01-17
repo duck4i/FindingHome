@@ -37,11 +37,12 @@ bool MainScene::init()
 	this->addBodies();
 
 	//	process keydown	
-	this->schedule(schedule_selector(MainScene::tickKeyboard));
-	this->setKeypadEnabled(true);
+	//this->schedule(schedule_selector(MainScene::tickKeyboard));	
 
 	this->scheduleUpdate();
 	this->schedule(schedule_selector(MainScene::tickBackground));
+
+	this->setKeypadEnabled(true);
 
 	return true;
 }
@@ -125,11 +126,13 @@ void MainScene::tickKeyboard(float delta)
 		y += step;	
 	
 	b2Vec2 vel = boxWhite->GetLinearVelocity();
+	bool midAir = vel.y != 0;
+	bool topSpeed = abs(vel.x) >= 5.0f;
 	CCLog("Velocity x: %f y: %f Y: %f", vel.x, vel.y, y);
 
-	if (y && abs(boxWhite->GetLinearVelocity().y) <= 0.0f)
+	if (y && !midAir)
 		boxWhite->ApplyLinearImpulse(b2Vec2(0, step), boxWhite->GetWorldCenter());
-	else
+	if (x && !topSpeed)
 		boxWhite->ApplyForce(b2Vec2(x, 0), boxWhite->GetWorldCenter());	
 }
 
@@ -142,7 +145,6 @@ short tweenColor(short start, short end)
 	else
 		return min(start + 1, 255);
 }
-
 
 void MainScene::update(float delta)
 {
@@ -160,7 +162,10 @@ void MainScene::update(float delta)
 			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
 			CCLog("New pos: %f %f", pos.x, pos.y);
 		}
-	}	
+	}
+
+	//	Now keyboard update
+	tickKeyboard(0);
 }
 
 
