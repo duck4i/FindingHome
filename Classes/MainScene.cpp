@@ -126,7 +126,8 @@ void MainScene::updateKeyboard(float delta)
 	short l = GetKeyState(VK_LEFT);
 	short r = GetKeyState(VK_RIGHT);
 	short d = GetKeyState(VK_DOWN);
-	short u = GetKeyState(VK_UP);	
+	short u = GetKeyState(VK_UP);
+	short u2 = GetKeyState(VK_SPACE);
 
 	short zoomIn = GetKeyState(VK_OEM_PLUS);
 	short zoomOut = GetKeyState(VK_OEM_MINUS);
@@ -144,7 +145,7 @@ void MainScene::updateKeyboard(float delta)
 		x += step;	
 	//if (d & down)	
 	//	y -= step;	
-	if (u & down)	
+	if ((u & down) || (u2 & down))	
 		y += step;	
 	
 	b2Vec2 vel = playerBody->GetLinearVelocity();
