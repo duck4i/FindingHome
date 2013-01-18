@@ -36,7 +36,7 @@ class LevelLoader
 {
 private:
 
-	CCLayer* worldNode;
+	CCNode* worldNode;
 	const char* levelPath;
 
 	xmlDocPtr sharedDoc;
@@ -44,13 +44,16 @@ private:
 	CCNode* playerNode;
 	CCNode* finishNode;
 
+	unsigned int zOrderCounter;
+
 public:
 
-	LevelLoader(CCLayer* world, const char* path)
+	LevelLoader(CCNode* world, const char* path)
 	{
 		this->worldNode = world;
 		levelPath = path;		
 		sharedDoc = NULL;
+		zOrderCounter = 0;
 	}
 
 	~LevelLoader()
@@ -60,7 +63,7 @@ public:
 	}
 
 	bool parse();
-
+	void logNode(xmlNodePtr node);
 
 };
 

@@ -116,6 +116,9 @@ void MainScene::addBodies()
 	bfw.friction = 0.3f;
 	bfw.shape = &bpw;	
 	playerBody->CreateFixture(&bfw);	
+
+	LevelLoader l(this->worldLayer, "..\\Resources\\Level1.xml");
+	l.parse();
 }
 
 
