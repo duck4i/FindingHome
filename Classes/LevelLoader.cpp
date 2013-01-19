@@ -82,11 +82,12 @@ void LevelLoader::logNode(xmlNodePtr node)
 
 void LevelLoader::createLevelLayers()
 {
-	this->mainLayer = CCLayer::create();
-	this->worldNode->addChild(this->mainLayer);
-
+	//	do not change the order of how we create layers, it will affect zOrder
 	this->backgroundLayer = CCLayer::create();
 	this->worldNode->addChild(this->backgroundLayer);
+
+	this->mainLayer = CCLayer::create();
+	this->worldNode->addChild(this->mainLayer);	
 }
 
 bool LevelLoader::parse()
