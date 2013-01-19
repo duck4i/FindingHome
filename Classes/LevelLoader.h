@@ -44,7 +44,16 @@ private:
 	CCNode* playerNode;
 	CCNode* finishNode;
 
-	unsigned int zOrderCounter;
+
+	CCNode* mainLayer;
+	bool createMainLayer();
+
+	CCNode* backgroundLayer;
+	bool createBackgroundLayer();
+
+	//	type 0: main layer; type 1: background layer
+	void parseCurrentNode(xmlNodePtr node, unsigned int type = 0, unsigned int zOrder = 0);
+
 
 public:
 
@@ -52,8 +61,7 @@ public:
 	{
 		this->worldNode = world;
 		levelPath = path;		
-		sharedDoc = NULL;
-		zOrderCounter = 0;
+		sharedDoc = NULL;		
 	}
 
 	~LevelLoader()

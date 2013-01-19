@@ -42,12 +42,32 @@ bool LevelLoader::parse()
 				const xmlChar* name = xmlGetProp(layers, (const xmlChar*) "Name");
 				if (xmlStrcasecmp(name, (const xmlChar*) MAIN_LAYER_NAME) == 0)
 				{
-					//MessageBox(NULL, "Found MAIN layer", "", MB_OK);
+					xmlNodePtr mainLayers = layers->children->next;
+					short count = xmlChildElementCount(mainLayers);
+					CCLog("Found main layer with %d children", count);
+
+					unsigned int zOrder = 0;
+					xmlNodePtr mainLayerChild = mainLayers->children;
+					while (mainLayerChild)
+					{
+						parseCurrentNode(mainLayerChild, 0, zOrder++);
+						mainLayerChild = mainLayerChild->next;
+					}
 				}
 				else if (xmlStrcasecmp(name, (const xmlChar*) BACKGROUND_LAYER_NAME) == 0)
 				{
-					//MessageBox(NULL, "Found BACKGROUND layer", "", MB_OK);
-				}								
+					xmlNode *backLayers = layers->children->next;
+					short count = xmlChildElementCount(backLayers);
+					CCLog("Found background layer with %d children", count);
+
+					unsigned int zOrder = 0;
+					xmlNodePtr backLayerChild = backLayers->children;
+					while (backLayerChild)
+					{						
+						parseCurrentNode(backLayerChild, 1, zOrder++);
+						backLayerChild = backLayerChild->next;
+					}
+				}
 				layers = layers->next;
 			}
 
@@ -59,3 +79,13 @@ bool LevelLoader::parse()
 	return success;
 }
 
+void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned int zOrder)
+{
+	xmlChar* nodeName = xmlGetProp(node, (const xmlChar*) "Name");
+	xmlChar* nodeType = xmlGetProp(node, (const xmlChar*) "type");	
+
+	if (nodeType == NULL)
+		return;	//	skipp unknown or closing elements
+	
+	CCLog("Processing node: %s with name: %s", nodeType, nodeName);
+}
