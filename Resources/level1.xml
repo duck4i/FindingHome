@@ -5,8 +5,8 @@
             <Items>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0010" Visible="true">
                     <Position>
-                        <X>-1915</X>
-                        <Y>-633</Y>
+                        <X>-1599</X>
+                        <Y>-1063</Y>
                     </Position>
                     <CustomProperties />
                     <Width>3913</Width>
@@ -29,8 +29,8 @@
             <Items>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0001" Visible="true">
                     <Position>
-                        <X>-1691</X>
-                        <Y>387</Y>
+                        <X>-1391</X>
+                        <Y>-273</Y>
                     </Position>
                     <CustomProperties />
                     <Width>790</Width>
@@ -39,30 +39,30 @@
                         <R>192</R>
                         <G>0</G>
                         <B>192</B>
-                        <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0002" Visible="true">
                     <Position>
-                        <X>-921</X>
-                        <Y>553</Y>
+                        <X>-621</X>
+                        <Y>-107</Y>
                     </Position>
                     <CustomProperties />
-                    <Width>863</Width>
-                    <Height>70</Height>
+                    <Width>858</Width>
+                    <Height>67</Height>
                     <FillColor>
                         <R>192</R>
                         <G>0</G>
                         <B>192</B>
-                        <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0003" Visible="true">
                     <Position>
-                        <X>-28</X>
-                        <Y>447</Y>
+                        <X>272</X>
+                        <Y>-213</Y>
                     </Position>
                     <CustomProperties />
                     <Width>293</Width>
@@ -71,14 +71,14 @@
                         <R>192</R>
                         <G>0</G>
                         <B>192</B>
-                        <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0004" Visible="true">
                     <Position>
-                        <X>262</X>
-                        <Y>354</Y>
+                        <X>562</X>
+                        <Y>-306</Y>
                     </Position>
                     <CustomProperties />
                     <Width>293</Width>
@@ -87,14 +87,14 @@
                         <R>192</R>
                         <G>0</G>
                         <B>192</B>
-                        <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0005" Visible="true">
                     <Position>
-                        <X>544</X>
-                        <Y>261</Y>
+                        <X>844</X>
+                        <Y>-399</Y>
                     </Position>
                     <CustomProperties />
                     <Width>293</Width>
@@ -103,14 +103,14 @@
                         <R>192</R>
                         <G>0</G>
                         <B>192</B>
-                        <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0006" Visible="true">
                     <Position>
-                        <X>-1548</X>
-                        <Y>330</Y>
+                        <X>-1248</X>
+                        <Y>-330</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="player" Type="Item" Description="">$null$</Property>
@@ -138,8 +138,8 @@
                 </Item>
                 <Item xsi:type="CircleItem" Name="Circle_0007" Visible="true">
                     <Position>
-                        <X>-258</X>
-                        <Y>373</Y>
+                        <X>-172</X>
+                        <Y>-218</Y>
                     </Position>
                     <CustomProperties />
                     <Radius>26.9258232</Radius>
@@ -147,14 +147,14 @@
                         <R>192</R>
                         <G>0</G>
                         <B>192</B>
-                        <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="CircleItem" Name="Circle_0008" Visible="true">
                     <Position>
-                        <X>652</X>
-                        <Y>70</Y>
+                        <X>988</X>
+                        <Y>-493</Y>
                     </Position>
                     <CustomProperties />
                     <Radius>31.38471</Radius>
@@ -162,14 +162,14 @@
                         <R>192</R>
                         <G>0</G>
                         <B>192</B>
-                        <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0009" Visible="true">
                     <Position>
-                        <X>1029</X>
-                        <Y>253</Y>
+                        <X>1329</X>
+                        <Y>-407</Y>
                     </Position>
                     <CustomProperties />
                     <Width>863</Width>
@@ -178,9 +178,63 @@
                         <R>192</R>
                         <G>0</G>
                         <B>192</B>
-                        <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
                     </FillColor>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0011" Visible="true">
+                    <Position>
+                        <X>-928</X>
+                        <Y>-938</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>-0.3649562</Rotation>
+                    <Scale>
+                        <X>7.89076471</X>
+                        <Y>7.89076471</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>dog.png</texture_filename>
+                    <asset_name>dog</asset_name>
+                    <Origin>
+                        <X>50</X>
+                        <Y>39</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0013" Visible="true">
+                    <Position>
+                        <X>409</X>
+                        <Y>-1019</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0.340513945</Rotation>
+                    <Scale>
+                        <X>15.1055994</X>
+                        <Y>15.1055994</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Dog\15.png</texture_filename>
+                    <asset_name>Dog\15</asset_name>
+                    <Origin>
+                        <X>18</X>
+                        <Y>12</Y>
+                    </Origin>
                 </Item>
             </Items>
             <ScrollSpeed>
@@ -191,11 +245,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>10</NextItemNumber>
+        <NextItemNumber>13</NextItemNumber>
         <ContentRootFolder>C:\Users\Mihailo\Desktop\cocos\FindingHome\Resources</ContentRootFolder>
         <CameraPosition>
-            <X>0</X>
-            <Y>0</Y>
+            <X>423.3333</X>
+            <Y>-416.666656</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

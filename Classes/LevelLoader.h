@@ -8,6 +8,8 @@
 
 using namespace cocos2d;
 
+#define RESOURCE_DIR		"..\\Resources\\"
+
 //	Custom property mappings
 //	We wont check custom level property type, only if it exists. 
 //	Maybe later if needed (for message boards, etc...) we can add value check for those types.
@@ -26,6 +28,18 @@ using namespace cocos2d;
 //	Z-INDEX IS DEFINED USING ORDER IN XML FILE > THE LATEST WE PARSE IT THE HIGHER IS Z-ORDER
 //	EXCEPTION FOR THIS ARE PLAYER AND FINISH ELEMENTS THAT HAVE HIGH ORDER
 
+//
+//	XML helper utilities class. Makes XML code easier to read and work with.
+//
+class XMLHelper
+{
+public:
+	static xmlNodePtr	findChildNodeWithName(xmlNodePtr parent, char* name);
+	static char*		readNodeContent(xmlNodePtr node);
+	static float		readNodeContentF(xmlNodePtr node);
+	static bool			readNodeContentB(xmlNodePtr node);
+	static unsigned int	readNodeContentU(xmlNodePtr node);
+};
 
 ///
 ///	Level loading class. 
@@ -44,24 +58,42 @@ private:
 	CCNode* playerNode;
 	CCNode* finishNode;
 
-
-	CCNode* mainLayer;
-	bool createMainLayer();
-
+	CCNode* mainLayer;	
 	CCNode* backgroundLayer;
-	bool createBackgroundLayer();
+	void createLevelLayers();
+	
+private:
 
 	//	type 0: main layer; type 1: background layer
 	void parseCurrentNode(xmlNodePtr node, unsigned int type = 0, unsigned int zOrder = 0);
-
+	
+	//	parser helpers
+	CCPoint		parseNodePosition(xmlNodePtr node);
+	CCSize		parseNodeSize(xmlNodePtr node);
+	ccColor4B	parseNodeColor(xmlNodePtr node, bool tint = false);
+	float		parseNodeRotation(xmlNodePtr node);
+	float		parseNodeRadius(xmlNodePtr node);
+	float		parseNodeScale(xmlNodePtr node);
+	char*		parseNodeTexture(xmlNodePtr node);
 
 public:
 
 	LevelLoader(CCNode* world, const char* path)
 	{
-		this->worldNode = world;
+		worldNode = world;
 		levelPath = path;		
-		sharedDoc = NULL;		
+		sharedDoc = NULL;
+
+		createLevelLayers();
+	}
+
+	LevelLoader(CCNode* world, const char* path, CCNode* mainLayer, CCNode* backLayer)
+	{
+		worldNode = world;
+		levelPath = path;
+		sharedDoc = NULL;
+		this->mainLayer = mainLayer;
+		this->backgroundLayer = backLayer;
 	}
 
 	~LevelLoader()

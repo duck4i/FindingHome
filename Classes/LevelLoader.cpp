@@ -1,5 +1,62 @@
 #include "LevelLoader.h"
 
+///
+///	XMLHelper static methods
+///
+
+xmlNodePtr XMLHelper::findChildNodeWithName(xmlNodePtr parent, char* name)
+{
+	if (parent == NULL)
+		return NULL;
+
+	xmlNodePtr subs = parent->children, ret = NULL;
+	while (subs != NULL)
+	{
+		if (xmlStrcasecmp(subs->name, (const xmlChar*) name) == 0)
+		{
+			ret = subs;
+			break;
+		}
+		subs = subs->next;
+	}
+	return ret;
+}
+
+char* XMLHelper::readNodeContent(xmlNodePtr node)
+{
+	if (node == NULL)
+		return NULL;
+	return (char*) xmlNodeGetContent(node);
+}
+
+float XMLHelper::readNodeContentF(xmlNodePtr node)
+{
+	char* n = readNodeContent(node);
+	if (n)
+		return atof(n);
+	return NULL;
+}
+
+bool XMLHelper::readNodeContentB(xmlNodePtr node)
+{
+	return xmlStrcasecmp((const xmlChar*) readNodeContent(node), (const xmlChar*) "true") == 0;
+}
+
+unsigned int XMLHelper::readNodeContentU(xmlNodePtr node)
+{
+	unsigned int ret = 0;
+	char* start = readNodeContent(node);
+	char* end = 0;
+	if (start == NULL)
+		return 0;
+	ret = strtoul(start, &end, 10);
+	return ret;
+}
+
+///
+///	LevelLoader Class
+///
+
 void LevelLoader::logNode(xmlNodePtr node)
 {
 	bool consoleOutput = false;
@@ -21,6 +78,15 @@ void LevelLoader::logNode(xmlNodePtr node)
 		MessageBox(NULL, s.c_str(), name, MB_OK);
 	else
 		CCLog("XML Node log: Name: %s Properties: %s", name, s.c_str());
+}
+
+void LevelLoader::createLevelLayers()
+{
+	this->mainLayer = CCLayer::create();
+	this->worldNode->addChild(this->mainLayer);
+
+	this->backgroundLayer = CCLayer::create();
+	this->worldNode->addChild(this->backgroundLayer);
 }
 
 bool LevelLoader::parse()
@@ -88,4 +154,88 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 		return;	//	skipp unknown or closing elements
 	
 	CCLog("Processing node: %s with name: %s", nodeType, nodeName);
+
+	CCPoint nodePosition = parseNodePosition(node);
+	CCSize nodeSize = parseNodeSize(node);
+	float rotation = parseNodeRotation(node);
+	float radius = parseNodeRadius(node);
+	float scale = parseNodeScale(node);
+	ccColor4B color = parseNodeColor(node);
+	ccColor4B colorTint = parseNodeColor(node, true);
+	char* nodeTexture = parseNodeTexture(node);
+
+
+	delete [] nodeTexture;
+}
+
+CCPoint LevelLoader::parseNodePosition(xmlNodePtr node)
+{
+	CCPoint r(0, 0);	
+	xmlNodePtr pos = XMLHelper::findChildNodeWithName(node, "Position");
+	if (pos)
+	{
+		r.x = XMLHelper::readNodeContentF(XMLHelper::findChildNodeWithName(pos, "X"));
+		r.y = XMLHelper::readNodeContentF(XMLHelper::findChildNodeWithName(pos, "Y"));
+	}
+	//CCLog("POSITION x: %f y: %f", r.x, r.y);
+	return r;
+}
+
+CCSize LevelLoader::parseNodeSize(xmlNodePtr node)
+{
+	CCSize r(0, 0);
+	r.width = XMLHelper::readNodeContentF(XMLHelper::findChildNodeWithName(node, "Width"));
+	r.height = XMLHelper::readNodeContentF(XMLHelper::findChildNodeWithName(node, "Height"));
+	//CCLog("SIZE width: %f height: %f", r.width, r.height);
+	return r;
+}
+
+float LevelLoader::parseNodeRotation(xmlNodePtr node)
+{
+	float ret = XMLHelper::readNodeContentF(XMLHelper::findChildNodeWithName(node, "Rotation"));
+	//CCLog("Rotation: %f", ret);
+	return ret;
+}
+
+float LevelLoader::parseNodeRadius(xmlNodePtr node)
+{
+	float ret = XMLHelper::readNodeContentF(XMLHelper::findChildNodeWithName(node, "Radius"));
+	//CCLog("Radius: %f", ret);
+	return ret;
+}
+
+float LevelLoader::parseNodeScale(xmlNodePtr node)
+{
+	float ret = XMLHelper::readNodeContentF(XMLHelper::findChildNodeWithName(XMLHelper::findChildNodeWithName(node, "Scale"), "X"));
+	if (ret == NULL)
+		ret = 1; //	default scale
+	//CCLog("Scale: %f", ret);
+	return ret;
+}
+
+ccColor4B LevelLoader::parseNodeColor(xmlNodePtr node, bool tint)
+{
+	ccColor4B ret;
+	char* name = tint == true ? "TintColor" : "FillColor";
+	xmlNodePtr color = XMLHelper::findChildNodeWithName(node, name);	
+	ret.r = XMLHelper::readNodeContentU(XMLHelper::findChildNodeWithName(color, "R"));
+	ret.g = XMLHelper::readNodeContentU(XMLHelper::findChildNodeWithName(color, "G"));
+	ret.b = XMLHelper::readNodeContentU(XMLHelper::findChildNodeWithName(color, "B"));
+	ret.a = XMLHelper::readNodeContentU(XMLHelper::findChildNodeWithName(color, "A"));	
+	//CCLog("Color (%s) r: %d g: %d b: %d a: %d", name, ret.r, ret.g, ret.b, ret.a);
+	return ret;
+}
+
+char* LevelLoader::parseNodeTexture(xmlNodePtr node)
+{
+	char* ret = NULL;
+	char* read = XMLHelper::readNodeContent(XMLHelper::findChildNodeWithName(node, "texture_filename"));
+
+	if (read)
+	{
+		ret = (char*) malloc(255);
+		sprintf(ret, "%s%s", RESOURCE_DIR, read);
+	}
+	CCLog("Texture: %s", ret);
+	return ret;
 }
