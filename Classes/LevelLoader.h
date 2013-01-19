@@ -5,6 +5,7 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <Box2D/Box2D.h>
+#include "Physics.h"
 
 using namespace cocos2d;
 

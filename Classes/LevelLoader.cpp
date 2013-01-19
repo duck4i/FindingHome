@@ -155,16 +155,50 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	
 	CCLog("Processing node: %s with name: %s", nodeType, nodeName);
 
+	//	Read everything we need from XML
 	CCPoint nodePosition = parseNodePosition(node);
 	CCSize nodeSize = parseNodeSize(node);
-	float rotation = parseNodeRotation(node);
-	float radius = parseNodeRadius(node);
-	float scale = parseNodeScale(node);
-	ccColor4B color = parseNodeColor(node);
-	ccColor4B colorTint = parseNodeColor(node, true);
+	float nodeRotation = parseNodeRotation(node);
+	float nodeRadius = parseNodeRadius(node);
+	float nodeScale = parseNodeScale(node);
+	ccColor4B nodeColor = parseNodeColor(node);
+	ccColor4B nodeColorTint = parseNodeColor(node, true);
 	char* nodeTexture = parseNodeTexture(node);
 
+	//	select layer to insert it into
+	CCNode* layer = type == 0 ? this->mainLayer : this->backgroundLayer;
+	CCNode* toInsert = NULL;
 
+	//	NOW DO ACTUAL WORLD CREATIONG -- LIKE A BOSS
+	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
+	{
+		CCLayerColor *a = CCLayerColor::create(nodeColor);
+		a->setContentSize(nodeSize);
+		
+		//	anchor point is always in (0,0) for layer, but our position is mapped to (0.5, 0.5), or element center
+		//	compensate (sounds awfully like somethign said in star trek :)		
+		nodePosition.y -= nodeSize.height;
+
+		toInsert = a;
+	}
+	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
+	{
+
+	}
+	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
+	{
+		toInsert = CCSprite::create(nodeTexture);
+	}
+
+	if (toInsert)
+	{
+		toInsert->setPosition(nodePosition);
+		toInsert->setRotation(CC_RADIANS_TO_DEGREES(nodeRotation));
+		toInsert->setScale(nodeScale);
+		layer->addChild(toInsert, zOrder);
+	}
+
+	//	since parseNodeTexture allocates we release it here
 	delete [] nodeTexture;
 }
 
@@ -175,7 +209,7 @@ CCPoint LevelLoader::parseNodePosition(xmlNodePtr node)
 	if (pos)
 	{
 		r.x = XMLHelper::readNodeContentF(XMLHelper::findChildNodeWithName(pos, "X"));
-		r.y = XMLHelper::readNodeContentF(XMLHelper::findChildNodeWithName(pos, "Y"));
+		r.y =  (1 /* WE HAVE TO INVERT Y */) - XMLHelper::readNodeContentF(XMLHelper::findChildNodeWithName(pos, "Y"));
 	}
 	//CCLog("POSITION x: %f y: %f", r.x, r.y);
 	return r;
