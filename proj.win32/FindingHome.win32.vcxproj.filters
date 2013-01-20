@@ -19,6 +19,12 @@
     <Filter Include="include\support">
       <UniqueIdentifier>{77670c04-ee35-4694-b3a1-74a0070b9d5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\levels">
+      <UniqueIdentifier>{3db0ad10-c710-4295-8901-b6c35853a9c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\levels">
+      <UniqueIdentifier>{5e497248-6e15-4e33-a627-ec00d26943e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\FindingHome.ico">
@@ -56,10 +62,13 @@
       <Filter>include\support</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\LevelLoader.h">
-      <Filter>include</Filter>
+      <Filter>include\levels</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\XMLHelper.h">
-      <Filter>include</Filter>
+      <Filter>include\levels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CustomProperty.h">
+      <Filter>include\levels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -79,10 +88,13 @@
       <Filter>source\support</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\LevelLoader.cpp">
-      <Filter>source</Filter>
+      <Filter>source\levels</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\XMLHelper.cpp">
-      <Filter>source</Filter>
+      <Filter>source\levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CustomProperty.cpp">
+      <Filter>source\levels</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

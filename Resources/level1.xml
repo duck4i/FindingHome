@@ -91,14 +91,12 @@
                         <PackedValue>4290773184</PackedValue>
                     </FillColor>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0006" Visible="true">
+                <Item xsi:type="TextureItem" Name="Player" Visible="true">
                     <Position>
                         <X>-1248</X>
                         <Y>-330</Y>
                     </Position>
-                    <CustomProperties>
-                        <Property Name="player" Type="Item" Description="">$null$</Property>
-                    </CustomProperties>
+                    <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>1</X>
@@ -237,60 +235,6 @@
                         <Y>12</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0026" Visible="true">
-                    <Position>
-                        <X>-332</X>
-                        <Y>-653</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>1</X>
-                        <Y>1</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>circle.png</texture_filename>
-                    <asset_name>circle</asset_name>
-                    <Origin>
-                        <X>32</X>
-                        <Y>32</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0027" Visible="true">
-                    <Position>
-                        <X>1433</X>
-                        <Y>-408</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0.07130748</Rotation>
-                    <Scale>
-                        <X>2.5202508</X>
-                        <Y>2.5202508</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>0</B>
-                        <A>255</A>
-                        <PackedValue>4294967040</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>circle.png</texture_filename>
-                    <asset_name>circle</asset_name>
-                    <Origin>
-                        <X>32</X>
-                        <Y>32</Y>
-                    </Origin>
-                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0028" Visible="true">
                     <Position>
                         <X>854</X>
@@ -426,6 +370,52 @@
                         <Y>32</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="RectangleItem" Name="Rectangle_0034" Visible="true">
+                    <Position>
+                        <X>2034</X>
+                        <Y>-36</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>120</Width>
+                    <Height>155</Height>
+                    <FillColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>145</A>
+                        <PackedValue>2445279424</PackedValue>
+                    </FillColor>
+                </Item>
+                <Item xsi:type="CircleItem" Name="Circle_0035" Visible="true">
+                    <Position>
+                        <X>1594</X>
+                        <Y>-406</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Radius>113.357841</Radius>
+                    <FillColor>
+                        <R>51</R>
+                        <G>153</G>
+                        <B>255</B>
+                        <A>145</A>
+                        <PackedValue>2436078079</PackedValue>
+                    </FillColor>
+                </Item>
+                <Item xsi:type="CircleItem" Name="Circle_0036" Visible="true">
+                    <Position>
+                        <X>-241</X>
+                        <Y>-691</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Radius>65</Radius>
+                    <FillColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>145</A>
+                        <PackedValue>2445279424</PackedValue>
+                    </FillColor>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -435,7 +425,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>33</NextItemNumber>
+        <NextItemNumber>36</NextItemNumber>
         <ContentRootFolder>C:\Users\Mihailo\Desktop\cocos\FindingHome\Resources</ContentRootFolder>
         <CameraPosition>
             <X>1091.90479</X>

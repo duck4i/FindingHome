@@ -104,97 +104,134 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	CCLog("Processing node: %s with name: %s", nodeType, nodeName);
 
 	//	Read everything we need from XML
-	CCPoint nodePosition = parseNodePosition(node);
-	CCSize nodeSize = parseNodeSize(node);
-	float nodeRotation = parseNodeRotation(node);
-	float nodeRadius = parseNodeRadius(node);
-	float nodeScale = parseNodeScale(node);
-	ccColor4B nodeColor = parseNodeColor(node);
-	ccColor4B nodeColorTint = parseNodeColor(node, true);
-	char* nodeTexture = parseNodeTexture(node);
+	NODEINFO info;	
+	info.xmlNode = node;
+	info.position = parseNodePosition(node);
+	info.size = parseNodeSize(node);
+	info.rotation = parseNodeRotation(node);
+	info.radius = parseNodeRadius(node);
+	info.scale = parseNodeScale(node);
+	info.color = parseNodeColor(node);
+	info.tint = parseNodeColor(node, true);
+	info.texture = parseNodeTexture(node);
 
+	//	check type
+	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
+		info.type = 0;
+	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
+		info.type = 1;
+	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
+		info.type = 2;
+
+	//	FIRST PROCESS PROPERTIES
+	CustomProperties props;
+	bool propsObtained = parseNodeProperties(info, &props);
+
+	//	THEN PARSE NODE AND INSERT IT INTO COCOS WORLD
+	bool inserted = parseNodeToCocosNode(info, type, zOrder);
+
+	//	THEN PROCESS PHYSICS (main layer only)
+	if (type == 0 && inserted)
+		parseNodePhysics(info, props);
+
+	//	since parseNodeTexture allocates we release it here
+	delete [] info.texture;	
+}
+
+bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, unsigned int type, unsigned int zOrder)
+{
 	//	select layer to insert it into
 	CCNode* layer = type == 0 ? this->mainLayer : this->backgroundLayer;
 	CCNode* toInsert = NULL;
-	unsigned int nodeTypeID = 0;
+	//unsigned int nodeTypeID = 0;
 
 	//	NOW DO ACTUAL WORLD CREATIONG -- LIKE A BOSS	
-	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
+	if (info.type == 0)
 	{
-		CCLayerColor *a = CCLayerColor::create(nodeColor);
-		a->setContentSize(nodeSize);
-		nodeTypeID = 0;
+		CCLayerColor *a = CCLayerColor::create(info.color);
+		a->setContentSize(info.size);		
 
 		//	Obey anchor point (not enabled  by default - this makes position issues in Box2D calculations)
 		a->ignoreAnchorPointForPosition(false);
 		
 		//	anchor point is always in (0,0) for layer, but our position is mapped to (0.5, 0.5), or element center
 		//	compensate (sounds awfully like something said in star trek :)
-		nodePosition.x += nodeSize.width / 2.0f;
-		nodePosition.y -= nodeSize.height / 2.0f;
+		info.position.x += info.size.width / 2.0f;
+		info.position.y -= info.size.height / 2.0f;
 
 		toInsert = a;
 	}
-	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
+	else if (info.type == 1)
 	{
-		nodeTypeID = 1;
+		info.type = 1;
 		CCSprite *a = CCSprite::create("..\\Resources\\circle.png");
 
-		nodeScale =  nodeRadius / a->getContentSize().width;
-		a->setColor(ccc3(nodeColor.r, nodeColor.g, nodeColor.b));
+		info.scale =  info.radius / a->getContentSize().width;
+		a->setColor(ccc3(info.color.r, info.color.g, info.color.b));
 
 		toInsert = a;
 	}
-	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
+	else if (info.type == 2)
 	{
-		nodeTypeID = 2;
-		CCSprite *a = CCSprite::create(nodeTexture);		
+		info.type = 2;
+		CCSprite *a = CCSprite::create(info.texture);		
 
-		nodeSize.width = a->getContentSize().width * nodeScale;
-		nodeSize.height = a->getContentSize().height * nodeScale;
+		info.size.width = a->getContentSize().width * info.scale;
+		info.size.height = a->getContentSize().height * info.scale;
 		
-		a->setColor(ccc3(nodeColorTint.r, nodeColorTint.g, nodeColorTint.b));
+		a->setColor(ccc3(info.tint.r, info.tint.g, info.tint.b));
 
 		toInsert = a;
 	}
 
 	if (toInsert)
 	{
-		toInsert->setPosition(nodePosition);
-		toInsert->setRotation(CC_RADIANS_TO_DEGREES(nodeRotation));
-		toInsert->setScale(nodeScale);
+		toInsert->setPosition(info.position);
+		toInsert->setRotation(CC_RADIANS_TO_DEGREES(info.rotation));
+		toInsert->setScale(info.scale);
 		
 		layer->addChild(toInsert, zOrder);
 	}
 
-	//	NOW PROCESS PHYSICS (main layer only)
+	info.cocosNode = toInsert;
+	return toInsert != NULL;
+}
+
+bool LevelLoader::parseNodeProperties(NODEINFO &info, __out CustomProperties *props)
+{
+
+	return true;
+}
+
+bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
+{
 	bool skipPhysics = false;
-	if (toInsert && type == 0 && !skipPhysics)
+	if (!skipPhysics)
 	{
 		if (this->boxWorld == NULL)
 		{
 			CCLog("Box world is not set up. Cannot create physics");
-			return;
+			return false;
 		}
 
 		b2BodyDef def;
-		def.userData = toInsert;
+		def.userData = info.cocosNode;
 
-		def.position.Set(SCREEN_TO_WORLD(nodePosition.x), SCREEN_TO_WORLD(nodePosition.y));
-		def.angle = -1 * nodeRotation;		
+		def.position.Set(SCREEN_TO_WORLD(info.position.x), SCREEN_TO_WORLD(info.position.y));
+		def.angle = -1 * info.rotation;		
 
 		b2Body* body = this->boxWorld->CreateBody(&def);
 
-		if (nodeTypeID == 1)
+		if (info.type == 1)
 		{
 			b2CircleShape cs;
-			cs.m_radius = SCREEN_TO_WORLD(nodeRadius);
+			cs.m_radius = SCREEN_TO_WORLD(info.radius);
 			body->CreateFixture(&cs, 0.0f);
 		}
 		else
 		{
 			b2PolygonShape ps;
-			ps.SetAsBox(SCREEN_TO_WORLD(nodeSize.width / 2), SCREEN_TO_WORLD(nodeSize.height / 2));
+			ps.SetAsBox(SCREEN_TO_WORLD(info.size.width / 2), SCREEN_TO_WORLD(info.size.height / 2));
 
 			b2FixtureDef fd;
 			fd.shape = &ps;
@@ -203,11 +240,8 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 		}
 	}
 
-	//	since parseNodeTexture allocates we release it here
-	delete [] nodeTexture;
+	return true;
 }
-
-
 
 CCPoint LevelLoader::parseNodePosition(xmlNodePtr node)
 {

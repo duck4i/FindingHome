@@ -7,18 +7,11 @@
 #include <Box2D/Box2D.h>
 #include "Physics.h"
 #include "XMLHelper.h"
+#include "CustomProperty.h"
 
 using namespace cocos2d;
 
 #define RESOURCE_DIR		"..\\Resources\\"
-
-//	Custom property mappings
-//	We wont check custom level property type, only if it exists. 
-//	Maybe later if needed (for message boards, etc...) we can add value check for those types.
-
-#define PLAYER_TAG_NAME		"Player"
-#define FINISH_TAG_NAME		"Finish"
-#define DYNAMIC_TAG_NAME	"Dynamic"	//	dynamic Box2D objects
 
 #define MAIN_LAYER_NAME			"Main"			//	everything in this layer is made as a rigid bodies in Box2D world
 #define BACKGROUND_LAYER_NAME	"Background"	//	only backgrouds and sprites - not collidable
@@ -30,16 +23,22 @@ using namespace cocos2d;
 //	Z-INDEX IS DEFINED USING ORDER IN XML FILE > THE LATEST WE PARSE IT THE HIGHER IS Z-ORDER
 //	EXCEPTION FOR THIS ARE PLAYER AND FINISH ELEMENTS THAT HAVE HIGH ORDER
 
+class CustomProperties;
 
-
-//
-//	Enum for property types in level editor
-//
-enum PROPERTY_TYPE {
-	propertyTypeDynamic,
-	propertyTypePlayer,
-	propertyTypeFinish
-};
+typedef struct 
+{
+	CCPoint position;
+	CCSize size;
+	float rotation;
+	float radius;
+	float scale;
+	ccColor4B color;
+	ccColor4B tint;
+	char* texture;
+	unsigned int type;
+	CCNode* cocosNode;
+	xmlNodePtr xmlNode;
+} NODEINFO;
 
 ///
 ///	Level loading class. 
@@ -68,7 +67,11 @@ private:
 
 	//	type 0: main layer; type 1: background layer
 	void parseCurrentNode(xmlNodePtr node, unsigned int type = 0, unsigned int zOrder = 0);
-	void parseNodePhysics(char* nodeType, CCSize nodeSize, CCPoint nodePosition);
+	
+	bool parseNodeToCocosNode(NODEINFO &info, unsigned int type = 0, unsigned int zOrder = 0);
+	bool parseNodeProperties(NODEINFO &info, __out CustomProperties *props);	
+	bool parseNodePhysics(NODEINFO &info, __in CustomProperties props);
+	
 	
 	//	parser helpers
 	CCPoint		parseNodePosition(xmlNodePtr node);
