@@ -214,9 +214,8 @@ void MainScene::update(float delta)
 		
 		if (s != NULL)
 		{
-			b2Vec2 pos = b->GetPosition();
-			CCPoint posRecalc = ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y));		
-			
+			b2Vec2 pos = b->GetPosition();			
+			CCPoint posRecalc = ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y));			
 			s->setPosition(posRecalc);
 			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
 		}

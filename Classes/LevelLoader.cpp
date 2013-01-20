@@ -144,8 +144,8 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, unsigned int type, unsign
 	{
 		info.type = 1;
 		CCSprite *a = CCSprite::create("..\\Resources\\circle.png");
-
-		info.scale =  info.radius / a->getContentSize().width;
+		float width = a->getContentSize().width;
+		info.scale =  info.radius * 2 - width; //	diametar is 2xradius
 		a->setColor(ccc3(info.color.r, info.color.g, info.color.b));
 
 		toInsert = a;
