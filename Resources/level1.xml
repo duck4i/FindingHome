@@ -34,7 +34,7 @@
                     </Position>
                     <CustomProperties />
                     <Width>807</Width>
-                    <Height>317</Height>
+                    <Height>331</Height>
                     <FillColor>
                         <R>255</R>
                         <G>255</G>
@@ -65,8 +65,8 @@
                         <Y>-193</Y>
                     </Position>
                     <CustomProperties />
-                    <Width>293</Width>
-                    <Height>263</Height>
+                    <Width>628</Width>
+                    <Height>280</Height>
                     <FillColor>
                         <R>255</R>
                         <G>0</G>
@@ -77,11 +77,11 @@
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0004" Visible="true">
                     <Position>
-                        <X>526</X>
+                        <X>528</X>
                         <Y>-228</Y>
                     </Position>
                     <CustomProperties />
-                    <Width>293</Width>
+                    <Width>291</Width>
                     <Height>556</Height>
                     <FillColor>
                         <R>192</R>
@@ -120,50 +120,36 @@
                         <Y>39</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="CircleItem" Name="Circle_0007" Visible="true">
-                    <Position>
-                        <X>-142</X>
-                        <Y>-606</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Radius>44</Radius>
-                    <FillColor>
-                        <R>192</R>
-                        <G>0</G>
-                        <B>192</B>
-                        <A>255</A>
-                        <PackedValue>4290773184</PackedValue>
-                    </FillColor>
-                </Item>
-                <Item xsi:type="CircleItem" Name="Circle_0008" Visible="true">
-                    <Position>
-                        <X>988</X>
-                        <Y>-493</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Radius>31.38471</Radius>
-                    <FillColor>
-                        <R>192</R>
-                        <G>0</G>
-                        <B>192</B>
-                        <A>255</A>
-                        <PackedValue>4290773184</PackedValue>
-                    </FillColor>
-                </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0009" Visible="true">
                     <Position>
                         <X>-1406</X>
-                        <Y>71</Y>
+                        <Y>74</Y>
                     </Position>
                     <CustomProperties />
                     <Width>3693</Width>
-                    <Height>266</Height>
+                    <Height>264</Height>
                     <FillColor>
                         <R>192</R>
                         <G>0</G>
                         <B>192</B>
                         <A>255</A>
                         <PackedValue>4290773184</PackedValue>
+                    </FillColor>
+                </Item>
+                <Item xsi:type="RectangleItem" Name="Rectangle_0033" Visible="true">
+                    <Position>
+                        <X>357</X>
+                        <Y>-55</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>628</Width>
+                    <Height>263</Height>
+                    <FillColor>
+                        <R>255</R>
+                        <G>0</G>
+                        <B>0</B>
+                        <A>150</A>
+                        <PackedValue>2533294080</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0011" Visible="true">
@@ -251,112 +237,193 @@
                         <Y>12</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0021" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0026" Visible="true">
                     <Position>
-                        <X>860</X>
-                        <Y>-47</Y>
+                        <X>-332</X>
+                        <Y>-653</Y>
                     </Position>
                     <CustomProperties />
-                    <Rotation>0.5350312</Rotation>
+                    <Rotation>0</Rotation>
                     <Scale>
-                        <X>16.47998</X>
-                        <Y>16.47998</Y>
+                        <X>1</X>
+                        <Y>1</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
-                        <G>0</G>
+                        <G>255</G>
                         <B>255</B>
                         <A>255</A>
-                        <PackedValue>4294902015</PackedValue>
+                        <PackedValue>4294967295</PackedValue>
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>block.png</texture_filename>
-                    <asset_name>block</asset_name>
+                    <texture_filename>circle.png</texture_filename>
+                    <asset_name>circle</asset_name>
                     <Origin>
-                        <X>8</X>
-                        <Y>8</Y>
+                        <X>32</X>
+                        <Y>32</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0022" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0027" Visible="true">
                     <Position>
-                        <X>1009</X>
-                        <Y>92</Y>
+                        <X>1433</X>
+                        <Y>-408</Y>
                     </Position>
                     <CustomProperties />
-                    <Rotation>0.9553741</Rotation>
+                    <Rotation>0.07130748</Rotation>
                     <Scale>
-                        <X>16.47998</X>
-                        <Y>16.47998</Y>
+                        <X>2.5202508</X>
+                        <Y>2.5202508</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
-                        <G>0</G>
-                        <B>255</B>
+                        <G>255</G>
+                        <B>0</B>
                         <A>255</A>
-                        <PackedValue>4294902015</PackedValue>
+                        <PackedValue>4294967040</PackedValue>
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>block.png</texture_filename>
-                    <asset_name>block</asset_name>
+                    <texture_filename>circle.png</texture_filename>
+                    <asset_name>circle</asset_name>
                     <Origin>
-                        <X>8</X>
-                        <Y>8</Y>
+                        <X>32</X>
+                        <Y>32</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0023" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0028" Visible="true">
                     <Position>
-                        <X>1156</X>
-                        <Y>164</Y>
+                        <X>854</X>
+                        <Y>-117</Y>
                     </Position>
                     <CustomProperties />
-                    <Rotation>0.3324356</Rotation>
+                    <Rotation>0.474912226</Rotation>
                     <Scale>
-                        <X>16.47998</X>
-                        <Y>16.47998</Y>
+                        <X>2.57529378</X>
+                        <Y>2.57529378</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
-                        <G>0</G>
+                        <G>255</G>
                         <B>255</B>
                         <A>255</A>
-                        <PackedValue>4294902015</PackedValue>
+                        <PackedValue>4294967295</PackedValue>
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>block.png</texture_filename>
                     <asset_name>block</asset_name>
                     <Origin>
-                        <X>8</X>
-                        <Y>8</Y>
+                        <X>32</X>
+                        <Y>32</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0024" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0029" Visible="true">
                     <Position>
-                        <X>1310</X>
-                        <Y>193</Y>
+                        <X>957</X>
+                        <Y>-37</Y>
                     </Position>
                     <CustomProperties />
-                    <Rotation>0.07153708</Rotation>
+                    <Rotation>0.837741852</Rotation>
                     <Scale>
-                        <X>16.47998</X>
-                        <Y>16.47998</Y>
+                        <X>2.57529378</X>
+                        <Y>2.57529378</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
-                        <G>0</G>
+                        <G>255</G>
                         <B>255</B>
                         <A>255</A>
-                        <PackedValue>4294902015</PackedValue>
+                        <PackedValue>4294967295</PackedValue>
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>block.png</texture_filename>
                     <asset_name>block</asset_name>
                     <Origin>
-                        <X>8</X>
-                        <Y>8</Y>
+                        <X>32</X>
+                        <Y>32</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0030" Visible="true">
+                    <Position>
+                        <X>1043</X>
+                        <Y>81</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>1.0383358</Rotation>
+                    <Scale>
+                        <X>2.57529378</X>
+                        <Y>2.57529378</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>block.png</texture_filename>
+                    <asset_name>block</asset_name>
+                    <Origin>
+                        <X>32</X>
+                        <Y>32</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0031" Visible="true">
+                    <Position>
+                        <X>1110</X>
+                        <Y>113</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0.519691765</Rotation>
+                    <Scale>
+                        <X>2.57529378</X>
+                        <Y>2.57529378</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>block.png</texture_filename>
+                    <asset_name>block</asset_name>
+                    <Origin>
+                        <X>32</X>
+                        <Y>32</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0032" Visible="true">
+                    <Position>
+                        <X>1223</X>
+                        <Y>144</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0.141674787</Rotation>
+                    <Scale>
+                        <X>2.57529378</X>
+                        <Y>2.57529378</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>block.png</texture_filename>
+                    <asset_name>block</asset_name>
+                    <Origin>
+                        <X>32</X>
+                        <Y>32</Y>
                     </Origin>
                 </Item>
             </Items>
@@ -368,11 +435,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>24</NextItemNumber>
+        <NextItemNumber>33</NextItemNumber>
         <ContentRootFolder>C:\Users\Mihailo\Desktop\cocos\FindingHome\Resources</ContentRootFolder>
         <CameraPosition>
-            <X>691.1904</X>
-            <Y>-503.63092</Y>
+            <X>1091.90479</X>
+            <Y>6.369093</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

@@ -193,9 +193,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 		nodeTypeID = 1;
 		CCSprite *a = CCSprite::create("..\\Resources\\circle.png");
 
-		float recalcScale =  nodeRadius / a->getContentSize().width;
-		a->setScale(recalcScale);
-
+		nodeScale =  nodeRadius / a->getContentSize().width;
 		a->setColor(ccc3(nodeColor.r, nodeColor.g, nodeColor.b));
 
 		toInsert = a;
