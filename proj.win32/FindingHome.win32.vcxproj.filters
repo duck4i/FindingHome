@@ -58,6 +58,9 @@
     <ClInclude Include="..\Classes\LevelLoader.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\XMLHelper.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -76,6 +79,9 @@
       <Filter>source\support</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\LevelLoader.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\XMLHelper.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

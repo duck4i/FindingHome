@@ -6,6 +6,7 @@
 #include <libxml/tree.h>
 #include <Box2D/Box2D.h>
 #include "Physics.h"
+#include "XMLHelper.h"
 
 using namespace cocos2d;
 
@@ -29,18 +30,7 @@ using namespace cocos2d;
 //	Z-INDEX IS DEFINED USING ORDER IN XML FILE > THE LATEST WE PARSE IT THE HIGHER IS Z-ORDER
 //	EXCEPTION FOR THIS ARE PLAYER AND FINISH ELEMENTS THAT HAVE HIGH ORDER
 
-//
-//	XML helper utilities class. Makes XML code easier to read and work with.
-//
-class XMLHelper
-{
-public:
-	static xmlNodePtr	findChildNodeWithName(xmlNodePtr parent, char* name);
-	static char*		readNodeContent(xmlNodePtr node);
-	static float		readNodeContentF(xmlNodePtr node);
-	static bool			readNodeContentB(xmlNodePtr node);
-	static unsigned int	readNodeContentU(xmlNodePtr node);
-};
+
 
 //
 //	Enum for property types in level editor
