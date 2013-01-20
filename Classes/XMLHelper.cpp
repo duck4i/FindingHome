@@ -52,3 +52,26 @@ unsigned int XMLHelper::readNodeContentU(xmlNodePtr node)
 	ret = strtoul(start, &end, 10);
 	return ret;
 }
+
+void XMLHelper::logNode(xmlNodePtr node)
+{
+	bool consoleOutput = false;
+
+	char* name = (char*) node->name;
+	std::string s = "";
+
+	for (xmlAttrPtr attr = node->properties; attr != NULL; attr = attr->next)
+	{
+		std::string o = "";
+		o.append((char*) attr->name);
+		o.append(": ");
+		o.append((char*) attr->children->content);
+		s.append(o);
+		s.append("\r\n");
+	}
+
+	if (!consoleOutput)
+		MessageBox(NULL, s.c_str(), name, MB_OK);
+	else
+		CCLog("XML Node log: Name: %s Properties: %s", name, s.c_str());
+}

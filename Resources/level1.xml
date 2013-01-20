@@ -93,10 +93,14 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-1248</X>
-                        <Y>-330</Y>
+                        <X>-1263</X>
+                        <Y>-320</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="player" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>1</X>
@@ -155,11 +159,7 @@
                         <X>-1148</X>
                         <Y>-1018</Y>
                     </Position>
-                    <CustomProperties>
-                        <Property Name="dynamic" Type="bool" Description="">
-                            <boolean>false</boolean>
-                        </Property>
-                    </CustomProperties>
+                    <CustomProperties />
                     <Rotation>-0.3649562</Rotation>
                     <Scale>
                         <X>7.89076471</X>
@@ -370,12 +370,16 @@
                         <Y>32</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="RectangleItem" Name="Rectangle_0034" Visible="true">
+                <Item xsi:type="RectangleItem" Name="Finish" Visible="true">
                     <Position>
-                        <X>2034</X>
-                        <Y>-36</Y>
+                        <X>2107</X>
+                        <Y>-59</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Finish" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Width>120</Width>
                     <Height>155</Height>
                     <FillColor>
@@ -391,7 +395,11 @@
                         <X>1594</X>
                         <Y>-406</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="dynamic" Type="bool" Description="">
+                            <boolean>false</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Radius>113.357841</Radius>
                     <FillColor>
                         <R>51</R>
@@ -406,7 +414,11 @@
                         <X>-241</X>
                         <Y>-691</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="dynamic" Type="bool" Description="">
+                            <boolean>false</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Radius>65</Radius>
                     <FillColor>
                         <R>192</R>
@@ -425,11 +437,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>36</NextItemNumber>
+        <NextItemNumber>37</NextItemNumber>
         <ContentRootFolder>C:\Users\Mihailo\Desktop\cocos\FindingHome\Resources</ContentRootFolder>
         <CameraPosition>
-            <X>1091.90479</X>
-            <Y>6.369093</Y>
+            <X>796.3491</X>
+            <Y>-479.742</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

@@ -4,28 +4,7 @@
 ///	LevelLoader Class
 ///
 
-void LevelLoader::logNode(xmlNodePtr node)
-{
-	bool consoleOutput = false;
 
-	char* name = (char*) node->name;
-	std::string s = "";
-
-	for (xmlAttrPtr attr = node->properties; attr != NULL; attr = attr->next)
-	{
-		std::string o = "";
-		o.append((char*) attr->name);
-		o.append(": ");
-		o.append((char*) attr->children->content);
-		s.append(o);
-		s.append("\r\n");
-	}
-
-	if (!consoleOutput)
-		MessageBox(NULL, s.c_str(), name, MB_OK);
-	else
-		CCLog("XML Node log: Name: %s Properties: %s", name, s.c_str());
-}
 
 void LevelLoader::createLevelLayers()
 {
@@ -199,8 +178,8 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, unsigned int type, unsign
 
 bool LevelLoader::parseNodeProperties(NODEINFO &info, __out CustomProperties *props)
 {
-
-	return true;
+	bool res = props->parseFromNode(info.xmlNode);
+	return res;
 }
 
 bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
@@ -216,28 +195,29 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 
 		b2BodyDef def;
 		def.userData = info.cocosNode;
+		def.type = props.isDynamicObject() ? b2_dynamicBody : b2_staticBody;		
 
 		def.position.Set(SCREEN_TO_WORLD(info.position.x), SCREEN_TO_WORLD(info.position.y));
-		def.angle = -1 * info.rotation;		
+		def.angle = -1 * info.rotation;
 
 		b2Body* body = this->boxWorld->CreateBody(&def);
 
+		b2FixtureDef fd;		
+		b2CircleShape cs;
+		b2PolygonShape ps;
+
 		if (info.type == 1)
-		{
-			b2CircleShape cs;
+		{			
 			cs.m_radius = SCREEN_TO_WORLD(info.radius);
-			body->CreateFixture(&cs, 0.0f);
+			fd.shape = &cs;
 		}
 		else
-		{
-			b2PolygonShape ps;
-			ps.SetAsBox(SCREEN_TO_WORLD(info.size.width / 2), SCREEN_TO_WORLD(info.size.height / 2));
-
-			b2FixtureDef fd;
-			fd.shape = &ps;
-
-			body->CreateFixture(&fd);
+		{			
+			ps.SetAsBox(SCREEN_TO_WORLD(info.size.width / 2), SCREEN_TO_WORLD(info.size.height / 2));			
+			fd.shape = &ps;			
 		}
+
+		body->CreateFixture(&fd);
 	}
 
 	return true;

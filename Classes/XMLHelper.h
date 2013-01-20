@@ -13,6 +13,7 @@ public:
 	static float		readNodeContentF(xmlNodePtr node);
 	static bool			readNodeContentB(xmlNodePtr node);
 	static unsigned int	readNodeContentU(xmlNodePtr node);
+	static void			logNode(xmlNodePtr node);
 };
 
 
