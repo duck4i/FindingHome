@@ -69,6 +69,8 @@ bool LevelLoader::parse()
 		currNode = currNode->next;
 	}
 
+	success = this->playerNode != NULL && this->playerBody != NULL;
+
 	return success;
 }
 
@@ -107,7 +109,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	bool propsObtained = parseNodeProperties(info, &props);
 
 	//	THEN PARSE NODE AND INSERT IT INTO COCOS WORLD
-	bool inserted = parseNodeToCocosNode(info, type, zOrder);
+	bool inserted = parseNodeToCocosNode(info, props, type, zOrder);
 
 	//	THEN PROCESS PHYSICS (main layer only)
 	if (type == 0 && inserted)
@@ -117,12 +119,11 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	delete [] info.texture;	
 }
 
-bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, unsigned int type, unsigned int zOrder)
+bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , unsigned int type, unsigned int zOrder)
 {
 	//	select layer to insert it into
 	CCNode* layer = type == 0 ? this->mainLayer : this->backgroundLayer;
-	CCNode* toInsert = NULL;
-	//unsigned int nodeTypeID = 0;
+	CCNode* toInsert = NULL;	
 
 	//	NOW DO ACTUAL WORLD CREATIONG -- LIKE A BOSS	
 	if (info.type == 0)
@@ -167,9 +168,14 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, unsigned int type, unsign
 	{
 		toInsert->setPosition(info.position);
 		toInsert->setRotation(CC_RADIANS_TO_DEGREES(info.rotation));
-		toInsert->setScale(info.scale);
-		
+		toInsert->setScale(info.scale);		
 		layer->addChild(toInsert, zOrder);
+
+		//	check for known types
+		if (props.isPlayerObject())
+			this->playerNode = toInsert;
+		else if (props.isFinishObject())
+			this->finishNode = toInsert;
 	}
 
 	info.cocosNode = toInsert;
@@ -195,13 +201,14 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 
 		b2BodyDef def;
 		def.userData = info.cocosNode;
-		def.type = props.isDynamicObject() ? b2_dynamicBody : b2_staticBody;		
+		def.type = props.isDynamicObject() || props.isPlayerObject() ? b2_dynamicBody : b2_staticBody;		
 
 		def.position.Set(SCREEN_TO_WORLD(info.position.x), SCREEN_TO_WORLD(info.position.y));
 		def.angle = -1 * info.rotation;
 
-		b2Body* body = this->boxWorld->CreateBody(&def);
+		b2Body* body = this->boxWorld->CreateBody(&def);		
 
+		//	now create fixtures
 		b2FixtureDef fd;		
 		b2CircleShape cs;
 		b2PolygonShape ps;
@@ -215,6 +222,12 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		{			
 			ps.SetAsBox(SCREEN_TO_WORLD(info.size.width / 2), SCREEN_TO_WORLD(info.size.height / 2));			
 			fd.shape = &ps;			
+		}
+
+		if (props.isPlayerObject())
+		{			
+			this->playerBody = body;
+			fd.density =  1.0f;
 		}
 
 		body->CreateFixture(&fd);

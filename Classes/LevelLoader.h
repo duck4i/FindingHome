@@ -60,7 +60,10 @@ private:
 
 	b2World *boxWorld;
 
+public:
 	CCNode* playerNode;
+	b2Body* playerBody;
+
 	CCNode* finishNode;
 	
 private:
@@ -68,7 +71,7 @@ private:
 	//	type 0: main layer; type 1: background layer
 	void parseCurrentNode(xmlNodePtr node, unsigned int type = 0, unsigned int zOrder = 0);
 	
-	bool parseNodeToCocosNode(NODEINFO &info, unsigned int type = 0, unsigned int zOrder = 0);
+	bool parseNodeToCocosNode(NODEINFO &info, __in CustomProperties props, unsigned int type = 0, unsigned int zOrder = 0);
 	bool parseNodeProperties(NODEINFO &info, __out CustomProperties *props);	
 	bool parseNodePhysics(NODEINFO &info, __in CustomProperties props);
 	
@@ -111,9 +114,7 @@ public:
 	}
 
 	bool parse();
-	void logNode(xmlNodePtr node);
-
-	b2World* getWorld();
+	void logNode(xmlNodePtr node);	
 };
 
 #endif

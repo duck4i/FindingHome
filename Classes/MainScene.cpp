@@ -38,15 +38,28 @@ bool MainScene::init()
 		ccc4(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2], backgroundAlphaEnd)
 		);
 	this->addChild(gback);
-
-	this->worldLayer = CCLayer::create();
-	this->addChild(worldLayer);
-
+		
 	this->debugLayer = NULL;
 	this->lastKeyboardUpdate = 0;
 
+	this->player = NULL;
+	this->playerBody = NULL;
+
 	direction = PlayerDirectionRight;
-	sceneScale = this->getScale();	
+	
+	//	Create world layer
+	this->worldLayer = CCLayer::create();	
+	//this->worldLayer = CCLayerColor::create(ccc4(0, 0, 0, 255));	
+
+	sceneScale = 0.5f;//this->getScale();
+	this->worldLayer->setScale(sceneScale);
+	//this->worldLayer->ignoreAnchorPointForPosition(false);
+	//this->worldLayer->setAnchorPoint(ccp(0.5f, 0.5f));
+	//this->worldLayer->setPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	//this->worldLayer->setAnchorPoint(ccp(0, 0));
+	//this->worldLayer->setPosition(0, 0);
+	this->addChild(worldLayer);
+
 
 	//	setup physics object
 	this->setupPhysics();
@@ -81,40 +94,35 @@ void MainScene::setupPhysics()
 
 void MainScene::addBodies()
 {
-	//	setup dynamic box
-	player = CCSprite::create("..\\Resources\\dog.png");
-	
-	b2Vec2 playerPos(WINDOW_WIDTH / 2 - player->getContentSize().width / 2, WINDOW_HEIGHT / 2 - player->getContentSize().height / 2);
-	
-	worldLayer->addChild(player);
-
-	b2BodyDef bw;
-	bw.userData = this->player;
-	bw.type = b2_dynamicBody;
-	bw.position.Set(SCREEN_TO_WORLD(playerPos.x), SCREEN_TO_WORLD(playerPos.y));
-	playerBody = this->boxWorld->CreateBody(&bw);
-	
-	b2PolygonShape bpw;	
-	bpw.SetAsBox(SCREEN_TO_WORLD(player->getContentSize().width / 2), SCREEN_TO_WORLD(player->getContentSize().height / 2));
-
-	b2FixtureDef bfw;
-	bfw.density = 1.0f;
-	bfw.friction = 0.3f;
-	bfw.shape = &bpw;	
-	playerBody->CreateFixture(&bfw);	
-
 	//	load level
 	LevelLoader l(this->worldLayer, "..\\Resources\\Level1.xml", this->boxWorld);
-	l.parse();
+	if (l.parse())
+	{
+		this->playerBody = l.playerBody;
+		this->player = l.playerNode;
+
+		//	center to player		
+		CCPoint pos = this->player->getPosition();
+		CCPoint pos2 = this->worldLayer->getPosition();
+
+		//this->worldLayer->runAction(CCMoveBy::create(1.0f, ccp(pos.x * -1, pos.y * -1)));
+		//this->runAction(CCFollow::create(player, CCRectMake(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)));
+		//this->worldLayer->runAction(CCFollow::create(player));
+		
+		//float x, y, z;
+		//this->getCamera()->getEyeXYZ(&x, &y, &z);
+		//this->getCamera()->setEyeXYZ(x, y, z + 100.0f);
+
+		return;
+	}
+		
+	MessageBox(NULL, "Player object is not found in this level.", "How are you gona play?", MB_ICONWARNING | MB_OK);
+
 }
 
 void MainScene::updateKeyboard(float delta)
 {
 	//CCLog("Tick keyboard");
-	short l = GetKeyState(VK_LEFT);
-	short r = GetKeyState(VK_RIGHT);
-	short d = GetKeyState(VK_DOWN);
-	short u = GetKeyState(VK_UP);
 	short u2 = GetKeyState(VK_SPACE);
 	short f1 = GetKeyState(VK_F1);
 
@@ -125,37 +133,46 @@ void MainScene::updateKeyboard(float delta)
 	long down = 0x8000; // hi bit
 	short step = 30.0f;
 
-	float x = 0;
-	float y = 0;
-	
-	if (l & down)
-		x -= step;	
-	if (r & down)	
-		x += step;	
-	//if (d & down)	
-	//	y -= step;	
-	if ((u & down) || (u2 & down))	
-		y += step;		
-	
-	b2Vec2 vel = playerBody->GetLinearVelocity();
-	bool midAir = abs(vel.y) >= 0.01f;
-	bool topSpeed = abs(vel.x) >= 5.0f;
+	//	Update player movement
+	if (playerBody)
+	{
+		short l = GetKeyState(VK_LEFT);
+		short r = GetKeyState(VK_RIGHT);
+		short d = GetKeyState(VK_DOWN);
+		short u = GetKeyState(VK_UP);
 
-	if (y && !midAir)
-		playerBody->ApplyLinearImpulse(b2Vec2(0, step), playerBody->GetWorldCenter());
-	if (x && !midAir && !topSpeed)
-		playerBody->ApplyForce(b2Vec2(x, 0), playerBody->GetWorldCenter());	
+		float x = 0;
+		float y = 0;
 	
-	//	Check player direction
-	if (x < 0 && direction == PlayerDirectionRight)
-	{
-		direction = PlayerDirectionLeft;
-		player->runAction(CCFlipX::create(true));
-	}
-	else if (x > 0 && direction == PlayerDirectionLeft)
-	{
-		direction = PlayerDirectionRight;
-		player->runAction(CCFlipX::create(false));
+		if (l & down)
+			x -= step;	
+		if (r & down)	
+			x += step;	
+		//if (d & down)	
+		//	y -= step;	
+		if ((u & down) || (u2 & down))	
+			y += step;		
+
+		b2Vec2 vel = playerBody->GetLinearVelocity();
+		bool midAir = abs(vel.y) >= 0.01f;
+		bool topSpeed = abs(vel.x) >= 5.0f;
+
+		if (y && !midAir)
+			playerBody->ApplyLinearImpulse(b2Vec2(0, step), playerBody->GetWorldCenter());
+		if (x && !midAir && !topSpeed)
+			playerBody->ApplyForce(b2Vec2(x, 0), playerBody->GetWorldCenter());	
+	
+		//	Check player direction
+		if (x < 0 && direction == PlayerDirectionRight)
+		{
+			direction = PlayerDirectionLeft;
+			player->runAction(CCFlipX::create(true));
+		}
+		else if (x > 0 && direction == PlayerDirectionLeft)
+		{
+			direction = PlayerDirectionRight;
+			player->runAction(CCFlipX::create(false));
+		}
 	}
 
 	//	now check for scaling keys
