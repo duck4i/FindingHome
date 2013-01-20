@@ -42,6 +42,15 @@ public:
 	static unsigned int	readNodeContentU(xmlNodePtr node);
 };
 
+//
+//	Enum for property types in level editor
+//
+enum PROPERTY_TYPE {
+	propertyTypeDynamic,
+	propertyTypePlayer,
+	propertyTypeFinish
+};
+
 ///
 ///	Level loading class. 
 ///	Accepts world node to insert layers into and path to XML level file

@@ -184,21 +184,33 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 		//	anchor point is always in (0,0) for layer, but our position is mapped to (0.5, 0.5), or element center
 		//	compensate (sounds awfully like something said in star trek :)
 		nodePosition.x += nodeSize.width / 2.0f;
-		nodePosition.y -= nodeSize.height / 2.0f;		
+		nodePosition.y -= nodeSize.height / 2.0f;
 
 		toInsert = a;
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
 	{
 		nodeTypeID = 1;
+		CCSprite *a = CCSprite::create("..\\Resources\\circle.png");
+
+		float recalcScale =  nodeRadius / a->getContentSize().width;
+		a->setScale(recalcScale);
+
+		a->setColor(ccc3(nodeColor.r, nodeColor.g, nodeColor.b));
+
+		toInsert = a;
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
 	{
 		nodeTypeID = 2;
-		toInsert = CCSprite::create(nodeTexture);
+		CCSprite *a = CCSprite::create(nodeTexture);		
 
-		nodeSize.width = toInsert->getContentSize().width * nodeScale;
-		nodeSize.height = toInsert->getContentSize().height * nodeScale;
+		nodeSize.width = a->getContentSize().width * nodeScale;
+		nodeSize.height = a->getContentSize().height * nodeScale;
+		
+		a->setColor(ccc3(nodeColorTint.r, nodeColorTint.g, nodeColorTint.b));
+
+		toInsert = a;
 	}
 
 	if (toInsert)
@@ -206,6 +218,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 		toInsert->setPosition(nodePosition);
 		toInsert->setRotation(CC_RADIANS_TO_DEGREES(nodeRotation));
 		toInsert->setScale(nodeScale);
+		
 		layer->addChild(toInsert, zOrder);
 	}
 
@@ -227,14 +240,22 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 
 		b2Body* body = this->boxWorld->CreateBody(&def);
 
-		b2PolygonShape ps;
-		ps.SetAsBox(SCREEN_TO_WORLD(nodeSize.width / 2), SCREEN_TO_WORLD(nodeSize.height / 2));
+		if (nodeTypeID == 1)
+		{
+			b2CircleShape cs;
+			cs.m_radius = SCREEN_TO_WORLD(nodeRadius);
+			body->CreateFixture(&cs, 0.0f);
+		}
+		else
+		{
+			b2PolygonShape ps;
+			ps.SetAsBox(SCREEN_TO_WORLD(nodeSize.width / 2), SCREEN_TO_WORLD(nodeSize.height / 2));
 
-		b2FixtureDef fd;
-		fd.shape = &ps;		
+			b2FixtureDef fd;
+			fd.shape = &ps;
 
-		body->CreateFixture(&fd);
-
+			body->CreateFixture(&fd);
+		}
 	}
 
 	//	since parseNodeTexture allocates we release it here

@@ -30,6 +30,7 @@ private:
 	void updateBackground(float delta);
 
 	float sceneScale;
+	float lastKeyboardUpdate;
 	void updateKeyboard(float delta);
 
 	//	player

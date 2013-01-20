@@ -43,8 +43,10 @@ bool MainScene::init()
 	this->addChild(worldLayer);
 
 	this->debugLayer = NULL;
+	this->lastKeyboardUpdate = 0;
+
 	direction = PlayerDirectionRight;
-	sceneScale = this->getScale();
+	sceneScale = this->getScale();	
 
 	//	setup physics object
 	this->setupPhysics();
@@ -72,6 +74,7 @@ void MainScene::setupPhysics()
 	if (true)
 	{
 		this->debugLayer = B2DebugDrawLayer::create(this->boxWorld, PTM_RATIO);
+		this->debugLayer->setVisible(false);
 		this->worldLayer->addChild(this->debugLayer, 9999);	
 	}
 }
@@ -105,8 +108,6 @@ void MainScene::addBodies()
 	l.parse();
 }
 
-
-
 void MainScene::updateKeyboard(float delta)
 {
 	//CCLog("Tick keyboard");
@@ -115,6 +116,7 @@ void MainScene::updateKeyboard(float delta)
 	short d = GetKeyState(VK_DOWN);
 	short u = GetKeyState(VK_UP);
 	short u2 = GetKeyState(VK_SPACE);
+	short f1 = GetKeyState(VK_F1);
 
 	short zoomIn = GetKeyState(VK_OEM_PLUS);
 	short zoomOut = GetKeyState(VK_OEM_MINUS);
@@ -133,7 +135,7 @@ void MainScene::updateKeyboard(float delta)
 	//if (d & down)	
 	//	y -= step;	
 	if ((u & down) || (u2 & down))	
-		y += step;	
+		y += step;		
 	
 	b2Vec2 vel = playerBody->GetLinearVelocity();
 	bool midAir = abs(vel.y) >= 0.01f;
@@ -175,6 +177,20 @@ void MainScene::updateKeyboard(float delta)
 		this->worldLayer->setScale(this->sceneScale);
 	}
 
+	//	now check for box2D debug, the code bellow acts like WM_KEYUP
+	{
+		if (f1 & down)
+		{
+			//	not too fast
+			lastKeyboardUpdate += delta;				
+		}
+		else if (lastKeyboardUpdate != 0)
+		{			
+			this->debugLayer->setVisible(!this->debugLayer->isVisible());			
+			lastKeyboardUpdate = 0;
+		}
+	}
+
 }
 
 short tweenColor(short start, short end)
@@ -207,7 +223,7 @@ void MainScene::update(float delta)
 	}
 
 	//	Now keyboard update
-	updateKeyboard(0);
+	updateKeyboard(delta);
 }
 
 void MainScene::updateBackground(float delta)
