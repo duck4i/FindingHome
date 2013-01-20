@@ -93,6 +93,8 @@ public:
 		levelPath = path;		
 		sharedDoc = NULL;
 		this->boxWorld = boxWorld;
+		this->playerBody = NULL;
+		this->playerNode = NULL;
 
 		createLevelLayers();
 	}
@@ -105,6 +107,8 @@ public:
 		this->mainLayer = mainLayer;
 		this->backgroundLayer = backLayer;
 		this->boxWorld = boxWorld;
+		this->playerBody = NULL;
+		this->playerNode = NULL;
 	}
 
 	~LevelLoader()

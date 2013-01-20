@@ -18,7 +18,7 @@ void LevelLoader::createLevelLayers()
 
 bool LevelLoader::parse()
 {
-	bool success = false;
+	bool success = false;	
 
 	sharedDoc = xmlReadFile(this->levelPath, "utf-8", XML_PARSE_RECOVER);
 	CCAssert(sharedDoc, "Cannot load level file");	
@@ -217,6 +217,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		{			
 			cs.m_radius = SCREEN_TO_WORLD(info.radius);
 			fd.shape = &cs;
+			fd.density = 0.3f;
 		}
 		else
 		{			
