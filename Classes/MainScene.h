@@ -10,6 +10,8 @@
 
 using namespace cocos2d;
 
+#define DEFAULT_SCALE 0.6f
+
 enum PlayerDirection
 {
 	PlayerDirectionLeft,

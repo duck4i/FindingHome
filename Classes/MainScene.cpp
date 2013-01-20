@@ -51,7 +51,7 @@ bool MainScene::init()
 	this->worldLayer = CCLayer::create();	
 	//this->worldLayer = CCLayerColor::create(ccc4(0, 0, 0, 255));	
 
-	sceneScale = 0.5f;//this->getScale();
+	sceneScale = DEFAULT_SCALE;
 	this->worldLayer->setScale(sceneScale);
 	//this->worldLayer->ignoreAnchorPointForPosition(false);
 	//this->worldLayer->setAnchorPoint(ccp(0.5f, 0.5f));
@@ -161,6 +161,7 @@ void MainScene::updateKeyboard(float delta)
 			playerBody->ApplyLinearImpulse(b2Vec2(0, step), playerBody->GetWorldCenter());
 		if (x && !midAir && !topSpeed)
 			playerBody->ApplyForce(b2Vec2(x, 0), playerBody->GetWorldCenter());	
+			//playerBody->ApplyLinearImpulse(b2Vec2(x, 0), playerBody->GetWorldCenter());
 	
 		//	Check player direction
 		if (x < 0 && direction == PlayerDirectionRight)
@@ -190,7 +191,7 @@ void MainScene::updateKeyboard(float delta)
 	}
 	else if (zoomReset & down)
 	{
-		this->sceneScale = 1.0f;
+		this->sceneScale = DEFAULT_SCALE;
 		this->worldLayer->setScale(this->sceneScale);
 	}
 
