@@ -3,21 +3,32 @@
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
-                <Item xsi:type="RectangleItem" Name="Rectangle_0010" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0040" Visible="true">
                     <Position>
-                        <X>11</X>
-                        <Y>-2143</Y>
+                        <X>1990</X>
+                        <Y>-1074</Y>
                     </Position>
                     <CustomProperties />
-                    <Width>3913</Width>
-                    <Height>2176</Height>
-                    <FillColor>
-                        <R>185</R>
-                        <G>209</G>
-                        <B>234</B>
-                        <A>145</A>
-                        <PackedValue>2444874218</PackedValue>
-                    </FillColor>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>8.132694</X>
+                        <Y>8.132694</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>myCity.jpg</texture_filename>
+                    <asset_name>myCity</asset_name>
+                    <Origin>
+                        <X>294</X>
+                        <Y>219</Y>
+                    </Origin>
                 </Item>
             </Items>
             <ScrollSpeed>
@@ -453,7 +464,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>38</NextItemNumber>
+        <NextItemNumber>40</NextItemNumber>
         <ContentRootFolder>C:\Users\Mihailo\Desktop\cocos\FindingHome\Resources</ContentRootFolder>
         <CameraPosition>
             <X>2804.89063</X>
