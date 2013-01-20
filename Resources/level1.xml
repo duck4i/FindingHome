@@ -211,14 +211,68 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0013" Visible="true">
                     <Position>
-                        <X>409</X>
-                        <Y>-1019</Y>
+                        <X>524</X>
+                        <Y>66</Y>
                     </Position>
                     <CustomProperties />
-                    <Rotation>0.340513945</Rotation>
+                    <Rotation>5.411354</Rotation>
                     <Scale>
-                        <X>15.1055994</X>
-                        <Y>15.1055994</Y>
+                        <X>16.9230938</X>
+                        <Y>16.9230938</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Dog\15.png</texture_filename>
+                    <asset_name>Dog\15</asset_name>
+                    <Origin>
+                        <X>18</X>
+                        <Y>12</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0015" Visible="true">
+                    <Position>
+                        <X>231</X>
+                        <Y>166</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>5.411354</Rotation>
+                    <Scale>
+                        <X>16.9230938</X>
+                        <Y>16.9230938</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Dog\15.png</texture_filename>
+                    <asset_name>Dog\15</asset_name>
+                    <Origin>
+                        <X>18</X>
+                        <Y>12</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0016" Visible="true">
+                    <Position>
+                        <X>804</X>
+                        <Y>-20</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>5.411354</Rotation>
+                    <Scale>
+                        <X>16.9230938</X>
+                        <Y>16.9230938</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -245,7 +299,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>14</NextItemNumber>
+        <NextItemNumber>17</NextItemNumber>
         <ContentRootFolder>C:\Users\Mihailo\Desktop\cocos\FindingHome\Resources</ContentRootFolder>
         <CameraPosition>
             <X>423.3333</X>

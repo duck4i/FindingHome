@@ -87,7 +87,7 @@ void LevelLoader::createLevelLayers()
 	this->worldNode->addChild(this->backgroundLayer);
 
 	this->mainLayer = CCLayer::create();
-	this->worldNode->addChild(this->mainLayer);	
+	this->worldNode->addChild(this->mainLayer);
 }
 
 bool LevelLoader::parse()
@@ -169,26 +169,36 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	//	select layer to insert it into
 	CCNode* layer = type == 0 ? this->mainLayer : this->backgroundLayer;
 	CCNode* toInsert = NULL;
+	unsigned int nodeTypeID = 0;
 
-	//	NOW DO ACTUAL WORLD CREATIONG -- LIKE A BOSS
+	//	NOW DO ACTUAL WORLD CREATIONG -- LIKE A BOSS	
 	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
 	{
 		CCLayerColor *a = CCLayerColor::create(nodeColor);
 		a->setContentSize(nodeSize);
+		nodeTypeID = 0;
+
+		//	Obey anchor point (not enabled  by default - this makes position issues in Box2D calculations)
+		a->ignoreAnchorPointForPosition(false);
 		
 		//	anchor point is always in (0,0) for layer, but our position is mapped to (0.5, 0.5), or element center
-		//	compensate (sounds awfully like somethign said in star trek :)		
-		nodePosition.y -= nodeSize.height;
+		//	compensate (sounds awfully like something said in star trek :)
+		nodePosition.x += nodeSize.width / 2.0f;
+		nodePosition.y -= nodeSize.height / 2.0f;		
 
 		toInsert = a;
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
 	{
-
+		nodeTypeID = 1;
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
 	{
+		nodeTypeID = 2;
 		toInsert = CCSprite::create(nodeTexture);
+
+		nodeSize.width = toInsert->getContentSize().width * nodeScale;
+		nodeSize.height = toInsert->getContentSize().height * nodeScale;
 	}
 
 	if (toInsert)
@@ -199,9 +209,39 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 		layer->addChild(toInsert, zOrder);
 	}
 
+	//	NOW PROCESS PHYSICS (main layer only)
+	bool skipPhysics = false;
+	if (toInsert && type == 0 && !skipPhysics)
+	{
+		if (this->boxWorld == NULL)
+		{
+			CCLog("Box world is not set up. Cannot create physics");
+			return;
+		}
+
+		b2BodyDef def;
+		def.userData = toInsert;
+
+		def.position.Set(SCREEN_TO_WORLD(nodePosition.x), SCREEN_TO_WORLD(nodePosition.y));
+		def.angle = -1 * nodeRotation;		
+
+		b2Body* body = this->boxWorld->CreateBody(&def);
+
+		b2PolygonShape ps;
+		ps.SetAsBox(SCREEN_TO_WORLD(nodeSize.width / 2), SCREEN_TO_WORLD(nodeSize.height / 2));
+
+		b2FixtureDef fd;
+		fd.shape = &ps;		
+
+		body->CreateFixture(&fd);
+
+	}
+
 	//	since parseNodeTexture allocates we release it here
 	delete [] nodeTexture;
 }
+
+
 
 CCPoint LevelLoader::parseNodePosition(xmlNodePtr node)
 {

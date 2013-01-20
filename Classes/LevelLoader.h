@@ -56,17 +56,20 @@ private:
 
 	xmlDocPtr sharedDoc;
 
-	CCNode* playerNode;
-	CCNode* finishNode;
-
 	CCNode* mainLayer;	
 	CCNode* backgroundLayer;
 	void createLevelLayers();
+
+	b2World *boxWorld;
+
+	CCNode* playerNode;
+	CCNode* finishNode;
 	
 private:
 
 	//	type 0: main layer; type 1: background layer
 	void parseCurrentNode(xmlNodePtr node, unsigned int type = 0, unsigned int zOrder = 0);
+	void parseNodePhysics(char* nodeType, CCSize nodeSize, CCPoint nodePosition);
 	
 	//	parser helpers
 	CCPoint		parseNodePosition(xmlNodePtr node);
@@ -79,22 +82,24 @@ private:
 
 public:
 
-	LevelLoader(CCNode* world, const char* path)
+	LevelLoader(CCNode* world, const char* path, b2World* boxWorld)
 	{
 		worldNode = world;
 		levelPath = path;		
 		sharedDoc = NULL;
+		this->boxWorld = boxWorld;
 
 		createLevelLayers();
 	}
 
-	LevelLoader(CCNode* world, const char* path, CCNode* mainLayer, CCNode* backLayer)
+	LevelLoader(CCNode* world, const char* path, b2World* boxWorld, CCNode* mainLayer, CCNode* backLayer)
 	{
 		worldNode = world;
 		levelPath = path;
 		sharedDoc = NULL;
 		this->mainLayer = mainLayer;
 		this->backgroundLayer = backLayer;
+		this->boxWorld = boxWorld;
 	}
 
 	~LevelLoader()
@@ -106,6 +111,7 @@ public:
 	bool parse();
 	void logNode(xmlNodePtr node);
 
+	b2World* getWorld();
 };
 
 #endif

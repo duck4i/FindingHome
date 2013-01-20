@@ -78,23 +78,6 @@ void MainScene::setupPhysics()
 
 void MainScene::addBodies()
 {
-	//	setup ground shape
-	CCLayer *blackBox = CCLayerColor::create(ccc4(0, 0, 0, 255));
-	blackBox->setContentSize(CCSizeMake(WINDOW_WIDTH, 50));
-	blackBox->setPosition(ccp(0, 100));
-	blackBox->setAnchorPoint(ccp(0, 0));
-	worldLayer->addChild(blackBox);
-
-	b2BodyDef bb;
-	bb.userData = blackBox;
-	bb.position.Set(SCREEN_TO_WORLD(blackBox->getPositionX()), SCREEN_TO_WORLD(blackBox->getPositionY()));
-
-	b2Body* bbb = this->boxWorld->CreateBody(&bb);
-
-	b2PolygonShape bpb;
-	bpb.SetAsBox(SCREEN_TO_WORLD(blackBox->getContentSize().width), SCREEN_TO_WORLD(blackBox->getContentSize().height));
-	bbb->CreateFixture(&bpb, 0.0f);
-
 	//	setup dynamic box
 	player = CCSprite::create("..\\Resources\\dog.png");
 	
@@ -117,7 +100,8 @@ void MainScene::addBodies()
 	bfw.shape = &bpw;	
 	playerBody->CreateFixture(&bfw);	
 
-	LevelLoader l(this->worldLayer, "..\\Resources\\Level1.xml");
+	//	load level
+	LevelLoader l(this->worldLayer, "..\\Resources\\Level1.xml", this->boxWorld);
 	l.parse();
 }
 
@@ -215,9 +199,10 @@ void MainScene::update(float delta)
 		if (s != NULL)
 		{
 			b2Vec2 pos = b->GetPosition();
+			CCPoint posRecalc = ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y));		
 			
-			s->setPosition(ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y)));
-			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));			
+			s->setPosition(posRecalc);
+			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
 		}
 	}
 
