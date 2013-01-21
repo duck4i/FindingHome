@@ -333,7 +333,9 @@ char* LevelLoader::parseNodeTexture(xmlNodePtr node)
 	if (read)
 	{
 		ret = (char*) malloc(255);
-		sprintf(ret, "%s%s", RESOURCE_DIR, read);
+		sprintf(ret, "%s%s", RESOURCE_DIR, read);		
+
+		//Json::Reader r;
 	}
 	CCLog("Texture: %s", ret);
 	return ret;

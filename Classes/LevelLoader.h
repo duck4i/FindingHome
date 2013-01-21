@@ -8,6 +8,7 @@
 #include "Physics.h"
 #include "XMLHelper.h"
 #include "CustomProperty.h"
+//#include "json\json.h"
 
 using namespace cocos2d;
 
