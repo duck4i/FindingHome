@@ -55,6 +55,8 @@ private:
 	bool initOK;
 	bool init();
 
+	Value rigidBodies;
+
 public:
 	
 	ShapeHelper(const char* resourcePath)

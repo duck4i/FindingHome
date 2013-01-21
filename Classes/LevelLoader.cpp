@@ -97,6 +97,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	info.color = parseNodeColor(node);
 	info.tint = parseNodeColor(node, true);
 	info.texture = parseNodeTexture(node);
+	info.rawTexture = parseNodeTexture(node, true);
 	info.flipHorizontally = parseNodeFlip(node);
 	info.flipVertically = parseNodeFlip(node, true);
 	info.visible = parseNodeVisible(node);
@@ -231,7 +232,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 
 		
 		//	check for custom shape
-		bool hasCustomShape = shelp.hasShapeForItem(info.texture);
+		bool hasCustomShape = shelp.hasShapeForItem(info.rawTexture);
 		if (hasCustomShape)
 		{
 			bool ok = shelp.createShapeForItem(info.texture, body);						
@@ -338,18 +339,20 @@ ccColor4B LevelLoader::parseNodeColor(xmlNodePtr node, bool tint)
 	return ret;
 }
 
-char* LevelLoader::parseNodeTexture(xmlNodePtr node)
+char* LevelLoader::parseNodeTexture(xmlNodePtr node, bool raw)
 {
 	char* ret = NULL;
 	char* read = XMLHelper::readNodeContent(XMLHelper::findChildNodeWithName(node, "texture_filename"));
 
-	if (read)
+	if (read && !raw)
 	{
 		ret = (char*) malloc(255);
-		sprintf(ret, "%s%s", RESOURCE_DIR, read);		
-
-		//Json::Reader r;
+		sprintf(ret, "%s%s", RESOURCE_DIR, read);
 	}
+	else if (read)
+		ret = read;
+
 	CCLog("Texture: %s", ret);
 	return ret;
 }
+

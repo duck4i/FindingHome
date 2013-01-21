@@ -35,6 +35,7 @@ typedef struct
 	ccColor4B color;
 	ccColor4B tint;
 	char* texture;
+	char* rawTexture;
 	unsigned int type;
 
 	bool flipHorizontally;
@@ -64,7 +65,7 @@ private:
 	CCNode* backgroundLayer;
 	void createLevelLayers();
 
-	b2World *boxWorld;
+	b2World *boxWorld;	
 
 public:
 	CCNode* playerNode;
@@ -89,7 +90,7 @@ private:
 	float		parseNodeRotation(xmlNodePtr node);
 	float		parseNodeRadius(xmlNodePtr node);
 	float		parseNodeScale(xmlNodePtr node);
-	char*		parseNodeTexture(xmlNodePtr node);
+	char*		parseNodeTexture(xmlNodePtr node, bool raw = false);	
 	bool		parseNodeFlip(xmlNodePtr node, bool vertical = false);
 	bool		parseNodeVisible(xmlNodePtr node);
 
