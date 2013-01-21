@@ -1,0 +1,1 @@
+copy ..\..\Debug.win32\*.dll *.*

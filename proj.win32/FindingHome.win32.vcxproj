@@ -48,10 +48,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;C:\Users\Bojan\Desktop\Cocos2D\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MinimalRebuild>true</MinimalRebuild>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -85,10 +85,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;C:\Users\Bojan\Desktop\Cocos2D\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Async</ExceptionHandling>
       <DebugInformationFormat />
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
