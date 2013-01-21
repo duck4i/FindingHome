@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_01" Visible="true">
     <Layers>
-        <Layer Name="Background" Visible="true">
+        <Layer Name="Background" Visible="false">
             <Items>
                 <Item xsi:type="TextureItem" Name="Texture_0044" Visible="true">
                     <Position>
@@ -48,7 +48,7 @@
                         <A>255</A>
                         <PackedValue>4294967295</PackedValue>
                     </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipHorizontally>true</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>myCity.jpg</texture_filename>
                     <asset_name>myCity</asset_name>
@@ -555,10 +555,10 @@
     <CustomProperties />
     <EditorRelated>
         <NextItemNumber>57</NextItemNumber>
-        <ContentRootFolder>C:\Users\Mihailo\Desktop\cocos\FindingHome\Resources</ContentRootFolder>
+        <ContentRootFolder>.</ContentRootFolder>
         <CameraPosition>
-            <X>1567.04688</X>
-            <Y>-1345.35571</Y>
+            <X>3972.04688</X>
+            <Y>-1618.68909</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

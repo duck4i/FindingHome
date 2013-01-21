@@ -33,7 +33,9 @@ bool LevelLoader::parse()
 			while (layers)
 			{
 				const xmlChar* name = xmlGetProp(layers, (const xmlChar*) "Name");
-				if (xmlStrcasecmp(name, (const xmlChar*) MAIN_LAYER_NAME) == 0)
+				bool visible = parseNodeVisible(layers);	//
+				
+				if (visible && xmlStrcasecmp(name, (const xmlChar*) MAIN_LAYER_NAME) == 0)
 				{
 					xmlNodePtr mainLayers = layers->children->next;
 					short count = xmlChildElementCount(mainLayers);
@@ -47,7 +49,7 @@ bool LevelLoader::parse()
 						mainLayerChild = mainLayerChild->next;
 					}
 				}
-				else if (xmlStrcasecmp(name, (const xmlChar*) BACKGROUND_LAYER_NAME) == 0)
+				else if (visible && xmlStrcasecmp(name, (const xmlChar*) BACKGROUND_LAYER_NAME) == 0)
 				{
 					xmlNode *backLayers = layers->children->next;
 					short count = xmlChildElementCount(backLayers);
@@ -95,6 +97,15 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	info.color = parseNodeColor(node);
 	info.tint = parseNodeColor(node, true);
 	info.texture = parseNodeTexture(node);
+	info.flipHorizontally = parseNodeFlip(node);
+	info.flipVertically = parseNodeFlip(node, true);
+	info.visible = parseNodeVisible(node);
+
+	if (!info.visible)
+	{
+		CCLog("Node hidden. Skipping.");
+		return;
+	}
 
 	//	check type
 	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
@@ -154,7 +165,7 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 	else if (info.type == 2)
 	{
 		info.type = 2;
-		CCSprite *a = CCSprite::create(info.texture);		
+		CCSprite *a = CCSprite::create(info.texture);
 
 		info.size.width = a->getContentSize().width * info.scale;
 		info.size.height = a->getContentSize().height * info.scale;
@@ -168,7 +179,13 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 	{
 		toInsert->setPosition(info.position);
 		toInsert->setRotation(CC_RADIANS_TO_DEGREES(info.rotation));
-		toInsert->setScale(info.scale);		
+		toInsert->setScale(info.scale);
+		
+		if (info.flipHorizontally)
+			toInsert->runAction(CCFlipX::create(true));
+		if (info.flipVertically)
+			toInsert->runAction(CCFlipY::create(true));
+		
 		layer->addChild(toInsert, zOrder);
 
 		//	check for known types
@@ -280,6 +297,19 @@ float LevelLoader::parseNodeScale(xmlNodePtr node)
 		ret = 1; //	default scale
 	//CCLog("Scale: %f", ret);
 	return ret;
+}
+
+bool LevelLoader::parseNodeFlip(xmlNodePtr node, bool vertical)
+{
+	char* name = vertical ? "FlipVertically" : "FlipHorizontally";
+	bool res = XMLHelper::readNodeContentB(XMLHelper::findChildNodeWithName(node, name));
+	return res;
+}
+
+bool LevelLoader::parseNodeVisible(xmlNodePtr node)
+{	
+	const xmlChar* res = xmlGetProp(node, (const xmlChar*) "Visible");
+	return xmlStrcasecmp(res, (const xmlChar*) "true") == 0;
 }
 
 ccColor4B LevelLoader::parseNodeColor(xmlNodePtr node, bool tint)

@@ -36,6 +36,11 @@ typedef struct
 	ccColor4B tint;
 	char* texture;
 	unsigned int type;
+
+	bool flipHorizontally;
+	bool flipVertically;
+	bool visible;
+
 	CCNode* cocosNode;
 	xmlNodePtr xmlNode;
 } NODEINFO;
@@ -54,6 +59,7 @@ private:
 
 	xmlDocPtr sharedDoc;
 
+	CCNode* frontLayer; // this one is displayed before main layer, eg. play gets behind something...
 	CCNode* mainLayer;	
 	CCNode* backgroundLayer;
 	void createLevelLayers();
@@ -84,6 +90,8 @@ private:
 	float		parseNodeRadius(xmlNodePtr node);
 	float		parseNodeScale(xmlNodePtr node);
 	char*		parseNodeTexture(xmlNodePtr node);
+	bool		parseNodeFlip(xmlNodePtr node, bool vertical = false);
+	bool		parseNodeVisible(xmlNodePtr node);
 
 public:
 
@@ -97,18 +105,6 @@ public:
 		this->playerNode = NULL;
 
 		createLevelLayers();
-	}
-
-	LevelLoader(CCNode* world, const char* path, b2World* boxWorld, CCNode* mainLayer, CCNode* backLayer)
-	{
-		worldNode = world;
-		levelPath = path;
-		sharedDoc = NULL;
-		this->mainLayer = mainLayer;
-		this->backgroundLayer = backLayer;
-		this->boxWorld = boxWorld;
-		this->playerBody = NULL;
-		this->playerNode = NULL;
 	}
 
 	~LevelLoader()
