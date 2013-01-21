@@ -14,7 +14,7 @@ public:
 	
 	ShapeHelper()
 	{
-		Reader r;
+		
 	}
 };
 

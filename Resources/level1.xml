@@ -555,7 +555,7 @@
     <CustomProperties />
     <EditorRelated>
         <NextItemNumber>57</NextItemNumber>
-        <ContentRootFolder>.</ContentRootFolder>
+        <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>3387.04688</X>
             <Y>-1783.68909</Y>
