@@ -216,17 +216,30 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 			return false;
 		}
 
+		//	init shape helper
+		ShapeHelper shelp(SHAPE_DATA);
+
+		//	now set body fixtures
 		b2BodyDef def;
 		def.userData = info.cocosNode;
-		def.type = props.isDynamicObject() || props.isPlayerObject() ? b2_dynamicBody : b2_staticBody;		
+		def.type = props.isDynamicObject() || props.isPlayerObject() ? b2_dynamicBody : b2_staticBody;
 
 		def.position.Set(SCREEN_TO_WORLD(info.position.x), SCREEN_TO_WORLD(info.position.y));
 		def.angle = -1 * info.rotation;
 
 		b2Body* body = this->boxWorld->CreateBody(&def);		
 
-		//	now create fixtures
-		b2FixtureDef fd;		
+		
+		//	check for custom shape
+		bool hasCustomShape = shelp.hasShapeForItem(info.texture);
+		if (hasCustomShape)
+		{
+			bool ok = shelp.createShapeForItem(info.texture, body);						
+			return ok;
+		}
+
+		//	now create fixtures for known shapes, or images without shape data
+		b2FixtureDef fd;
 		b2CircleShape cs;
 		b2PolygonShape ps;
 

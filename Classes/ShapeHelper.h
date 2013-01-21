@@ -8,8 +8,11 @@
 using namespace cocos2d;
 using namespace Json;
 
+//	HELP HERE
+//	http://jsoncpp.sourceforge.net/
+
+//	CONTENT EXAMPLE HERE
 /*
-Content example.
 {
     "rigidBodies": [{
         "name": "dog.png",
@@ -47,15 +50,19 @@ private:
 
 	const char* resourcePath;
 
+	bool initOK;
+	bool init();
+
 public:
 	
 	ShapeHelper(const char* resourcePath)
 	{
 		this->resourcePath = resourcePath;
+		initOK = init();
 	}
 
 	bool hasShapeForItem(char* name);
-	bool createShapeForItem(b2Body* body, char* name);
+	bool createShapeForItem(char* name, __in b2Body* body);
 
 };
 

@@ -11,6 +11,7 @@
 using namespace cocos2d;
 
 #define RESOURCE_DIR		"..\\Resources\\"
+#define SHAPE_DATA			RESOURCE_DIR "ShapeData.json"
 
 #define MAIN_LAYER_NAME			"Main"			//	everything in this layer is made as a rigid bodies in Box2D world
 #define BACKGROUND_LAYER_NAME	"Background"	//	only backgrouds and sprites - not collidable
