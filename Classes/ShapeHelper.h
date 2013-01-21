@@ -2,11 +2,13 @@
 #define __SHAPE_HELPER_H__
 
 #include <cocos2d.h>
+#include <fstream>
 #include <Box2D\Box2D.h>
 #include "json\json.h"
 
 using namespace cocos2d;
 using namespace Json;
+using namespace std;
 
 //	HELP HERE
 //	http://jsoncpp.sourceforge.net/

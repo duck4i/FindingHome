@@ -5,7 +5,12 @@ bool ShapeHelper::init()
 	bool res = false;
 	CCLog("%s", __FUNCTION__);
 
+	Json::Value root;
+	Json::Reader reader;
+	std::ifstream fin;
 
+	fin.open(resourcePath);
+	res = reader.parse(fin, root);
 
 
 	CCLog("Returning %d", res);
@@ -18,8 +23,7 @@ bool ShapeHelper::hasShapeForItem(char* name)
 	CCLog("%s Name: %s", __FUNCTION__, name);
 
 	if (!initOK)
-		return res;
-
+		return res;	
 
 
 	CCLog("Returning %d", res);
