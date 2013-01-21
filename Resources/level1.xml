@@ -450,7 +450,7 @@
                         <PackedValue>4294967040</PackedValue>
                     </FillColor>
                 </Item>
-                <Item xsi:type="RectangleItem" Name="Rectangle_0048" Visible="false">
+                <Item xsi:type="RectangleItem" Name="Rectangle_0048" Visible="true">
                     <Position>
                         <X>2389</X>
                         <Y>-1434</Y>
@@ -470,7 +470,7 @@
                         <PackedValue>4294967295</PackedValue>
                     </FillColor>
                 </Item>
-                <Item xsi:type="RectangleItem" Name="Rectangle_0054" Visible="false">
+                <Item xsi:type="RectangleItem" Name="Rectangle_0054" Visible="true">
                     <Position>
                         <X>2436</X>
                         <Y>-1375</Y>
@@ -490,7 +490,7 @@
                         <PackedValue>4294901760</PackedValue>
                     </FillColor>
                 </Item>
-                <Item xsi:type="RectangleItem" Name="Rectangle_0055" Visible="false">
+                <Item xsi:type="RectangleItem" Name="Rectangle_0055" Visible="true">
                     <Position>
                         <X>2420</X>
                         <Y>-1562</Y>
@@ -510,7 +510,7 @@
                         <PackedValue>4278190335</PackedValue>
                     </FillColor>
                 </Item>
-                <Item xsi:type="RectangleItem" Name="Rectangle_0056" Visible="false">
+                <Item xsi:type="RectangleItem" Name="Rectangle_0056" Visible="true">
                     <Position>
                         <X>2354</X>
                         <Y>-1547</Y>
@@ -538,11 +538,11 @@
                     <CustomProperties />
                     <Radius>65</Radius>
                     <FillColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>0</B>
+                        <R>192</R>
+                        <G>192</G>
+                        <B>192</B>
                         <A>255</A>
-                        <PackedValue>4294967040</PackedValue>
+                        <PackedValue>4290822336</PackedValue>
                     </FillColor>
                 </Item>
             </Items>
@@ -557,8 +557,8 @@
         <NextItemNumber>57</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>3387.04688</X>
-            <Y>-1783.68909</Y>
+            <X>3137.04688</X>
+            <Y>-978.6891</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>
