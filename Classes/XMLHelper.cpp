@@ -74,4 +74,5 @@ void XMLHelper::logNode(xmlNodePtr node)
 		MessageBox(NULL, s.c_str(), name, MB_OK);
 	else
 		CCLog("XML Node log: Name: %s Properties: %s", name, s.c_str());
+		
 }

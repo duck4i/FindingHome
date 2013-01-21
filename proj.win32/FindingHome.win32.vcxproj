@@ -57,7 +57,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4267;4251;4244;4099;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -132,6 +132,7 @@
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\Physics.h" />
     <ClInclude Include="..\Classes\Settings.h" />
+    <ClInclude Include="..\Classes\ShapeHelper.h" />
     <ClInclude Include="..\Classes\XMLHelper.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="..\Classes\GLES-Render.cpp" />
     <ClCompile Include="..\Classes\LevelLoader.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
+    <ClCompile Include="..\Classes\ShapeHelper.cpp" />
     <ClCompile Include="..\Classes\XMLHelper.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

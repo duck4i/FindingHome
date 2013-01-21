@@ -70,6 +70,9 @@
     <ClInclude Include="..\Classes\CustomProperty.h">
       <Filter>include\levels</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\ShapeHelper.h">
+      <Filter>include\levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -94,6 +97,9 @@
       <Filter>source\levels</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\CustomProperty.cpp">
+      <Filter>source\levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShapeHelper.cpp">
       <Filter>source\levels</Filter>
     </ClCompile>
   </ItemGroup>

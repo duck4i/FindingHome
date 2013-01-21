@@ -1,6 +1,11 @@
 #ifndef _XML_HELPER_H__
 #define _XML_HELPER_H__
-#include "LevelLoader.h"
+
+#include <cocos2d.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
+using namespace cocos2d;
 
 //
 //	XML helper utilities class. Makes XML code easier to read and work with.

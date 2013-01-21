@@ -2,13 +2,11 @@
 #define __LEVEL_LOADER_H__
 
 #include <cocos2d.h>
-#include <libxml/parser.h>
-#include <libxml/tree.h>
 #include <Box2D/Box2D.h>
-#include "Physics.h"
 #include "XMLHelper.h"
+#include "ShapeHelper.h"
+#include "Physics.h"
 #include "CustomProperty.h"
-//#include "json\json.h"
 
 using namespace cocos2d;
 
