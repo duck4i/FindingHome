@@ -98,6 +98,8 @@ bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, floa
 			fd.density = density;			
 
 			b2Fixture *f = body->CreateFixture(&fd);			
+
+			delete [] vertices;
 		}		
 	}
 	else
