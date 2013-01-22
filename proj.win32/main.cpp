@@ -25,7 +25,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     // create the application instance
     AppDelegate app;
-    CCEGLView* eglView = CCEGLView::sharedOpenGLView();		
+    CCEGLView* eglView = CCEGLView::sharedOpenGLView();
 
 	bool fullScreen = false;
 	if (fullScreen)

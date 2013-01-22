@@ -46,8 +46,6 @@ bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, floa
 	bool res = false;
 	CCLog("%s Name: %s", __FUNCTION__, name);
 
-	//	http://www.box2d.org/forum/viewtopic.php?f=3&t=8418
-
 	Value v = itemWithName(name);
 	if (v != NULL && body != NULL)
 	{
