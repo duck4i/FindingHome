@@ -59,17 +59,24 @@ bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, floa
 		{
 			Value curr = polys[i];
 			unsigned int numVertices = curr.size();
-			b2Vec2* vertices = (b2Vec2*) malloc(numVertices * sizeof(b2Vec2));			
+			b2Vec2* vertices = (b2Vec2*) malloc(numVertices * sizeof(b2Vec2));
 
 			for (unsigned int j = 0; j < curr.size(); j++)	//	all vertices of current poly
 			{
 				Value set = curr[j];
 				float x = set["x"].asDouble();
 				float y = set["y"].asDouble();
+
+				float width = SCREEN_TO_WORLD(size.width);
+				float height = SCREEN_TO_WORLD(size.height);
 				
 				//	scale properly from content size
-				x *= SCREEN_TO_WORLD(size.width);
-				y *= SCREEN_TO_WORLD(size.height);
+				x *= width;
+				y *= height;
+
+				//	adjusting anchor point (physics editor 0x0 but box2d 0.5x0.5x)
+				x -= width / 2.0f;
+				y -= height / 2.0f;				
 
 				vertices[j].Set(x, y);
 			}

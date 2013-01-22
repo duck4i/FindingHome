@@ -6,6 +6,7 @@
 #include "XMLHelper.h"
 #include "ShapeHelper.h"
 #include "Physics.h"
+#include "LevelNodeInfo.h"
 #include "CustomProperty.h"
 
 using namespace cocos2d;
@@ -24,27 +25,6 @@ using namespace cocos2d;
 //	EXCEPTION FOR THIS ARE PLAYER AND FINISH ELEMENTS THAT HAVE HIGH ORDER
 
 class CustomProperties;
-
-typedef struct 
-{
-	CCPoint position;
-	CCSize size;
-	float rotation;
-	float radius;
-	float scale;
-	ccColor4B color;
-	ccColor4B tint;
-	char* texture;
-	char* rawTexture;
-	unsigned int type;
-
-	bool flipHorizontally;
-	bool flipVertically;
-	bool visible;
-
-	CCNode* cocosNode;
-	xmlNodePtr xmlNode;
-} NODEINFO;
 
 ///
 ///	Level loading class. 

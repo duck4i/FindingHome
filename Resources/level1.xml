@@ -111,6 +111,33 @@
                         <Y>216</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0061" Visible="true">
+                    <Position>
+                        <X>-85</X>
+                        <Y>-662</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1</X>
+                        <Y>1</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>F:\Games\cocos2d-x\FindingHome\Resources\dog.png</texture_filename>
+                    <asset_name>F:\Games\cocos2d-x\FindingHome\Resources\dog</asset_name>
+                    <Origin>
+                        <X>50</X>
+                        <Y>39</Y>
+                    </Origin>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -169,15 +196,15 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Player" Visible="true">
                     <Position>
-                        <X>630</X>
-                        <Y>-691</Y>
+                        <X>127</X>
+                        <Y>-673</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="player" Type="bool" Description="">
                             <boolean>true</boolean>
                         </Property>
                     </CustomProperties>
-                    <Rotation>-0.239932656</Rotation>
+                    <Rotation>0</Rotation>
                     <Scale>
                         <X>1</X>
                         <Y>1</Y>
@@ -520,14 +547,41 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0041" Visible="true">
                     <Position>
-                        <X>475</X>
-                        <Y>-2339</Y>
+                        <X>-285</X>
+                        <Y>-1089</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>4.616241</X>
-                        <Y>4.616241</Y>
+                        <X>1</X>
+                        <Y>1</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>sky.png</texture_filename>
+                    <asset_name>sky</asset_name>
+                    <Origin>
+                        <X>256</X>
+                        <Y>216</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0058" Visible="true">
+                    <Position>
+                        <X>-2055</X>
+                        <Y>-1359</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>-0.2890557</Rotation>
+                    <Scale>
+                        <X>4.726485</X>
+                        <Y>4.726485</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -554,11 +608,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>57</NextItemNumber>
+        <NextItemNumber>69</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>1942.04688</X>
-            <Y>-1091.18909</Y>
+            <X>221.667633</X>
+            <Y>-659.0397</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

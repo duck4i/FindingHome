@@ -129,6 +129,7 @@
     <ClInclude Include="..\Classes\CustomProperty.h" />
     <ClInclude Include="..\Classes\GLES-Render.h" />
     <ClInclude Include="..\Classes\LevelLoader.h" />
+    <ClInclude Include="..\Classes\LevelNodeInfo.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\Physics.h" />
     <ClInclude Include="..\Classes\Settings.h" />

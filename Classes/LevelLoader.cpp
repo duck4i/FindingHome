@@ -173,7 +173,7 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 		
 		a->setColor(ccc3(info.tint.r, info.tint.g, info.tint.b));
 
-		toInsert = a;
+		toInsert = a;		
 	}
 
 	if (toInsert)
@@ -226,9 +226,8 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		def.angle = -1 * info.rotation;
 
 		b2Body* body = this->boxWorld->CreateBody(&def);		
-		if (props.isPlayerObject())					
+		if (props.isPlayerObject())
 			this->playerBody = body;
-
 		
 		//	check for custom shape
 		bool customFixture = shapeHelper->createShapeForItem(info.rawTexture, body, info.size);
