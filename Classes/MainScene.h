@@ -27,9 +27,11 @@ private:
 	short lastUsedBackgroundIndex;
 	CCLayerGradient *gback;
 
-	void update(float delta);
-	
+	void update(float delta);	
 	void updateBackground(float delta);
+
+	CCPoint originalCamera;
+	void updateCamera(float delta);
 
 	float sceneScale;
 	float lastKeyboardUpdate;
@@ -52,6 +54,8 @@ private:
 
 	//	touch events
 	//void ccTouchesBegan(
+	bool touchesInProgress;
+	bool cameraScheduled;
 	void ccTouchesBegan(CCSet* touches, CCEvent* event);
 	void ccTouchesEnded(CCSet* touches, CCEvent* event);
 	void ccTouchesMoved(CCSet* touches, CCEvent* event);

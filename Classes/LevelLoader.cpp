@@ -73,6 +73,13 @@ bool LevelLoader::parse()
 
 	success = this->playerNode != NULL && this->playerBody != NULL;
 
+
+	//	Camera?
+	if (this->playerNode)
+	{
+		
+	}
+
 	return success;
 }
 
@@ -127,8 +134,11 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	if (type == 0 && inserted)
 		parseNodePhysics(info, props);
 
+
+
 	//	since parseNodeTexture allocates we release it here
-	delete [] info.texture;	
+	if (info.texture)
+		delete [] info.texture;	
 }
 
 bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , unsigned int type, unsigned int zOrder)
@@ -243,7 +253,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 			{			
 				cs.m_radius = SCREEN_TO_WORLD(info.radius);
 				fd.shape = &cs;
-				fd.density = 0.3f;
+				fd.density = 1.0f;
 			}
 			else
 			{			
