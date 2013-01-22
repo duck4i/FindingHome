@@ -26,5 +26,10 @@ namespace GLEED2D
         {
             System.Diagnostics.Process.Start("http://gleed2d.codeplex.com");
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

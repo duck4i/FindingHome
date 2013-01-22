@@ -111,38 +111,12 @@
                         <Y>216</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0061" Visible="true">
-                    <Position>
-                        <X>-85</X>
-                        <Y>-662</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>1</X>
-                        <Y>1</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>F:\Games\cocos2d-x\FindingHome\Resources\dog.png</texture_filename>
-                    <asset_name>F:\Games\cocos2d-x\FindingHome\Resources\dog</asset_name>
-                    <Origin>
-                        <X>50</X>
-                        <Y>39</Y>
-                    </Origin>
-                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
                 <Y>1</Y>
             </ScrollSpeed>
+            <CustomProperties />
         </Layer>
         <Layer Name="Main" Visible="true">
             <Items>
@@ -547,8 +521,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0041" Visible="true">
                     <Position>
-                        <X>-285</X>
-                        <Y>-1089</Y>
+                        <X>-1615</X>
+                        <Y>-909</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
@@ -574,8 +548,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0058" Visible="true">
                     <Position>
-                        <X>-2055</X>
-                        <Y>-1359</Y>
+                        <X>-3735</X>
+                        <Y>-1339</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>-0.2890557</Rotation>
@@ -599,16 +573,44 @@
                         <Y>216</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0072" Visible="true">
+                    <Position>
+                        <X>-683</X>
+                        <Y>171</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1</X>
+                        <Y>1</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>F:\Games\cocos2d-x\FindingHome\Resources\dog.png</texture_filename>
+                    <asset_name>F:\Games\cocos2d-x\FindingHome\Resources\dog</asset_name>
+                    <Origin>
+                        <X>50</X>
+                        <Y>39</Y>
+                    </Origin>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
                 <Y>1</Y>
             </ScrollSpeed>
+            <CustomProperties />
         </Layer>
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>69</NextItemNumber>
+        <NextItemNumber>72</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>221.667633</X>
