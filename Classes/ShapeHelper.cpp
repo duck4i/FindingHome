@@ -69,10 +69,19 @@ bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, floa
 
 				float width = SCREEN_TO_WORLD(size.width);
 				float height = SCREEN_TO_WORLD(size.height);
+
+				//	correct proportions
+				float xCorrector = 1.0f;
+				float yCorrector = 1.0f;
+
+				if(size.height < size.width)
+					yCorrector = size.width/size.height;
+				if(size.width < size.height)
+					xCorrector = size.height/size.width;				
 				
 				//	scale properly from content size
-				x *= width;
-				y *= height;
+				x *= width * xCorrector;
+				y *= height * yCorrector;
 
 				//	adjusting anchor point (physics editor 0x0 but box2d 0.5x0.5x)
 				x -= width / 2.0f;
