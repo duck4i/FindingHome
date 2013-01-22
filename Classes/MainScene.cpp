@@ -101,7 +101,7 @@ void MainScene::addBodies()
 		this->playerBody = l.playerBody;
 		this->player = l.playerNode;
 
-		//	center to player		
+		//	center to player
 		CCPoint pos = this->player->getPosition();
 		CCPoint pos2 = this->worldLayer->getPosition();
 

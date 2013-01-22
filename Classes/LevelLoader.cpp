@@ -215,10 +215,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		{
 			CCLog("Box world is not set up. Cannot create physics");
 			return false;
-		}
-
-		//	init shape helper
-		ShapeHelper shelp(SHAPE_DATA);
+		}		
 
 		//	now set body fixtures
 		b2BodyDef def;
@@ -229,40 +226,37 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		def.angle = -1 * info.rotation;
 
 		b2Body* body = this->boxWorld->CreateBody(&def);		
+		if (props.isPlayerObject())					
+			this->playerBody = body;
 
 		
 		//	check for custom shape
-		bool hasCustomShape = shelp.hasShapeForItem(info.rawTexture);
-		if (hasCustomShape)
-		{
-			bool ok = shelp.createShapeForItem(info.texture, body);						
-			return ok;
-		}
+		bool customFixture = shapeHelper->createShapeForItem(info.rawTexture, body, info.size);
 
-		//	now create fixtures for known shapes, or images without shape data
-		b2FixtureDef fd;
-		b2CircleShape cs;
-		b2PolygonShape ps;
-
-		if (info.type == 1)
+		if (!customFixture)
 		{			
-			cs.m_radius = SCREEN_TO_WORLD(info.radius);
-			fd.shape = &cs;
-			fd.density = 0.3f;
-		}
-		else
-		{			
-			ps.SetAsBox(SCREEN_TO_WORLD(info.size.width / 2), SCREEN_TO_WORLD(info.size.height / 2));			
-			fd.shape = &ps;			
+			//	now create fixtures for known shapes, or images without shape data
+			b2FixtureDef fd;
+			b2CircleShape cs;
+			b2PolygonShape ps;
+
+			if (info.type == 1)
+			{			
+				cs.m_radius = SCREEN_TO_WORLD(info.radius);
+				fd.shape = &cs;
+				fd.density = 0.3f;
+			}
+			else
+			{			
+				ps.SetAsBox(SCREEN_TO_WORLD(info.size.width / 2), SCREEN_TO_WORLD(info.size.height / 2));			
+				fd.shape = &ps;			
+			}
+
+			body->CreateFixture(&fd);
 		}
 
-		if (props.isPlayerObject())
-		{			
-			this->playerBody = body;
-			fd.density =  1.0f;
-		}
-
-		body->CreateFixture(&fd);
+		
+			
 	}
 
 	return true;

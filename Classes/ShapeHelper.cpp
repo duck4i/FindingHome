@@ -19,35 +19,73 @@ bool ShapeHelper::init()
 	return res;
 }
 
-bool ShapeHelper::hasShapeForItem(char* name)
-{
-	bool res = false;
-	CCLog("%s Name: %s", __FUNCTION__, name);
-
+Value ShapeHelper::itemWithName(char* name)
+{	
 	if (!initOK || name == NULL)
-		return res;	
+		return NULL;
 
-	unsigned int size = rigidBodies.size();
-	CCLog("Found size: %u", size);
-
+	unsigned int size = rigidBodies.size();	
 	for (unsigned int i = 0; i < rigidBodies.size(); i++)
 	{
 		Value v = rigidBodies[i];
-		//CCLog("%s", v.asString().c_str());
+		if (v == NULL || v.empty())
+			continue;
+		
+		string shapeName = v["name"].asString();
+		string imageName = v["imagePath"].asString();
+		string s(name);
+		
+		if (!s.compare(shapeName) || !s.compare(imageName))		
+			return v;
 	}
-
-	CCLog("Returning %d", res);
-	return res;
+	return NULL;
 }
 
-
-bool ShapeHelper::createShapeForItem(char* name, b2Body* body)
+bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, float density, float friction)
 {
 	bool res = false;
 	CCLog("%s Name: %s", __FUNCTION__, name);
 
 	//	http://www.box2d.org/forum/viewtopic.php?f=3&t=8418
 
-	CCLog("Returning %d", res);
+	Value v = itemWithName(name);
+	if (v != NULL && body != NULL)
+	{
+		Value polys = v["polygons"];
+		unsigned int numPoly = polys.size();
+		res = numPoly > 0;
+
+		for (unsigned int i = 0; i < numPoly; i++)
+		{
+			Value curr = polys[i];
+			unsigned int numVertices = curr.size();
+			b2Vec2* vertices = (b2Vec2*) malloc(numVertices * sizeof(b2Vec2));			
+
+			for (unsigned int j = 0; j < curr.size(); j++)	//	all vertices of current poly
+			{
+				Value set = curr[j];
+				float x = set["x"].asDouble();
+				float y = set["y"].asDouble();
+				
+				//	scale properly from content size
+				x *= SCREEN_TO_WORLD(size.width);
+				y *= SCREEN_TO_WORLD(size.height);
+
+				vertices[j].Set(x, y);
+			}
+
+			b2PolygonShape ps;
+			ps.Set(vertices, numVertices);		
+			
+			b2FixtureDef fd;
+			fd.shape = &ps;			
+			fd.density = density;			
+
+			b2Fixture *f = body->CreateFixture(&fd);			
+		}		
+	}
+	else
+		CCLog("%s Cannot create shape, something is wrong. (%s)", __FUNCTION__, name);
+	
 	return res;
 }

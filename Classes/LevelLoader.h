@@ -65,7 +65,8 @@ private:
 	CCNode* backgroundLayer;
 	void createLevelLayers();
 
-	b2World *boxWorld;	
+	b2World *boxWorld;
+	ShapeHelper *shapeHelper;
 
 public:
 	CCNode* playerNode;
@@ -104,6 +105,7 @@ public:
 		this->boxWorld = boxWorld;
 		this->playerBody = NULL;
 		this->playerNode = NULL;
+		this->shapeHelper = new ShapeHelper(SHAPE_DATA);
 
 		createLevelLayers();
 	}
@@ -112,6 +114,8 @@ public:
 	{
 		if (sharedDoc)
 			xmlFreeDoc(sharedDoc);
+		if (shapeHelper)
+			delete shapeHelper;
 	}
 
 	bool parse();
