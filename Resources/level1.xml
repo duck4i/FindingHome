@@ -1,123 +1,6 @@
 <?xml version="1.0"?>
 <Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_01" Visible="true">
     <Layers>
-        <Layer Name="Background" Visible="false">
-            <Items>
-                <Item xsi:type="TextureItem" Name="Texture_0044" Visible="true">
-                    <Position>
-                        <X>1777</X>
-                        <Y>-711</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>6.94318628</X>
-                        <Y>6.94318628</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>myCity.jpg</texture_filename>
-                    <asset_name>myCity</asset_name>
-                    <Origin>
-                        <X>294</X>
-                        <Y>219</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0045" Visible="true">
-                    <Position>
-                        <X>5865</X>
-                        <Y>-711</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>6.94318628</X>
-                        <Y>6.94318628</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>true</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>myCity.jpg</texture_filename>
-                    <asset_name>myCity</asset_name>
-                    <Origin>
-                        <X>294</X>
-                        <Y>219</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0042" Visible="true">
-                    <Position>
-                        <X>3479</X>
-                        <Y>-1183</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>4.616241</X>
-                        <Y>4.616241</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>sky.png</texture_filename>
-                    <asset_name>sky</asset_name>
-                    <Origin>
-                        <X>256</X>
-                        <Y>216</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0043" Visible="true">
-                    <Position>
-                        <X>1135</X>
-                        <Y>-1199</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>4.616241</X>
-                        <Y>4.616241</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>sky.png</texture_filename>
-                    <asset_name>sky</asset_name>
-                    <Origin>
-                        <X>256</X>
-                        <Y>216</Y>
-                    </Origin>
-                </Item>
-            </Items>
-            <ScrollSpeed>
-                <X>1</X>
-                <Y>1</Y>
-            </ScrollSpeed>
-            <CustomProperties />
-        </Layer>
         <Layer Name="Main" Visible="true">
             <Items>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0002" Visible="true">
@@ -573,16 +456,25 @@
                         <Y>216</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0072" Visible="true">
+            </Items>
+            <ScrollSpeed>
+                <X>1</X>
+                <Y>1</Y>
+            </ScrollSpeed>
+            <CustomProperties />
+        </Layer>
+        <Layer Name="Background" Visible="false">
+            <Items>
+                <Item xsi:type="TextureItem" Name="Texture_0044" Visible="true">
                     <Position>
-                        <X>-683</X>
-                        <Y>171</Y>
+                        <X>1777</X>
+                        <Y>-711</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>1</X>
-                        <Y>1</Y>
+                        <X>6.94318628</X>
+                        <Y>6.94318628</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -593,11 +485,92 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>F:\Games\cocos2d-x\FindingHome\Resources\dog.png</texture_filename>
-                    <asset_name>F:\Games\cocos2d-x\FindingHome\Resources\dog</asset_name>
+                    <texture_filename>myCity.jpg</texture_filename>
+                    <asset_name>myCity</asset_name>
                     <Origin>
-                        <X>50</X>
-                        <Y>39</Y>
+                        <X>294</X>
+                        <Y>219</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0045" Visible="true">
+                    <Position>
+                        <X>5865</X>
+                        <Y>-711</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>6.94318628</X>
+                        <Y>6.94318628</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>true</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>myCity.jpg</texture_filename>
+                    <asset_name>myCity</asset_name>
+                    <Origin>
+                        <X>294</X>
+                        <Y>219</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0042" Visible="true">
+                    <Position>
+                        <X>3479</X>
+                        <Y>-1183</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>4.616241</X>
+                        <Y>4.616241</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>sky.png</texture_filename>
+                    <asset_name>sky</asset_name>
+                    <Origin>
+                        <X>256</X>
+                        <Y>216</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0043" Visible="true">
+                    <Position>
+                        <X>1135</X>
+                        <Y>-1199</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>4.616241</X>
+                        <Y>4.616241</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>sky.png</texture_filename>
+                    <asset_name>sky</asset_name>
+                    <Origin>
+                        <X>256</X>
+                        <Y>216</Y>
                     </Origin>
                 </Item>
             </Items>
@@ -610,7 +583,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>72</NextItemNumber>
+        <NextItemNumber>74</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>221.667633</X>

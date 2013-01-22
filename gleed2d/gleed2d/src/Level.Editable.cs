@@ -100,6 +100,7 @@ namespace GLEED2D
 
         public string RelativePath(string relativeTo, string pathToTranslate)
         {
+            /*
             string[] absoluteDirectories = relativeTo.Split('\\');
             string[] relativeDirectories = pathToTranslate.Split('\\');
 
@@ -136,6 +137,20 @@ namespace GLEED2D
             relativePath.Append(relativeDirectories[relativeDirectories.Length - 1]);
 
             return relativePath.ToString();
+             */
+
+            String basePath = Path.GetFullPath(relativeTo);
+            String destPath = Path.GetFullPath(pathToTranslate);
+
+            Uri origin = new Uri(basePath);
+            Uri path = new Uri(destPath);
+
+            string ret = path.MakeRelative(origin);            
+            ret = ret.Replace(@"/", @"\");
+
+            ret += Path.GetFileName(destPath);
+
+            return ret;
         }
 
 

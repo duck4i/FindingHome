@@ -49,7 +49,7 @@ namespace GLEED2D
                 Height = value;
                 OnTransformed();
             }
-        }
+        } 
 
         [DisplayName("FillColor"), Category(" General")]
         [Editor(typeof(XNAColorUITypeEditor), typeof(UITypeEditor))]
@@ -93,6 +93,7 @@ namespace GLEED2D
             Rectangle.Location = Position.ToPoint();
             Rectangle.Width = (int)Width;
             Rectangle.Height = (int)Height;
+            
         }
 
         public override void onMouseOver(Vector2 mouseworldpos)
