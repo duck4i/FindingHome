@@ -240,7 +240,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		//	now create fixtures for known shapes, or images without shape data
 		b2FixtureDef fd;
 		fd.density = 1.0f;
-
+		
 		if (props.isPlayerObject())
 		{
 			this->playerBody = body;

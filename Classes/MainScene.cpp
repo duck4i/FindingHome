@@ -186,7 +186,7 @@ void MainScene::updateKeyboard(float delta)
 	
 	long down = 0x8000; // hi bit
 	short step = 30;
-	short stepUp = 60;
+	short stepUp = 220;
 
 	//	Update player movement
 	if (playerBody)
@@ -220,17 +220,28 @@ void MainScene::updateKeyboard(float delta)
 			//	http://www.ikbentomas.nl/other/box2d/
 			//	http://www.cocos2d-iphone.org/forum/topic/13501
 		
-			bool midAir = abs(vel.y) >= 0.01f;
-			bool midAirMove = abs(vel.y) >= 0.08f;
+			//	check if any contacts
+			bool midAir = true;
+			b2ContactEdge *con = playerBody->GetContactList();
+			while (con)
+			{
+				if (con->contact->IsTouching())
+				{
+					midAir = false;
+					break;
+				}
+				con = con->next;
+			}
 
+			//	no more jumping and only slight adjustment of direction when in air
 			if (midAir)
 			{
-				y = 0;// x = 0; 
+				y = 0;
+				x *= 0.2f;
 			}
-		
+
 			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());
-		
-		
+
 			//
 			//	limit top velocity
 			//
