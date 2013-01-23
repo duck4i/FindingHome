@@ -129,11 +129,11 @@
                     <Width>1656</Width>
                     <Height>294</Height>
                     <FillColor>
-                        <R>192</R>
-                        <G>0</G>
-                        <B>192</B>
+                        <R>128</R>
+                        <G>64</G>
+                        <B>0</B>
                         <A>255</A>
-                        <PackedValue>4290773184</PackedValue>
+                        <PackedValue>4286595072</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0046" Visible="true">
@@ -177,11 +177,11 @@
                     <Width>138</Width>
                     <Height>155</Height>
                     <FillColor>
-                        <R>192</R>
-                        <G>0</G>
-                        <B>192</B>
+                        <R>128</R>
+                        <G>64</G>
+                        <B>0</B>
                         <A>255</A>
-                        <PackedValue>4290773184</PackedValue>
+                        <PackedValue>4286595072</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0009" Visible="true">
@@ -190,26 +190,26 @@
                         <Y>-311</Y>
                     </Position>
                     <CustomProperties />
-                    <Width>3693</Width>
-                    <Height>267</Height>
+                    <Width>4828</Width>
+                    <Height>1087</Height>
                     <FillColor>
                         <R>128</R>
                         <G>64</G>
                         <B>0</B>
-                        <A>100</A>
-                        <PackedValue>1686126592</PackedValue>
+                        <A>255</A>
+                        <PackedValue>4286595072</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0028" Visible="true">
                     <Position>
-                        <X>2338</X>
+                        <X>2334</X>
                         <Y>-501</Y>
                     </Position>
                     <CustomProperties />
-                    <Rotation>0.474912226</Rotation>
+                    <Rotation>-1.05456555</Rotation>
                     <Scale>
-                        <X>2.57529378</X>
-                        <Y>2.57529378</Y>
+                        <X>2.62558746</X>
+                        <Y>2.62558746</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -233,7 +233,7 @@
                         <Y>-421</Y>
                     </Position>
                     <CustomProperties />
-                    <Rotation>0.837741852</Rotation>
+                    <Rotation>0.7989328</Rotation>
                     <Scale>
                         <X>2.57529378</X>
                         <Y>2.57529378</Y>
@@ -257,7 +257,7 @@
                 <Item xsi:type="TextureItem" Name="Texture_0030" Visible="true">
                     <Position>
                         <X>2527</X>
-                        <Y>-304</Y>
+                        <Y>-308</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>1.0383358</Rotation>
@@ -337,8 +337,8 @@
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Finish" Visible="true">
                     <Position>
-                        <X>3592</X>
-                        <Y>-352</Y>
+                        <X>4707</X>
+                        <Y>-357</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="Finish" Type="bool" Description="">
@@ -549,6 +549,146 @@
                         <Y>39</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="PathItem" Name="Path_0077" Visible="true">
+                    <Position>
+                        <X>2302</X>
+                        <Y>-611</Y>
+                    </Position>
+                    <CustomProperties />
+                    <LocalPoints>
+                        <Vector2>
+                            <X>0</X>
+                            <Y>0</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>83</X>
+                            <Y>45</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>130</X>
+                            <Y>85</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>166</X>
+                            <Y>123</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>195</X>
+                            <Y>162</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>226</X>
+                            <Y>212</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>287</X>
+                            <Y>250</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>391</X>
+                            <Y>277</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>462</X>
+                            <Y>292</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>533</X>
+                            <Y>300</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>-8</X>
+                            <Y>299</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>-1</X>
+                            <Y>1</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>3</X>
+                            <Y>2</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>3</X>
+                            <Y>2</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>3</X>
+                            <Y>2</Y>
+                        </Vector2>
+                    </LocalPoints>
+                    <WorldPoints>
+                        <Vector2>
+                            <X>2302</X>
+                            <Y>-611</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2385</X>
+                            <Y>-566</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2432</X>
+                            <Y>-526</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2468</X>
+                            <Y>-488</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2497</X>
+                            <Y>-449</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2528</X>
+                            <Y>-399</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2589</X>
+                            <Y>-361</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2693</X>
+                            <Y>-334</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2764</X>
+                            <Y>-319</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2835</X>
+                            <Y>-311</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2294</X>
+                            <Y>-312</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2301</X>
+                            <Y>-610</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2305</X>
+                            <Y>-609</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2305</X>
+                            <Y>-609</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>2305</X>
+                            <Y>-609</Y>
+                        </Vector2>
+                    </WorldPoints>
+                    <IsPolygon>false</IsPolygon>
+                    <LineWidth>4</LineWidth>
+                    <LineColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
+                    </LineColor>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -559,11 +699,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>76</NextItemNumber>
+        <NextItemNumber>77</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>1760.001</X>
-            <Y>-624.039734</Y>
+            <X>2188.7417</X>
+            <Y>-545.6323</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>
