@@ -144,11 +144,9 @@ namespace GLEED2D
 
             Uri origin = new Uri(basePath);
             Uri path = new Uri(destPath);
-
-            string ret = path.MakeRelative(origin);            
+            
+            string ret = origin.MakeRelative(path);
             ret = ret.Replace(@"/", @"\");
-
-            ret += Path.GetFileName(destPath);
 
             return ret;
         }

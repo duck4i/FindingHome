@@ -111,6 +111,33 @@
                         <Y>216</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0078" Visible="true">
+                    <Position>
+                        <X>1674</X>
+                        <Y>1164</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1</X>
+                        <Y>1</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>dog.png</texture_filename>
+                    <asset_name>dog</asset_name>
+                    <Origin>
+                        <X>50</X>
+                        <Y>39</Y>
+                    </Origin>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -699,7 +726,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>77</NextItemNumber>
+        <NextItemNumber>80</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>2188.7417</X>
