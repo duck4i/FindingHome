@@ -70,6 +70,12 @@ bool MainScene::init()
 	if (this->player)
 	{
 		this->originalCamera = this->getPosition();
+
+
+		CCPoint real = this->worldLayer->convertToWorldSpace(this->player->getPosition());
+		originalCamera.x = 190;///*real.x*/ - CCDirector::sharedDirector()->getWinSizeInPixels().width / 2;
+		originalCamera.y = 100;///*real.y*/ - CCDirector::sharedDirector()->getWinSizeInPixels().height / 2;
+	
 		this->schedule(schedule_selector(MainScene::updateCamera));
 		this->cameraScheduled = true;
 
@@ -101,27 +107,28 @@ void MainScene::updateCamera(float delta)
 	CCPoint playerPos = this->player->getPosition();
 	//this->player->get
 
-	CCPoint m_obHalfScreenSize(size.width / 2, size.height / 2);
+
+	
+	CCPoint m_obHalfScreenSize(size.width / 2, size.height / 2);	
+
+	//
+
 	playerPos.x *= sceneScale;
-	playerPos.y *= sceneScale;
+	playerPos.y *= sceneScale;		
 
+	m_obHalfScreenSize.x -= originalCamera.x;
+	m_obHalfScreenSize.y -= originalCamera.y;
 
+	CCPoint sub = ccpSub(m_obHalfScreenSize, playerPos);		 	
 
-	this->worldLayer->setPosition(ccpSub(m_obHalfScreenSize, playerPos));
+	//CCPoint real = this->worldLayer->convertToWorldSpace(this->player->getPosition());
+	//int x = real.x - m_obHalfScreenSize.x;
 
-	return ;
+	//sub.x -= x;
 
-	//	koliko je dalji od pocetka ekrana 		
-	float distance = (playerPos.x - playerSize.width / 2.0f) - size.width;
-	//.          .    .
-	float x = 0;
-
-	if (distance > 0)
-		x = distance * -1.0f;
+	this->worldLayer->setPosition(sub);
 	
-	
-	this->worldLayer->setPosition(x, 0);
-	//this->setPosition(x, 0);
+	//this->worldLayer->setPosition(this->worldLayer->convertToWorldSpace(this->player->getPosition()));
 }
 
 
@@ -185,8 +192,16 @@ void MainScene::addBodies()
 
 }
 
+float lastk = 0;
 void MainScene::updateKeyboard(float delta)
 {
+	//	set interval between keys
+	lastk += delta;
+	if (lastk >= 0.02f)	
+		lastk = 0;	
+	else
+		return;
+
 	//CCLog("Tick keyboard");
 	short u2 = GetKeyState(VK_SPACE);
 	short f1 = GetKeyState(VK_F1);
@@ -271,7 +286,7 @@ void MainScene::updateKeyboard(float delta)
 
 			if (sceneScale != DEFAULT_SCALE)
 			{
-				this->setScale(DEFAULT_SCALE);
+				this->worldLayer->setScale(DEFAULT_SCALE);
 				this->sceneScale = DEFAULT_SCALE;
 			}
 		}
