@@ -207,52 +207,54 @@ void MainScene::updateKeyboard(float delta)
 			y += stepUp;
 
 		//	check if anything to do
-		if (!x && !y)
-			return;
-
-		this->playerBody->SetFixedRotation(true);
-
-		//	
-		//	Calculate and apply forces for movement
-		//
-		b2Vec2 vel = playerBody->GetLinearVelocity();
-
-		//	http://www.box2d.org/forum/viewtopic.php?f=3&t=4733
-		
-		bool midAir = abs(vel.y) >= 0.01f;
-		bool midAirMove = abs(vel.y) >= 0.08f;
-
-		if (midAir)
+		if (x || y)
 		{
-			y = 0;// x = 0; 
+			this->playerBody->SetFixedRotation(true);
+
+			//	
+			//	Calculate and apply forces for movement
+			//
+			b2Vec2 vel = playerBody->GetLinearVelocity();
+
+			//	http://www.box2d.org/forum/viewtopic.php?f=3&t=4733
+			//	http://www.ikbentomas.nl/other/box2d/
+			//	http://www.cocos2d-iphone.org/forum/topic/13501
+		
+			bool midAir = abs(vel.y) >= 0.01f;
+			bool midAirMove = abs(vel.y) >= 0.08f;
+
+			if (midAir)
+			{
+				y = 0;// x = 0; 
+			}
+		
+			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());
+		
+		
+			//
+			//	limit top velocity
+			//
+			const b2Vec2 velocity = playerBody->GetLinearVelocity();
+			const float speed = abs(velocity.x);
+			const float maxSpeed = 8.0f;
+			if (speed > maxSpeed)
+				playerBody->SetLinearVelocity((maxSpeed / speed) * velocity);
+		
+
+			//	Check player direction
+			/*
+			if (x < 0 && direction == PlayerDirectionRight)
+			{
+				direction = PlayerDirectionLeft;
+				player->runAction(CCFlipX::create(true));
+			}
+			else if (x > 0 && direction == PlayerDirectionLeft)
+			{
+				direction = PlayerDirectionRight;
+				player->runAction(CCFlipX::create(false));
+			}		
+			*/
 		}
-		
-		playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());
-		
-		
-		//
-		//	limit top velocity
-		//
-		const b2Vec2 velocity = playerBody->GetLinearVelocity();
-		const float speed = abs(velocity.x);
-		const float maxSpeed = 8.0f;
-		if (speed > maxSpeed)
-			playerBody->SetLinearVelocity((maxSpeed / speed) * velocity);
-		
-
-		//	Check player direction
-		/*
-		if (x < 0 && direction == PlayerDirectionRight)
-		{
-			direction = PlayerDirectionLeft;
-			player->runAction(CCFlipX::create(true));
-		}
-		else if (x > 0 && direction == PlayerDirectionLeft)
-		{
-			direction = PlayerDirectionRight;
-			player->runAction(CCFlipX::create(false));
-		}		
-		*/
 	}
 
 	//	now check for scaling keys

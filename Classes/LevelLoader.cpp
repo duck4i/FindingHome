@@ -244,8 +244,9 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		if (props.isPlayerObject())
 		{
 			this->playerBody = body;
-			//fd.density = 10.0f;
-			//fd.friction = 1000.0f;
+			fd.density = 3.0f;			
+			fd.friction = 1.0f;
+			fd.restitution = 0;
 		}
 		
 		//	check for custom shape
@@ -260,6 +261,8 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 			{
 				cs.m_radius = SCREEN_TO_WORLD(info.radius);
 				fd.shape = &cs;
+				if (!props.isPlayerObject())
+					fd.restitution  = 0.5f;
 			}
 			else
 			{
