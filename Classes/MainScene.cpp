@@ -70,11 +70,10 @@ bool MainScene::init()
 		//	always start in (20%/20%) coordinates
 		float twentyPercent = 0.25f;
 		float xs = ( playerStart.x - (size.width * twentyPercent) ) * -1;
-		float ys = ( playerStart.y - (size.height * twentyPercent) ) * -1;				
-		this->worldLayer->runAction(CCMoveBy::create(0.0f, ccp(xs, ys)));
+		float ys = ( playerStart.y - (size.height * twentyPercent) ) * -1;	
+		this->worldLayer->setPosition(this->getPositionX() + xs, this->getPositionY() + ys);		
 	
-		this->schedule(schedule_selector(MainScene::updateCamera));
-		this->cameraScheduled = true;		
+		this->schedule(schedule_selector(MainScene::updateCamera));	
 	}
 
 	this->setKeypadEnabled(true);
@@ -92,54 +91,34 @@ void MainScene::toggleCameraProgress()
 
 void MainScene::updateCamera(float delta)
 {
-	if (this->touchesInProgress)
-	{
-		unschedule(schedule_selector(MainScene::updateCamera));
-		this->cameraScheduled = false;
-		return;
-	}
-	else if (this->cameraMoveInProgress)
+	if (this->cameraMoveInProgress)
 		return;
 
 	CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
 	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->player->getPosition());
-	CCPoint pos = this->player->getPosition();
+	CCPoint prevPos = this->worldLayer->getPosition();
+	
+	float margin = 0.35f;
+	float rightMargin = size.width - size.width * margin;
+	float leftMargin = size.width * margin;
 
-	float rCol = size.width - realPos.x;
-	float twentyPercent = size.width * 0.2f;
-	float nx = 0, ny = 0;
-	float margin = 0;
+	float topMargin = size.height - size.height * margin;
+	float bottomMargin = size.height * margin;
 
-	if (realPos.x <= twentyPercent) 
-	{
-		nx = ((size.width - twentyPercent) - realPos.x) - margin;		
-	}
-	else if (rCol <= twentyPercent)
-	{
-		nx = -1 * (realPos.x - twentyPercent) + margin;
-	}
+	float xm = prevPos.x;
+	float ym = prevPos.y;
 
-	float twentyPercentHeight = size.height * 0.2f;
-	if (realPos.y <= twentyPercentHeight)
-	{
-		ny = size.height - twentyPercent - margin;
-	}
+	if (realPos.x >= rightMargin)
+		xm -= (realPos.x - rightMargin) * sceneScale;
+	else if (realPos.x <= leftMargin)
+		xm += (leftMargin - realPos.x) * sceneScale;
 
-	//if (
-
-	//	do actual moving
-	if (nx != 0 || ny != 0)
-	{
-		this->cameraMoveInProgress = true;
-		CCFiniteTimeAction *move = CCEaseInOut::create(CCMoveBy::create(1.0f, ccp(nx, ny)), 1.0f);
-		CCCallFunc *reset = CCCallFunc::create(this, callfunc_selector(MainScene::toggleCameraProgress));
-		
-		CCSequence *s = CCSequence::createWithTwoActions(move, reset);
-		this->worldLayer->runAction(s);
-	}
-
-	bool ok = true;
-
+	if (realPos.y <= bottomMargin)
+		ym += (bottomMargin - realPos.y) * sceneScale;
+	else if (realPos.y >= topMargin)
+		ym -= realPos.y - topMargin;
+	
+	this->worldLayer->setPosition(xm, ym);
 }
 
 
@@ -206,7 +185,8 @@ void MainScene::updateKeyboard(float delta)
 	short cameraContinue = GetKeyState(VK_F2);
 	
 	long down = 0x8000; // hi bit
-	short step = 30.0f;
+	short step = 30;
+	short stepUp = 160;
 
 	//	Update player movement
 	if (playerBody)
@@ -226,18 +206,29 @@ void MainScene::updateKeyboard(float delta)
 		//if (d & down)	
 		//	y -= step;	
 		if ((u & down) || (u2 & down))	
-			y += step;		
+			y += stepUp;
 
+		//	
+		//	Calculate and apply forces for movement
+		//
 		b2Vec2 vel = playerBody->GetLinearVelocity();
 		bool midAir = abs(vel.y) >= 0.01f;
 		bool topSpeed = abs(vel.x) >= 5.0f;
 
 		if (y && !midAir)
-			playerBody->ApplyLinearImpulse(b2Vec2(0, step), playerBody->GetWorldCenter());
-		if (x && !midAir && !topSpeed)
-			playerBody->ApplyForce(b2Vec2(x, 0), playerBody->GetWorldCenter());	
-			//playerBody->ApplyLinearImpulse(b2Vec2(x, 0), playerBody->GetWorldCenter());
-	
+			playerBody->ApplyLinearImpulse(b2Vec2(0, y), playerBody->GetWorldCenter());
+		if (x  && !midAir)
+			playerBody->ApplyLinearImpulse(b2Vec2(x, 2), playerBody->GetWorldCenter());
+		
+		//
+		//	limit top velocity
+		//
+		const b2Vec2 velocity = playerBody->GetLinearVelocity();		
+		const float speed = abs(velocity.x);
+		const float maxSpeed = 8.0f;
+		if (speed > maxSpeed)
+			playerBody->SetLinearVelocity((maxSpeed / speed) * velocity);
+
 		//	Check player direction
 		if (x < 0 && direction == PlayerDirectionRight)
 		{
@@ -254,35 +245,28 @@ void MainScene::updateKeyboard(float delta)
 	//	now check for scaling keys
 	float scaleStep = 0.01f;
 	if (zoomIn & down)
-	{
+	{		
 		this->sceneScale += scaleStep;
 		this->worldLayer->setScale(sceneScale);
 	}
 	else if (zoomOut & down)
-	{
+	{		
 		this->sceneScale -= scaleStep;
 		this->sceneScale = max(this->sceneScale, 0.01f); // no less than 0.01
 		this->worldLayer->setScale(sceneScale);
 	}
 	else if (zoomReset & down)
-	{
+	{		
 		this->sceneScale = DEFAULT_SCALE;
 		this->worldLayer->setScale(this->sceneScale);		
 	}
 	
-	if (cameraContinue & down )
+	//	Continue camera and reset scale
+	if (cameraContinue & down && this->cameraMoveInProgress)
 	{
-		if (!this->cameraScheduled)
-		{
-			this->schedule(schedule_selector(MainScene::updateCamera));
-			this->cameraScheduled = true;
-
-			if (sceneScale != DEFAULT_SCALE)
-			{
-				this->worldLayer->setScale(DEFAULT_SCALE);
-				this->sceneScale = DEFAULT_SCALE;
-			}
-		}
+		this->cameraMoveInProgress = false;
+		this->sceneScale = DEFAULT_SCALE;
+		this->worldLayer->setScale(this->sceneScale);	
 	}
 
 	//	now check for box2D debug, the code bellow acts like WM_KEYUP
@@ -372,12 +356,13 @@ void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 {
 	CCLog("Touches began");
 	this->touchesInProgress = true;
+	this->cameraMoveInProgress = true;
 }
 
 void MainScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
 	CCLog("Touches ended");
-	this->touchesInProgress = false;
+	this->touchesInProgress = false;	
 }
 
 void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)

@@ -233,22 +233,27 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		def.type = props.isDynamicObject() || props.isPlayerObject() ? b2_dynamicBody : b2_staticBody;
 
 		def.position.Set(SCREEN_TO_WORLD(info.position.x), SCREEN_TO_WORLD(info.position.y));
-		def.angle = -1 * info.rotation;
+		def.angle = -1 * info.rotation;		
 
-		b2Body* body = this->boxWorld->CreateBody(&def);		
+		b2Body* body = this->boxWorld->CreateBody(&def);	
+
+		//	now create fixtures for known shapes, or images without shape data
+		b2FixtureDef fd;
+		b2CircleShape cs;
+		b2PolygonShape ps;				
+
 		if (props.isPlayerObject())
+		{
 			this->playerBody = body;
+			fd.density = 1.0f;
+			fd.friction = 0.0f;
+		}
 		
 		//	check for custom shape
-		bool customFixture = shapeHelper->createShapeForItem(info.rawTexture, body, info.size);
+		bool customFixture = shapeHelper->createShapeForItem(info.rawTexture, body, info.size, fd.density, fd.friction);
 
 		if (!customFixture)
-		{			
-			//	now create fixtures for known shapes, or images without shape data
-			b2FixtureDef fd;
-			b2CircleShape cs;
-			b2PolygonShape ps;
-
+		{
 			if (info.type == 1)
 			{			
 				cs.m_radius = SCREEN_TO_WORLD(info.radius);
