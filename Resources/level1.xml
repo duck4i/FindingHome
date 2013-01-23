@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_01" Visible="true">
     <Layers>
-        <Layer Name="Background" Visible="false">
+        <Layer Name="Background" Visible="true">
             <Items>
-                <Item xsi:type="TextureItem" Name="Texture_0044" Visible="false">
+                <Item xsi:type="TextureItem" Name="Texture_0044" Visible="true">
                     <Position>
                         <X>-2463</X>
                         <Y>-386</Y>
@@ -30,7 +30,7 @@
                         <Y>219</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0045" Visible="false">
+                <Item xsi:type="TextureItem" Name="Texture_0045" Visible="true">
                     <Position>
                         <X>1625</X>
                         <Y>-386</Y>
@@ -60,7 +60,7 @@
                 <Item xsi:type="TextureItem" Name="Texture_0042" Visible="true">
                     <Position>
                         <X>2074</X>
-                        <Y>-683</Y>
+                        <Y>-638</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
@@ -376,15 +376,12 @@
                 </Item>
                 <Item xsi:type="CircleItem" Name="Circle_0036" Visible="true">
                     <Position>
-                        <X>-1485</X>
-                        <Y>-870</Y>
+                        <X>-2154</X>
+                        <Y>-846</Y>
                     </Position>
                     <CustomProperties>
-                        <Property Name="dynamic" Type="bool" Description="">
-                            <boolean>false</boolean>
-                        </Property>
-                        <Property Name="player" Type="string" Description="">
-                            <string />
+                        <Property Name="player" Type="bool" Description="">
+                            <boolean>true</boolean>
                         </Property>
                     </CustomProperties>
                     <Radius>64</Radius>
@@ -722,6 +719,49 @@
                         <PackedValue>4286595072</PackedValue>
                     </FillColor>
                 </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0090" Visible="true">
+                    <Position>
+                        <X>-1067</X>
+                        <Y>-565</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0.7924775</Rotation>
+                    <Scale>
+                        <X>6.27595043</X>
+                        <Y>6.27595043</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>block.png</texture_filename>
+                    <asset_name>block</asset_name>
+                    <Origin>
+                        <X>32</X>
+                        <Y>32</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="RectangleItem" Name="Rectangle_0093" Visible="true">
+                    <Position>
+                        <X>-1954</X>
+                        <Y>-855</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>109</Width>
+                    <Height>72</Height>
+                    <FillColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
+                    </FillColor>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -732,11 +772,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>89</NextItemNumber>
+        <NextItemNumber>93</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>-1431.2583</X>
-            <Y>-175.632324</Y>
+            <X>-1697.925</X>
+            <Y>-950.3546</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

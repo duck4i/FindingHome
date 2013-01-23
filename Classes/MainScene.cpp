@@ -90,7 +90,7 @@ void MainScene::toggleCameraProgress()
 }
 
 void MainScene::updateCamera(float delta)
-{
+{	
 	if (this->cameraMoveInProgress)
 		return;
 
@@ -186,11 +186,11 @@ void MainScene::updateKeyboard(float delta)
 	
 	long down = 0x8000; // hi bit
 	short step = 30;
-	short stepUp = 160;
+	short stepUp = 60;
 
 	//	Update player movement
 	if (playerBody)
-	{
+	{		
 		short l = GetKeyState(VK_LEFT);
 		short r = GetKeyState(VK_RIGHT);
 		short d = GetKeyState(VK_DOWN);
@@ -202,34 +202,46 @@ void MainScene::updateKeyboard(float delta)
 		if (l & down)
 			x -= step;	
 		if (r & down)	
-			x += step;	
-		//if (d & down)	
-		//	y -= step;	
-		if ((u & down) || (u2 & down))	
+			x += step;
+		if ((u & down) || (u2 & down))
 			y += stepUp;
+
+		//	check if anything to do
+		if (!x && !y)
+			return;
+
+		this->playerBody->SetFixedRotation(true);
 
 		//	
 		//	Calculate and apply forces for movement
 		//
 		b2Vec2 vel = playerBody->GetLinearVelocity();
-		bool midAir = abs(vel.y) >= 0.01f;
-		bool topSpeed = abs(vel.x) >= 5.0f;
 
-		if (y && !midAir)
-			playerBody->ApplyLinearImpulse(b2Vec2(0, y), playerBody->GetWorldCenter());
-		if (x  && !midAir)
-			playerBody->ApplyLinearImpulse(b2Vec2(x, 2), playerBody->GetWorldCenter());
+		//	http://www.box2d.org/forum/viewtopic.php?f=3&t=4733
+		
+		bool midAir = abs(vel.y) >= 0.01f;
+		bool midAirMove = abs(vel.y) >= 0.08f;
+
+		if (midAir)
+		{
+			y = 0;// x = 0; 
+		}
+		
+		playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());
+		
 		
 		//
 		//	limit top velocity
 		//
-		const b2Vec2 velocity = playerBody->GetLinearVelocity();		
+		const b2Vec2 velocity = playerBody->GetLinearVelocity();
 		const float speed = abs(velocity.x);
 		const float maxSpeed = 8.0f;
 		if (speed > maxSpeed)
 			playerBody->SetLinearVelocity((maxSpeed / speed) * velocity);
+		
 
 		//	Check player direction
+		/*
 		if (x < 0 && direction == PlayerDirectionRight)
 		{
 			direction = PlayerDirectionLeft;
@@ -239,7 +251,8 @@ void MainScene::updateKeyboard(float delta)
 		{
 			direction = PlayerDirectionRight;
 			player->runAction(CCFlipX::create(false));
-		}
+		}		
+		*/
 	}
 
 	//	now check for scaling keys

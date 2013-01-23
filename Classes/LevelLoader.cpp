@@ -239,31 +239,32 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 
 		//	now create fixtures for known shapes, or images without shape data
 		b2FixtureDef fd;
-		b2CircleShape cs;
-		b2PolygonShape ps;				
+		fd.density = 1.0f;
 
 		if (props.isPlayerObject())
 		{
 			this->playerBody = body;
-			fd.density = 1.0f;
-			fd.friction = 0.0f;
+			//fd.density = 10.0f;
+			//fd.friction = 1000.0f;
 		}
 		
 		//	check for custom shape
 		bool customFixture = shapeHelper->createShapeForItem(info.rawTexture, body, info.size, fd.density, fd.friction);
 
 		if (!customFixture)
-		{
+		{		
+			b2CircleShape cs;
+			b2PolygonShape ps;
+
 			if (info.type == 1)
-			{			
+			{
 				cs.m_radius = SCREEN_TO_WORLD(info.radius);
 				fd.shape = &cs;
-				fd.density = 1.0f;
 			}
 			else
-			{			
-				ps.SetAsBox(SCREEN_TO_WORLD(info.size.width / 2), SCREEN_TO_WORLD(info.size.height / 2));			
-				fd.shape = &ps;			
+			{
+				ps.SetAsBox(SCREEN_TO_WORLD(info.size.width / 2), SCREEN_TO_WORLD(info.size.height / 2));
+				fd.shape = &ps;
 			}
 
 			body->CreateFixture(&fd);

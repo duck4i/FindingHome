@@ -93,7 +93,8 @@ bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, floa
 			
 			b2FixtureDef fd;
 			fd.shape = &ps;			
-			fd.density = density;			
+			fd.density = density;
+			fd.friction = friction;
 
 			b2Fixture *f = body->CreateFixture(&fd);			
 
