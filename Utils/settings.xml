@@ -8,7 +8,7 @@
   <SaveLevelAppendLevelFilename>false</SaveLevelAppendLevelFilename>
   <ShowGrid>true</ShowGrid>
   <SnapToGrid>false</SnapToGrid>
-  <ShowWorldOrigin>false</ShowWorldOrigin>
+  <ShowWorldOrigin>true</ShowWorldOrigin>
   <ColorSelectionFirst>
     <R>255</R>
     <G>255</G>
