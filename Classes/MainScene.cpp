@@ -116,7 +116,7 @@ void MainScene::updateCamera(float delta)
 	if (realPos.y <= bottomMargin)
 		ym += (bottomMargin - realPos.y) * sceneScale;
 	else if (realPos.y >= topMargin)
-		ym -= realPos.y - topMargin * sceneScale;
+		ym -= (realPos.y - topMargin) * sceneScale;
 	
 	this->worldLayer->setPosition(xm, ym);
 }
