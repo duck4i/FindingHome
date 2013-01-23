@@ -30,7 +30,8 @@ private:
 	void update(float delta);	
 	void updateBackground(float delta);
 
-	CCPoint originalCamera;
+	bool cameraMoveInProgress;
+	void toggleCameraProgress();
 	void updateCamera(float delta);
 
 	float sceneScale;

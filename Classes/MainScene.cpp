@@ -43,21 +43,15 @@ bool MainScene::init()
 	this->lastKeyboardUpdate = 0;
 
 	this->player = NULL;
-	this->playerBody = NULL;	
+	this->playerBody = NULL;
 
 	direction = PlayerDirectionRight;
 	
 	//	Create world layer
-	this->worldLayer = CCLayer::create();	
-	//this->worldLayer = CCLayerColor::create(ccc4(0, 0, 0, 255));	
+	this->worldLayer = CCLayer::create();		
 
 	sceneScale = DEFAULT_SCALE;
 	this->worldLayer->setScale(sceneScale);
-	//this->worldLayer->ignoreAnchorPointForPosition(false);
-	//this->worldLayer->setAnchorPoint(ccp(0.5f, 0.5f));
-	//this->worldLayer->setPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-	//this->worldLayer->setAnchorPoint(ccp(0, 0));
-	//this->worldLayer->setPosition(0, 0);
 	this->addChild(worldLayer);
 
 	//	setup physics object
@@ -69,19 +63,18 @@ bool MainScene::init()
 
 	if (this->player)
 	{
-		this->originalCamera = this->getPosition();
+		this->cameraMoveInProgress = false;	
+		CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
+		CCPoint playerStart = this->worldLayer->convertToWorldSpace(player->getPosition());
 
-
-		CCPoint real = this->worldLayer->convertToWorldSpace(this->player->getPosition());
-		originalCamera.x = 190;///*real.x*/ - CCDirector::sharedDirector()->getWinSizeInPixels().width / 2;
-		originalCamera.y = 100;///*real.y*/ - CCDirector::sharedDirector()->getWinSizeInPixels().height / 2;
+		//	always start in (20%/20%) coordinates
+		float twentyPercent = 0.25f;
+		float xs = ( playerStart.x - (size.width * twentyPercent) ) * -1;
+		float ys = ( playerStart.y - (size.height * twentyPercent) ) * -1;				
+		this->worldLayer->runAction(CCMoveBy::create(0.0f, ccp(xs, ys)));
 	
 		this->schedule(schedule_selector(MainScene::updateCamera));
-		this->cameraScheduled = true;
-
-		//this->setPosition(
-		
-		//CCFollow *f = CCFollow::create(this->player);
+		this->cameraScheduled = true;		
 	}
 
 	this->setKeypadEnabled(true);
@@ -92,6 +85,11 @@ bool MainScene::init()
 	return true;
 }
 
+void MainScene::toggleCameraProgress()
+{
+	this->cameraMoveInProgress = !this->cameraMoveInProgress;
+}
+
 void MainScene::updateCamera(float delta)
 {
 	if (this->touchesInProgress)
@@ -100,35 +98,48 @@ void MainScene::updateCamera(float delta)
 		this->cameraScheduled = false;
 		return;
 	}
-	
-	//	camera!	
+	else if (this->cameraMoveInProgress)
+		return;
+
 	CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
-	CCSize playerSize = this->player->getContentSize();
-	CCPoint playerPos = this->player->getPosition();
-	//this->player->get
+	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->player->getPosition());
+	CCPoint pos = this->player->getPosition();
 
+	float rCol = size.width - realPos.x;
+	float twentyPercent = size.width * 0.2f;
+	float nx = 0, ny = 0;
+	float margin = 0;
 
-	
-	CCPoint m_obHalfScreenSize(size.width / 2, size.height / 2);	
+	if (realPos.x <= twentyPercent) 
+	{
+		nx = ((size.width - twentyPercent) - realPos.x) - margin;		
+	}
+	else if (rCol <= twentyPercent)
+	{
+		nx = -1 * (realPos.x - twentyPercent) + margin;
+	}
 
-	//
+	float twentyPercentHeight = size.height * 0.2f;
+	if (realPos.y <= twentyPercentHeight)
+	{
+		ny = size.height - twentyPercent - margin;
+	}
 
-	playerPos.x *= sceneScale;
-	playerPos.y *= sceneScale;		
+	//if (
 
-	m_obHalfScreenSize.x -= originalCamera.x;
-	m_obHalfScreenSize.y -= originalCamera.y;
+	//	do actual moving
+	if (nx != 0 || ny != 0)
+	{
+		this->cameraMoveInProgress = true;
+		CCFiniteTimeAction *move = CCEaseInOut::create(CCMoveBy::create(1.0f, ccp(nx, ny)), 1.0f);
+		CCCallFunc *reset = CCCallFunc::create(this, callfunc_selector(MainScene::toggleCameraProgress));
+		
+		CCSequence *s = CCSequence::createWithTwoActions(move, reset);
+		this->worldLayer->runAction(s);
+	}
 
-	CCPoint sub = ccpSub(m_obHalfScreenSize, playerPos);		 	
+	bool ok = true;
 
-	//CCPoint real = this->worldLayer->convertToWorldSpace(this->player->getPosition());
-	//int x = real.x - m_obHalfScreenSize.x;
-
-	//sub.x -= x;
-
-	this->worldLayer->setPosition(sub);
-	
-	//this->worldLayer->setPosition(this->worldLayer->convertToWorldSpace(this->player->getPosition()));
 }
 
 
@@ -165,25 +176,7 @@ void MainScene::addBodies()
 		{			
 			CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
 			CCPoint pos = this->player->getPosition();
-
-			//CCFollow* f = CCFollow::create(this->player);
-			//CCFollow* f = CCFollow::create(this->player);
-			//f->setBoudarySet(true);
-			
-			//this->runAction(f);
 		}
-
-		//	center to player
-		//CCPoint pos = this->player->getPosition();
-		//CCPoint pos2 = this->worldLayer->getPosition();
-
-		//this->worldLayer->runAction(CCMoveBy::create(1.0f, ccp(pos.x * -1, pos.y * -1)));
-		//this->runAction(CCFollow::create(player, CCRectMake(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)));
-		//this->worldLayer->runAction(CCFollow::create(player));
-		
-		//float x, y, z;
-		//this->getCamera()->getEyeXYZ(&x, &y, &z);
-		//this->getCamera()->setEyeXYZ(x, y, z + 100.0f);
 
 		return;
 	}
