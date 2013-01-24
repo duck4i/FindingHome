@@ -19,6 +19,7 @@ private:
 	char* controllerPath;
 	
 	CCTexture2DMutable *controller;
+	CCImage* controllerImage;
 
 	bool initOK;
 	bool init();
@@ -44,7 +45,8 @@ public:
 		this->parent = parent;
 		this->controllerPath = controllerPath;
 		this->controller = NULL;
-		this->controllerPosition = 0;
+		this->controllerImage = NULL;
+		this->controllerPosition = 1;
 		this->updateTimer = 0;
 		this->firstUpdate = true;
 		

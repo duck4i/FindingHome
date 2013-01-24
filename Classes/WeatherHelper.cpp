@@ -14,7 +14,7 @@ short tweenColor(short start, short end)
 
 bool WeatherHelper::init()
 {
-	CCImage* controllerImage = new CCImage;	
+	controllerImage = new CCImage;	
 	if (!controllerImage->initWithImageFile(this->controllerPath))
 	{
 		CCLog("Error initializing weather image data");
@@ -31,8 +31,6 @@ bool WeatherHelper::init()
 		return false;
 	}
 
-	delete controllerImage;
-
 	//	now set position of controller
 	//this->controllerPosition = controller->getPixelsWide() / 2;
 
@@ -48,8 +46,8 @@ void WeatherHelper::colorAtThisTime(ccColor4B &start, ccColor4B &end)
 	if (!this->controller)
 		return;
 	
-	start = this->controller->pixelAt(ccp(controllerPosition, 1));
-	//end = this->controller->pixelAt(ccp(controllerPosition, controller->getPixelsHigh() - 1));
+	start = this->controller->pixelAt(ccp(controllerPosition, 0));	
+	end = this->controller->pixelAt(ccp(controllerPosition, controller->getPixelsHigh() - 1));
 }
 
 void WeatherHelper::update(float delta)
@@ -59,7 +57,7 @@ void WeatherHelper::update(float delta)
 
 	updateTimer += delta;
 
-	float actionInterval = 1.0f; // each seconds 1 pixel move. That means (for 380 width) complete cycle each ~6 minutes.
+	float actionInterval = 0.10f; // each seconds 1 pixel move. That means (for 380 width) complete cycle each ~6 minutes.
 	if (updateTimer >= actionInterval || firstUpdate)
 	{
 		updateTimer = 0;
@@ -78,13 +76,7 @@ void WeatherHelper::update(float delta)
 		colorAtThisTime(start, end);
 
 		this->background->setStartColor(ccc3(start.r, start.g, start.b));
-		this->background->setStartOpacity(start.a);
-
-		this->background->setEndColor(ccc3(start.r, start.g, start.b));
-		this->background->setEndOpacity(start.a);
-
-		//this->background->setEndColor(ccc3(end.r, end.g, end.b));
-		//this->background->setEndOpacity(end.a);
+		this->background->setEndColor(ccc3(end.r, end.g, end.b));						
 	}
 
 }
