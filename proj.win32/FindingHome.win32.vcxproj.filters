@@ -76,6 +76,9 @@
     <ClInclude Include="..\Classes\LevelNodeInfo.h">
       <Filter>include\levels</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\WeatherHelper.h">
+      <Filter>include\levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -103,6 +106,9 @@
       <Filter>source\levels</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ShapeHelper.cpp">
+      <Filter>source\levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WeatherHelper.cpp">
       <Filter>source\levels</Filter>
     </ClCompile>
   </ItemGroup>

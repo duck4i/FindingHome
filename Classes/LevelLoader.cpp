@@ -9,7 +9,7 @@
 void LevelLoader::createLevelLayers()
 {
 	//	do not change the order of how we create layers, it will affect zOrder
-	this->backgroundLayer = CCLayer::create();
+	this->backgroundLayer = CCLayer::create();	
 	this->worldNode->addChild(this->backgroundLayer);
 
 	this->mainLayer = CCLayer::create();
@@ -145,7 +145,7 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 {
 	//	select layer to insert it into
 	CCNode* layer = type == 0 ? this->mainLayer : this->backgroundLayer;
-	CCNode* toInsert = NULL;	
+	CCNode* toInsert = NULL;
 
 	//	NOW DO ACTUAL WORLD CREATIONG -- LIKE A BOSS	
 	if (info.type == 0)

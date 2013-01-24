@@ -7,16 +7,24 @@
 #include "Settings.h"
 #include "B2DebugDrawLayer.h"
 #include "LevelLoader.h"
+#include "WeatherHelper.h"
 
 using namespace cocos2d;
 
-#define DEFAULT_SCALE 0.6f
+#define DEFAULT_SCALE 0.5f
 
 enum PlayerDirection
 {
 	PlayerDirectionLeft,
 	PlayerDirectionRight
 };
+
+typedef struct
+{
+	short key;
+	short state;
+} KEYSTATE, *LPKEYSTATE;
+
 
 class MainScene : public CCLayer
 {
@@ -35,6 +43,8 @@ private:
 	void updateCamera(float delta);
 
 	float sceneScale;
+	
+	bool jumpKeyIsDown;
 	float lastKeyboardUpdate;
 	void updateKeyboard(float delta);
 

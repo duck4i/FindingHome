@@ -76,6 +76,7 @@ bool MainScene::init()
 		this->schedule(schedule_selector(MainScene::updateCamera));	
 	}
 
+	this->jumpKeyIsDown = false;
 	this->setKeypadEnabled(true);
 
 	this->touchesInProgress = false;
@@ -196,14 +197,25 @@ void MainScene::updateKeyboard(float delta)
 		short d = GetKeyState(VK_DOWN);
 		short u = GetKeyState(VK_UP);
 
+		bool jumped = (u & down) || (u2 & down) ;
+
+		bool skipY = false;
+		if (jumped && jumpKeyIsDown)
+			skipY = true;
+		else if (jumped)
+			jumpKeyIsDown = true;
+		else if (!jumped)
+			jumpKeyIsDown = false;
+
 		float x = 0;
 		float y = 0;
 	
 		if (l & down)
 			x -= step;	
-		if (r & down)	
+		else if (r & down)	
 			x += step;
-		if ((u & down) || (u2 & down))
+		
+		if (jumped && !skipY)
 			y += stepUp;
 
 		//	check if anything to do
@@ -247,7 +259,7 @@ void MainScene::updateKeyboard(float delta)
 			//
 			const b2Vec2 velocity = playerBody->GetLinearVelocity();
 			const float speed = abs(velocity.x);
-			const float maxSpeed = 8.0f;
+			const float maxSpeed = 10.0f;
 			if (speed > maxSpeed)
 				playerBody->SetLinearVelocity((maxSpeed / speed) * velocity);
 		

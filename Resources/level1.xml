@@ -3,7 +3,7 @@
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
-                <Item xsi:type="TextureItem" Name="Texture_0044" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0044" Visible="false">
                     <Position>
                         <X>-2463</X>
                         <Y>-386</Y>
@@ -30,7 +30,7 @@
                         <Y>219</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0045" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0045" Visible="false">
                     <Position>
                         <X>1625</X>
                         <Y>-386</Y>

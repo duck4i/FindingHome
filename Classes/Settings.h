@@ -7,4 +7,7 @@
 
 #define WINDOW_TITLE	"Finding home"
 
+#define RESOURCE_DIR		"..\\Resources\\"
+#define SHAPE_DATA			RESOURCE_DIR "ShapeData.json"
+
 #endif
