@@ -1,17 +1,6 @@
 #include "WeatherHelper.h"
 
 
-short tweenColor(short start, short end)
-{
-	if (start == end)
-		return end;
-	else if (start > end)
-		return max(start - 1, 0);
-	else
-		return min(start + 1, 255);
-}
-
-
 bool WeatherHelper::init()
 {
 	controllerImage = new CCImage;	
@@ -75,8 +64,35 @@ void WeatherHelper::update(float delta)
 		ccColor4B start, end;
 		colorAtThisTime(start, end);
 
+		//ccc4FEqual
+
+		/*if (start != prevStart || end != prevEnd)
+		{
+		}*/
+
 		this->background->setStartColor(ccc3(start.r, start.g, start.b));
 		this->background->setEndColor(ccc3(end.r, end.g, end.b));						
 	}
 
+	//	if tweening needed then do it, first pass is layer start
+	if (stepR != 0 || stepG != 0 || stepB != 0) 
+	{
+		ccColor3B c = this->background->getStartColor();
+		c.r += stepR; c.g += stepG; c.b += stepB;
+		this->background->setStartColor(c);
+	}
+
+	//	now gradient stop
+	if (stepR != 0 || stepG != 0 || stepB != 0)
+	{
+		ccColor3B c = this->background->getEndColor();
+		c.r += stepR2; c.g += stepG2; c.b += stepB2;
+		this->background->setEndColor(c);
+	}
+
+}
+
+bool WeatherHelper::colorsEqual(ccColor4B a, ccColor4B b)
+{
+	return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
 }
