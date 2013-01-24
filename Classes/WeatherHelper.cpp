@@ -1,29 +1,90 @@
 #include "WeatherHelper.h"
 
-ccColor4B WeatherHelper::getColorFromPixel(CCSprite* sprite, float x, float y)
+
+short tweenColor(short start, short end)
 {
-	ccColor4B c;
-	c.r = c.g = c.b = c.a = 0;
-
-	if (!sprite)
-		return c;
-	
-	unsigned int data[4] = {0};
-	CCPoint loc = ccp(x * CC_CONTENT_SCALE_FACTOR(), y * CC_CONTENT_SCALE_FACTOR());
-	CCSize size = CCSizeMake(sprite->getContentSize().width * CC_CONTENT_SCALE_FACTOR(), sprite->getContentSize().height * CC_CONTENT_SCALE_FACTOR());
-	
-	CCRenderTexture *t = CCRenderTexture::create(size.width, size.height, kCCTexture2DPixelFormat_RGB888);
-	if (t)
-	{
-
-		delete t;
-	}
-
-	return c;
+	if (start == end)
+		return end;
+	else if (start > end)
+		return max(start - 1, 0);
+	else
+		return min(start + 1, 255);
 }
+
 
 bool WeatherHelper::init()
 {
+	CCImage* controllerImage = new CCImage;	
+	if (!controllerImage->initWithImageFile(this->controllerPath))
+	{
+		CCLog("Error initializing weather image data");
+		return false;
+	}	
 
-	return false;
+	CCSize s = CCSizeMake(controllerImage->getWidth(), controllerImage->getHeight());
+	controller = new CCTexture2DMutable;	
+	
+	if (!controller->initWithData(controllerImage->getData(), kCCTexture2DPixelFormat_RGBA8888, s.width, s.height, s))
+	{
+		CCLog("Error creating mutable weather texture");
+		delete controllerImage;
+		return false;
+	}
+
+	delete controllerImage;
+
+	//	now set position of controller
+	//this->controllerPosition = controller->getPixelsWide() / 2;
+
+	//	now init layer	
+	this->background = CCLayerGradient::create();
+	this->parent->addChild(this->background);
+
+	return true;
+}
+
+void WeatherHelper::colorAtThisTime(ccColor4B &start, ccColor4B &end)
+{
+	if (!this->controller)
+		return;
+	
+	start = this->controller->pixelAt(ccp(controllerPosition, 1));
+	//end = this->controller->pixelAt(ccp(controllerPosition, controller->getPixelsHigh() - 1));
+}
+
+void WeatherHelper::update(float delta)
+{
+	if (!initOK)
+		return;
+
+	updateTimer += delta;
+
+	float actionInterval = 1.0f; // each seconds 1 pixel move. That means (for 380 width) complete cycle each ~6 minutes.
+	if (updateTimer >= actionInterval || firstUpdate)
+	{
+		updateTimer = 0;
+		this->controllerPosition++;
+		firstUpdate = false;
+
+		//	reset when came to the end
+		if (this->controllerPosition >= this->controller->getPixelsWide())
+		{
+			this->controllerPosition = 0;
+			this->updateTimer = 0;
+			return;
+		}
+
+		ccColor4B start, end;
+		colorAtThisTime(start, end);
+
+		this->background->setStartColor(ccc3(start.r, start.g, start.b));
+		this->background->setStartOpacity(start.a);
+
+		this->background->setEndColor(ccc3(start.r, start.g, start.b));
+		this->background->setEndOpacity(start.a);
+
+		//this->background->setEndColor(ccc3(end.r, end.g, end.b));
+		//this->background->setEndOpacity(end.a);
+	}
+
 }

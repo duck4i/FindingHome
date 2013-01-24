@@ -2,8 +2,7 @@
 #define __WEATHER_HELPER_H__
 
 #include <cocos2d.h>
-#include "Settings.h"
-
+#include "extern\CCTexture2DMutable.h"
 using namespace cocos2d;
 
 //	Get pixel from image - IOS
@@ -12,39 +11,53 @@ using namespace cocos2d;
 //	Fez weather system
 //	http://theinstructionlimit.com/wp-content/uploads/2012/03/fez_tech_postmort_pdf_no_notes.pdf
 
-//	Use openGL to capture pixel
-/*
-location = ccp(x * CC_CONTENT_SCALE_FACTOR(), y * CC_CONTENT_SCALE_FACTOR());
-UInt8 data[4];
-CCRenderTexture* renderTexture = [[CCRenderTexture alloc] initWithWidth:sprite.boundingBox.size.width * CC_CONTENT_SCALE_FACTOR() 
-                                                                 height:sprite.boundingBox.size.height * CC_CONTENT_SCALE_FACTOR() 
-                                                            pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-[renderTexture begin];
-[sprite draw];
-glReadPixels((GLint)location.x,(GLint)location.y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, data);
-[renderTexture end];
-[renderTexture release];
-NSLog(@"R: %d, G: %d, B: %d, A: %d", data[0], data[1], data[2], data[3]);
-*/
-
-
-
 class WeatherHelper
 {
 private:
 
-	CCNode *parent;
-	static ccColor4B getColorFromPixel(CCSprite* sprite, float x, float y);
+	CCNode *parent;		
+	char* controllerPath;
+	
+	CCTexture2DMutable *controller;
 
+	bool initOK;
 	bool init();
+
+	void colorAtThisTime(ccColor4B &start, ccColor4B &end);
+
+	/*
+	 *	Controller position moves with x-axis from 0 -> end of image, increments slighty when update method called
+	 *	and is used to determine what vertical stripe of colors to use in simulation.
+	 *	Basically tracks time of the day.
+	 */
+	unsigned int controllerPosition;	
+
+	float updateTimer;
+	bool firstUpdate;
+
+	CCLayerGradient *background;
 
 public:
 
-	WeatherHelper(CCNode* parent)
+	WeatherHelper(CCNode* parent, char* controllerPath)
 	{
 		this->parent = parent;
+		this->controllerPath = controllerPath;
+		this->controller = NULL;
+		this->controllerPosition = 0;
+		this->updateTimer = 0;
+		this->firstUpdate = true;
+		
+		this->initOK = init();
 	}
 
+	~WeatherHelper()
+	{		
+		//if (this->controller)
+		//	delete controller;
+	}
+
+	//	call this method on scene update
 	void update(float delta);
 };
 

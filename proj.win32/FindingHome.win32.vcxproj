@@ -125,9 +125,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\B2DebugDrawLayer.h" />
     <ClInclude Include="..\Classes\CustomProperty.h" />
-    <ClInclude Include="..\Classes\GLES-Render.h" />
+    <ClInclude Include="..\Classes\extern\B2DebugDrawLayer.h" />
+    <ClInclude Include="..\Classes\extern\CCTexture2DMutable.h" />
+    <ClInclude Include="..\Classes\extern\GLES-Render.h" />
     <ClInclude Include="..\Classes\LevelLoader.h" />
     <ClInclude Include="..\Classes\LevelNodeInfo.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
@@ -141,9 +142,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\B2DebugDrawLayer.cpp" />
     <ClCompile Include="..\Classes\CustomProperty.cpp" />
-    <ClCompile Include="..\Classes\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\extern\B2DebugDrawLayer.cpp" />
+    <ClCompile Include="..\Classes\extern\CCTexture2DMutable.cpp" />
+    <ClCompile Include="..\Classes\extern\GLES-Render.cpp" />
     <ClCompile Include="..\Classes\LevelLoader.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\ShapeHelper.cpp" />

@@ -1,21 +1,12 @@
 #include "MainScene.h"
 
-short backgroundAlphaStart = 80;
-short backgroundAlphaEnd = 255;
-
-short backgroundMatrix[][3] = 
-{ 	
-	{134, 193, 253},	//day
-	{255, 201, 14},		//sunset
-	{80, 80, 180}		//night
-};
 
 CCScene* MainScene::scene()
 {
 	CCScene* scene = CCScene::create();	
 
 	MainScene *ms = MainScene::create();
-	if (ms)
+	if (scene && ms)
 		scene->addChild(ms);
 
 	return scene;
@@ -26,29 +17,24 @@ MainScene::~MainScene()
 	CCLog("MainScene destructor called");
 	if (boxWorld)
 		delete boxWorld;	
+	if (weather)
+		delete weather;	
 }
 
 bool MainScene::init()
-{
-	lastUsedBackgroundIndex = 0;
-	firstBackgroundChange = true;
-	backgroundTimer = NULL;
-	gback = CCLayerGradient::create(
-		ccc4(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2], backgroundAlphaStart), 
-		ccc4(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2], backgroundAlphaEnd)
-		);
-	this->addChild(gback);
-		
+{		
 	this->debugLayer = NULL;
 	this->lastKeyboardUpdate = 0;
 
 	this->player = NULL;
 	this->playerBody = NULL;
+	this->weather = NULL;
 
 	direction = PlayerDirectionRight;
 	
 	//	Create world layer
-	this->worldLayer = CCLayer::create();		
+	this->worldLayer = CCLayer::create();
+	this->weather = new WeatherHelper(this, WEATHER_CONTROLLER_DATA);
 
 	sceneScale = DEFAULT_SCALE;
 	this->worldLayer->setScale(sceneScale);
@@ -59,8 +45,8 @@ bool MainScene::init()
 	this->addBodies();
 
 	this->scheduleUpdate();
-	this->schedule(schedule_selector(MainScene::updateBackground));	
 
+	//	schedule camera update
 	if (this->player)
 	{
 		this->cameraMoveInProgress = false;	
@@ -76,6 +62,7 @@ bool MainScene::init()
 		this->schedule(schedule_selector(MainScene::updateCamera));	
 	}
 
+	//	schedule keyboard and touch events
 	this->jumpKeyIsDown = false;
 	this->setKeypadEnabled(true);
 
@@ -323,16 +310,6 @@ void MainScene::updateKeyboard(float delta)
 
 }
 
-short tweenColor(short start, short end)
-{
-	if (start == end)
-		return end;
-	else if (start > end)
-		return max(start - 1, 0);
-	else
-		return min(start + 1, 255);
-}
-
 void MainScene::update(float delta)
 {
 	//	PHYSICS UPDATE FIRST	
@@ -353,41 +330,9 @@ void MainScene::update(float delta)
 
 	//	Now keyboard update
 	updateKeyboard(delta);
-}
 
-void MainScene::updateBackground(float delta)
-{
-	//	update background color
-	short timeToChange = 15;
-	backgroundTimer += delta;
-	//CCLog("Background timer %f", backgroundTimer);
-
-	if (backgroundTimer >= timeToChange)
-	{
-		if (!firstBackgroundChange)
-			lastUsedBackgroundIndex++;
-		if (lastUsedBackgroundIndex > 2)
-			lastUsedBackgroundIndex = 0;
-		backgroundTimer = 0;
-		firstBackgroundChange = false;
-	}
-
-	if (!firstBackgroundChange)
-	{
-		ccColor3B currentColor = gback->getStartColor();
-		ccColor3B nextColor = lastUsedBackgroundIndex < 2 ? 
-			ccc3(backgroundMatrix[lastUsedBackgroundIndex + 1][0], backgroundMatrix[lastUsedBackgroundIndex + 1][1], backgroundMatrix[lastUsedBackgroundIndex + 1][2])
-			:
-			ccc3(backgroundMatrix[0][0], backgroundMatrix[0][1], backgroundMatrix[0][2]);
-
-		short r = tweenColor(currentColor.r, nextColor.r);
-		short g = tweenColor(currentColor.g, nextColor.g);
-		short b = tweenColor(currentColor.b, nextColor.b);
-	
-		ccColor3B newColor = ccc3(r, g, b);
-		gback->setStartColor(newColor);
-		gback->setEndColor(newColor);
-	}
+	//	And weather ofcourse
+	weather->update(delta);
 }
 
 void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)

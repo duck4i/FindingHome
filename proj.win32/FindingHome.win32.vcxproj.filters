@@ -40,9 +40,6 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>include\support</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>include\support</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>include\support</Filter>
     </ClInclude>
@@ -54,12 +51,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Physics.h">
       <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GLES-Render.h">
-      <Filter>include\support</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\B2DebugDrawLayer.h">
-      <Filter>include\support</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\LevelLoader.h">
       <Filter>include\levels</Filter>
@@ -79,22 +70,25 @@
     <ClInclude Include="..\Classes\WeatherHelper.h">
       <Filter>include\levels</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\extern\B2DebugDrawLayer.h">
+      <Filter>include\support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\extern\GLES-Render.h">
+      <Filter>include\support</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>include\support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\extern\CCTexture2DMutable.h">
+      <Filter>include\support</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>source\support</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>source\support</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MainScene.cpp">
       <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GLES-Render.cpp">
-      <Filter>source\support</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\B2DebugDrawLayer.cpp">
-      <Filter>source\support</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\LevelLoader.cpp">
       <Filter>source\levels</Filter>
@@ -110,6 +104,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\WeatherHelper.cpp">
       <Filter>source\levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\extern\B2DebugDrawLayer.cpp">
+      <Filter>source\support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\extern\GLES-Render.cpp">
+      <Filter>source\support</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>source\support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\extern\CCTexture2DMutable.cpp">
+      <Filter>source\support</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

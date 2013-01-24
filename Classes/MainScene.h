@@ -5,7 +5,7 @@
 #include "Box2D/Box2D.h"
 #include "SimpleAudioEngine.h"
 #include "Settings.h"
-#include "B2DebugDrawLayer.h"
+#include "extern/B2DebugDrawLayer.h"
 #include "LevelLoader.h"
 #include "WeatherHelper.h"
 
@@ -19,24 +19,13 @@ enum PlayerDirection
 	PlayerDirectionRight
 };
 
-typedef struct
-{
-	short key;
-	short state;
-} KEYSTATE, *LPKEYSTATE;
-
-
 class MainScene : public CCLayer
 {
 private:
 
-	bool firstBackgroundChange;
-	float backgroundTimer;
-	short lastUsedBackgroundIndex;
-	CCLayerGradient *gback;
-
 	void update(float delta);	
-	void updateBackground(float delta);
+
+	WeatherHelper *weather;
 
 	bool cameraMoveInProgress;
 	void toggleCameraProgress();
@@ -53,13 +42,13 @@ private:
 	b2Body *playerBody;
 	PlayerDirection direction;	
 	
-	
 	//	world
 	CCNode *worldLayer;
 	b2World *boxWorld;
 	B2DebugDrawLayer *debugLayer;
 	bool boxWorldSleep;
 	
+	//	initialization and setup
 	void setupPhysics();
 	void addBodies();
 
