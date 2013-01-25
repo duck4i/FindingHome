@@ -18,14 +18,20 @@ bool WeatherHelper::init()
 		CCLog("Error creating mutable weather texture");
 		delete controllerImage;
 		return false;
-	}
-
-	//	now set position of controller
-	//this->controllerPosition = controller->getPixelsWide() / 2;
+	}	
 
 	//	now init layer	
 	this->background = CCLayerGradient::create();
 	this->backgroundNext = CCLayerGradient::create();
+	this->backgroundNext->setOpacity(0);
+
+	//	now set position of controller		
+	//this->controllerPosition = controller->getPixelsWide() / 2;
+
+	colorAtThisTime(lastStart, lastEnd);
+	
+	this->background->setStartColor(ccc3(lastStart.r, lastStart.b, lastStart.g));
+	this->background->setEndColor(ccc3(lastEnd.r, lastEnd.g, lastEnd.b));
 
 	this->parent->addChild(this->background);
 	this->parent->addChild(this->backgroundNext);
@@ -70,7 +76,7 @@ void WeatherHelper::update(float delta)
 
 		if (!ccc4BEqual(lastStart, start) || !ccc4BEqual(lastEnd, end))
 		{
-			float changeTime = 1;
+			float changeTime = 10.0f;
 			this->backgroundNext->setOpacity(0);
 			this->backgroundNext->setStartColor(ccc3(start.r, start.b, start.g));
 			this->backgroundNext->setEndColor(ccc3(end.r, end.g, end.b));
@@ -81,7 +87,7 @@ void WeatherHelper::update(float delta)
 			CCCallFunc *done = CCCallFunc::create(this, callfunc_selector(WeatherHelper::backgroundDoneChanging));
 
 			this->backgroundNext->runAction(CCSequence::createWithTwoActions(in, done));
-			//this->background->runAction(out);
+			this->background->runAction(out);
 
 			backgroundChanging = true;
 
@@ -97,8 +103,7 @@ void WeatherHelper::backgroundDoneChanging()
 	this->background->setStartColor(this->backgroundNext->getStartColor());
 	this->background->setEndColor(this->backgroundNext->getEndColor());
 	this->background->setOpacity(255);
-	//this->backgroundNext->setOpacity(0);
+	this->backgroundNext->setOpacity(0);
 
-	backgroundChanging = false;
-	//this->parent->removeChild(this->backgroundNext);
+	backgroundChanging = false;	
 }

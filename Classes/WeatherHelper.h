@@ -62,14 +62,14 @@ public:
 		this->controllerPath = controllerPath;
 		this->controller = NULL;
 		this->controllerImage = NULL;
-		this->controllerPosition = 1;
+		this->controllerPosition = 0;
 		this->updateTimer = 0;
 		this->firstUpdate = true;
 
 		this->background = NULL;
 		this->backgroundNext = NULL;
 
-		backgroundChanging = false;
+		backgroundChanging = false;				
 		
 		this->initOK = init();
 	}
