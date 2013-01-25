@@ -16,6 +16,10 @@ using namespace cocos2d;
 
 //	blending ?
 //	http://www.andersriggelsen.dk/glblendfunc.php
+//	http://www.raywenderlich.com/3857/how-to-create-dynamic-textures-with-ccrendertexture
+
+//	real world day and night
+//	http://twistedsifter.com/2012/04/blending-day-and-night-into-single-photo-stephen-wilkes/
 
 static inline bool ccc4BEqual(ccColor4B a, ccColor4B b)
 {
@@ -62,6 +66,8 @@ private:
 	
 	int tintStrengthAtThisTime(ccColor3B c);
 	ccColor3B tintColorAtThisTime();
+
+	bool isNight();
 
 	//	get how bright color is percieved by human eye
 	//	http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx

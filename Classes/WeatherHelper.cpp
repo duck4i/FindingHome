@@ -41,10 +41,10 @@ bool WeatherHelper::init()
 	ccColor3B col = tintColorAtThisTime();
 	this->topTintLayer = CCLayerColor::create(ccc4(col.r, col.g, col.b,	tintStrengthAtThisTime(col)));
 
-	ccBlendFunc blend;
-	blend.src = GL_SRC_COLOR;
-	blend.dst = GL_SRC_ALPHA;
-	this->topTintLayer->setBlendFunc(blend);
+	//ccBlendFunc blend;
+	//blend.src = GL_SRC_COLOR;
+	//blend.dst = GL_SRC_COLOR;	
+	//this->topTintLayer->setBlendFunc(blend);
 
 	this->worldLayer->addChild(this->topTintLayer, 10000);
 
@@ -60,9 +60,14 @@ void WeatherHelper::colorAtThisTime(ccColor4B &start, ccColor4B &end)
 	end = this->controller->pixelAt(ccp(controllerPosition, controller->getPixelsHigh() - 1));
 }
 
+bool WeatherHelper::isNight()
+{
+	return this->controllerPosition < 66 || this->controllerPosition > (unsigned int) (this->controllerImage->getWidth() - 66) ;
+}
+
 int WeatherHelper::tintStrengthAtThisTime(ccColor3B c)
 {	
-	if (this->controllerPosition < 66 || this->controllerPosition > this->controllerImage->getWidth() - 66)
+	if (isNight())
 		return 160;	//	fix for nights
 
 	int colorBrightness = getColorPercivedBrigthness(c.r, c.g, c.b);
@@ -74,7 +79,7 @@ int WeatherHelper::tintStrengthAtThisTime(ccColor3B c)
 
 ccColor3B WeatherHelper::tintColorAtThisTime()
 {	
-	if (this->controllerPosition < 66 || this->controllerPosition > this->controllerImage->getWidth() - 66)
+	if (isNight())
 		return ccc3(lastStart.r, lastStart.g, lastStart.b);
 
 	ccColor3B c;
