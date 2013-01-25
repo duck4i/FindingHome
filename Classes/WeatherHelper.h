@@ -29,10 +29,11 @@ private:
 	CCTexture2DMutable *controller;
 	CCImage* controllerImage;
 
-	bool initOK;
-	bool init();
+	float updateTimer;
+	bool firstUpdate;
 
-	void colorAtThisTime(ccColor4B &start, ccColor4B &end);	
+	bool initOK;
+	bool init();	
 
 	/*
 	 *	Controller position moves with x-axis from 0 -> end of image, increments slighty when update method called
@@ -40,16 +41,19 @@ private:
 	 *	Basically tracks time of the day.
 	 */
 	unsigned int controllerPosition;	
+	void colorAtThisTime(ccColor4B &start, ccColor4B &end);
+	int tintStrengthAtThisTime();
 
-	float updateTimer;
-	bool firstUpdate;
-	
+	//	get how bright color is percieved by human eye
+	//	http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
+	int getColorPercivedBrigthness(int r, int g, int b);
 
 	ccColor4B lastStart;
 	ccColor4B lastEnd;
 
 	CCLayerGradient *background;
 	CCLayerGradient *backgroundNext;
+	CCLayerColor	*topTintLayer;
 	
 	bool backgroundChanging;
 	void backgroundDoneChanging();

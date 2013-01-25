@@ -25,16 +25,21 @@ bool WeatherHelper::init()
 	this->backgroundNext = CCLayerGradient::create();
 	this->backgroundNext->setOpacity(0);
 
+
 	//	now set position of controller		
 	//this->controllerPosition = controller->getPixelsWide() / 2;
-
-	colorAtThisTime(lastStart, lastEnd);
-	
+	//this->background->setCompressedInterpolation(true);	
+	colorAtThisTime(lastStart, lastEnd);	
+			
 	this->background->setStartColor(ccc3(lastStart.r, lastStart.b, lastStart.g));
 	this->background->setEndColor(ccc3(lastEnd.r, lastEnd.g, lastEnd.b));
 
 	this->parent->addChild(this->background);
 	this->parent->addChild(this->backgroundNext);
+
+	//	tinting layer
+	this->topTintLayer = CCLayerColor::create(ccc4(lastStart.r, lastStart.g, lastStart.b, tintStrengthAtThisTime()));
+	this->parent->addChild(this->topTintLayer, 10000);
 
 	return true;
 }
@@ -46,6 +51,32 @@ void WeatherHelper::colorAtThisTime(ccColor4B &start, ccColor4B &end)
 	
 	start = this->controller->pixelAt(ccp(controllerPosition, 0));	
 	end = this->controller->pixelAt(ccp(controllerPosition, controller->getPixelsHigh() - 1));
+}
+
+int WeatherHelper::tintStrengthAtThisTime()
+{
+	/*/	weakest at the center (day) strongest at the night
+	static const float night = 120;
+
+	float width = this->controllerImage->getWidth();
+	float center =  width / 2;
+	float stepToMax = night / (width - center);
+	float dif = abs(this->controllerPosition - center);
+
+	float ret = dif * stepToMax;
+	return ret;
+	*/
+	int colorBrightness = getColorPercivedBrigthness(lastEnd.r, lastEnd.g, lastEnd.b);
+	return min(150, 255 - colorBrightness);
+}
+
+int WeatherHelper::getColorPercivedBrigthness(int r, int g, int b)
+{
+	float ret = 
+		r * r * 0.241f +
+		g * g * 0.691f +
+		b * b * 0.068f;
+	return (int) sqrtf(ret);
 }
 
 void WeatherHelper::update(float delta)
@@ -83,11 +114,17 @@ void WeatherHelper::update(float delta)
 
 			CCFadeTo *in = CCFadeTo::create(changeTime, 255);
 			CCFadeTo *out = CCFadeTo::create(changeTime, 0);
+			CCTintTo *tint = CCTintTo::create(changeTime, start.r, start.g, start.b);
+			int ts = tintStrengthAtThisTime();
+			CCFadeTo *tintStrength = CCFadeTo::create(changeTime, ts);
 
 			CCCallFunc *done = CCCallFunc::create(this, callfunc_selector(WeatherHelper::backgroundDoneChanging));
 
 			this->backgroundNext->runAction(CCSequence::createWithTwoActions(in, done));
 			this->background->runAction(out);
+			
+			this->topTintLayer->runAction(tint);
+			this->topTintLayer->runAction(tintStrength);
 
 			backgroundChanging = true;
 
