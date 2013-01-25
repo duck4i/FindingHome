@@ -51,10 +51,11 @@ static float random(float min, float max)
 ///
 ///	These control the weather :)
 ///
-#define MASTER_SPEED		3.0f
+#define MASTER_SPEED		1.0f
 
 #define CHANGE_SPEED		30.0f / MASTER_SPEED
 #define STARS_FADE_SPEED	30.0f / MASTER_SPEED
+#define STARS_NATURAL_DROP	0.02f * MASTER_SPEED
 
 #define CONTROLLER_WIDTH	384.0f
 #define FULL_CYCLE			60.0f	//	1h

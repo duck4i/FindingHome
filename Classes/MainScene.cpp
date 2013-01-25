@@ -249,7 +249,7 @@ void MainScene::updateKeyboard(float delta)
 			}
 
 			float maxSpeed = DOG_SPEED;
-			if (shift & down)
+			if (shift & down && !midAir)
 			{
 				x *= DOG_SHIFT_FACTOR;
 				maxSpeed *= DOG_SHIFT_FACTOR;

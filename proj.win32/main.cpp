@@ -44,6 +44,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	//	set window name
 	SetWindowText(eglView->getHWnd(), WINDOW_TITLE);
 
+	srand(GetTickCount());
+
     int ret = CCApplication::sharedApplication()->run();
 
 #ifdef USE_WIN32_CONSOLE

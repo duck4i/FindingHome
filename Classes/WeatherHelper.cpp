@@ -39,14 +39,7 @@ bool WeatherHelper::init()
 
 	ccColor3B col = tintColorAtThisTime();
 	this->topTintLayer = CCLayerColor::create(ccc4(col.r, col.g, col.b,	tintStrengthAtThisTime(col)));
-
-	//ccBlendFunc blend;
-	//blend.src = GL_SRC_COLOR;
-	//blend.dst = GL_SRC_COLOR;	
-	//this->topTintLayer->setBlendFunc(blend);
-
-	this->worldLayer->addChild(this->topTintLayer, 10000);
-
+	this->worldLayer->addChild(this->topTintLayer, 10000);		
 
 	//	and now - stars
 	this->createStarrySky();
@@ -155,7 +148,10 @@ void WeatherHelper::update(float delta)
 	updateTimer += delta;
 	if (updateTimer >= ACTION_INTERVAL)
 	{	
-		updateTimer = 0;		
+		updateTimer = 0;
+
+		this->starrySkyNaturalRotation.x += STARS_NATURAL_DROP;
+		this->starrySkyNaturalRotation.y += STARS_NATURAL_DROP;
 
 		if (backgroundChanging) // thats it
 			return;
@@ -188,6 +184,15 @@ void WeatherHelper::update(float delta)
 			lastStart = start;
 			lastEnd = end;
 			
+
+			ccColor3B col = tintColorAtThisTime();
+			this->topTintLayer->setColor(col);
+			
+			//ccBlendFunc blend;
+			//blend.src = GL_SRC_COLOR;
+			//blend.dst = GL_SRC_COLOR;	
+			//this->topTintLayer->setBlendFunc(blend);
+
 
 			/*
 			//	tint the world
@@ -241,10 +246,7 @@ void WeatherHelper::update(float delta)
 					c->runAction(tintStrength);
 				}
 			}
-			*/			
-
-			lastStart = start;
-			lastEnd = end;			
+			*/	
 		}
 	}
 
