@@ -27,7 +27,7 @@ bool WeatherHelper::init()
 
 
 	//	now set position of controller		
-	//this->controllerPosition = controller->getPixelsWide() / 2;
+	this->controllerPosition = controller->getPixelsWide() / 2;
 	//this->background->setCompressedInterpolation(true);	
 	colorAtThisTime(lastStart, lastEnd);	
 			

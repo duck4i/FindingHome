@@ -21,6 +21,8 @@ using namespace cocos2d;
 //	real world day and night
 //	http://twistedsifter.com/2012/04/blending-day-and-night-into-single-photo-stephen-wilkes/
 
+//	colors? http://es.appbrain.com/app/winter-snow-cartoon-lwp-pro/com.electricseed.cartoonwinterlandscape
+
 static inline bool ccc4BEqual(ccColor4B a, ccColor4B b)
 {
 	return a.a == b.a && a.b == b.b && a.g == b.g && a.r == b.r;
