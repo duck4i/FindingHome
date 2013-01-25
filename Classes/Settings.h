@@ -13,7 +13,7 @@
 #define SHAPE_DATA					RESOURCE_DIR "ShapeData.json"
 #define WEATHER_CONTROLLER_DATA		RESOURCE_DIR "weather_controller.png"
 
-
+#define STAR_PATH					RESOURCE_DIR "star.png"
 
 
 #endif

@@ -41,6 +41,12 @@ static inline ccColor4B Blend(ccColor4B c1, ccColor4B c2)
     return result;
 }
 
+static float random(float min, float max)
+{
+	float r = (float)rand() / (float)RAND_MAX;
+	return min + r * (max - min);
+}
+
 class WeatherHelper : public CCObject
 {
 private:
@@ -70,6 +76,10 @@ private:
 	ccColor3B tintColorAtThisTime();
 
 	bool isNight();
+
+	CCPoint starrySkyNaturalRotation;
+	CCSpriteBatchNode* starrySky;
+	void createStarrySky();
 
 	//	get how bright color is percieved by human eye
 	//	http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
@@ -102,6 +112,9 @@ public:
 		this->backgroundNext = NULL;
 
 		backgroundChanging = false;				
+		starrySky = NULL;
+		starrySkyNaturalRotation.x = 0;
+		starrySkyNaturalRotation.y = 0;
 		
 		this->initOK = init();
 	}

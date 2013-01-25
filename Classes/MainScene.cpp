@@ -22,7 +22,9 @@ MainScene::~MainScene()
 }
 
 bool MainScene::init()
-{		
+{	
+	this->initWithColor(ccc4(255, 255, 255, 255));
+
 	this->debugLayer = NULL;
 	this->lastKeyboardUpdate = 0;
 
@@ -31,6 +33,8 @@ bool MainScene::init()
 	this->weather = NULL;
 
 	direction = PlayerDirectionRight;
+
+	//this->addChild(CCLayerColor::create(ccc4(255, 255, 255, 255)), 1);
 	
 	//	Create world layer
 	this->worldLayer = CCLayer::create();
@@ -43,6 +47,16 @@ bool MainScene::init()
 	//	setup physics object
 	this->setupPhysics();
 	this->addBodies();	
+
+	//	schedule keyboard and touch events
+	this->jumpKeyIsDown = false;
+	this->disableKeyboard = false;
+	this->setKeypadEnabled(true);
+
+	this->touchesInProgress = false;
+	this->setTouchEnabled(true);
+
+	this->scheduleUpdate();
 
 	//	schedule camera update
 	if (this->player)
@@ -60,14 +74,6 @@ bool MainScene::init()
 		this->schedule(schedule_selector(MainScene::updateCamera));	
 	}
 
-	//	schedule keyboard and touch events
-	this->jumpKeyIsDown = false;
-	this->setKeypadEnabled(true);
-
-	this->touchesInProgress = false;
-	this->setTouchEnabled(true);
-
-	this->scheduleUpdate();
 
 	return true;
 }
@@ -155,6 +161,9 @@ void MainScene::addBodies()
 float lastk = 0;
 void MainScene::updateKeyboard(float delta)
 {
+	if (disableKeyboard)
+		return;
+
 	//	set interval between keys
 	lastk += delta;
 	if (lastk >= 0.02f)	
@@ -171,6 +180,7 @@ void MainScene::updateKeyboard(float delta)
 	short zoomReset = GetKeyState(VK_BACK);	
 
 	short cameraContinue = GetKeyState(VK_F2);
+	short restart = GetKeyState(VK_F4);
 	
 	long down = 0x8000; // hi bit
 	short step = 30;
@@ -308,6 +318,19 @@ void MainScene::updateKeyboard(float delta)
 		}
 	}
 
+	//	now restart	
+	if (restart & down)
+	{
+		if (!restartKeyIsDown)
+		{
+			CCScene* s = CCTransitionFade::create(3.0f, MainScene::scene());
+			CCDirector::sharedDirector()->replaceScene(s);
+			restartKeyIsDown = true;
+		}
+	}
+	else
+		restartKeyIsDown = false;
+
 }
 
 void MainScene::update(float delta)
@@ -332,7 +355,8 @@ void MainScene::update(float delta)
 	updateKeyboard(delta);
 
 	//	And weather ofcourse
-	weather->update(delta);
+	if (weather)
+		weather->update(delta);
 }
 
 void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)

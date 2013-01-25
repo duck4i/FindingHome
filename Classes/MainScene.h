@@ -19,7 +19,7 @@ enum PlayerDirection
 	PlayerDirectionRight
 };
 
-class MainScene : public CCLayer
+class MainScene : public CCLayerColor
 {
 private:
 
@@ -34,7 +34,10 @@ private:
 	float sceneScale;
 	
 	bool jumpKeyIsDown;
+	bool restartKeyIsDown;
+
 	float lastKeyboardUpdate;
+	bool disableKeyboard;
 	void updateKeyboard(float delta);
 
 	//	player
