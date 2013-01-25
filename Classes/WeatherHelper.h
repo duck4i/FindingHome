@@ -14,7 +14,12 @@ using namespace cocos2d;
 //	Color fading
 //	http://stackoverflow.com/questions/319594/calculate-a-color-fade
 
-class WeatherHelper
+static inline bool ccc4BEqual(ccColor4B a, ccColor4B b)
+{
+	return a.a == b.a && a.b == b.b && a.g == b.g && a.r == b.r;
+}
+
+class WeatherHelper : public CCObject
 {
 private:
 
@@ -28,8 +33,6 @@ private:
 	bool init();
 
 	void colorAtThisTime(ccColor4B &start, ccColor4B &end);	
-	bool colorsEqual(ccColor4B a, ccColor4B b);
-	float calculateTweenStep(ccColor4B a, ccColor4B b);
 
 	/*
 	 *	Controller position moves with x-axis from 0 -> end of image, increments slighty when update method called
@@ -40,15 +43,16 @@ private:
 
 	float updateTimer;
 	bool firstUpdate;
+	
 
-	ccColor4B prevStart;
-	ccColor4B prevEnd;
-
-	float stepR, stepR2;
-	float stepG, stepG2;
-	float stepB, stepB2;
+	ccColor4B lastStart;
+	ccColor4B lastEnd;
 
 	CCLayerGradient *background;
+	CCLayerGradient *backgroundNext;
+	
+	bool backgroundChanging;
+	void backgroundDoneChanging();
 
 public:
 
@@ -62,7 +66,10 @@ public:
 		this->updateTimer = 0;
 		this->firstUpdate = true;
 
-		this->stepR = this->stepG = this->stepB = this->stepR2 = this->stepG2 = this->stepB2 = 0;
+		this->background = NULL;
+		this->backgroundNext = NULL;
+
+		backgroundChanging = false;
 		
 		this->initOK = init();
 	}

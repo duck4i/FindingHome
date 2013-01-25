@@ -25,7 +25,10 @@ bool WeatherHelper::init()
 
 	//	now init layer	
 	this->background = CCLayerGradient::create();
+	this->backgroundNext = CCLayerGradient::create();
+
 	this->parent->addChild(this->background);
+	this->parent->addChild(this->backgroundNext);
 
 	return true;
 }
@@ -46,8 +49,9 @@ void WeatherHelper::update(float delta)
 
 	updateTimer += delta;
 
-	float actionInterval = 0.10f; // each seconds 1 pixel move. That means (for 380 width) complete cycle each ~6 minutes.
-	if (updateTimer >= actionInterval || firstUpdate)
+	float actionInterval = 0.10f; // each seconds 1 pixel move. That means (for 380 width) complete cycle each ~6 minutes.	
+
+	if ( !backgroundChanging &&  (updateTimer >= actionInterval || firstUpdate) )
 	{
 		updateTimer = 0;
 		this->controllerPosition++;
@@ -64,35 +68,37 @@ void WeatherHelper::update(float delta)
 		ccColor4B start, end;
 		colorAtThisTime(start, end);
 
-		//ccc4FEqual
-
-		/*if (start != prevStart || end != prevEnd)
+		if (!ccc4BEqual(lastStart, start) || !ccc4BEqual(lastEnd, end))
 		{
-		}*/
+			float changeTime = 1;
+			this->backgroundNext->setOpacity(0);
+			this->backgroundNext->setStartColor(ccc3(start.r, start.b, start.g));
+			this->backgroundNext->setEndColor(ccc3(end.r, end.g, end.b));
 
-		this->background->setStartColor(ccc3(start.r, start.g, start.b));
-		this->background->setEndColor(ccc3(end.r, end.g, end.b));						
+			CCFadeTo *in = CCFadeTo::create(changeTime, 255);
+			CCFadeTo *out = CCFadeTo::create(changeTime, 0);
+
+			CCCallFunc *done = CCCallFunc::create(this, callfunc_selector(WeatherHelper::backgroundDoneChanging));
+
+			this->backgroundNext->runAction(CCSequence::createWithTwoActions(in, done));
+			//this->background->runAction(out);
+
+			backgroundChanging = true;
+
+			lastStart = start;
+			lastEnd = end;
+		}
 	}
-
-	//	if tweening needed then do it, first pass is layer start
-	if (stepR != 0 || stepG != 0 || stepB != 0) 
-	{
-		ccColor3B c = this->background->getStartColor();
-		c.r += stepR; c.g += stepG; c.b += stepB;
-		this->background->setStartColor(c);
-	}
-
-	//	now gradient stop
-	if (stepR != 0 || stepG != 0 || stepB != 0)
-	{
-		ccColor3B c = this->background->getEndColor();
-		c.r += stepR2; c.g += stepG2; c.b += stepB2;
-		this->background->setEndColor(c);
-	}
-
 }
 
-bool WeatherHelper::colorsEqual(ccColor4B a, ccColor4B b)
-{
-	return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
+void WeatherHelper::backgroundDoneChanging()
+{	
+	this->background->stopAllActions();
+	this->background->setStartColor(this->backgroundNext->getStartColor());
+	this->background->setEndColor(this->backgroundNext->getEndColor());
+	this->background->setOpacity(255);
+	//this->backgroundNext->setOpacity(0);
+
+	backgroundChanging = false;
+	//this->parent->removeChild(this->backgroundNext);
 }
