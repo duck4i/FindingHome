@@ -23,7 +23,8 @@ MainScene::~MainScene()
 
 bool MainScene::init()
 {	
-	this->initWithColor(ccc4(255, 255, 255, 255));
+	//	this->initWithColor(ccc4(100, 149, 237, 255));	//	cornflower blue
+	this->initWithColor(ccc4(0, 0, 0, 255));	//	
 
 	this->debugLayer = NULL;
 	this->lastKeyboardUpdate = 0;
@@ -61,6 +62,7 @@ bool MainScene::init()
 	//	schedule camera update
 	if (this->player)
 	{
+		this->playerBody->SetFixedRotation(true);
 		this->cameraMoveInProgress = false;	
 		CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
 		CCPoint playerStart = this->worldLayer->convertToWorldSpace(player->getPosition());
@@ -183,8 +185,6 @@ void MainScene::updateKeyboard(float delta)
 	short restart = GetKeyState(VK_F4);
 	
 	long down = 0x8000; // hi bit
-	short step = 30;
-	short stepUp = 220;
 
 	//	Update player movement
 	if (playerBody)
@@ -193,6 +193,7 @@ void MainScene::updateKeyboard(float delta)
 		short r = GetKeyState(VK_RIGHT);
 		short d = GetKeyState(VK_DOWN);
 		short u = GetKeyState(VK_UP);
+		short shift = GetKeyState(VK_LSHIFT);
 
 		bool jumped = (u & down) || (u2 & down) ;
 
@@ -208,18 +209,16 @@ void MainScene::updateKeyboard(float delta)
 		float y = 0;
 	
 		if (l & down)
-			x -= step;	
-		else if (r & down)	
-			x += step;
+			x -= DOG_STEP_VALUE;	
+		else if (r & down)
+			x += DOG_STEP_VALUE;
 		
 		if (jumped && !skipY)
-			y += stepUp;
+			y += DOG_JUMP_VALUE;
 
 		//	check if anything to do
 		if (x || y)
 		{
-			this->playerBody->SetFixedRotation(true);
-
 			//	
 			//	Calculate and apply forces for movement
 			//
@@ -246,8 +245,16 @@ void MainScene::updateKeyboard(float delta)
 			if (midAir)
 			{
 				y = 0;
-				x *= 0.2f;
+				x *= DOG_MID_AIR_FACTOR;
 			}
+
+			float maxSpeed = DOG_SPEED;
+			if (shift & down)
+			{
+				x *= DOG_SHIFT_FACTOR;
+				maxSpeed *= DOG_SHIFT_FACTOR;
+				y *= DOG_SHIFT_FACTOR;
+			}			
 
 			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());
 
@@ -255,8 +262,7 @@ void MainScene::updateKeyboard(float delta)
 			//	limit top velocity
 			//
 			const b2Vec2 velocity = playerBody->GetLinearVelocity();
-			const float speed = abs(velocity.x);
-			const float maxSpeed = 10.0f;
+			const float speed = abs(velocity.x);			
 			if (speed > maxSpeed)
 				playerBody->SetLinearVelocity((maxSpeed / speed) * velocity);
 		
@@ -321,14 +327,14 @@ void MainScene::updateKeyboard(float delta)
 	//	now restart	
 	if (restart & down)
 	{
-		if (!restartKeyIsDown)
+		if (!restartKeyIsDown)									
 		{
 			CCScene* s = CCTransitionFade::create(3.0f, MainScene::scene());
 			CCDirector::sharedDirector()->replaceScene(s);
 			restartKeyIsDown = true;
 		}
 	}
-	else
+	else if (restartKeyIsDown)
 		restartKeyIsDown = false;
 
 }

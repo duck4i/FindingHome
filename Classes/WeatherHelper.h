@@ -47,6 +47,25 @@ static float random(float min, float max)
 	return min + r * (max - min);
 }
 
+
+///
+///	These control the weather :)
+///
+#define MASTER_SPEED		3.0f
+
+#define CHANGE_SPEED		30.0f / MASTER_SPEED
+#define STARS_FADE_SPEED	30.0f / MASTER_SPEED
+
+#define CONTROLLER_WIDTH	384.0f
+#define FULL_CYCLE			60.0f	//	1h
+
+#define ACTION_IN			CONTROLLER_WIDTH / FULL_CYCLE
+#define ACTION_INTERVAL		ACTION_IN / MASTER_SPEED
+
+
+/**
+ *	Class for weather control. 
+ */
 class WeatherHelper : public CCObject
 {
 private:
@@ -80,6 +99,7 @@ private:
 	CCPoint starrySkyNaturalRotation;
 	CCSpriteBatchNode* starrySky;
 	void createStarrySky();
+	void flipStarVisibility();
 
 	//	get how bright color is percieved by human eye
 	//	http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
@@ -94,6 +114,7 @@ private:
 	
 	bool backgroundChanging;
 	void backgroundDoneChanging();
+	
 
 public:
 
@@ -111,7 +132,7 @@ public:
 		this->background = NULL;
 		this->backgroundNext = NULL;
 
-		backgroundChanging = false;				
+		backgroundChanging = false;
 		starrySky = NULL;
 		starrySkyNaturalRotation.x = 0;
 		starrySkyNaturalRotation.y = 0;

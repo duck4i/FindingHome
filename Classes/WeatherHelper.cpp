@@ -8,39 +8,35 @@ bool WeatherHelper::init()
 	{
 		CCLog("Error initializing weather image data");
 		return false;
-	}	
+	}
 
 	CCSize s = CCSizeMake(controllerImage->getWidth(), controllerImage->getHeight());
-	controller = new CCTexture2DMutable;	
+	controller = new CCTexture2DMutable;
 	
 	if (!controller->initWithData(controllerImage->getData(), kCCTexture2DPixelFormat_RGBA8888, s.width, s.height, s))
 	{
 		CCLog("Error creating mutable weather texture");
 		delete controllerImage;
 		return false;
-	}	
+	}
 
 	//	now init layer
 	this->background = CCLayerGradient::create();
 	this->backgroundNext = CCLayerGradient::create();
 	this->backgroundNext->setOpacity(0);
 
-	//CCLayerColor *l = CCLayerColor::create(ccc4(255, 255, 255, 255));
-	//this->parent->addChild(l);
-	///this->parent(
+	//	now set position of controller	
+	this->controllerPosition = random(0, this->controllerImage->getWidth() - 1);
+	colorAtThisTime(lastStart, lastEnd);
 
-	//	now set position of controller		
-	//this->controllerPosition = controller->getPixelsWide() / 2;
-	this->background->setCompressedInterpolation(true);	
-	colorAtThisTime(lastStart, lastEnd);	
-			
-	this->background->setStartColor(ccc3(lastStart.r, lastStart.b, lastStart.g));
+	this->background->setStartColor(ccc3(lastStart.r, lastStart.g, lastStart.b));
 	this->background->setEndColor(ccc3(lastEnd.r, lastEnd.g, lastEnd.b));
-
+	
 	this->parent->addChild(this->background);
 	this->parent->addChild(this->backgroundNext);
 
 	//	tinting layer
+
 	ccColor3B col = tintColorAtThisTime();
 	this->topTintLayer = CCLayerColor::create(ccc4(col.r, col.g, col.b,	tintStrengthAtThisTime(col)));
 
@@ -65,16 +61,20 @@ void WeatherHelper::createStarrySky()
 	CCSize sajz = CCDirector::sharedDirector()->getWinSizeInPixels();
 
 	starrySky = CCSpriteBatchNode::create(STAR_PATH);
+	starrySky->setTag(isNight() ? 100 : 0);
 
-	int numberOfMotherfuckers = random(100, 400);
+	int scale = 2;
+	int numberOfMotherfuckers = random(150 * scale, 400 * scale);
 
 	for (int i = 0; i < numberOfMotherfuckers; i++)
 	{
 		CCSprite *star = CCSprite::createWithTexture(tex);
-		CCPoint pos = ccp(random(-sajz.width, sajz.width), random(-sajz.width, sajz.height));
+		CCPoint pos = ccp(random(-sajz.width * scale, sajz.width * scale), random(-sajz.width * scale, sajz.height * scale));
 		star->setPosition(pos);
 		float scale = random(0.25, 0.85);
 		star->setScale(scale);
+		if (!isNight())
+			star->setOpacity(0);
 
 		//	color the small stars occasionally
 		if (scale < 0.4)
@@ -91,8 +91,8 @@ void WeatherHelper::createStarrySky()
 		//this->parent->addChild(star);
 		starrySky->addChild(star);
 	}
-
-	this->parent->addChild(starrySky, 0);
+	
+	this->parent->addChild(starrySky);
 }
 
 void WeatherHelper::colorAtThisTime(ccColor4B &start, ccColor4B &end)
@@ -106,7 +106,11 @@ void WeatherHelper::colorAtThisTime(ccColor4B &start, ccColor4B &end)
 
 bool WeatherHelper::isNight()
 {
-	return this->controllerPosition < 66 || this->controllerPosition > (unsigned int) (this->controllerImage->getWidth() - 66) ;
+	//float margin = 32;
+	//return this->controllerPosition <= margin || this->controllerPosition >= (unsigned int) (this->controllerImage->getWidth() - margin) ;
+	int index = getColorPercivedBrigthness(lastStart.r, lastStart.g, lastStart.b);
+	bool night = index <= 60;
+	return night;
 }
 
 int WeatherHelper::tintStrengthAtThisTime(ccColor3B c)
@@ -149,12 +153,13 @@ void WeatherHelper::update(float delta)
 		return;
 
 	updateTimer += delta;
+	if (updateTimer >= ACTION_INTERVAL)
+	{	
+		updateTimer = 0;		
 
-	float actionInterval = 0.30f; // each seconds 1 pixel move. That means (for 380 width) complete cycle each ~6 minutes.	
+		if (backgroundChanging) // thats it
+			return;
 
-	if ( !backgroundChanging && (updateTimer >= actionInterval) )
-	{
-		updateTimer = 0;
 		this->controllerPosition++;
 		firstUpdate = false;
 
@@ -162,7 +167,6 @@ void WeatherHelper::update(float delta)
 		if (this->controllerPosition >= this->controller->getPixelsWide())
 		{
 			this->controllerPosition = 0;
-			this->updateTimer = 0;
 			return;
 		}
 
@@ -171,20 +175,21 @@ void WeatherHelper::update(float delta)
 
 		if (!ccc4BEqual(lastStart, start) || !ccc4BEqual(lastEnd, end))
 		{
-			backgroundChanging = true;
+			backgroundChanging = true;			
 
-			float changeTime = 10.0f;
-			this->backgroundNext->setOpacity(0);
-			this->backgroundNext->setStartColor(ccc3(start.r, start.b, start.g));
-			this->backgroundNext->setEndColor(ccc3(end.r, end.g, end.b));
+			this->backgroundNext->setStartColor(ccc3(start.r, start.g, start.b));
+			this->backgroundNext->setEndColor(ccc3(end.r, end.g, end.b));			
 
-			CCFadeTo *in = CCFadeTo::create(changeTime, 255);
-			CCFadeTo *out = CCFadeTo::create(changeTime, 0);			
+			CCFadeIn *in = CCFadeIn::create(CHANGE_SPEED);
 			CCCallFunc *done = CCCallFunc::create(this, callfunc_selector(WeatherHelper::backgroundDoneChanging));
 
 			this->backgroundNext->runAction(CCSequence::createWithTwoActions(in, done));
-			this->background->runAction(out);
 			
+			lastStart = start;
+			lastEnd = end;
+			
+
+			/*
 			//	tint the world
 			ccColor3B tintCol = tintColorAtThisTime();						
 			int ts = tintStrengthAtThisTime(tintCol);
@@ -236,8 +241,7 @@ void WeatherHelper::update(float delta)
 					c->runAction(tintStrength);
 				}
 			}
-			*/
-			
+			*/			
 
 			lastStart = start;
 			lastEnd = end;			
@@ -245,21 +249,46 @@ void WeatherHelper::update(float delta)
 	}
 
 	//	update stars position
-	CCPoint pos = this->worldLayer->getPosition();
-	float divider = 50;
-	float factorX = pos.x / divider;
-	float factorY = pos.y / divider;
-	//bool ok = true;
-	this->starrySky->setPosition(factorX, factorY);
+	if (isNight())
+	{
+		CCPoint pos = this->worldLayer->getPosition();
+		float divider = 50;
+		float factorX = (pos.x / divider) - starrySkyNaturalRotation.x;
+		float factorY = (pos.y / divider) - starrySkyNaturalRotation.y;		
+		this->starrySky->setPosition(factorX, factorY);
+
+		if (starrySky->getTag() == 0)
+		{			
+			flipStarVisibility();
+			starrySky->setTag(100);
+		}
+	}
+	else if (starrySky->getTag() == 100)
+	{		
+		flipStarVisibility();
+		starrySky->setTag(0);
+	}
+}
+
+void WeatherHelper::flipStarVisibility()
+{
+	bool show = starrySky->getTag() == 0;
+	for (int i = 0; i < starrySky->getChildrenCount(); i++)
+	{
+		CCSprite* s = (CCSprite*) starrySky->getChildren()->objectAtIndex(i);
+		float ran = random(STARS_FADE_SPEED * 0.2f, STARS_FADE_SPEED);
+		if (show)
+			s->runAction(CCFadeIn::create(ran));
+		else
+			s->runAction(CCFadeOut::create(ran));
+	}
 }
 
 void WeatherHelper::backgroundDoneChanging()
-{	
-	this->background->stopAllActions();
+{		
 	this->background->setStartColor(this->backgroundNext->getStartColor());
-	this->background->setEndColor(this->backgroundNext->getEndColor());
-	this->background->setOpacity(255);
-	//this->backgroundNext->setOpacity(0);
+	this->background->setEndColor(this->backgroundNext->getEndColor());	
+	this->backgroundNext->setOpacity(0);
 
 	backgroundChanging = false;	
 }
