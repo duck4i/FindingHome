@@ -55,19 +55,17 @@ void WeatherHelper::colorAtThisTime(ccColor4B &start, ccColor4B &end)
 
 int WeatherHelper::tintStrengthAtThisTime()
 {
-	/*/	weakest at the center (day) strongest at the night
-	static const float night = 120;
+	ccColor4B c;
+	if (controllerPosition > controllerImage->getWidth() / 2)
+		c = lastStart;
+	else
+		c = lastEnd;
 
-	float width = this->controllerImage->getWidth();
-	float center =  width / 2;
-	float stepToMax = night / (width - center);
-	float dif = abs(this->controllerPosition - center);
-
-	float ret = dif * stepToMax;
+	int colorBrightness = getColorPercivedBrigthness(c.r, c.g, c.b);
+		
+	//	min 20, max 130
+	int ret = min(130, max(255 - colorBrightness, 20));
 	return ret;
-	*/
-	int colorBrightness = getColorPercivedBrigthness(lastEnd.r, lastEnd.g, lastEnd.b);
-	return min(150, 255 - colorBrightness);
 }
 
 int WeatherHelper::getColorPercivedBrigthness(int r, int g, int b)
@@ -75,7 +73,7 @@ int WeatherHelper::getColorPercivedBrigthness(int r, int g, int b)
 	float ret = 
 		r * r * 0.241f +
 		g * g * 0.691f +
-		b * b * 0.068f;
+		b * b * 0.068f;	
 	return (int) sqrtf(ret);
 }
 
