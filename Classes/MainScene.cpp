@@ -34,7 +34,7 @@ bool MainScene::init()
 	
 	//	Create world layer
 	this->worldLayer = CCLayer::create();
-	this->weather = new WeatherHelper(this, WEATHER_CONTROLLER_DATA);
+	this->weather = new WeatherHelper(this, this->worldLayer, WEATHER_CONTROLLER_DATA);
 
 	sceneScale = DEFAULT_SCALE;
 	this->worldLayer->setScale(sceneScale);
@@ -42,9 +42,7 @@ bool MainScene::init()
 
 	//	setup physics object
 	this->setupPhysics();
-	this->addBodies();
-
-	this->scheduleUpdate();
+	this->addBodies();	
 
 	//	schedule camera update
 	if (this->player)
@@ -68,6 +66,8 @@ bool MainScene::init()
 
 	this->touchesInProgress = false;
 	this->setTouchEnabled(true);
+
+	this->scheduleUpdate();
 
 	return true;
 }

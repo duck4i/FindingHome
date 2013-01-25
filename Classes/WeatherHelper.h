@@ -14,16 +14,33 @@ using namespace cocos2d;
 //	Color fading
 //	http://stackoverflow.com/questions/319594/calculate-a-color-fade
 
+//	blending ?
+//	http://www.andersriggelsen.dk/glblendfunc.php
+
 static inline bool ccc4BEqual(ccColor4B a, ccColor4B b)
 {
 	return a.a == b.a && a.b == b.b && a.g == b.g && a.r == b.r;
+}
+
+static inline ccColor4B Blend(ccColor4B c1, ccColor4B c2)
+{
+    ccColor4B result;
+	double a1 = c1.a / 255.0;
+    double a2 = c2.a / 255.0;
+
+    result.r = (int) (a1 * c1.r + a2 * (1 - a1) * c2.r);
+    result.g = (int) (a1 * c1.g + a2 * (1 - a1) * c2.g);
+    result.b = (int) (a1 * c1.b + a2 * (1 - a1) * c2.b);
+    result.a = (int) (255 * (a1 + a2 * (1 - a1)));
+    return result;
 }
 
 class WeatherHelper : public CCObject
 {
 private:
 
-	CCNode *parent;		
+	CCNode *parent;
+	CCNode *worldLayer;
 	char* controllerPath;
 	
 	CCTexture2DMutable *controller;
@@ -42,7 +59,9 @@ private:
 	 */
 	unsigned int controllerPosition;	
 	void colorAtThisTime(ccColor4B &start, ccColor4B &end);
-	int tintStrengthAtThisTime();
+	
+	int tintStrengthAtThisTime(ccColor3B c);
+	ccColor3B tintColorAtThisTime();
 
 	//	get how bright color is percieved by human eye
 	//	http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
@@ -60,9 +79,10 @@ private:
 
 public:
 
-	WeatherHelper(CCNode* parent, char* controllerPath)
+	WeatherHelper(CCNode* parent, CCNode* worldLayer, char* controllerPath)
 	{
 		this->parent = parent;
+		this->worldLayer = worldLayer;
 		this->controllerPath = controllerPath;
 		this->controller = NULL;
 		this->controllerImage = NULL;

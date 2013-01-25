@@ -38,8 +38,15 @@ bool WeatherHelper::init()
 	this->parent->addChild(this->backgroundNext);
 
 	//	tinting layer
-	this->topTintLayer = CCLayerColor::create(ccc4(lastStart.r, lastStart.g, lastStart.b, tintStrengthAtThisTime()));
-	this->parent->addChild(this->topTintLayer, 10000);
+	ccColor3B col = tintColorAtThisTime();
+	this->topTintLayer = CCLayerColor::create(ccc4(col.r, col.g, col.b,	tintStrengthAtThisTime(col)));
+
+	ccBlendFunc blend;
+	blend.src = GL_SRC_COLOR;
+	blend.dst = GL_SRC_ALPHA;
+	this->topTintLayer->setBlendFunc(blend);
+
+	this->worldLayer->addChild(this->topTintLayer, 10000);
 
 	return true;
 }
@@ -53,19 +60,29 @@ void WeatherHelper::colorAtThisTime(ccColor4B &start, ccColor4B &end)
 	end = this->controller->pixelAt(ccp(controllerPosition, controller->getPixelsHigh() - 1));
 }
 
-int WeatherHelper::tintStrengthAtThisTime()
-{
-	ccColor4B c;
-	if (controllerPosition > controllerImage->getWidth() / 2)
-		c = lastStart;
-	else
-		c = lastEnd;
+int WeatherHelper::tintStrengthAtThisTime(ccColor3B c)
+{	
+	if (this->controllerPosition < 66 || this->controllerPosition > this->controllerImage->getWidth() - 66)
+		return 160;	//	fix for nights
 
 	int colorBrightness = getColorPercivedBrigthness(c.r, c.g, c.b);
-		
+	
 	//	min 20, max 130
-	int ret = min(130, max(255 - colorBrightness, 20));
+	int ret = min(80, max(255 - colorBrightness, 20));
 	return ret;
+}
+
+ccColor3B WeatherHelper::tintColorAtThisTime()
+{	
+	if (this->controllerPosition < 66 || this->controllerPosition > this->controllerImage->getWidth() - 66)
+		return ccc3(lastStart.r, lastStart.g, lastStart.b);
+
+	ccColor3B c;
+	//if (controllerPosition > (unsigned int)(controllerImage->getWidth() / 2) )
+	//	c = ccc3(lastStart.r, lastStart.g, lastStart.b);
+	//else
+		c = ccc3(lastEnd.r, lastEnd.g, lastEnd.b);
+	return c;
 }
 
 int WeatherHelper::getColorPercivedBrigthness(int r, int g, int b)
@@ -86,7 +103,7 @@ void WeatherHelper::update(float delta)
 
 	float actionInterval = 0.10f; // each seconds 1 pixel move. That means (for 380 width) complete cycle each ~6 minutes.	
 
-	if ( !backgroundChanging &&  (updateTimer >= actionInterval || firstUpdate) )
+	if ( !backgroundChanging && (updateTimer >= actionInterval) )
 	{
 		updateTimer = 0;
 		this->controllerPosition++;
@@ -105,29 +122,76 @@ void WeatherHelper::update(float delta)
 
 		if (!ccc4BEqual(lastStart, start) || !ccc4BEqual(lastEnd, end))
 		{
+			backgroundChanging = true;
+
 			float changeTime = 10.0f;
 			this->backgroundNext->setOpacity(0);
 			this->backgroundNext->setStartColor(ccc3(start.r, start.b, start.g));
 			this->backgroundNext->setEndColor(ccc3(end.r, end.g, end.b));
 
 			CCFadeTo *in = CCFadeTo::create(changeTime, 255);
-			CCFadeTo *out = CCFadeTo::create(changeTime, 0);
-			CCTintTo *tint = CCTintTo::create(changeTime, start.r, start.g, start.b);
-			int ts = tintStrengthAtThisTime();
-			CCFadeTo *tintStrength = CCFadeTo::create(changeTime, ts);
-
+			CCFadeTo *out = CCFadeTo::create(changeTime, 0);			
 			CCCallFunc *done = CCCallFunc::create(this, callfunc_selector(WeatherHelper::backgroundDoneChanging));
 
 			this->backgroundNext->runAction(CCSequence::createWithTwoActions(in, done));
 			this->background->runAction(out);
 			
+			//	tint the world
+			ccColor3B tintCol = tintColorAtThisTime();						
+			int ts = tintStrengthAtThisTime(tintCol);
+
+			CCTintTo *tint = CCTintTo::create(changeTime, tintCol.r, tintCol.g, tintCol.b);
+			CCFadeTo *tintStrength = CCFadeTo::create(changeTime, ts);
+
+			//	does not work good if we do it above all layers
+			//this->worldLayer->runAction(tint);
+			//this->worldLayer->runAction(tintStrength);
 			this->topTintLayer->runAction(tint);
 			this->topTintLayer->runAction(tintStrength);
+			//Color colorTint = Blend(			
+			/*
+			CCArray* children = this->worldLayer->getChildren();
+			int count = children->count();
+			for (int i = 0; i < children->count(); i++)
+			{
+				CCObject* o = children->objectAtIndex(i);
+				CCNode* c = (CCNode*) o;
 
-			backgroundChanging = true;
+				if (c->getChildrenCount() > 0)
+				{
+					CCArray *subs = c->getChildren();
+					for (int j = 0; j < subs->count(); j++)
+					{
+						CCNode *o2 =  (CCNode*) subs->objectAtIndex(j);
+
+						CCSprite* s = dynamic_cast<CCSprite*>(o2);
+						CCLayerColor* l = dynamic_cast<CCLayerColor*>(o2);
+
+						ccBlendFunc blend;
+						blend.src = GL_SRC_ALPHA;
+						blend.dst = GL_ONE;
+						if (s)
+							s->setBlendFunc(blend);
+						if (l)
+							l->setBlendFunc(blend);
+						//if (s)
+						//	s->runAction(CCTintTo::create(changeTime, tintCol.r, tintCol.g, tintCol.b));
+						//else if (l)
+						//	l->runAction(CCTintTo::create(changeTime, tintCol.r, tintCol.g, tintCol.b));						
+						
+					}
+				}
+				else
+				{
+					c->runAction(tint);
+					c->runAction(tintStrength);
+				}
+			}
+			*/
+			
 
 			lastStart = start;
-			lastEnd = end;
+			lastEnd = end;			
 		}
 	}
 }
