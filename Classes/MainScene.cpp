@@ -1,6 +1,5 @@
 #include "MainScene.h"
 
-
 CCScene* MainScene::scene()
 {
 	CCScene* scene = CCScene::create();	
@@ -161,6 +160,7 @@ void MainScene::addBodies()
 }
 
 float lastk = 0;
+bool globalMidAir = false;
 void MainScene::updateKeyboard(float delta)
 {
 	if (disableKeyboard)
@@ -213,7 +213,7 @@ void MainScene::updateKeyboard(float delta)
 		else if (r & down)
 			x += DOG_STEP_VALUE;
 		
-		if (jumped && !skipY)
+		if (jumped && !skipY && !globalMidAir)
 			y += DOG_JUMP_VALUE;
 
 		//	check if anything to do
@@ -236,35 +236,41 @@ void MainScene::updateKeyboard(float delta)
 				if (con->contact->IsTouching())
 				{
 					midAir = false;
+					globalMidAir = false;
 					break;
 				}
 				con = con->next;
-			}
+			}						
+
+			float maxSpeed = DOG_SPEED;
+			const b2Vec2 velocity = playerBody->GetLinearVelocity();
 
 			//	no more jumping and only slight adjustment of direction when in air
-			if (midAir)
+			if (midAir || globalMidAir)
 			{
-				y = 0;
+				//y = -10.0f * velocity.y;
 				x *= DOG_MID_AIR_FACTOR;
 			}
 
-			float maxSpeed = DOG_SPEED;
-			if (shift & down && !midAir)
+			if ((shift & down) && !midAir)
 			{
 				x *= DOG_SHIFT_FACTOR;
 				maxSpeed *= DOG_SHIFT_FACTOR;
 				y *= DOG_SHIFT_FACTOR;
-			}			
+			}
+			
+			if (y > 0)
+				globalMidAir = true;
 
 			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());
 
 			//
 			//	limit top velocity
-			//
-			const b2Vec2 velocity = playerBody->GetLinearVelocity();
+			//			
 			const float speed = abs(velocity.x);			
 			if (speed > maxSpeed)
 				playerBody->SetLinearVelocity((maxSpeed / speed) * velocity);
+		
 		
 
 			//	Check player direction
@@ -329,9 +335,16 @@ void MainScene::updateKeyboard(float delta)
 	{
 		if (!restartKeyIsDown)									
 		{
-			CCScene* s = CCTransitionFade::create(3.0f, MainScene::scene());
-			CCDirector::sharedDirector()->replaceScene(s);
 			restartKeyIsDown = true;
+			//this->unscheduleAllSelectors();
+			CCScene* m = MainScene::scene();
+			if (m)
+			{
+				CCScene* s = CCTransitionFade::create(3.0f, m);
+				if (s)
+					CCDirector::sharedDirector()->replaceScene(s);
+			}
+			
 		}
 	}
 	else if (restartKeyIsDown)

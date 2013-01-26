@@ -135,6 +135,7 @@
     <ClInclude Include="..\Classes\Physics.h" />
     <ClInclude Include="..\Classes\Settings.h" />
     <ClInclude Include="..\Classes\ShapeHelper.h" />
+    <ClInclude Include="..\Classes\TintShader.h" />
     <ClInclude Include="..\Classes\WeatherHelper.h" />
     <ClInclude Include="..\Classes\XMLHelper.h" />
     <ClInclude Include="main.h" />
@@ -149,9 +150,16 @@
     <ClCompile Include="..\Classes\LevelLoader.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\ShapeHelper.cpp" />
+    <ClCompile Include="..\Classes\TintShader.cpp" />
     <ClCompile Include="..\Classes\WeatherHelper.cpp" />
     <ClCompile Include="..\Classes\XMLHelper.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\TintShader.fsh">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\Resources\TintShader.vsh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

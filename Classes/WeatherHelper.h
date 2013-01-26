@@ -3,6 +3,7 @@
 
 #include <cocos2d.h>
 #include "extern\CCTexture2DMutable.h"
+#include "TintShader.h"
 using namespace cocos2d;
 
 //	Get pixel from image - IOS
@@ -51,7 +52,7 @@ static float random(float min, float max)
 ///
 ///	These control the weather :)
 ///
-#define MASTER_SPEED		1.0f
+#define MASTER_SPEED		10.0f
 
 #define CHANGE_SPEED		30.0f / MASTER_SPEED
 #define STARS_FADE_SPEED	30.0f / MASTER_SPEED
@@ -111,7 +112,6 @@ private:
 
 	CCLayerGradient *background;
 	CCLayerGradient *backgroundNext;
-	CCLayerColor	*topTintLayer;
 	
 	bool backgroundChanging;
 	void backgroundDoneChanging();

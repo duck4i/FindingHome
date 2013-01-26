@@ -82,6 +82,9 @@
     <ClInclude Include="..\Classes\extern\CCTexture2DMutable.h">
       <Filter>include\support</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\TintShader.h">
+      <Filter>include\levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -117,5 +120,16 @@
     <ClCompile Include="..\Classes\extern\CCTexture2DMutable.cpp">
       <Filter>source\support</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\TintShader.cpp">
+      <Filter>source\levels</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\TintShader.fsh">
+      <Filter>resource</Filter>
+    </None>
+    <None Include="..\Resources\TintShader.vsh">
+      <Filter>resource</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -35,19 +35,22 @@ bool WeatherHelper::init()
 	this->parent->addChild(this->background);
 	this->parent->addChild(this->backgroundNext);
 
-	//	tinting layer
-
-	ccColor3B col = tintColorAtThisTime();
-	this->topTintLayer = CCLayerColor::create(ccc4(col.r, col.g, col.b,	tintStrengthAtThisTime(col)));
-	this->worldLayer->addChild(this->topTintLayer, 10000);		
-
 	//	and now - stars
 	this->createStarrySky();
 
+
+
+
+	//	TV scan sprite? Not for long!
 	CCSize winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
 	CCSprite *tv_scan = CCSprite::create("..\\Resources\\tv_scan.png");
 	tv_scan->setPosition(ccp(winSize.width / 2, winSize.height / 2));
 	this->parent->addChild(tv_scan, 1000);
+
+
+	//	My first shader lady and gentleman
+	TintShader *shader = TintShader::create();	
+	shader->start(this->worldLayer);
 
 	return true;
 }
@@ -113,6 +116,7 @@ bool WeatherHelper::isNight()
 
 int WeatherHelper::tintStrengthAtThisTime(ccColor3B c)
 {	
+	return 255;
 	if (isNight())
 		return 160;	//	fix for nights
 
@@ -189,69 +193,7 @@ void WeatherHelper::update(float delta)
 			lastStart = start;
 			lastEnd = end;
 			
-
-			ccColor3B col = tintColorAtThisTime();
-			this->topTintLayer->setColor(col);
-			
-			//ccBlendFunc blend;
-			//blend.src = GL_SRC_COLOR;
-			//blend.dst = GL_SRC_COLOR;	
-			//this->topTintLayer->setBlendFunc(blend);
-
-
-			/*
-			//	tint the world
-			ccColor3B tintCol = tintColorAtThisTime();						
-			int ts = tintStrengthAtThisTime(tintCol);
-
-			CCTintTo *tint = CCTintTo::create(changeTime, tintCol.r, tintCol.g, tintCol.b);
-			CCFadeTo *tintStrength = CCFadeTo::create(changeTime, ts);
-
-			//	does not work good if we do it above all layers
-			//this->worldLayer->runAction(tint);
-			//this->worldLayer->runAction(tintStrength);
-			this->topTintLayer->runAction(tint);
-			this->topTintLayer->runAction(tintStrength);
-			//Color colorTint = Blend(			
-			/*
-			CCArray* children = this->worldLayer->getChildren();
-			int count = children->count();
-			for (int i = 0; i < children->count(); i++)
-			{
-				CCObject* o = children->objectAtIndex(i);
-				CCNode* c = (CCNode*) o;
-
-				if (c->getChildrenCount() > 0)
-				{
-					CCArray *subs = c->getChildren();
-					for (int j = 0; j < subs->count(); j++)
-					{
-						CCNode *o2 =  (CCNode*) subs->objectAtIndex(j);
-
-						CCSprite* s = dynamic_cast<CCSprite*>(o2);
-						CCLayerColor* l = dynamic_cast<CCLayerColor*>(o2);
-
-						ccBlendFunc blend;
-						blend.src = GL_SRC_ALPHA;
-						blend.dst = GL_ONE;
-						if (s)
-							s->setBlendFunc(blend);
-						if (l)
-							l->setBlendFunc(blend);
-						//if (s)
-						//	s->runAction(CCTintTo::create(changeTime, tintCol.r, tintCol.g, tintCol.b));
-						//else if (l)
-						//	l->runAction(CCTintTo::create(changeTime, tintCol.r, tintCol.g, tintCol.b));						
-						
-					}
-				}
-				else
-				{
-					c->runAction(tint);
-					c->runAction(tintStrength);
-				}
-			}
-			*/	
+			ccColor3B col = tintColorAtThisTime();		
 		}
 	}
 

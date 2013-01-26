@@ -15,5 +15,8 @@
 
 #define STAR_PATH					RESOURCE_DIR "star.png"
 
+#define SHADER_IMAGE				RESOURCE_DIR "myCity.jpg"
+#define SHADER_IMAGE_RAMP			RESOURCE_DIR "weather_controller.png"
+
 
 #endif
