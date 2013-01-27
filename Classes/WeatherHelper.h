@@ -6,6 +6,8 @@
 #include "TintShader.h"
 using namespace cocos2d;
 
+#define MOON_RESOURCE RESOURCE_DIR "moon.png"
+
 //	Get pixel from image - IOS
 //	http://stackoverflow.com/questions/448125/how-to-get-pixel-data-from-a-uiimage-cocoa-touch-or-cgimage-core-graphics
 
@@ -98,18 +100,28 @@ private:
 	void colorAtThisTime(ccColor4B &start, ccColor4B &end);
 	
 	int tintStrengthAtThisTime(ccColor3B c);
-	ccColor3B tintColorAtThisTime();
+	ccColor3B tintColorAtThisTime(unsigned int index = 0);
 
 	bool isNight();
 
 	CCPoint starrySkyNaturalRotation;
 	CCSpriteBatchNode* starrySky;
+	void createStarrySky();
+	void flipStarVisibility();	
 
 	CCSprite* moon;
 	CCPoint moonPosition;
+	void createMoon();
 
-	void createStarrySky();
-	void flipStarVisibility();
+	CCNode* clouds;
+	CCSpriteBatchNode* bigOnes; 
+	CCSpriteBatchNode* mediumOnes;
+	CCSpriteBatchNode* smallOnes;
+
+	CCPoint cloudPos[3];
+	void createClouds();
+	void updateCloudColors();
+
 
 	//	get how bright color is percieved by human eye
 	//	http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
@@ -147,6 +159,7 @@ public:
 		starrySkyNaturalRotation.y = 0;
 
 		moon = NULL;
+		clouds = NULL;
 		
 		this->initOK = init();
 	}
