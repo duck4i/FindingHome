@@ -56,7 +56,11 @@ static float random(float min, float max)
 
 #define CHANGE_SPEED		30.0f / MASTER_SPEED
 #define STARS_FADE_SPEED	30.0f / MASTER_SPEED
-#define STARS_NATURAL_DROP	0.02f * MASTER_SPEED
+#define MOON_FADE_SPEED		STARS_FADE_SPEED * 1.3f
+#define STARS_NATURAL_DROP	0.02f * MASTER_SPEED	//	used for moon too
+
+#define STARS_PARALAX_DIV	50
+#define MOON_PARALAX_DIV	25
 
 #define CONTROLLER_WIDTH	384.0f
 #define FULL_CYCLE			60.0f	//	1h
@@ -100,6 +104,10 @@ private:
 
 	CCPoint starrySkyNaturalRotation;
 	CCSpriteBatchNode* starrySky;
+
+	CCSprite* moon;
+	CCPoint moonPosition;
+
 	void createStarrySky();
 	void flipStarVisibility();
 
@@ -137,6 +145,8 @@ public:
 		starrySky = NULL;
 		starrySkyNaturalRotation.x = 0;
 		starrySkyNaturalRotation.y = 0;
+
+		moon = NULL;
 		
 		this->initOK = init();
 	}

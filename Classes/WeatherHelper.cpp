@@ -26,7 +26,10 @@ bool WeatherHelper::init()
 	this->backgroundNext->setOpacity(0);
 
 	//	now set position of controller	
+#ifndef START_ONLY_AT_NIGHT
 	this->controllerPosition = random(0, this->controllerImage->getWidth() - 1);
+#endif
+
 	colorAtThisTime(lastStart, lastEnd);
 
 	this->background->setStartColor(ccc3(lastStart.r, lastStart.g, lastStart.b));
@@ -93,7 +96,19 @@ void WeatherHelper::createStarrySky()
 		//this->parent->addChild(star);
 		starrySky->addChild(star);
 	}
-	
+
+	moon = CCSprite::create(RESOURCE_DIR "moon.png");
+	CCSize moonSize = moon->getContentSize();
+
+	float x = random(moonSize.width, sajz.width - moonSize.width);
+	float y = random(moonSize.height, sajz.height - moonSize.height);
+
+	moon->setPosition(ccp(x, y));
+	moonPosition = moon->getPosition();
+
+	moon->setScale(random(0.3, 1));
+
+	this->parent->addChild(moon);	
 	this->parent->addChild(starrySky);
 }
 
@@ -163,6 +178,9 @@ void WeatherHelper::update(float delta)
 		this->starrySkyNaturalRotation.x += STARS_NATURAL_DROP;
 		this->starrySkyNaturalRotation.y += STARS_NATURAL_DROP;
 
+		moonPosition.x += STARS_NATURAL_DROP;
+		moonPosition.y += STARS_NATURAL_DROP;
+
 		if (backgroundChanging) // thats it
 			return;
 
@@ -201,11 +219,17 @@ void WeatherHelper::update(float delta)
 	//	update stars position
 	if (isNight())
 	{
+		//	increase slowly based on world position
 		CCPoint pos = this->worldLayer->getPosition();
-		float divider = 50;
+		float divider = STARS_PARALAX_DIV;
 		float factorX = (pos.x / divider) - starrySkyNaturalRotation.x;
 		float factorY = (pos.y / divider) - starrySkyNaturalRotation.y;		
 		this->starrySky->setPosition(factorX, factorY);
+
+		divider = MOON_PARALAX_DIV;
+		factorX = moonPosition.x + pos.x / divider;	
+		factorY = moonPosition.y + pos.y / divider;
+		this->moon->setPosition(ccp(factorX, factorY));
 
 		if (starrySky->getTag() == 0)
 		{			
@@ -223,6 +247,8 @@ void WeatherHelper::update(float delta)
 void WeatherHelper::flipStarVisibility()
 {
 	bool show = starrySky->getTag() == 0;
+
+	//	show / hide all items since BatchSprite knows no opacity
 	for (int i = 0; i < starrySky->getChildrenCount(); i++)
 	{
 		CCSprite* s = (CCSprite*) starrySky->getChildren()->objectAtIndex(i);
@@ -232,6 +258,10 @@ void WeatherHelper::flipStarVisibility()
 		else
 			s->runAction(CCFadeOut::create(ran));
 	}
+
+	//	and do the same for moon
+	moon->runAction(CCFadeTo::create(MOON_FADE_SPEED, show ? 255 : 0));
+
 }
 
 void WeatherHelper::backgroundDoneChanging()
