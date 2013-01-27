@@ -168,6 +168,9 @@ void WeatherHelper::createClouds()
 		float y = random(-300 * scale, 100 * scale);
 		s->setPosition(ccp(x, y));
 		s->setOpacity(random(120, 220));
+		s->setTag(s->getOpacity());
+		if (isNight())
+			s->setOpacity(0);
 		s->setColor(color);
 		smallOnes->addChild(s);
 	}
@@ -396,7 +399,7 @@ void WeatherHelper::updateCloudColors()
 	for (int i = 0; i < medChildren->count(); i++)
 	{
 		CCSprite* s = (CCSprite*) medChildren->objectAtIndex(i);
-		s->runAction(CCTintTo::create(CHANGE_SPEED, color.r, color.g, color.b));
+		s->runAction(CCTintTo::create(CHANGE_SPEED, color.r, color.g, color.b));		
 	}
 
 	color = tintColorAtThisTime(2);
@@ -405,5 +408,12 @@ void WeatherHelper::updateCloudColors()
 	{
 		CCSprite* s = (CCSprite*) smaChildren->objectAtIndex(i);
 		s->runAction(CCTintTo::create(CHANGE_SPEED, color.r, color.g, color.b));
+		
+		//	also hide small smiley clouds
+		bool hidden = s->getOpacity() == 0;
+		if (hidden && !isNight() || !hidden && isNight())
+		{		
+			s->runAction(CCFadeTo::create(CHANGE_SPEED, hidden ? s->getTag() : 0));
+		}
 	}
 }
