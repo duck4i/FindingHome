@@ -49,8 +49,9 @@ bool WeatherHelper::init()
 
 
 	//	My first shader lady and gentleman
-	TintShader *shader = TintShader::create();	
-	shader->start(this->worldLayer);
+	//TintShader *shader = TintShader::create();	
+	//this->parent->addChild(shader, 100000);
+	//shader->start(this->parent);
 
 	return true;
 }

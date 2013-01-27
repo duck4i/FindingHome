@@ -26,15 +26,13 @@ bool MainScene::init()
 	this->initWithColor(ccc4(0, 0, 0, 255));	//	
 
 	this->debugLayer = NULL;
-	this->lastKeyboardUpdate = 0;
+	this->boxDebugKeyIsDown = false;
 
 	this->player = NULL;
 	this->playerBody = NULL;
 	this->weather = NULL;
 
 	direction = PlayerDirectionRight;
-
-	//this->addChild(CCLayerColor::create(ccc4(255, 255, 255, 255)), 1);
 	
 	//	Create world layer
 	this->worldLayer = CCLayer::create();
@@ -46,7 +44,7 @@ bool MainScene::init()
 
 	//	setup physics object
 	this->setupPhysics();
-	this->addBodies();	
+	this->addBodies();
 
 	//	schedule keyboard and touch events
 	this->jumpKeyIsDown = false;
@@ -61,7 +59,11 @@ bool MainScene::init()
 	//	schedule camera update
 	if (this->player)
 	{
+		//	set rotation and friction damping and gravity scale
 		this->playerBody->SetFixedRotation(true);
+		this->playerBody->SetLinearDamping(0.5f);
+		this->playerBody->SetGravityScale(2);
+
 		this->cameraMoveInProgress = false;	
 		CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
 		CCPoint playerStart = this->worldLayer->convertToWorldSpace(player->getPosition());
@@ -70,9 +72,9 @@ bool MainScene::init()
 		float twentyPercent = 0.25f;
 		float xs = ( playerStart.x - (size.width * twentyPercent) ) * -1;
 		float ys = ( playerStart.y - (size.height * twentyPercent) ) * -1;	
-		this->worldLayer->setPosition(this->getPositionX() + xs, this->getPositionY() + ys);		
-	
-		this->schedule(schedule_selector(MainScene::updateCamera));	
+		this->worldLayer->setPosition(this->getPositionX() + xs, this->getPositionY() + ys);
+
+		this->schedule(schedule_selector(MainScene::updateCamera));
 	}
 
 
@@ -159,18 +161,9 @@ void MainScene::addBodies()
 
 }
 
-float lastk = 0;
-bool globalMidAir = false;
 void MainScene::updateKeyboard(float delta)
 {
 	if (disableKeyboard)
-		return;
-
-	//	set interval between keys
-	lastk += delta;
-	if (lastk >= 0.02f)	
-		lastk = 0;	
-	else
 		return;
 
 	//CCLog("Tick keyboard");
@@ -188,33 +181,30 @@ void MainScene::updateKeyboard(float delta)
 
 	//	Update player movement
 	if (playerBody)
-	{		
+	{
 		short l = GetKeyState(VK_LEFT);
 		short r = GetKeyState(VK_RIGHT);
 		short d = GetKeyState(VK_DOWN);
 		short u = GetKeyState(VK_UP);
 		short shift = GetKeyState(VK_LSHIFT);
 
-		bool jumped = (u & down) || (u2 & down) ;
-
-		bool skipY = false;
-		if (jumped && jumpKeyIsDown)
-			skipY = true;
-		else if (jumped)
-			jumpKeyIsDown = true;
-		else if (!jumped)
-			jumpKeyIsDown = false;
+		bool jumped = (u & down) || (u2 & down);
 
 		float x = 0;
 		float y = 0;
-	
+
 		if (l & down)
 			x -= DOG_STEP_VALUE;	
 		else if (r & down)
 			x += DOG_STEP_VALUE;
 		
-		if (jumped && !skipY && !globalMidAir)
+		if (jumped && jumpKeyIsDown < 1)
+		{
 			y += DOG_JUMP_VALUE;
+			jumpKeyIsDown++;
+		}
+		else if (!jumped)
+			jumpKeyIsDown = 0;		
 
 		//	check if anything to do
 		if (x || y)
@@ -228,50 +218,47 @@ void MainScene::updateKeyboard(float delta)
 			//	http://www.ikbentomas.nl/other/box2d/
 			//	http://www.cocos2d-iphone.org/forum/topic/13501
 		
-			//	check if any contacts
+			//	claim we have not jumped
 			bool midAir = true;
+
 			b2ContactEdge *con = playerBody->GetContactList();
 			while (con)
 			{
 				if (con->contact->IsTouching())
 				{
 					midAir = false;
-					globalMidAir = false;
 					break;
 				}
 				con = con->next;
-			}						
+			}
 
 			float maxSpeed = DOG_SPEED;
 			const b2Vec2 velocity = playerBody->GetLinearVelocity();
 
-			//	no more jumping and only slight adjustment of direction when in air
-			if (midAir || globalMidAir)
+			//	no more jumping and only slight adjustment of direction when in air			
+			if (midAir)
 			{
-				//y = -10.0f * velocity.y;
 				x *= DOG_MID_AIR_FACTOR;
+				y = 0;
 			}
-
-			if ((shift & down) && !midAir)
+			
+			///
+			///	Shift button feature
+			///
+			if ((shift & down))
 			{
 				x *= DOG_SHIFT_FACTOR;
 				maxSpeed *= DOG_SHIFT_FACTOR;
 				y *= DOG_SHIFT_FACTOR;
-			}
+			}									
+
+			//	apply horizontal force - take care of max velocity
+			const float speed = abs(velocity.x);
+			if (speed >= maxSpeed)
+				x = 0;
 			
-			if (y > 0)
-				globalMidAir = true;
-
-			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());
-
-			//
-			//	limit top velocity
-			//			
-			const float speed = abs(velocity.x);			
-			if (speed > maxSpeed)
-				playerBody->SetLinearVelocity((maxSpeed / speed) * velocity);
-		
-		
+			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());			
+			
 
 			//	Check player direction
 			/*
@@ -309,34 +296,35 @@ void MainScene::updateKeyboard(float delta)
 	}
 	
 	//	Continue camera and reset scale
-	if (cameraContinue & down && this->cameraMoveInProgress)
+	if (cameraContinue & down)
 	{
-		this->cameraMoveInProgress = false;
 		this->sceneScale = DEFAULT_SCALE;
-		this->worldLayer->setScale(this->sceneScale);	
+		this->worldLayer->setScale(this->sceneScale);
+		this->cameraMoveInProgress = false;
 	}
 
-	//	now check for box2D debug, the code bellow acts like WM_KEYUP
+	//
+	//	now check for box2D debug, the code bellow acts like WM_KEYUP	
+	//
+	if (f1 & down)
 	{
-		if (f1 & down)
+		if (!boxDebugKeyIsDown)
 		{
-			//	not too fast
-			lastKeyboardUpdate += delta;
-		}
-		else if (lastKeyboardUpdate != 0)
-		{			
-			this->debugLayer->setVisible(!this->debugLayer->isVisible());			
-			lastKeyboardUpdate = 0;
+			this->debugLayer->setVisible(!this->debugLayer->isVisible());
+			boxDebugKeyIsDown = true;
 		}
 	}
+	else if (boxDebugKeyIsDown)
+		boxDebugKeyIsDown = false;
 
+	//
 	//	now restart	
+	//
 	if (restart & down)
 	{
-		if (!restartKeyIsDown)									
+		if (!restartKeyIsDown)
 		{
 			restartKeyIsDown = true;
-			//this->unscheduleAllSelectors();
 			CCScene* m = MainScene::scene();
 			if (m)
 			{
@@ -344,11 +332,17 @@ void MainScene::updateKeyboard(float delta)
 				if (s)
 					CCDirector::sharedDirector()->replaceScene(s);
 			}
-			
 		}
 	}
 	else if (restartKeyIsDown)
 		restartKeyIsDown = false;
+
+	b2Vec2 vel = this->playerBody->GetLinearVelocity();
+	if (vel.y <= 0)
+	{
+		vel.y -= 0.2;
+		this->playerBody->SetLinearVelocity(vel);
+	}
 
 }
 

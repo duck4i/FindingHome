@@ -12,13 +12,12 @@
 using namespace cocos2d;
 
 #define DEFAULT_SCALE		0.5f
-
 #define DOG_SPEED			10.0f
 
-#define DOG_MID_AIR_FACTOR	0.2f
-#define DOG_SHIFT_FACTOR	1.5f
-#define DOG_JUMP_VALUE		200
-#define DOG_STEP_VALUE		20.0f
+#define DOG_MID_AIR_FACTOR	0.3f
+#define DOG_SHIFT_FACTOR	1.25f
+#define DOG_JUMP_VALUE		280.0f
+#define DOG_STEP_VALUE		25.0f
 
 enum PlayerDirection
 {
@@ -30,7 +29,7 @@ class MainScene : public CCLayerColor
 {
 private:
 
-	void update(float delta);	
+	void update(float delta);
 
 	WeatherHelper *weather;
 
@@ -40,17 +39,17 @@ private:
 
 	float sceneScale;
 	
-	bool jumpKeyIsDown;
+	unsigned int jumpKeyIsDown;
 	bool restartKeyIsDown;
-
-	float lastKeyboardUpdate;
+	bool boxDebugKeyIsDown;
+	
 	bool disableKeyboard;
 	void updateKeyboard(float delta);
 
 	//	player
 	CCNode* player;
 	b2Body *playerBody;
-	PlayerDirection direction;	
+	PlayerDirection direction;
 	
 	//	world
 	CCNode *worldLayer;
@@ -63,13 +62,13 @@ private:
 	void addBodies();
 
 	//	touch events
-	//void ccTouchesBegan(
 	bool touchesInProgress;
 	void ccTouchesBegan(CCSet* touches, CCEvent* event);
 	void ccTouchesEnded(CCSet* touches, CCEvent* event);
 	void ccTouchesMoved(CCSet* touches, CCEvent* event);
 
 public:
+
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();  	
 

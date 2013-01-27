@@ -8,7 +8,7 @@ varying vec4 v_color;
 
 void main()
 {
-	//gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-	//gl_FragColor = vec4(1.0, 0.0, 0.0, 0.3) * v_color;
-	gl_FragColor = v_color;
+	//float x = gl_FragCoord;
+	gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+	gl_FragColor.r = cos(gl_FragCoord.x);	
 }

@@ -245,7 +245,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		{
 			this->playerBody = body;
 			fd.density = 3.0f;			
-			fd.friction = 1.0f;
+			fd.friction = 0.8f;
 			fd.restitution = 0;
 		}
 		
