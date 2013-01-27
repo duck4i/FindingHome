@@ -329,6 +329,8 @@ void MainScene::updateKeyboard(float delta)
 		if (!boxDebugKeyIsDown)
 		{
 			this->debugLayer->setVisible(!this->debugLayer->isVisible());
+			CCDirector* d = CCDirector::sharedDirector();
+			d->setDisplayStats(!d->isDisplayStats());
 			boxDebugKeyIsDown = true;
 		}
 	}
