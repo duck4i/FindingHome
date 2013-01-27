@@ -77,6 +77,11 @@ bool MainScene::init()
 		this->schedule(schedule_selector(MainScene::updateCamera));
 	}
 
+	//	schedule controls
+	char* message = "F1 - Enable debug mode F2 - Reset camera F4 Restart game F7 - Zoom in F8 - Zoom out F9 - Reset zoom";
+	CCLabelTTF* lab = CCLabelTTF::create(message, "Arial", 18.0f);	
+	lab->setPosition(ccp(CCDirector::sharedDirector()->getWinSizeInPixels().width / 2, CCDirector::sharedDirector()->getWinSizeInPixels().height - 15));
+	this->addChild(lab, 100000);
 
 	return true;
 }
@@ -170,9 +175,9 @@ void MainScene::updateKeyboard(float delta)
 	short u2 = GetKeyState(VK_SPACE);
 	short f1 = GetKeyState(VK_F1);
 
-	short zoomIn = GetKeyState(VK_OEM_PLUS);
-	short zoomOut = GetKeyState(VK_OEM_MINUS);
-	short zoomReset = GetKeyState(VK_BACK);	
+	short zoomIn = GetKeyState(VK_F7);
+	short zoomOut = GetKeyState(VK_F8);
+	short zoomReset = GetKeyState(VK_F9);	
 
 	short cameraContinue = GetKeyState(VK_F2);
 	short restart = GetKeyState(VK_F4);
