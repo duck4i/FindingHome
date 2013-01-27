@@ -145,7 +145,12 @@ void MainScene::setupPhysics()
 void MainScene::addBodies()
 {
 	//	load level
-	LevelLoader l(this->worldLayer, "..\\Resources\\Level1.xml", this->boxWorld);
+	char *level = "..\\Resources\\Level1.xml";
+	extern char* commandLine;
+	if (commandLine && strlen(commandLine))
+		level = commandLine;
+
+	LevelLoader l(this->worldLayer, level, this->boxWorld);
 	if (l.parse())
 	{		
 		this->playerBody = l.playerBody;
@@ -279,6 +284,14 @@ void MainScene::updateKeyboard(float delta)
 			}		
 			*/
 		}
+
+		//	in any case constrol the jump velocity to look more real
+		b2Vec2 vel = this->playerBody->GetLinearVelocity();
+		if (vel.y <= 0)
+		{
+			vel.y -= 0.2;
+			this->playerBody->SetLinearVelocity(vel);
+		}
 	}
 
 	//	now check for scaling keys
@@ -341,13 +354,6 @@ void MainScene::updateKeyboard(float delta)
 	}
 	else if (restartKeyIsDown)
 		restartKeyIsDown = false;
-
-	b2Vec2 vel = this->playerBody->GetLinearVelocity();
-	if (vel.y <= 0)
-	{
-		vel.y -= 0.2;
-		this->playerBody->SetLinearVelocity(vel);
-	}
 
 }
 

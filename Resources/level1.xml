@@ -3,60 +3,6 @@
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
-                <Item xsi:type="TextureItem" Name="Texture_0044" Visible="false">
-                    <Position>
-                        <X>-2463</X>
-                        <Y>-386</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>6.94318628</X>
-                        <Y>6.94318628</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>myCity.jpg</texture_filename>
-                    <asset_name>myCity</asset_name>
-                    <Origin>
-                        <X>294</X>
-                        <Y>219</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0045" Visible="false">
-                    <Position>
-                        <X>1625</X>
-                        <Y>-386</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>6.94318628</X>
-                        <Y>6.94318628</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>true</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>myCity.jpg</texture_filename>
-                    <asset_name>myCity</asset_name>
-                    <Origin>
-                        <X>294</X>
-                        <Y>219</Y>
-                    </Origin>
-                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0042" Visible="true">
                     <Position>
                         <X>2074</X>

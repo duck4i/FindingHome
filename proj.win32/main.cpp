@@ -2,11 +2,14 @@
 #include "AppDelegate.h"
 #include "CCEGLView.h"
 #include "Settings.h"
+#include <string>
 
 USING_NS_CC;
 
 // uncomment below line, open debug console
 // #define USE_WIN32_CONSOLE
+
+char* commandLine = NULL;
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                        HINSTANCE hPrevInstance,
@@ -15,6 +18,16 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
+	
+	if (lpCmdLine && strlen(lpCmdLine) > 0)
+	{				
+		commandLine = lpCmdLine + 1;
+		commandLine[strlen(commandLine) - 1] = 0;				
+	}	
+	
+	//commandLine = _strdup(lpCmdLine);
+	//MessageBox(NULL, lpCmdLine, "line", MB_OK);
+
 
 #ifdef USE_WIN32_CONSOLE
     AllocConsole();
