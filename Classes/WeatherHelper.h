@@ -64,8 +64,8 @@ static float random(float min, float max)
 #define STARS_PARALAX_DIV	25
 #define MOON_PARALAX_DIV	50
 
-#define CLOUDS_1_PARALAX	10
-#define CLOUDS_2_PARALAX	15
+#define CLOUDS_1_PARALAX	15
+#define CLOUDS_2_PARALAX	20
 #define CLOUDS_3_PARALAX	30
 #define HIDDEN_CLOUD_ALPHA	0
 
