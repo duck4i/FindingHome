@@ -18,5 +18,6 @@
 #define SHADER_IMAGE				RESOURCE_DIR "myCity.jpg"
 #define SHADER_IMAGE_RAMP			RESOURCE_DIR "weather_controller.png"
 
+#define PLAYER_TAG	1001
 
 #endif

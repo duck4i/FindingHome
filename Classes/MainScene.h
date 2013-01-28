@@ -15,7 +15,7 @@ using namespace cocos2d;
 #define DOG_SPEED			10.0f
 
 #define DOG_MID_AIR_FACTOR	0.3f
-#define DOG_SHIFT_FACTOR	1.25f
+#define DOG_SHIFT_FACTOR	1.45f
 #define DOG_JUMP_VALUE		280.0f
 #define DOG_STEP_VALUE		25.0f
 

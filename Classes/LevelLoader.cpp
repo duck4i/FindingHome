@@ -164,13 +164,22 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 		toInsert = a;
 	}
 	else if (info.type == 1)
-	{
+	{																
 		info.type = 1;
-		CCSprite *a = CCSprite::create("..\\Resources\\circle.png");
+		CCSprite *a = NULL;
+		if (props.isPlayerObject())
+		{
+			a = CCSprite::create("..\\Resources\\Dog.png");
+			a->setTag(PLAYER_TAG);
+		}
+		else
+		{
+			a = CCSprite::create("..\\Resources\\circle.png");
+			a->setColor(ccc3(info.color.r, info.color.g, info.color.b));
+		}
+		
 		float width = a->getContentSize().width;
 		info.scale =  info.radius * 2 / width; //	diametar is 2xradius
-		a->setColor(ccc3(info.color.r, info.color.g, info.color.b));
-
 		toInsert = a;
 	}
 	else if (info.type == 2)

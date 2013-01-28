@@ -105,7 +105,7 @@ void MainScene::updateCamera(float delta)
 	float leftMargin = size.width * margin;
 
 	float topMargin = size.height - size.height * margin;
-	float bottomMargin = size.height * margin;
+	float bottomMargin = size.height * 0.25;
 
 	float xm = prevPos.x;
 	float ym = prevPos.y;
@@ -145,7 +145,7 @@ void MainScene::setupPhysics()
 void MainScene::addBodies()
 {
 	//	load level
-	char *level = "..\\Resources\\Level1.xml";
+	char *level = "..\\Resources\\Level2.xml";
 	extern char* commandLine;
 	if (commandLine && strlen(commandLine))
 		level = commandLine;
@@ -270,8 +270,7 @@ void MainScene::updateKeyboard(float delta)
 			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());			
 			
 
-			//	Check player direction
-			/*
+			//	Check player direction			
 			if (x < 0 && direction == PlayerDirectionRight)
 			{
 				direction = PlayerDirectionLeft;
@@ -281,8 +280,7 @@ void MainScene::updateKeyboard(float delta)
 			{
 				direction = PlayerDirectionRight;
 				player->runAction(CCFlipX::create(false));
-			}		
-			*/
+			}
 		}
 
 		//	in any case constrol the jump velocity to look more real
@@ -372,6 +370,10 @@ void MainScene::update(float delta)
 		{
 			b2Vec2 pos = b->GetPosition();			
 			CCPoint posRecalc = ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y));			
+
+			if (s->getTag() == PLAYER_TAG)
+				posRecalc.y -= 15;
+
 			s->setPosition(posRecalc);
 			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
 		}
