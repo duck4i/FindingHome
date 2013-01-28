@@ -891,13 +891,14 @@
                 </Item>
                 <Item xsi:type="CircleItem" Name="Circle_0085" Visible="true">
                     <Position>
-                        <X>-1048</X>
-                        <Y>-34</Y>
+                        <X>-1189</X>
+                        <Y>90</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="dynamic" Type="bool" Description="">
                             <boolean>false</boolean>
                         </Property>
+                        <Property Name="explode" Type="Item" Description="">Player</Property>
                     </CustomProperties>
                     <Radius>32.01562</Radius>
                     <FillColor>
@@ -1786,11 +1787,11 @@
         </Property>
     </CustomProperties>
     <EditorRelated>
-        <NextItemNumber>91</NextItemNumber>
+        <NextItemNumber>92</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>-1460.19824</X>
-            <Y>-40.80835</Y>
+            <X>-855.198242</X>
+            <Y>-89.80835</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

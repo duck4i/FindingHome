@@ -267,28 +267,27 @@ void MainScene::updateKeyboard(float delta)
 			if (speed >= maxSpeed)
 				x = 0;
 			
-			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());			
-			
-
-			//	Check player direction			
-			if (x < 0 && direction == PlayerDirectionRight)
-			{
-				direction = PlayerDirectionLeft;
-				player->runAction(CCFlipX::create(true));
-			}
-			else if (x > 0 && direction == PlayerDirectionLeft)
-			{
-				direction = PlayerDirectionRight;
-				player->runAction(CCFlipX::create(false));
-			}
+			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());
 		}
 
 		//	in any case constrol the jump velocity to look more real
 		b2Vec2 vel = this->playerBody->GetLinearVelocity();
 		if (vel.y <= 0)
 		{
-			vel.y -= 0.2;
+			vel.y -= 0.2f;
 			this->playerBody->SetLinearVelocity(vel);
+		}
+
+		//	Check player direction			
+		if (x < 0 && direction == PlayerDirectionRight)
+		{
+			direction = PlayerDirectionLeft;
+			player->runAction(CCFlipX::create(true));
+		}
+		else if (x > 0 && direction == PlayerDirectionLeft)
+		{
+			direction = PlayerDirectionRight;
+			player->runAction(CCFlipX::create(false));
 		}
 	}
 

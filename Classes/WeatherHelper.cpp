@@ -38,12 +38,11 @@ bool WeatherHelper::init()
 	this->parent->addChild(this->background);
 	this->parent->addChild(this->backgroundNext);
 
-	//	and now - stars	
-	this->createMoon();
-	this->createClouds();
+	//	and now - stars			
 	this->createStarrySky();
-
-
+	this->createMoon();
+	this->createClouds();	
+	
 
 	//	TV scan sprite? Not for long!
 	CCSize winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
@@ -77,7 +76,7 @@ void WeatherHelper::createStarrySky()
 		CCSprite *star = CCSprite::createWithTexture(tex);
 		CCPoint pos = ccp(random(-sajz.width * scale, sajz.width * scale), random(-sajz.width * scale, sajz.height * scale));
 		star->setPosition(pos);
-		float scale = random(0.25, 0.85);
+		float scale = random(0.25f, 0.85f);
 		star->setScale(scale);
 		if (!isNight())
 			star->setOpacity(0);
@@ -114,7 +113,7 @@ void WeatherHelper::createMoon()
 	moon->setPosition(ccp(x, y));
 	moonPosition = moon->getPosition();
 
-	moon->setScale(random(0.3, 1));
+	moon->setScale(random(0.3f, 1.0f));
 	moon->setOpacity(isNight() ? 255 : 0);
 
 	this->parent->addChild(moon);
@@ -134,16 +133,20 @@ void WeatherHelper::createClouds()
 	bigOnes = CCSpriteBatchNode::create(RESOURCE_DIR "cloudBig.png");
 	mediumOnes = CCSpriteBatchNode::create(RESOURCE_DIR "cloudMedium.png");
 	smallOnes = CCSpriteBatchNode::create(RESOURCE_DIR "cloudSmall.png");
-	float scale = 2;	
+	float scale = 1;
 
 	ccColor3B color = tintColorAtThisTime();
 	for (int i = 0; i < 6 * scale; i++)
 	{
 		CCSprite* s = CCSprite::createWithTexture(cloudBig);
 		float x = random(-200 * scale, size.width * scale);
-		float y = random(-300 * scale, 100 * scale);
+		float y = random(-100 * scale, 100 * scale);
 		s->setPosition(ccp(x, y));
-		s->setOpacity(random(180, 200));
+		s->setOpacity(random(160, 220));
+		s->setTag(s->getOpacity());
+		if (isNight())
+			s->setOpacity(HIDDEN_CLOUD_ALPHA);
+		s->setScale(random(0.7, 2));
 		s->setColor(color);
 		bigOnes->addChild(s);
 	}
@@ -153,22 +156,27 @@ void WeatherHelper::createClouds()
 	{
 		CCSprite* s = CCSprite::createWithTexture(cloudMedium);
 		float x = random(-size.width * scale, size.width * scale);
-		float y = random(-300 * scale, 100 * scale);
+		float y = random(-200 * scale, 100 * scale);
 		s->setPosition(ccp(x, y));
 		s->setOpacity(random(160, 220));
+		s->setTag(s->getOpacity());
+		if (isNight())
+			s->setOpacity(HIDDEN_CLOUD_ALPHA);
+		s->setScale(random(0.7, 2));
 		s->setColor(color);
 		mediumOnes->addChild(s);
 	}
 
 	color = tintColorAtThisTime(2);
-	for (int i = 0; i < random(6, 12) * scale; i++)
+	for (int i = 0; i < random(4, 8) * scale; i++)
 	{
 		CCSprite* s = CCSprite::createWithTexture(cloudSmall);
 		float x = random(-size.width * scale, size.width * scale);
-		float y = random(-300 * scale, 100 * scale);
+		float y = random(-200 * scale, 100 * scale);
 		s->setPosition(ccp(x, y));
-		s->setOpacity(random(120, 220));
+		s->setOpacity(random(160, 220));		
 		s->setTag(s->getOpacity());
+		s->setScale(random(0.7, 1.2));
 		if (isNight())
 			s->setOpacity(0);
 		s->setColor(color);
@@ -332,26 +340,25 @@ void WeatherHelper::update(float delta)
 		starrySky->setTag(0);
 	}
 
+	//	position clouds
 	if (!isNight())
 	{
 		CCPoint pos = this->worldLayer->getPosition();
-		float div = 30;
+		float div = CLOUDS_1_PARALAX;
 		float x = cloudPos[0].x - pos.x / div;
 		float y = cloudPos[0].y - pos.y / div;
 		this->bigOnes->setPosition(x, y);
 		
-		div = 15;
+		div = CLOUDS_2_PARALAX;
 		x = cloudPos[1].x + pos.x / div;
 		y = cloudPos[1].y + pos.y / div;
 		this->mediumOnes->setPosition(x, y);
 
-		div = 10;
+		div = CLOUDS_3_PARALAX;
 		x = cloudPos[2].x + pos.x / div;
 		y = cloudPos[2].y + pos.y / div;
 		this->smallOnes->setPosition(x, y);
-	}
-
-	
+	}	
 
 }
 
@@ -360,7 +367,7 @@ void WeatherHelper::flipStarVisibility()
 	bool show = starrySky->getTag() == 0;
 
 	//	show / hide all items since BatchSprite knows no opacity
-	for (int i = 0; i < starrySky->getChildrenCount(); i++)
+	for (unsigned int i = 0; i < starrySky->getChildrenCount(); i++)
 	{
 		CCSprite* s = (CCSprite*) starrySky->getChildren()->objectAtIndex(i);
 		float ran = random(STARS_FADE_SPEED * 0.2f, STARS_FADE_SPEED);
@@ -376,35 +383,50 @@ void WeatherHelper::flipStarVisibility()
 }
 
 void WeatherHelper::backgroundDoneChanging()
-{		
+{
 	this->background->setStartColor(this->backgroundNext->getStartColor());
 	this->background->setEndColor(this->backgroundNext->getEndColor());	
 	this->backgroundNext->setOpacity(0);
 
 	backgroundChanging = false;	
+	
 }
 
 void WeatherHelper::updateCloudColors()
-{	
+{
 	ccColor3B color = tintColorAtThisTime(0);
 	CCArray* bigChildren = bigOnes->getChildren();
-	for (int i = 0; i < bigChildren->count(); i++)
+	for (unsigned int i = 0; i < bigChildren->count(); i++)
 	{
 		CCSprite* s = (CCSprite*) bigChildren->objectAtIndex(i);		
 		s->runAction(CCTintTo::create(CHANGE_SPEED, color.r, color.g, color.b));
+
+		//	also hide small smiley clouds
+		bool hidden = s->getOpacity() == HIDDEN_CLOUD_ALPHA;
+		if (hidden && !isNight() || !hidden && isNight())
+		{		
+			s->runAction(CCFadeTo::create(CHANGE_SPEED, hidden ? s->getTag() : HIDDEN_CLOUD_ALPHA));
+		}
 	}
 
 	color = tintColorAtThisTime(1);
 	CCArray* medChildren = mediumOnes->getChildren();
-	for (int i = 0; i < medChildren->count(); i++)
+	for (unsigned int i = 0; i < medChildren->count(); i++)
 	{
 		CCSprite* s = (CCSprite*) medChildren->objectAtIndex(i);
-		s->runAction(CCTintTo::create(CHANGE_SPEED, color.r, color.g, color.b));		
+		s->runAction(CCTintTo::create(CHANGE_SPEED, color.r, color.g, color.b));
+
+		//	also hide small smiley clouds
+		bool hidden = s->getOpacity() == HIDDEN_CLOUD_ALPHA;
+		if (hidden && !isNight() || !hidden && isNight())
+		{		
+			s->runAction(CCFadeTo::create(CHANGE_SPEED, hidden ? s->getTag() : HIDDEN_CLOUD_ALPHA));
+		}
 	}
 
 	color = tintColorAtThisTime(2);
 	CCArray* smaChildren = smallOnes->getChildren();
-	for (int i = 0; i < smaChildren->count(); i++)
+	for (unsigned int i = 0; i < smaChildren->count(); i++)
 	{
 		CCSprite* s = (CCSprite*) smaChildren->objectAtIndex(i);
 		s->runAction(CCTintTo::create(CHANGE_SPEED, color.r, color.g, color.b));

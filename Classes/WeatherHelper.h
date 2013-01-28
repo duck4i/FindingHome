@@ -61,8 +61,13 @@ static float random(float min, float max)
 #define MOON_FADE_SPEED		STARS_FADE_SPEED * 1.3f
 #define STARS_NATURAL_DROP	0.02f * MASTER_SPEED	//	used for moon too
 
-#define STARS_PARALAX_DIV	50
-#define MOON_PARALAX_DIV	25
+#define STARS_PARALAX_DIV	25
+#define MOON_PARALAX_DIV	50
+
+#define CLOUDS_1_PARALAX	10
+#define CLOUDS_2_PARALAX	15
+#define CLOUDS_3_PARALAX	30
+#define HIDDEN_CLOUD_ALPHA	0
 
 #define CONTROLLER_WIDTH	384.0f
 #define FULL_CYCLE			60.0f	//	1h

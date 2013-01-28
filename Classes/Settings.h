@@ -15,9 +15,10 @@
 
 #define STAR_PATH					RESOURCE_DIR "star.png"
 
-#define SHADER_IMAGE				RESOURCE_DIR "myCity.jpg"
-#define SHADER_IMAGE_RAMP			RESOURCE_DIR "weather_controller.png"
-
 #define PLAYER_TAG	1001
+
+#define RESOURCE_BLOCK	RESOURCE_DIR "block.png"
+#define RESOURCE_CIRCLE	RESOURCE_DIR "circle.png"
+#define RESOURCE_PLAYER	RESOURCE_DIR "dog.png"
 
 #endif

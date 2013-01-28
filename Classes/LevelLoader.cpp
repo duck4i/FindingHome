@@ -150,16 +150,21 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 	//	NOW DO ACTUAL WORLD CREATIONG -- LIKE A BOSS	
 	if (info.type == 0)
 	{
-		CCLayerColor *a = CCLayerColor::create(info.color);
-		a->setContentSize(info.size);		
-
-		//	Obey anchor point (not enabled  by default - this makes position issues in Box2D calculations)
-		a->ignoreAnchorPointForPosition(false);
-		
 		//	anchor point is always in (0,0) for layer, but our position is mapped to (0.5, 0.5), or element center
 		//	compensate (sounds awfully like something said in star trek :)
 		info.position.x += info.size.width / 2.0f;
 		info.position.y -= info.size.height / 2.0f;
+
+		//	primitives cannot be batched, we will use block.png stretched as a block primitive
+		CCSprite *a = CCSprite::create(RESOURCE_BLOCK);
+		a->setColor(ccc3(info.color.r, info.color.g, info.color.b));
+
+		float sx = info.size.width / a->getContentSize().width;
+		float sy = info.size.height / a->getContentSize().height;
+		
+		a->setScaleX(sx);
+		a->setScaleY(sy);
+		info.scale = 0;
 
 		toInsert = a;
 	}
@@ -169,12 +174,12 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 		CCSprite *a = NULL;
 		if (props.isPlayerObject())
 		{
-			a = CCSprite::create("..\\Resources\\Dog.png");
+			a = CCSprite::create(RESOURCE_PLAYER);
 			a->setTag(PLAYER_TAG);
 		}
 		else
 		{
-			a = CCSprite::create("..\\Resources\\circle.png");
+			a = CCSprite::create(RESOURCE_CIRCLE);
 			a->setColor(ccc3(info.color.r, info.color.g, info.color.b));
 		}
 		
@@ -199,7 +204,8 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 	{
 		toInsert->setPosition(info.position);
 		toInsert->setRotation(CC_RADIANS_TO_DEGREES(info.rotation));
-		toInsert->setScale(info.scale);
+		if (info.scale)
+			toInsert->setScale(info.scale);
 		
 		if (info.flipHorizontally)
 			toInsert->runAction(CCFlipX::create(true));

@@ -38,9 +38,12 @@ private:
 
 	xmlDocPtr sharedDoc;
 
+	
 	CCNode* frontLayer; // this one is displayed before main layer, eg. play gets behind something...
 	CCNode* mainLayer;	
 	CCNode* backgroundLayer;
+	
+	CCNode* levelLayers;
 	void createLevelLayers();
 
 	b2World *boxWorld;
