@@ -18,10 +18,10 @@ void LevelLoader::createLevelLayers()
 
 bool LevelLoader::parse()
 {
-	bool success = false;	
+	bool success = false;
 
 	sharedDoc = xmlReadFile(this->levelPath, "utf-8", XML_PARSE_RECOVER);
-	CCAssert(sharedDoc, "Cannot load level file");	
+	CCAssert(sharedDoc, "Cannot load level file");
 	
 	xmlNodePtr currNode = sharedDoc->children->children;
 	
