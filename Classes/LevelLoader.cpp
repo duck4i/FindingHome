@@ -105,6 +105,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	info.tint = parseNodeColor(node, true);
 	info.texture = parseNodeTexture(node);
 	info.rawTexture = parseNodeTexture(node, true);
+	info.assetTexture = parseNodeAssetName(node);
 	info.flipHorizontally = parseNodeFlip(node);
 	info.flipVertically = parseNodeFlip(node, true);
 	info.visible = parseNodeVisible(node);
@@ -265,7 +266,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		}
 		
 		//	check for custom shape
-		bool customFixture = shapeHelper->createShapeForItem(info.rawTexture, body, info.size, fd.density, fd.friction);
+		bool customFixture = shapeHelper->createShapeForItem(info.assetTexture, body, info.size, fd.density, fd.friction);
 
 		if (!customFixture)
 		{		
@@ -286,10 +287,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 			}
 
 			body->CreateFixture(&fd);
-		}
-
-		
-			
+		}					
 	}
 
 	return true;
@@ -383,3 +381,9 @@ char* LevelLoader::parseNodeTexture(xmlNodePtr node, bool raw)
 	return ret;
 }
 
+char* LevelLoader::parseNodeAssetName(xmlNodePtr node)
+{
+	char* ret = NULL;
+	char* read = XMLHelper::readNodeContent(XMLHelper::findChildNodeWithName(node, "asset_name"));
+	return read;
+}

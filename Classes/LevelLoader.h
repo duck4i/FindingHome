@@ -72,7 +72,8 @@ private:
 	float		parseNodeRotation(xmlNodePtr node);
 	float		parseNodeRadius(xmlNodePtr node);
 	float		parseNodeScale(xmlNodePtr node);
-	char*		parseNodeTexture(xmlNodePtr node, bool raw = false);	
+	char*		parseNodeTexture(xmlNodePtr node, bool raw = false);
+	char*		parseNodeAssetName(xmlNodePtr node);
 	bool		parseNodeFlip(xmlNodePtr node, bool vertical = false);
 	bool		parseNodeVisible(xmlNodePtr node);
 

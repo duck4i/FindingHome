@@ -79,7 +79,17 @@ namespace GLEED2D
                     {
                         TextureItem ti = (TextureItem)i;
                         ti.texture_filename = RelativePath(ContentRootFolder, ti.texture_fullpath);
-                        ti.asset_name = ti.texture_filename.Substring(0, ti.texture_filename.LastIndexOf('.'));
+                        //ti.asset_name = ti.texture_filename.Substring(0, ti.texture_filename.LastIndexOf('.'));
+                        
+                        int lastDirSpearator = ti.texture_filename.LastIndexOf(@"\");
+                        if (lastDirSpearator != -1)
+                        {
+                            lastDirSpearator++;
+                            ti.asset_name = ti.asset_name = ti.texture_filename.Substring(lastDirSpearator, ti.texture_filename.Length - lastDirSpearator);
+                        }
+                        else
+                            ti.asset_name = ti.texture_filename;
+                        
                     }
                 }
             }

@@ -24,7 +24,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>sky.png</texture_filename>
-                    <asset_name>sky</asset_name>
+                    <asset_name>sky.png</asset_name>
                     <Origin>
                         <X>256</X>
                         <Y>216</Y>
@@ -51,7 +51,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>sky.png</texture_filename>
-                    <asset_name>sky</asset_name>
+                    <asset_name>sky.png</asset_name>
                     <Origin>
                         <X>256</X>
                         <Y>216</Y>
@@ -167,7 +167,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>block.png</texture_filename>
-                    <asset_name>block</asset_name>
+                    <asset_name>block.png</asset_name>
                     <Origin>
                         <X>32</X>
                         <Y>32</Y>
@@ -194,7 +194,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>block.png</texture_filename>
-                    <asset_name>block</asset_name>
+                    <asset_name>block.png</asset_name>
                     <Origin>
                         <X>32</X>
                         <Y>32</Y>
@@ -221,7 +221,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>block.png</texture_filename>
-                    <asset_name>block</asset_name>
+                    <asset_name>block.png</asset_name>
                     <Origin>
                         <X>32</X>
                         <Y>32</Y>
@@ -248,7 +248,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>block.png</texture_filename>
-                    <asset_name>block</asset_name>
+                    <asset_name>block.png</asset_name>
                     <Origin>
                         <X>32</X>
                         <Y>32</Y>
@@ -275,7 +275,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>block.png</texture_filename>
-                    <asset_name>block</asset_name>
+                    <asset_name>block.png</asset_name>
                     <Origin>
                         <X>32</X>
                         <Y>32</Y>
@@ -455,7 +455,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>dog.png</texture_filename>
-                    <asset_name>dog</asset_name>
+                    <asset_name>dog.png</asset_name>
                     <Origin>
                         <X>50</X>
                         <Y>39</Y>
@@ -686,7 +686,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>block.png</texture_filename>
-                    <asset_name>block</asset_name>
+                    <asset_name>block.png</asset_name>
                     <Origin>
                         <X>32</X>
                         <Y>32</Y>
@@ -729,7 +729,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>block.png</texture_filename>
-                    <asset_name>block</asset_name>
+                    <asset_name>block.png</asset_name>
                     <Origin>
                         <X>32</X>
                         <Y>32</Y>

@@ -24,7 +24,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\rocks\med_rock_3.png</texture_filename>
-                    <asset_name>tropical\rocks\med_rock_3</asset_name>
+                    <asset_name>med_rock_3.png</asset_name>
                     <Origin>
                         <X>37</X>
                         <Y>30</Y>
@@ -51,7 +51,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\flower_pot\flower_pot2.png</texture_filename>
-                    <asset_name>tropical\flower_pot\flower_pot2</asset_name>
+                    <asset_name>flower_pot2.png</asset_name>
                     <Origin>
                         <X>32</X>
                         <Y>36</Y>
@@ -78,7 +78,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\character\test3.png</texture_filename>
-                    <asset_name>tropical\character\test3</asset_name>
+                    <asset_name>test3.png</asset_name>
                     <Origin>
                         <X>22</X>
                         <Y>43</Y>
@@ -105,7 +105,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\fern\fern_2.png</texture_filename>
-                    <asset_name>tropical\fern\fern_2</asset_name>
+                    <asset_name>fern_2.png</asset_name>
                     <Origin>
                         <X>25</X>
                         <Y>23</Y>
@@ -132,7 +132,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\rocks\med_rock_2.png</texture_filename>
-                    <asset_name>tropical\rocks\med_rock_2</asset_name>
+                    <asset_name>med_rock_2.png</asset_name>
                     <Origin>
                         <X>31</X>
                         <Y>19</Y>
@@ -159,7 +159,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\rocks\small_rock_3.png</texture_filename>
-                    <asset_name>tropical\rocks\small_rock_3</asset_name>
+                    <asset_name>small_rock_3.png</asset_name>
                     <Origin>
                         <X>17</X>
                         <Y>7</Y>
@@ -186,7 +186,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\rocks\med_rock_2.png</texture_filename>
-                    <asset_name>tropical\rocks\med_rock_2</asset_name>
+                    <asset_name>med_rock_2.png</asset_name>
                     <Origin>
                         <X>31</X>
                         <Y>19</Y>
@@ -213,7 +213,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\palm\palm_4.png</texture_filename>
-                    <asset_name>tropical\palm\palm_4</asset_name>
+                    <asset_name>palm_4.png</asset_name>
                     <Origin>
                         <X>36</X>
                         <Y>47</Y>
@@ -240,7 +240,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\palm\palm_4.png</texture_filename>
-                    <asset_name>tropical\palm\palm_4</asset_name>
+                    <asset_name>palm_4.png</asset_name>
                     <Origin>
                         <X>36</X>
                         <Y>47</Y>
@@ -267,7 +267,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\rocks\med_rock_2.png</texture_filename>
-                    <asset_name>tropical\rocks\med_rock_2</asset_name>
+                    <asset_name>med_rock_2.png</asset_name>
                     <Origin>
                         <X>31</X>
                         <Y>19</Y>
@@ -294,7 +294,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\palm\palm_4.png</texture_filename>
-                    <asset_name>tropical\palm\palm_4</asset_name>
+                    <asset_name>palm_4.png</asset_name>
                     <Origin>
                         <X>36</X>
                         <Y>47</Y>
@@ -337,7 +337,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\palm\palm_4.png</texture_filename>
-                    <asset_name>tropical\palm\palm_4</asset_name>
+                    <asset_name>palm_4.png</asset_name>
                     <Origin>
                         <X>36</X>
                         <Y>47</Y>
@@ -354,9 +354,9 @@
                     <FillColor>
                         <R>184</R>
                         <G>134</G>
-                        <B>11</B>
+                        <B>73</B>
                         <A>255</A>
-                        <PackedValue>4290283019</PackedValue>
+                        <PackedValue>4290283081</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0057" Visible="true">
@@ -380,7 +380,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\rocks\med_rock_3.png</texture_filename>
-                    <asset_name>tropical\rocks\med_rock_3</asset_name>
+                    <asset_name>med_rock_3.png</asset_name>
                     <Origin>
                         <X>37</X>
                         <Y>30</Y>
@@ -663,7 +663,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -690,7 +690,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -717,7 +717,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -744,7 +744,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -761,8 +761,8 @@
             <Items>
                 <Item xsi:type="CircleItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-3468</X>
-                        <Y>-1268</Y>
+                        <X>-2978</X>
+                        <Y>-1188</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="player" Type="bool" Description="">
@@ -799,7 +799,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -826,7 +826,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -930,7 +930,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -957,7 +957,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -984,7 +984,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1011,7 +1011,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1038,7 +1038,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\statues\statue_6.png</texture_filename>
-                    <asset_name>tropical\statues\statue_6</asset_name>
+                    <asset_name>statue_6.png</asset_name>
                     <Origin>
                         <X>37</X>
                         <Y>71</Y>
@@ -1065,7 +1065,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\vines\vine_1.png</texture_filename>
-                    <asset_name>tropical\vines\vine_1</asset_name>
+                    <asset_name>vine_1.png</asset_name>
                     <Origin>
                         <X>29</X>
                         <Y>23</Y>
@@ -1092,7 +1092,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\vines\vine_3.png</texture_filename>
-                    <asset_name>tropical\vines\vine_3</asset_name>
+                    <asset_name>vine_3.png</asset_name>
                     <Origin>
                         <X>29</X>
                         <Y>16</Y>
@@ -1119,7 +1119,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1146,7 +1146,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\MdBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\MdBrnP</asset_name>
+                    <asset_name>MdBrnP.png</asset_name>
                     <Origin>
                         <X>408</X>
                         <Y>89</Y>
@@ -1173,7 +1173,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\MdBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\MdBrnP</asset_name>
+                    <asset_name>MdBrnP.png</asset_name>
                     <Origin>
                         <X>408</X>
                         <Y>89</Y>
@@ -1200,7 +1200,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\xSmlBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\xSmlBrnP</asset_name>
+                    <asset_name>xSmlBrnP.png</asset_name>
                     <Origin>
                         <X>81</X>
                         <Y>75</Y>
@@ -1227,7 +1227,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\SmBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\SmBrnP</asset_name>
+                    <asset_name>SmBrnP.png</asset_name>
                     <Origin>
                         <X>163</X>
                         <Y>86</Y>
@@ -1254,7 +1254,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\SmBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\SmBrnP</asset_name>
+                    <asset_name>SmBrnP.png</asset_name>
                     <Origin>
                         <X>163</X>
                         <Y>86</Y>
@@ -1281,7 +1281,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\MdBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\MdBrnP</asset_name>
+                    <asset_name>MdBrnP.png</asset_name>
                     <Origin>
                         <X>408</X>
                         <Y>89</Y>
@@ -1308,7 +1308,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1335,7 +1335,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1362,7 +1362,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1389,7 +1389,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1416,7 +1416,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\MdBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\MdBrnP</asset_name>
+                    <asset_name>MdBrnP.png</asset_name>
                     <Origin>
                         <X>408</X>
                         <Y>89</Y>
@@ -1443,7 +1443,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1470,7 +1470,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1497,7 +1497,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1524,7 +1524,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1551,7 +1551,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1578,7 +1578,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\statues\statue_6.png</texture_filename>
-                    <asset_name>tropical\statues\statue_6</asset_name>
+                    <asset_name>statue_6.png</asset_name>
                     <Origin>
                         <X>37</X>
                         <Y>71</Y>
@@ -1605,7 +1605,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\vines\vine_1.png</texture_filename>
-                    <asset_name>tropical\vines\vine_1</asset_name>
+                    <asset_name>vine_1.png</asset_name>
                     <Origin>
                         <X>29</X>
                         <Y>23</Y>
@@ -1632,7 +1632,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\vines\vine_3.png</texture_filename>
-                    <asset_name>tropical\vines\vine_3</asset_name>
+                    <asset_name>vine_3.png</asset_name>
                     <Origin>
                         <X>29</X>
                         <Y>16</Y>
@@ -1659,7 +1659,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1686,7 +1686,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
-                    <asset_name>indiegraphicsbundle\platforms\GrndBrnP</asset_name>
+                    <asset_name>GrndBrnP.png</asset_name>
                     <Origin>
                         <X>477</X>
                         <Y>44</Y>
@@ -1713,7 +1713,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\statues\statue_6.png</texture_filename>
-                    <asset_name>tropical\statues\statue_6</asset_name>
+                    <asset_name>statue_6.png</asset_name>
                     <Origin>
                         <X>37</X>
                         <Y>71</Y>
@@ -1740,7 +1740,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\vines\vine_1.png</texture_filename>
-                    <asset_name>tropical\vines\vine_1</asset_name>
+                    <asset_name>vine_1.png</asset_name>
                     <Origin>
                         <X>29</X>
                         <Y>23</Y>
@@ -1767,7 +1767,7 @@
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
                     <texture_filename>tropical\vines\vine_3.png</texture_filename>
-                    <asset_name>tropical\vines\vine_3</asset_name>
+                    <asset_name>vine_3.png</asset_name>
                     <Origin>
                         <X>29</X>
                         <Y>16</Y>
@@ -1790,8 +1790,8 @@
         <NextItemNumber>92</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>-855.198242</X>
-            <Y>-89.80835</Y>
+            <X>2204.80176</X>
+            <Y>-1599.80835</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

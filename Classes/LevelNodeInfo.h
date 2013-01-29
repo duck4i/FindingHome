@@ -17,14 +17,17 @@ typedef struct
 	ccColor4B tint;
 	char* texture;
 	char* rawTexture;
+	char* assetTexture;
 	unsigned int type;
 
 	bool flipHorizontally;
 	bool flipVertically;
 	bool visible;
 
-	CCNode* cocosNode;
 	xmlNodePtr xmlNode;
+	CCNode* cocosNode;
+	
+
 } NODEINFO;
 
 
