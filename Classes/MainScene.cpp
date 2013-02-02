@@ -241,6 +241,7 @@ void MainScene::updateKeyboard(float delta)
 				}
 				con = con->next;
 			}
+			con = NULL;
 
 			float maxSpeed = DOG_SPEED;
 			const b2Vec2 velocity = playerBody->GetLinearVelocity();
@@ -279,17 +280,17 @@ void MainScene::updateKeyboard(float delta)
 		}
 
 		//	Check player direction			
-		if (x < 0 && direction == PlayerDirectionRight)
+		if (l & down && direction == PlayerDirectionRight)
 		{
 			direction = PlayerDirectionLeft;
 			player->runAction(CCFlipX::create(true));
 		}
-		else if (x > 0 && direction == PlayerDirectionLeft)
+		else if (r & down && direction == PlayerDirectionLeft)
 		{
 			direction = PlayerDirectionRight;
 			player->runAction(CCFlipX::create(false));
 		}
-	}
+	}//if playerBody
 
 	//	now check for scaling keys
 	float scaleStep = 0.01f;
@@ -358,7 +359,11 @@ void MainScene::updateKeyboard(float delta)
 
 void MainScene::update(float delta)
 {
-	//	PHYSICS UPDATE FIRST	
+	//	Keyboard update
+	updateKeyboard(delta);
+
+
+	//	PHYSICS UPDATE
 	this->boxWorld->Step(BOX_WOLRD_STEP, BOX_WORLD_VELOCITY_PASSES, BOX_WORLD_POSITION_PASSES);	
 
 	for (b2Body* b = this->boxWorld->GetBodyList(); b; b = b->GetNext())
@@ -378,8 +383,7 @@ void MainScene::update(float delta)
 		}
 	}
 
-	//	Now keyboard update
-	updateKeyboard(delta);
+	
 
 	//	And weather ofcourse
 	if (weather)
@@ -388,9 +392,7 @@ void MainScene::update(float delta)
 
 void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 {
-	CCLog("Touches began");
-	this->touchesInProgress = true;
-	this->cameraMoveInProgress = true;
+	CCLog("Touches began");	
 }
 
 void MainScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
@@ -401,7 +403,12 @@ void MainScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
 
 void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 {
+#ifdef _DEBUG
+
 	CCLog("Touch moved");
+	this->touchesInProgress = true;
+	this->cameraMoveInProgress = true;
+
 	CCTouch *t = (CCTouch*) touches->anyObject();
 	if (!t)
 		return;
@@ -412,5 +419,6 @@ void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 	CCPoint diff = ccpSub(loc, locPrev);
 	diff.y *= -1;
 	this->worldLayer->setPosition(ccpAdd(this->worldLayer->getPosition(), diff));
-	//this->debugLayer->setPosition
+
+#endif
 }

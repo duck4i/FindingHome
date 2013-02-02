@@ -2,8 +2,8 @@
 #define __SETTINGS_H__
 #include "Physics.h"
 
-#define WINDOW_WIDTH	1024
-#define WINDOW_HEIGHT	768
+#define WINDOW_WIDTH	960
+#define WINDOW_HEIGHT	640
 
 #define WINDOW_TITLE	"Finding home"
 

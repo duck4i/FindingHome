@@ -9,7 +9,7 @@
 void LevelLoader::createLevelLayers()
 {
 	//	do not change the order of how we create layers, it will affect zOrder
-	this->backgroundLayer = CCLayer::create();	
+	this->backgroundLayer = CCLayer::create();
 	this->worldNode->addChild(this->backgroundLayer);
 
 	this->mainLayer = CCLayer::create();
@@ -241,7 +241,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		{
 			CCLog("Box world is not set up. Cannot create physics");
 			return false;
-		}		
+		}
 
 		//	now set body fixtures
 		b2BodyDef def;
@@ -263,6 +263,18 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 			fd.density = 3.0f;			
 			fd.friction = 0.8f;
 			fd.restitution = 0;
+			
+			b2FixtureDef groundBody;
+			b2PolygonShape groundBodyShape;
+
+			CCSize playerSize = this->playerNode->getContentSize();
+			playerSize.height += 60;	//	more than player size - so it goes into ground
+			groundBodyShape.SetAsBox(SCREEN_TO_WORLD(playerSize.width / 2), SCREEN_TO_WORLD(playerSize.height / 2));
+
+			groundBody.isSensor = true;
+			groundBody.shape = &groundBodyShape;
+
+			this->playerBody->CreateFixture(&groundBody);
 		}
 		
 		//	check for custom shape

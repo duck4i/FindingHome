@@ -129,6 +129,7 @@
     <ClInclude Include="..\Classes\extern\B2DebugDrawLayer.h" />
     <ClInclude Include="..\Classes\extern\CCTexture2DMutable.h" />
     <ClInclude Include="..\Classes\extern\GLES-Render.h" />
+    <ClInclude Include="..\Classes\KeyboardHelper.h" />
     <ClInclude Include="..\Classes\LevelLoader.h" />
     <ClInclude Include="..\Classes\LevelNodeInfo.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
@@ -147,6 +148,7 @@
     <ClCompile Include="..\Classes\extern\B2DebugDrawLayer.cpp" />
     <ClCompile Include="..\Classes\extern\CCTexture2DMutable.cpp" />
     <ClCompile Include="..\Classes\extern\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\KeyboardHelper.cpp" />
     <ClCompile Include="..\Classes\LevelLoader.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\ShapeHelper.cpp" />

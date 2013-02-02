@@ -4,8 +4,9 @@
 #include "cocos2d.h"
 #include "Box2D/Box2D.h"
 #include "SimpleAudioEngine.h"
-#include "Settings.h"
 #include "extern/B2DebugDrawLayer.h"
+#include "Settings.h"
+#include "KeyboardHelper.h"
 #include "LevelLoader.h"
 #include "WeatherHelper.h"
 

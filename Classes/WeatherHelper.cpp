@@ -346,17 +346,17 @@ void WeatherHelper::update(float delta)
 		CCPoint pos = this->worldLayer->getPosition();
 		float div = CLOUDS_1_PARALAX;
 		float x = cloudPos[0].x - pos.x / div;
-		float y = cloudPos[0].y - pos.y / div;
+		float y = cloudPos[0].y; //- pos.y / div;
 		this->bigOnes->setPosition(x, y);
 		
 		div = CLOUDS_2_PARALAX;
 		x = cloudPos[1].x + pos.x / div;
-		y = cloudPos[1].y + pos.y / div;
+		y = cloudPos[1].y; //+ pos.y / div;
 		this->mediumOnes->setPosition(x, y);
 
 		div = CLOUDS_3_PARALAX;
 		x = cloudPos[2].x + pos.x / div;
-		y = cloudPos[2].y + pos.y / div;
+		y = cloudPos[2].y;	// + pos.y / div;
 		this->smallOnes->setPosition(x, y);
 	}	
 

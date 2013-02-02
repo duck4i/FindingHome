@@ -750,6 +750,114 @@
                         <Y>44</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0083" Visible="true">
+                    <Position>
+                        <X>11127</X>
+                        <Y>338</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>-4.46675</Rotation>
+                    <Scale>
+                        <X>4.3677454</X>
+                        <Y>4.3677454</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\vines\vine_3.png</texture_filename>
+                    <asset_name>vine_3.png</asset_name>
+                    <Origin>
+                        <X>29</X>
+                        <Y>16</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0082" Visible="true">
+                    <Position>
+                        <X>10881</X>
+                        <Y>362</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>1.13464916</Rotation>
+                    <Scale>
+                        <X>4.75510168</X>
+                        <Y>4.75510168</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\vines\vine_1.png</texture_filename>
+                    <asset_name>vine_1.png</asset_name>
+                    <Origin>
+                        <X>29</X>
+                        <Y>23</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0014" Visible="true">
+                    <Position>
+                        <X>-2499</X>
+                        <Y>62</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>1.13464916</Rotation>
+                    <Scale>
+                        <X>4.75510168</X>
+                        <Y>4.75510168</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\vines\vine_1.png</texture_filename>
+                    <asset_name>vine_1.png</asset_name>
+                    <Origin>
+                        <X>29</X>
+                        <Y>23</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0015" Visible="true">
+                    <Position>
+                        <X>-2253</X>
+                        <Y>38</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>-4.46675</Rotation>
+                    <Scale>
+                        <X>4.3677454</X>
+                        <Y>4.3677454</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\vines\vine_3.png</texture_filename>
+                    <asset_name>vine_3.png</asset_name>
+                    <Origin>
+                        <X>29</X>
+                        <Y>16</Y>
+                    </Origin>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -1042,60 +1150,6 @@
                     <Origin>
                         <X>37</X>
                         <Y>71</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0014" Visible="true">
-                    <Position>
-                        <X>-2499</X>
-                        <Y>62</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>1.13464916</Rotation>
-                    <Scale>
-                        <X>4.75510168</X>
-                        <Y>4.75510168</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>tropical\vines\vine_1.png</texture_filename>
-                    <asset_name>vine_1.png</asset_name>
-                    <Origin>
-                        <X>29</X>
-                        <Y>23</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0015" Visible="true">
-                    <Position>
-                        <X>-2253</X>
-                        <Y>38</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>-4.46675</Rotation>
-                    <Scale>
-                        <X>4.3677454</X>
-                        <Y>4.3677454</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>tropical\vines\vine_3.png</texture_filename>
-                    <asset_name>vine_3.png</asset_name>
-                    <Origin>
-                        <X>29</X>
-                        <Y>16</Y>
                     </Origin>
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0026" Visible="true">
@@ -1719,60 +1773,6 @@
                         <Y>71</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0082" Visible="true">
-                    <Position>
-                        <X>10881</X>
-                        <Y>362</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>1.13464916</Rotation>
-                    <Scale>
-                        <X>4.75510168</X>
-                        <Y>4.75510168</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>tropical\vines\vine_1.png</texture_filename>
-                    <asset_name>vine_1.png</asset_name>
-                    <Origin>
-                        <X>29</X>
-                        <Y>23</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0083" Visible="true">
-                    <Position>
-                        <X>11127</X>
-                        <Y>338</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>-4.46675</Rotation>
-                    <Scale>
-                        <X>4.3677454</X>
-                        <Y>4.3677454</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>tropical\vines\vine_3.png</texture_filename>
-                    <asset_name>vine_3.png</asset_name>
-                    <Origin>
-                        <X>29</X>
-                        <Y>16</Y>
-                    </Origin>
-                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -1787,11 +1787,11 @@
         </Property>
     </CustomProperties>
     <EditorRelated>
-        <NextItemNumber>92</NextItemNumber>
+        <NextItemNumber>93</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>2204.80176</X>
-            <Y>-1599.80835</Y>
+            <X>992.46875</X>
+            <Y>-281.80835</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

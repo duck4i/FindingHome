@@ -50,8 +50,10 @@ private:
 	ShapeHelper *shapeHelper;
 
 public:
+
 	CCNode* playerNode;
 	b2Body* playerBody;
+	//b2Fixture* playerSensorFixture;
 
 	CCNode* finishNode;
 	
