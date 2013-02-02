@@ -23,11 +23,14 @@ bool CustomProperties::parseFromNode(xmlNodePtr node)
 			//	check for helper types
 			if (xmlStrcasecmp(name, (const xmlChar*) PLAYER_TAG_NAME) == 0)
 				foundPropNamedPlayer = true;
+			//	cannot be player and finish so we else if here
 			else if (xmlStrcasecmp(name, (const xmlChar*) FINISH_TAG_NAME) == 0)
 				foundPropNamedFinish = true;
-			else if (xmlStrcasecmp(name, (const xmlChar*) DYNAMIC_TAG_NAME) == 0)
+			
+			if (xmlStrcasecmp(name, (const xmlChar*) DYNAMIC_TAG_NAME) == 0)
 				foundPropNamedDynamic = true;
-
+			if (xmlStrcasecmp(name, (const xmlChar*) BOUNCE_TAG_NAME) == 0)
+				foundPropNamedBounce = true;
 
 
 		}

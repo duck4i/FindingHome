@@ -10,6 +10,7 @@
 #define PLAYER_TAG_NAME		"Player"
 #define FINISH_TAG_NAME		"Finish"
 #define DYNAMIC_TAG_NAME	"Dynamic"	//	dynamic Box2D objects
+#define BOUNCE_TAG_NAME		"Bounce"
 
 /*
 <Property Name="obicanItem" Type="Item" Description="">Rectangle_0010</Property>
@@ -62,7 +63,7 @@ private:
 	bool foundPropNamedPlayer;
 	bool foundPropNamedFinish;	
 	bool foundPropNamedDynamic;
-	
+	bool foundPropNamedBounce;
 
 public:
 
@@ -71,6 +72,7 @@ public:
 		foundPropNamedPlayer = false;
 		foundPropNamedFinish = false;
 		foundPropNamedDynamic = false;		
+		foundPropNamedBounce = false;
 	}
 		
 	std::vector<CustomProperty> properties;	
@@ -79,6 +81,7 @@ public:
 
 	//	few helpers
 	bool isDynamicObject() { return foundPropNamedDynamic; }
+	bool isBouncable() { return foundPropNamedBounce; }
 	bool isMessageBoard();
 	
 	bool isPlayerObject() { return foundPropNamedPlayer; }

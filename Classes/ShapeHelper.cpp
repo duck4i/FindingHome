@@ -41,7 +41,7 @@ Value ShapeHelper::itemWithName(char* name)
 	return NULL;
 }
 
-bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, float density, float friction)
+bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, float density, float friction, bool bounce)
 {
 	bool res = false;
 	CCLog("%s Name: %s", __FUNCTION__, name);
@@ -95,6 +95,9 @@ bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, floa
 			fd.shape = &ps;			
 			fd.density = density;
 			fd.friction = friction;
+
+			if (bounce)
+				fd.restitution = 0.5;
 
 			b2Fixture *f = body->CreateFixture(&fd);			
 

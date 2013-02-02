@@ -28,8 +28,9 @@ enum PlayerDirection
 
 class MainScene : public CCLayerColor
 {
-private:
+private:	
 
+	void loadMap(float delta);
 	void update(float delta);
 
 	WeatherHelper *weather;
@@ -53,6 +54,8 @@ private:
 	PlayerDirection direction;
 	
 	//	world
+	CCSize winSize;
+	CCNode *loadLayer;
 	CCNode *worldLayer;
 	b2World *boxWorld;
 	B2DebugDrawLayer *debugLayer;

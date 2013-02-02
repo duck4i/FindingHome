@@ -35,7 +35,7 @@ public:
 		initOK = init();
 	}
 
-	bool createShapeForItem(char* name, __in b2Body* body, CCSize size, float density = 1.0f, float friction = 1.0f);
+	bool createShapeForItem(char* name, __in b2Body* body, CCSize size, float density = 1.0f, float friction = 1.0f, bool bounce = false);
 
 };
 

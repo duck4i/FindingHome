@@ -135,8 +135,6 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	if (type == 0 && inserted)
 		parseNodePhysics(info, props);
 
-
-
 	//	since parseNodeTexture allocates we release it here
 	if (info.texture)
 		delete [] info.texture;	
@@ -278,7 +276,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		}
 		
 		//	check for custom shape
-		bool customFixture = shapeHelper->createShapeForItem(info.assetTexture, body, info.size, fd.density, fd.friction);
+		bool customFixture = shapeHelper->createShapeForItem(info.assetTexture, body, info.size, fd.density, fd.friction, props.isBouncable());
 
 		if (!customFixture)
 		{		
@@ -288,15 +286,16 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 			if (info.type == 1)
 			{
 				cs.m_radius = SCREEN_TO_WORLD(info.radius);
-				fd.shape = &cs;
-				if (!props.isPlayerObject())
-					fd.restitution  = 0.5f;
+				fd.shape = &cs;				
 			}
 			else
 			{
 				ps.SetAsBox(SCREEN_TO_WORLD(info.size.width / 2), SCREEN_TO_WORLD(info.size.height / 2));
 				fd.shape = &ps;
 			}
+
+			if (props.isBouncable())
+				fd.restitution = 0.5;
 
 			body->CreateFixture(&fd);
 		}					

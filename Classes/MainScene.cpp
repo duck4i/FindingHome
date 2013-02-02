@@ -22,27 +22,43 @@ MainScene::~MainScene()
 
 bool MainScene::init()
 {	
+	winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
+
 	//	this->initWithColor(ccc4(100, 149, 237, 255));	//	cornflower blue
-	this->initWithColor(ccc4(0, 0, 0, 255));	//	
+	this->initWithColor(ccc4(0, 0, 0, 255));
 
 	this->debugLayer = NULL;
 	this->boxDebugKeyIsDown = false;
-
 	this->player = NULL;
-	this->playerBody = NULL;
+	this->playerBody = NULL;	
+	this->boxWorld = NULL;	
 	this->weather = NULL;
 
 	direction = PlayerDirectionRight;
 	
 	//	Create world layer
-	this->worldLayer = CCLayer::create();
-	this->weather = new WeatherHelper(this, this->worldLayer, WEATHER_CONTROLLER_DATA);
-
+	this->worldLayer = CCLayer::create();	
 	sceneScale = DEFAULT_SCALE;
-	this->worldLayer->setScale(sceneScale);
-	this->addChild(worldLayer);
+	this->worldLayer->setScale(sceneScale);	
+	this->addChild(worldLayer, 1000);
 
-	//	setup physics object
+	//	add loading layer
+	this->loadLayer = CCSprite::create(RESOURCE_LOADING);	
+	loadLayer->setPosition(ccp(winSize.width / 2, winSize.height / 2));
+	this->addChild(loadLayer, 10000);
+
+	//	load map after 1 second
+	this->scheduleOnce(schedule_selector(MainScene::loadMap), 0.0f);
+
+	return true;
+}
+
+void MainScene::loadMap(float none)
+{
+	//	weather data
+	this->weather = new WeatherHelper(this, this->worldLayer, WEATHER_CONTROLLER_DATA);	
+
+	//	setup physics object 
 	this->setupPhysics();
 	this->addBodies();
 
@@ -83,46 +99,9 @@ bool MainScene::init()
 	lab->setPosition(ccp(CCDirector::sharedDirector()->getWinSizeInPixels().width / 2, CCDirector::sharedDirector()->getWinSizeInPixels().height - 15));
 	this->addChild(lab, 100000);
 
-	return true;
+	//	remove loading layer
+	this->loadLayer->removeFromParentAndCleanup(true);
 }
-
-void MainScene::toggleCameraProgress()
-{
-	this->cameraMoveInProgress = !this->cameraMoveInProgress;
-}
-
-void MainScene::updateCamera(float delta)
-{	
-	if (this->cameraMoveInProgress)
-		return;
-
-	CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
-	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->player->getPosition());
-	CCPoint prevPos = this->worldLayer->getPosition();
-	
-	float margin = 0.35f;
-	float rightMargin = size.width - size.width * margin;
-	float leftMargin = size.width * margin;
-
-	float topMargin = size.height - size.height * margin;
-	float bottomMargin = size.height * 0.25;
-
-	float xm = prevPos.x;
-	float ym = prevPos.y;
-
-	if (realPos.x >= rightMargin)
-		xm -= (realPos.x - rightMargin) * sceneScale;
-	else if (realPos.x <= leftMargin)
-		xm += (leftMargin - realPos.x) * sceneScale;
-
-	if (realPos.y <= bottomMargin)
-		ym += (bottomMargin - realPos.y) * sceneScale;
-	else if (realPos.y >= topMargin)
-		ym -= (realPos.y - topMargin) * sceneScale;
-	
-	this->worldLayer->setPosition(xm, ym);
-}
-
 
 void MainScene::setupPhysics()
 {
@@ -171,6 +150,43 @@ void MainScene::addBodies()
 
 }
 
+void MainScene::toggleCameraProgress()
+{
+	this->cameraMoveInProgress = !this->cameraMoveInProgress;
+}
+
+void MainScene::updateCamera(float delta)
+{	
+	if (this->cameraMoveInProgress)
+		return;
+
+	CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
+	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->player->getPosition());
+	CCPoint prevPos = this->worldLayer->getPosition();
+	
+	float margin = 0.35f;
+	float rightMargin = size.width - size.width * margin;
+	float leftMargin = size.width * margin;
+
+	float topMargin = size.height - size.height * margin;
+	float bottomMargin = size.height * 0.25;
+
+	float xm = prevPos.x;
+	float ym = prevPos.y;
+
+	if (realPos.x >= rightMargin)
+		xm -= (realPos.x - rightMargin) * sceneScale;
+	else if (realPos.x <= leftMargin)
+		xm += (leftMargin - realPos.x) * sceneScale;
+
+	if (realPos.y <= bottomMargin)
+		ym += (bottomMargin - realPos.y) * sceneScale;
+	else if (realPos.y >= topMargin)
+		ym -= (realPos.y - topMargin) * sceneScale;
+	
+	this->worldLayer->setPosition(xm, ym);
+}
+
 void MainScene::updateKeyboard(float delta)
 {
 	if (disableKeyboard)
@@ -196,7 +212,11 @@ void MainScene::updateKeyboard(float delta)
 		short r = GetKeyState(VK_RIGHT);
 		short d = GetKeyState(VK_DOWN);
 		short u = GetKeyState(VK_UP);
-		short shift = GetKeyState(VK_LSHIFT);
+		short shift = GetKeyState(VK_LSHIFT);		
+
+		//( when both left and right buttons pushed do nothing as that is some unknown state)
+		if (r & down && l & down)
+			return;
 
 		bool jumped = (u & down) || (u2 & down);
 
@@ -342,14 +362,8 @@ void MainScene::updateKeyboard(float delta)
 	{
 		if (!restartKeyIsDown)
 		{
-			restartKeyIsDown = true;
-			CCScene* m = MainScene::scene();
-			if (m)
-			{
-				CCScene* s = CCTransitionFade::create(3.0f, m);
-				if (s)
-					CCDirector::sharedDirector()->replaceScene(s);
-			}
+			restartKeyIsDown = true;									
+			CCDirector::sharedDirector()->replaceScene(MainScene::scene());			
 		}
 	}
 	else if (restartKeyIsDown)

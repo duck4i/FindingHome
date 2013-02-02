@@ -15,10 +15,11 @@
 
 #define STAR_PATH					RESOURCE_DIR "star.png"
 
-#define PLAYER_TAG	1001
+#define PLAYER_TAG			1001
 
-#define RESOURCE_BLOCK	RESOURCE_DIR "block.png"
-#define RESOURCE_CIRCLE	RESOURCE_DIR "circle.png"
-#define RESOURCE_PLAYER	RESOURCE_DIR "dog.png"
+#define RESOURCE_BLOCK		RESOURCE_DIR	"block.png"
+#define RESOURCE_CIRCLE		RESOURCE_DIR	"circle.png"
+#define RESOURCE_PLAYER		RESOURCE_DIR	"dog.png"
+#define RESOURCE_LOADING	RESOURCE_DIR	"loading.png"
 
 #endif
