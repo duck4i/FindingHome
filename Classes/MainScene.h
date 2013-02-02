@@ -20,6 +20,8 @@ using namespace cocos2d;
 #define DOG_JUMP_VALUE		280.0f
 #define DOG_STEP_VALUE		25.0f
 
+#define ZOOM_STEP			0.005f
+
 enum PlayerDirection
 {
 	PlayerDirectionLeft,
@@ -52,6 +54,8 @@ private:
 	CCNode* player;
 	b2Body *playerBody;
 	PlayerDirection direction;
+
+	CCSprite* shiftSprite;
 	
 	//	world
 	CCSize winSize;
@@ -70,6 +74,12 @@ private:
 	void ccTouchesBegan(CCSet* touches, CCEvent* event);
 	void ccTouchesEnded(CCSet* touches, CCEvent* event);
 	void ccTouchesMoved(CCSet* touches, CCEvent* event);
+
+	//	sets scene zoom value (scale)
+	void setSceneZoom(float value);
+	void incSceneZoom();
+	void descSceneZoom();
+	void resetSceneZoom();
 
 public:
 

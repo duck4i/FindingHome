@@ -62,6 +62,12 @@ void MainScene::loadMap(float none)
 	this->setupPhysics();
 	this->addBodies();
 
+	this->shiftSprite = CCSprite::create(RESOURCE_SHIFT);
+	this->shiftSprite->setAnchorPoint(ccp(0, 0));
+	this->shiftSprite->setPosition(ccp(10, 30));
+	this->shiftSprite->setVisible(false);
+	this->addChild(this->shiftSprite, 100000);
+
 	//	schedule keyboard and touch events
 	this->jumpKeyIsDown = false;
 	this->disableKeyboard = false;
@@ -310,32 +316,37 @@ void MainScene::updateKeyboard(float delta)
 			direction = PlayerDirectionRight;
 			player->runAction(CCFlipX::create(false));
 		}
+
+		//	shift key
+		if ((shift & down))
+		{
+			if (!this->shiftSprite->isVisible())
+				this->shiftSprite->setVisible(true);
+		}
+		else if (this->shiftSprite->isVisible())
+				this->shiftSprite->setVisible(false);
+
 	}//if playerBody
 
 	//	now check for scaling keys
 	float scaleStep = 0.01f;
 	if (zoomIn & down)
 	{		
-		this->sceneScale += scaleStep;
-		this->worldLayer->setScale(sceneScale);
+		incSceneZoom();
 	}
 	else if (zoomOut & down)
 	{		
-		this->sceneScale -= scaleStep;
-		this->sceneScale = max(this->sceneScale, 0.01f); // no less than 0.01
-		this->worldLayer->setScale(sceneScale);
+		descSceneZoom();
 	}
 	else if (zoomReset & down)
 	{		
-		this->sceneScale = DEFAULT_SCALE;
-		this->worldLayer->setScale(this->sceneScale);		
+		resetSceneZoom();
 	}
 	
 	//	Continue camera and reset scale
 	if (cameraContinue & down)
 	{
-		this->sceneScale = DEFAULT_SCALE;
-		this->worldLayer->setScale(this->sceneScale);
+		resetSceneZoom();
 		this->cameraMoveInProgress = false;
 	}
 
@@ -368,14 +379,12 @@ void MainScene::updateKeyboard(float delta)
 	}
 	else if (restartKeyIsDown)
 		restartKeyIsDown = false;
-
 }
 
 void MainScene::update(float delta)
 {
 	//	Keyboard update
 	updateKeyboard(delta);
-
 
 	//	PHYSICS UPDATE
 	this->boxWorld->Step(BOX_WOLRD_STEP, BOX_WORLD_VELOCITY_PASSES, BOX_WORLD_POSITION_PASSES);	
@@ -396,9 +405,7 @@ void MainScene::update(float delta)
 			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
 		}
 	}
-
 	
-
 	//	And weather ofcourse
 	if (weather)
 		weather->update(delta);
@@ -435,4 +442,44 @@ void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 	this->worldLayer->setPosition(ccpAdd(this->worldLayer->getPosition(), diff));
 
 #endif
+}
+
+void MainScene::setSceneZoom(float val)
+{		
+	if (!player || !worldLayer)
+		return;
+
+	CCPoint oldPos = this->worldLayer->convertToWorldSpace(player->getPosition());		
+	CCPoint oldWPos = this->convertToWorldSpace(worldLayer->getPosition());
+
+	this->worldLayer->setScale(this->sceneScale);
+
+	CCPoint pos = this->worldLayer->convertToWorldSpace(player->getPosition());
+	CCPoint wPos = this->convertToWorldSpace(worldLayer->getPosition());
+	CCPoint worldPos = this->worldLayer->getPosition();
+		
+	CCPoint diff = ccpSub(pos, oldPos);
+	CCPoint wDiff = ccpSub(wPos, oldWPos);
+		
+	this->worldLayer->setPosition(worldPos.x + diff.x, worldPos.y + diff.y);	
+}
+
+void MainScene::incSceneZoom()
+{
+	this->sceneScale += ZOOM_STEP;
+	this->sceneScale = min(2.0f, this->sceneScale);
+	setSceneZoom(this->sceneScale);
+}
+
+void MainScene::descSceneZoom()
+{
+	this->sceneScale -= ZOOM_STEP;
+	this->sceneScale = max(0.005f, this->sceneScale);
+	setSceneZoom(this->sceneScale);
+}
+
+void MainScene::resetSceneZoom()
+{
+	this->sceneScale = DEFAULT_SCALE;
+	setSceneZoom(this->sceneScale);
 }
