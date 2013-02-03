@@ -11,6 +11,14 @@ USING_NS_CC;
 
 char* commandLine = NULL;
 
+bool alreadyRunning()
+{
+	HANDLE h = CreateMutex(NULL, FALSE, "FHomeM00tex");
+	if (h != NULL && GetLastError() == ERROR_ALREADY_EXISTS)
+		return true;
+	return false;
+}
+
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                        HINSTANCE hPrevInstance,
                        LPTSTR    lpCmdLine,
@@ -18,6 +26,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
+
+	//	check double run
+	if (alreadyRunning())
+		return -1;
 	
 	if (lpCmdLine && strlen(lpCmdLine) > 0)
 	{				

@@ -328,20 +328,13 @@ void MainScene::updateKeyboard(float delta)
 
 	}//if playerBody
 
-	//	now check for scaling keys
-	float scaleStep = 0.01f;
+	//	now check for scaling keys	
 	if (zoomIn & down)
-	{		
 		incSceneZoom();
-	}
 	else if (zoomOut & down)
-	{		
 		descSceneZoom();
-	}
 	else if (zoomReset & down)
-	{		
-		resetSceneZoom();
-	}
+		resetSceneZoom();	
 	
 	//	Continue camera and reset scale
 	if (cameraContinue & down)
