@@ -1,8 +1,35 @@
 <?xml version="1.0"?>
-<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_01" Visible="true">
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Tutorial Level" Visible="true">
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
+                <Item xsi:type="TextureItem" Name="Texture_0214" Visible="true">
+                    <Position>
+                        <X>9029</X>
+                        <Y>51</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>2.14450216</X>
+                        <Y>2.14450216</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>GoodBoy.png</texture_filename>
+                    <asset_name>GoodBoy.png</asset_name>
+                    <Origin>
+                        <X>182</X>
+                        <Y>140</Y>
+                    </Origin>
+                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0020" Visible="true">
                     <Position>
                         <X>-2541</X>
@@ -1711,22 +1738,6 @@
                         <Y>30</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="RectangleItem" Name="Rectangle_0183" Visible="true">
-                    <Position>
-                        <X>-15357</X>
-                        <Y>-917</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Width>6656</Width>
-                    <Height>1903</Height>
-                    <FillColor>
-                        <R>184</R>
-                        <G>134</G>
-                        <B>73</B>
-                        <A>255</A>
-                        <PackedValue>4290283081</PackedValue>
-                    </FillColor>
-                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0184" Visible="true">
                     <Position>
                         <X>-14358</X>
@@ -2293,6 +2304,22 @@
                         <X>32</X>
                         <Y>36</Y>
                     </Origin>
+                </Item>
+                <Item xsi:type="RectangleItem" Name="Rectangle_0183" Visible="true">
+                    <Position>
+                        <X>-15177</X>
+                        <Y>-917</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>6476</Width>
+                    <Height>1903</Height>
+                    <FillColor>
+                        <R>184</R>
+                        <G>134</G>
+                        <B>73</B>
+                        <A>255</A>
+                        <PackedValue>4290283081</PackedValue>
+                    </FillColor>
                 </Item>
             </Items>
             <ScrollSpeed>
@@ -3764,8 +3791,8 @@
                 </Item>
                 <Item xsi:type="CircleItem" Name="Circle_0166" Visible="true">
                     <Position>
-                        <X>-13398</X>
-                        <Y>-1204</Y>
+                        <X>-13438</X>
+                        <Y>-1184</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="player" Type="bool" Description="">
@@ -4067,8 +4094,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0203" Visible="true">
                     <Position>
-                        <X>22437</X>
-                        <Y>-767</Y>
+                        <X>19787</X>
+                        <Y>1463</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="dynamic" Type="bool" Description="">
@@ -4113,11 +4140,11 @@
         </Property>
     </CustomProperties>
     <EditorRelated>
-        <NextItemNumber>213</NextItemNumber>
+        <NextItemNumber>214</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>358.96875</X>
-            <Y>-1533.96826</Y>
+            <X>-6991.03125</X>
+            <Y>-1633.96826</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

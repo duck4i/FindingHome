@@ -33,15 +33,15 @@ class MainScene : public CCLayerColor
 private:	
 
 	void loadMap(float delta);
+	
 	void update(float delta);
-
-	WeatherHelper *weather;
+	void updatePhysics(float delta);	
 
 	bool cameraMoveInProgress;
 	void toggleCameraProgress();
 	void updateCamera(float delta);
 
-	float sceneScale;
+	float sceneScale;	
 	
 	unsigned int jumpKeyIsDown;
 	bool restartKeyIsDown;
@@ -49,6 +49,9 @@ private:
 	
 	bool disableKeyboard;
 	void updateKeyboard(float delta);
+
+	//	weather
+	WeatherHelper *weather;
 
 	//	player
 	CCNode* player;

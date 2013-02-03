@@ -34,7 +34,7 @@ bool MainScene::init()
 	this->boxWorld = NULL;	
 	this->weather = NULL;
 
-	direction = PlayerDirectionRight;
+	direction = PlayerDirectionRight;	
 	
 	//	Create world layer
 	this->worldLayer = CCLayer::create();	
@@ -48,7 +48,7 @@ bool MainScene::init()
 	this->addChild(loadLayer, 10000);
 
 	//	load map after 1 second
-	this->scheduleOnce(schedule_selector(MainScene::loadMap), 0.0f);
+	this->scheduleOnce(schedule_selector(MainScene::loadMap), 0.0f);	
 
 	return true;
 }
@@ -74,9 +74,6 @@ void MainScene::loadMap(float none)
 	this->setKeypadEnabled(true);
 
 	this->touchesInProgress = false;
-	this->setTouchEnabled(true);
-
-	this->scheduleUpdate();
 
 	//	schedule camera update
 	if (this->player)
@@ -86,14 +83,13 @@ void MainScene::loadMap(float none)
 		this->playerBody->SetLinearDamping(0.5f);
 		this->playerBody->SetGravityScale(2);
 
-		this->cameraMoveInProgress = false;	
-		CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
+		this->cameraMoveInProgress = false;			
 		CCPoint playerStart = this->worldLayer->convertToWorldSpace(player->getPosition());
 
 		//	always start in (20%/20%) coordinates
 		float twentyPercent = 0.25f;
-		float xs = ( playerStart.x - (size.width * twentyPercent) ) * -1;
-		float ys = ( playerStart.y - (size.height * twentyPercent) ) * -1;	
+		float xs = ( playerStart.x - (winSize.width * twentyPercent) ) * -1;
+		float ys = ( playerStart.y - (winSize.height * twentyPercent) ) * -1;	
 		this->worldLayer->setPosition(this->getPositionX() + xs, this->getPositionY() + ys);
 
 		this->schedule(schedule_selector(MainScene::updateCamera));
@@ -107,6 +103,10 @@ void MainScene::loadMap(float none)
 
 	//	remove loading layer
 	this->loadLayer->removeFromParentAndCleanup(true);
+
+	//	now do UPDATE schedule
+	this->setTouchEnabled(true);
+	this->scheduleUpdate();
 }
 
 void MainScene::setupPhysics()
@@ -140,20 +140,12 @@ void MainScene::addBodies()
 	{		
 		this->playerBody = l.playerBody;
 		this->player = l.playerNode;
-
-		//CCAssert(this->player, "Player buddy missing?");
-
-		if (this->player)
-		{			
-			CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
-			CCPoint pos = this->player->getPosition();
-		}
-
 		return;
 	}
-		
+	
+#ifdef CC_PLATFORM_WIN32
 	MessageBox(NULL, "Player object is not found in this level.", "How are you gona play?", MB_ICONWARNING | MB_OK);
-
+#endif
 }
 
 void MainScene::toggleCameraProgress()
@@ -163,32 +155,40 @@ void MainScene::toggleCameraProgress()
 
 void MainScene::updateCamera(float delta)
 {	
+	//CCLog("DELTA CAMERA: %f", delta);
 	if (this->cameraMoveInProgress)
 		return;
-
-	CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
+	
 	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->player->getPosition());
 	CCPoint prevPos = this->worldLayer->getPosition();
 	
 	float margin = 0.35f;
-	float rightMargin = size.width - size.width * margin;
-	float leftMargin = size.width * margin;
 
-	float topMargin = size.height - size.height * margin;
-	float bottomMargin = size.height * 0.25;
+#ifndef _DISABLE_FLOAT_CAMERA
+	float rightMargin = winSize.width / 2;//winSize.width - winSize.width * margin;
+	float leftMargin = winSize.width / 2; //winSize.width * margin;
+	float timeDelay = delta * 2;//delta /* / (1.0f / 60.0f)*/;
+#else
+	float rightMargin = winSize.width - winSize.width * margin;
+	float leftMargin = winSize.width * margin;
+	float timeDelay = 1;
+#endif
+
+	float topMargin = winSize.height - winSize.height * margin;
+	float bottomMargin = winSize.height * 0.25;
 
 	float xm = prevPos.x;
-	float ym = prevPos.y;
+	float ym = prevPos.y;	
 
 	if (realPos.x >= rightMargin)
-		xm -= (realPos.x - rightMargin) * sceneScale;
+		xm -= (realPos.x - rightMargin) * sceneScale * timeDelay;
 	else if (realPos.x <= leftMargin)
-		xm += (leftMargin - realPos.x) * sceneScale;
+		xm += (leftMargin - realPos.x) * sceneScale * timeDelay;
 
 	if (realPos.y <= bottomMargin)
-		ym += (bottomMargin - realPos.y) * sceneScale;
+		ym += (bottomMargin - realPos.y) * sceneScale * timeDelay;
 	else if (realPos.y >= topMargin)
-		ym -= (realPos.y - topMargin) * sceneScale;
+		ym -= (realPos.y - topMargin) * sceneScale * timeDelay;
 	
 	this->worldLayer->setPosition(xm, ym);
 }
@@ -377,9 +377,18 @@ void MainScene::updateKeyboard(float delta)
 void MainScene::update(float delta)
 {
 	//	Keyboard update
-	updateKeyboard(delta);
+	updateKeyboard(delta);	
 
 	//	PHYSICS UPDATE
+	updatePhysics(delta);
+	
+	//	And weather ofcourse
+	if (weather)
+		weather->update(delta);
+}
+
+void MainScene::updatePhysics(float delta)
+{
 	this->boxWorld->Step(BOX_WOLRD_STEP, BOX_WORLD_VELOCITY_PASSES, BOX_WORLD_POSITION_PASSES);	
 
 	for (b2Body* b = this->boxWorld->GetBodyList(); b; b = b->GetNext())
@@ -398,10 +407,6 @@ void MainScene::update(float delta)
 			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
 		}
 	}
-	
-	//	And weather ofcourse
-	if (weather)
-		weather->update(delta);
 }
 
 void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)

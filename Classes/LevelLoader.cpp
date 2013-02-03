@@ -91,7 +91,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	if (nodeType == NULL)
 		return;	//	skipp unknown or closing elements
 	
-	CCLog("Processing node: %s with name: %s", nodeType, nodeName);
+	//CCLog("Processing node: %s with name: %s", nodeType, nodeName);
 
 	//	Read everything we need from XML
 	NODEINFO info;	
@@ -112,7 +112,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 
 	if (!info.visible)
 	{
-		CCLog("Node hidden. Skipping.");
+		//CCLog("Node hidden. Skipping.");
 		return;
 	}
 
@@ -388,7 +388,7 @@ char* LevelLoader::parseNodeTexture(xmlNodePtr node, bool raw)
 	else if (read)
 		ret = read;
 
-	CCLog("Texture: %s", ret);
+	//CCLog("Texture: %s", ret);
 	return ret;
 }
 

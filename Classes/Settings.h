@@ -5,7 +5,7 @@
 #define WINDOW_WIDTH	960
 #define WINDOW_HEIGHT	640
 
-#define WINDOW_TITLE	"Finding home"
+#define WINDOW_TITLE	"Finding Home Alpha"
 
 //	resource dirs and static files
 #define RESOURCE_DIR		"..\\Resources\\"
