@@ -84,6 +84,7 @@ void MainScene::loadMap(float none)
 		this->playerBody->SetGravityScale(2);
 
 		this->cameraMoveInProgress = false;			
+		
 		CCPoint playerStart = this->worldLayer->convertToWorldSpace(player->getPosition());
 
 		//	always start in (20%/20%) coordinates
@@ -91,7 +92,7 @@ void MainScene::loadMap(float none)
 		float xs = ( playerStart.x - (winSize.width * twentyPercent) ) * -1;
 		float ys = ( playerStart.y - (winSize.height * twentyPercent) ) * -1;	
 		this->worldLayer->setPosition(this->getPositionX() + xs, this->getPositionY() + ys);
-
+		
 		this->schedule(schedule_selector(MainScene::updateCamera));
 	}
 
@@ -102,7 +103,8 @@ void MainScene::loadMap(float none)
 	this->addChild(lab, 100000);
 
 	//	remove loading layer
-	this->loadLayer->removeFromParentAndCleanup(true);
+	//this->loadLayer->removeFromParentAndCleanup(true);
+	this->loadLayer->runAction(CCFadeTo::create(1.0f, 0));
 
 	//	now do UPDATE schedule
 	this->setTouchEnabled(true);
@@ -422,7 +424,7 @@ void MainScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
 
 void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 {
-#ifdef _DEBUG
+#ifndef NO_MOUSE_MOVE
 
 	CCLog("Touch moved");
 	this->touchesInProgress = true;

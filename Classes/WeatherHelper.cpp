@@ -146,7 +146,7 @@ void WeatherHelper::createClouds()
 		s->setTag(s->getOpacity());
 		if (isNight())
 			s->setOpacity(HIDDEN_CLOUD_ALPHA);
-		s->setScale(random(0.7, 2));
+		s->setScale(random(0.7f, 2.0f));
 		s->setColor(color);
 		bigOnes->addChild(s);
 	}
@@ -162,7 +162,7 @@ void WeatherHelper::createClouds()
 		s->setTag(s->getOpacity());
 		if (isNight())
 			s->setOpacity(HIDDEN_CLOUD_ALPHA);
-		s->setScale(random(0.7, 2));
+		s->setScale(random(0.7f, 2.0f));
 		s->setColor(color);
 		mediumOnes->addChild(s);
 	}
@@ -176,7 +176,7 @@ void WeatherHelper::createClouds()
 		s->setPosition(ccp(x, y));
 		s->setOpacity(random(160, 220));		
 		s->setTag(s->getOpacity());
-		s->setScale(random(0.7, 1.2));
+		s->setScale(random(0.7f, 1.2f));
 		if (isNight())
 			s->setOpacity(0);
 		s->setColor(color);

@@ -14,6 +14,10 @@
 
 	;Request application privileges for Windows Vista
 	RequestExecutionLevel user
+	
+	;	set stronger compression
+	SetCompressor /SOLID lzma
+	
 
 ;--------------------------------
 ;Interface Settings
@@ -52,7 +56,11 @@ Section "Install"
 
 	;	copy resources
 	SetOutPath "$INSTDIR\Resources\"
-	File /r "..\Resources\*.*"
+	File /r "..\Resources\*.png"
+	File /r "..\Resources\*.xml"
+	File /r "..\Resources\*.json"
+	File /r "..\Resources\*.vsh"
+	File /r "..\Resources\*.fsh"
 
 	;	copy EXE and DLL's
 	SetOutPath "$INSTDIR"
