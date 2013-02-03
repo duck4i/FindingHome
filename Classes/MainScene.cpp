@@ -33,6 +33,7 @@ bool MainScene::init()
 	this->playerBody = NULL;	
 	this->boxWorld = NULL;	
 	this->weather = NULL;
+	this->totalTimeInAir = 0;
 
 	direction = PlayerDirectionRight;	
 	
@@ -87,7 +88,7 @@ void MainScene::loadMap(float none)
 		
 		CCPoint playerStart = this->worldLayer->convertToWorldSpace(player->getPosition());
 
-		//	always start in (20%/20%) coordinates
+		//	always start in (25%/25%) coordinates
 		float twentyPercent = 0.25f;
 		float xs = ( playerStart.x - (winSize.width * twentyPercent) ) * -1;
 		float ys = ( playerStart.y - (winSize.height * twentyPercent) ) * -1;	
@@ -214,19 +215,19 @@ void MainScene::updateKeyboard(float delta)
 	long down = 0x8000; // hi bit
 
 	//	Update player movement
-	if (playerBody)
+	if (player)
 	{
 		short l = GetKeyState(VK_LEFT);
 		short r = GetKeyState(VK_RIGHT);
 		short d = GetKeyState(VK_DOWN);
 		short u = GetKeyState(VK_UP);
-		short shift = GetKeyState(VK_LSHIFT);		
+		short shift = GetKeyState(VK_LSHIFT);
 
 		//( when both left and right buttons pushed do nothing as that is some unknown state)
 		if (r & down && l & down)
 			return;
 
-		bool jumped = (u & down) || (u2 & down);
+		bool jumped = (u & down) || (u2 & down);		
 
 		float x = 0;
 		float y = 0;
@@ -236,13 +237,17 @@ void MainScene::updateKeyboard(float delta)
 		else if (r & down)
 			x += DOG_STEP_VALUE;
 		
+		//	jump key only once
 		if (jumped && jumpKeyIsDown < 1)
 		{
 			y += DOG_JUMP_VALUE;
 			jumpKeyIsDown++;
 		}
 		else if (!jumped)
-			jumpKeyIsDown = 0;		
+			jumpKeyIsDown = 0;
+
+		//	check is player in air
+		float midAir = isPlayerMidAir();		
 
 		//	check if anything to do
 		if (x || y)
@@ -254,22 +259,7 @@ void MainScene::updateKeyboard(float delta)
 
 			//	http://www.box2d.org/forum/viewtopic.php?f=3&t=4733
 			//	http://www.ikbentomas.nl/other/box2d/
-			//	http://www.cocos2d-iphone.org/forum/topic/13501
-		
-			//	claim we have not jumped
-			bool midAir = true;
-
-			b2ContactEdge *con = playerBody->GetContactList();
-			while (con)
-			{
-				if (con->contact->IsTouching())
-				{
-					midAir = false;
-					break;
-				}
-				con = con->next;
-			}
-			con = NULL;
+			//	http://www.cocos2d-iphone.org/forum/topic/13501				
 
 			float maxSpeed = DOG_SPEED;
 			const b2Vec2 velocity = playerBody->GetLinearVelocity();
@@ -297,7 +287,7 @@ void MainScene::updateKeyboard(float delta)
 				x = 0;
 			
 			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());
-		}
+		}//	if (x || y)
 
 		//	in any case constrol the jump velocity to look more real
 		b2Vec2 vel = this->playerBody->GetLinearVelocity();
@@ -326,9 +316,9 @@ void MainScene::updateKeyboard(float delta)
 				this->shiftSprite->setVisible(true);
 		}
 		else if (this->shiftSprite->isVisible())
-				this->shiftSprite->setVisible(false);
+			this->shiftSprite->setVisible(false);
 
-	}//if playerBody
+	}//if player
 
 	//	now check for scaling keys	
 	if (zoomIn & down)
@@ -369,7 +359,7 @@ void MainScene::updateKeyboard(float delta)
 		if (!restartKeyIsDown)
 		{
 			restartKeyIsDown = true;									
-			CCDirector::sharedDirector()->replaceScene(MainScene::scene());			
+			playerDied();
 		}
 	}
 	else if (restartKeyIsDown)
@@ -482,4 +472,39 @@ void MainScene::resetSceneZoom()
 {
 	this->sceneScale = DEFAULT_SCALE;
 	setSceneZoom(this->sceneScale);
+}
+
+void MainScene::playerDied()
+{
+	CCDirector::sharedDirector()->replaceScene(MainScene::scene());			
+}
+
+bool MainScene::isPlayerMidAir()
+{
+	if (!playerBody)
+		return false;
+
+	bool midAir = true;
+	b2ContactEdge *con = playerBody->GetContactList();
+	while (con)
+	{
+		if (con->contact->IsTouching())
+		{
+			midAir = false;
+			break;
+		}
+		con = con->next;
+	}
+
+	//	check for death
+	if (midAir)
+	{
+		totalTimeInAir += 1/60.0f;
+		if (totalTimeInAir >= IN_AIR_BEFORE_DEATH)
+			playerDied();
+	}
+	else
+		totalTimeInAir = 0;
+
+	return midAir;
 }

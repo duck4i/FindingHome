@@ -21,6 +21,7 @@ using namespace cocos2d;
 #define DOG_STEP_VALUE		25.0f
 
 #define ZOOM_STEP			0.005f
+#define IN_AIR_BEFORE_DEATH	5.0f
 
 enum PlayerDirection
 {
@@ -41,11 +42,12 @@ private:
 	void toggleCameraProgress();
 	void updateCamera(float delta);
 
-	float sceneScale;	
+	float sceneScale;		
 	
 	unsigned int jumpKeyIsDown;
 	bool restartKeyIsDown;
 	bool boxDebugKeyIsDown;
+	float totalTimeInAir;
 	
 	bool disableKeyboard;
 	void updateKeyboard(float delta);
@@ -83,6 +85,9 @@ private:
 	void incSceneZoom();
 	void descSceneZoom();
 	void resetSceneZoom();
+
+	bool isPlayerMidAir();
+	void playerDied();
 
 public:
 
