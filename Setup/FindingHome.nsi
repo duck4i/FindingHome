@@ -23,6 +23,13 @@
 ;Pages
 	!insertmacro MUI_PAGE_WELCOME  
 	!insertmacro MUI_PAGE_INSTFILES
+
+		;	Autostart game after install
+		;!define MUI_FINISHPAGE_NOAUTOCLOSE
+		!define MUI_FINISHPAGE_RUN
+		!define MUI_FINISHPAGE_RUN_CHECKED
+		!define MUI_FINISHPAGE_RUN_TEXT "Play game now!"
+		!define MUI_FINISHPAGE_RUN_FUNCTION "LaunchLink"	
 	!insertmacro MUI_PAGE_FINISH
 
 	!insertmacro MUI_UNPAGE_CONFIRM
@@ -67,6 +74,10 @@ Section "Install"
 	CreateShortCut "$DESKTOP\Finding Home.lnk" "$INSTDIR\bin\FindingHome.win32.exe" "" "$INSTDIR\game.ico" 0
 	
 	SetOutPath "$INSTDIR"
+	
+	;	now run game
+	;ExecShell "" "$DESKTOP\Finding Home.lnk"
+	
 
 SectionEnd
 
@@ -100,3 +111,8 @@ Section "Uninstall"
 	
 
 SectionEnd
+
+;	code to run game after install
+Function LaunchLink
+  ExecShell "" "$DESKTOP\Finding Home.lnk"
+FunctionEnd
