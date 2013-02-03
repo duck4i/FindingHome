@@ -26,14 +26,18 @@
 ;--------------------------------
 ;Pages
 	!insertmacro MUI_PAGE_WELCOME  
+	!insertmacro MUI_PAGE_LICENSE "readme.txt"
 	!insertmacro MUI_PAGE_INSTFILES
 
 		;	Autostart game after install
 		;!define MUI_FINISHPAGE_NOAUTOCLOSE
 		!define MUI_FINISHPAGE_RUN
-		!define MUI_FINISHPAGE_RUN_CHECKED
+		!define MUI_FINISHPAGE_RUN_NOTCHECKED
 		!define MUI_FINISHPAGE_RUN_TEXT "Play game now!"
 		!define MUI_FINISHPAGE_RUN_FUNCTION "LaunchLink"	
+		;	Read Me
+		!define MUI_FINISHPAGE_SHOWREADME_CHECKED
+		!define MUI_FINISHPAGE_SHOWREADME $INSTDIR\readme.txt
 	!insertmacro MUI_PAGE_FINISH
 
 	!insertmacro MUI_UNPAGE_CONFIRM
@@ -65,6 +69,7 @@ Section "Install"
 	;	copy EXE and DLL's
 	SetOutPath "$INSTDIR"
 	File "game.ico"
+	File "readme.txt"
 
 	;Store installation folder
 	WriteRegStr HKCU "Software\FindingHomeDemo" "" $INSTDIR
@@ -76,6 +81,7 @@ Section "Install"
 	SetOutPath "$INSTDIR\bin\"	
     CreateDirectory "$SMPROGRAMS\FindingHome"
 	CreateShortCut "$SMPROGRAMS\FindingHome\Play.lnk" "$INSTDIR\bin\FindingHome.win32.exe" "" "$INSTDIR\game.ico" 0
+	CreateShortCut "$SMPROGRAMS\FindingHome\ReadMe.lnk" "$INSTDIR\readme.txt"
     CreateShortCut "$SMPROGRAMS\FindingHome\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
 	
 	;	write desktop
@@ -106,6 +112,8 @@ Section "Uninstall"
 	
 	;	remove uninstaller
 	Delete "$INSTDIR\Uninstall.exe"	
+	Delete "$INSTDIR\Readme.txt"
+	
 	RMDir "$INSTDIR"
 
 	DeleteRegKey /ifempty HKCU "Software\FindingHomeDemo"
@@ -113,7 +121,8 @@ Section "Uninstall"
 	;	remove icons
 	Delete "$SMPROGRAMS\FindingHome\Uninstall.lnk"
 	Delete "$SMPROGRAMS\FindingHome\Play.lnk"
-	RMDir "$SMPROGRAMS\FindingHome"
+	Delete "$SMPROGRAMS\FindingHome\ReadMe.lnk"
+	RMDir /r "$SMPROGRAMS\FindingHome"
 	
 	Delete "$DESKTOP\Finding Home.lnk"
 	
