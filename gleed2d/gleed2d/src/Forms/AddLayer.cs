@@ -19,7 +19,6 @@ namespace GLEED2D
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-
             TreeNode[] nodes = MainForm.Instance.treeView1.Nodes.Find(textBox1.Text, true);
             if (nodes.Length > 0)
             {

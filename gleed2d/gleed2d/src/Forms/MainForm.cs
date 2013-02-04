@@ -161,10 +161,10 @@ namespace GLEED2D
         }
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
-            if (e.Node.Tag is Level)
-            {
-                Editor.Instance.level.Visible = e.Node.Checked;
-            }
+            //if (e.Node.Tag is Level)
+            //{
+            //    Editor.Instance.level.Visible = e.Node.Checked;
+            //}
             if (e.Node.Tag is Layer)
             {
                 Layer l = (Layer)e.Node.Tag;
@@ -448,7 +448,7 @@ namespace GLEED2D
             newlevel.EditorRelated.Version = Editor.Instance.Version;
             Editor.Instance.loadLevel(newlevel);
             levelfilename = "untitled";
-            DirtyFlag = false;
+            DirtyFlag = false;            
         }
         public void saveLevel(String filename)
         {
@@ -981,6 +981,19 @@ namespace GLEED2D
         private void ViewSnapToGrid_CheckedChanged(object sender, EventArgs e)
         {
             Constants.Instance.SnapToGrid = SnapToGridButton.Checked = ViewSnapToGrid.Checked;
+        }
+
+        private void LevelContextMenu_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void insertGameLayersToolStripMenuItem_Click(object sender, EventArgs e)
+        {            
+            Editor.Instance.level.Layers.Add(new Layer("Background"));
+            Editor.Instance.level.Layers.Add(new Layer("Main"));
+
+            Editor.Instance.updatetreeview();
         }
 
 
