@@ -167,7 +167,7 @@ void MainScene::updateCamera(float delta)
 	
 	float margin = 0.35f;
 
-#ifndef _DISABLE_FLOAT_CAMERA
+#ifndef DISABLE_FLOAT_CAMERA
 	float rightMargin = winSize.width / 2;//winSize.width - winSize.width * margin;
 	float leftMargin = winSize.width / 2; //winSize.width * margin;
 	float timeDelay = delta * 2;//delta /* / (1.0f / 60.0f)*/;
