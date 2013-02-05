@@ -23,6 +23,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     // initialize director
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
+	
+	pDirector->setProjection(ccDirectorProjection::kCCDirectorProjection2D);
+	pDirector->setDepthTest(false);
 
     // turn on display FPS
     pDirector->setDisplayStats(false);

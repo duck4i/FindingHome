@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Users\Mihailo\Desktop\cocos2d-x\FindingHome\gleed2d\gleed2d\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Mihailo\Desktop\cocos2d-x\FindingHome\gleed2d\gleed2d\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Mihailo\Desktop\cocos2d-x\FindingHome\gleed2d\gleed2d\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Mihailo\Desktop\cocos2d-x\FindingHome\bin\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2013-02-05T21:09:07.3361564+01:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

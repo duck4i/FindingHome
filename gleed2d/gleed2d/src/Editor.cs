@@ -256,6 +256,19 @@ namespace GLEED2D
             updatetreeviewselection();
         }
 
+        public Layer layerWithName(string name)
+        {   
+            var m = Editor.Instance.level.Layers;
+            foreach (Layer l in m)
+            {
+                if (l.Name == name)
+                {
+                    return l;                    
+                }
+            }
+            return null;
+        }
+
         public void moveItemToLayer(Item i1, Layer l2, Item i2)
         {
             int index2 = i2 == null ? 0 : l2.Items.IndexOf(i2);
@@ -302,6 +315,23 @@ namespace GLEED2D
         {
             state = EditorState.idle;
             currentbrush = null;
+        }
+
+        public void togglePropertyForSelectedItems(CustomProperty prop)
+        {
+            beginCommand("Toggling custom property - " + prop.name);
+            foreach (Item i in SelectedItems)
+            {
+                if (i.CustomProperties.ContainsKey(prop.name))
+                {
+                    i.CustomProperties.Remove(prop.name);
+                }
+                else
+                {                    
+                    i.CustomProperties[prop.name] = prop;
+                }
+            }
+            Editor.Instance.endCommand();
         }
 
         public void paintTextureBrush(bool continueAfterPaint)

@@ -80,7 +80,7 @@
     <PackedValue>2025898176</PackedValue>
   </GridColor>
   <GridLineThickness>1</GridLineThickness>
-  <GridNumberOfGridLines>500</GridNumberOfGridLines>
+  <GridNumberOfGridLines>1500</GridNumberOfGridLines>
   <GridSpacing>
     <X>64</X>
     <Y>64</Y>

@@ -98,7 +98,7 @@ void MainScene::loadMap(float none)
 	}
 
 	//	schedule controls
-	char* message = "F1 - Enable debug mode F2 - Reset camera F4 - Restart game F7 - Zoom in F8 - Zoom out F9 - Reset zoom";
+	char* message = "[F1] Enable debug mode [F2] Reset camera [F4] Restart game [F7] Zoom in [F8] Zoom out [F9] Reset zoom";
 	CCLabelTTF* lab = CCLabelTTF::create(message, "Arial", 18.0f);		
 	lab->setPosition(ccp(CCDirector::sharedDirector()->getWinSizeInPixels().width / 2, CCDirector::sharedDirector()->getWinSizeInPixels().height - 15));
 	this->addChild(lab, 100000);

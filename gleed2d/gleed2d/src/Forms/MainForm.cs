@@ -47,8 +47,6 @@ namespace GLEED2D
         {
             Instance = this;
             InitializeComponent();
-
-
         }
         public IntPtr getHandle()
         {
@@ -98,7 +96,9 @@ namespace GLEED2D
 
             pictureBox1.AllowDrop = true;
 
+            //  already set up game layers            
         }
+
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Constants.Instance.export("settings.xml");
@@ -436,10 +436,6 @@ namespace GLEED2D
 
 
 
-
-
-
-
         //MENU
         public void newLevel()
         {
@@ -448,6 +444,11 @@ namespace GLEED2D
             newlevel.EditorRelated.Version = Editor.Instance.Version;
             Editor.Instance.loadLevel(newlevel);
             levelfilename = "untitled";
+
+            //  add game layers
+            addGameLayers();
+
+            Editor.Instance.updatetreeview();
             DirtyFlag = false;            
         }
         public void saveLevel(String filename)
@@ -989,16 +990,63 @@ namespace GLEED2D
         }
 
         private void insertGameLayersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            addGameLayers();
+        }
+
+        private void addGameLayers()
         {            
             Editor.Instance.level.Layers.Add(new Layer("Background"));
             Editor.Instance.level.Layers.Add(new Layer("Main"));
-
             Editor.Instance.updatetreeview();
         }
 
 
+        private void sendToMainStripButton_Click(object sender, EventArgs e)
+        {
+            Layer main = Editor.Instance.layerWithName("Main");
+            if (main != null)
+            {
+                Editor.Instance.moveSelectedItemsToLayer(main);
+            }
+        }
 
+        private void sendToBackStripButton_Click(object sender, EventArgs e)
+        {
+            Layer main = Editor.Instance.layerWithName("Background");
+            if (main != null)
+            {
+                Editor.Instance.moveSelectedItemsToLayer(main);                
+                dirtyflag = true;
 
+                propertyGrid1.Refresh();
+                propertyGrid1.Update();
+                Editor.Instance.updatetreeview();
+            }
+        }
+
+        private void togglePhysicalStripButton_Click(object sender, EventArgs e)
+        {
+            CustomProperty c = new CustomProperty();
+            c.name = "dynamic";
+            c.type = typeof(bool);
+            c.value = true;
+            c.description = "";
+            Editor.Instance.togglePropertyForSelectedItems(c);
+            propertyGrid1.Refresh();
+        }
+
+        private void toggleCollectableStripButton_Click(object sender, EventArgs e)
+        {
+            CustomProperty c = new CustomProperty();
+            c.name = "collectable";
+            c.type = typeof(bool);
+            c.value = true;
+            c.description = "";
+            Editor.Instance.togglePropertyForSelectedItems(c);
+            propertyGrid1.Refresh();
+        }
+        
 
 
     }
