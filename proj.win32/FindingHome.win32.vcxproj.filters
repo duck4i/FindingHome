@@ -25,6 +25,9 @@
     <Filter Include="source\levels">
       <UniqueIdentifier>{5e497248-6e15-4e33-a627-ec00d26943e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\entities">
+      <UniqueIdentifier>{9bbacde0-61ca-41cd-8697-58d3c670a978}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\FindingHome.ico">
@@ -67,9 +70,6 @@
     <ClInclude Include="..\Classes\LevelNodeInfo.h">
       <Filter>include\levels</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\WeatherHelper.h">
-      <Filter>include\levels</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\extern\B2DebugDrawLayer.h">
       <Filter>include\support</Filter>
     </ClInclude>
@@ -87,6 +87,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\KeyboardHelper.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WeatherHelper.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ContactListener.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player.h">
+      <Filter>include\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameEntity.h">
+      <Filter>include\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -108,9 +120,6 @@
     <ClCompile Include="..\Classes\ShapeHelper.cpp">
       <Filter>source\levels</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\WeatherHelper.cpp">
-      <Filter>source\levels</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\extern\B2DebugDrawLayer.cpp">
       <Filter>source\support</Filter>
     </ClCompile>
@@ -127,6 +136,12 @@
       <Filter>source\levels</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\KeyboardHelper.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WeatherHelper.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ContactListerner.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

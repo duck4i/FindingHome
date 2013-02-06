@@ -9,6 +9,7 @@
 #include "KeyboardHelper.h"
 #include "LevelLoader.h"
 #include "WeatherHelper.h"
+#include "ContactListener.h"
 
 using namespace cocos2d;
 
@@ -88,6 +89,9 @@ private:
 
 	bool isPlayerMidAir();
 	void playerDied();
+
+	//	contact listener
+	ContactListener worldListener;
 
 public:
 

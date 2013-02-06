@@ -19,9 +19,7 @@ TintShader::~TintShader()
 }
 
 bool TintShader::start(CCNode* target)
-{
-	//CCLayerColor *co = CCLayerColor::create(ccc4(255, 255, 255, 100));
-	//this->addChild(co);
+{	
 	CCSize screen = CCDirector::sharedDirector()->getWinSizeInPixels();
 
 	CCSprite *s = CCSprite::create(RESOURCE_DIR "dog.png");

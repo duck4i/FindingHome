@@ -56,7 +56,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>DISABLE_FLOAT_CAMERAxxx; NO_MOUSE_MOVExxx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DISABLE_FLOAT_CAMERA; NO_MOUSE_MOVExxx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;4099;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -125,15 +125,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\ContactListener.h" />
     <ClInclude Include="..\Classes\CustomProperty.h" />
     <ClInclude Include="..\Classes\extern\B2DebugDrawLayer.h" />
     <ClInclude Include="..\Classes\extern\CCTexture2DMutable.h" />
     <ClInclude Include="..\Classes\extern\GLES-Render.h" />
+    <ClInclude Include="..\Classes\GameEntity.h" />
     <ClInclude Include="..\Classes\KeyboardHelper.h" />
     <ClInclude Include="..\Classes\LevelLoader.h" />
     <ClInclude Include="..\Classes\LevelNodeInfo.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\Physics.h" />
+    <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\Settings.h" />
     <ClInclude Include="..\Classes\ShapeHelper.h" />
     <ClInclude Include="..\Classes\TintShader.h" />
@@ -144,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\ContactListerner.cpp" />
     <ClCompile Include="..\Classes\CustomProperty.cpp" />
     <ClCompile Include="..\Classes\extern\B2DebugDrawLayer.cpp" />
     <ClCompile Include="..\Classes\extern\CCTexture2DMutable.cpp" />

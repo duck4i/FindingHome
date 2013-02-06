@@ -119,7 +119,8 @@ void MainScene::setupPhysics()
 	this->boxWorldSleep = true;
 
 	this->boxWorld = new b2World(gravity);
-	this->boxWorld->SetAllowSleeping(this->boxWorldSleep);			
+	this->boxWorld->SetAllowSleeping(this->boxWorldSleep);
+	this->boxWorld->SetContactListener(&this->worldListener);	
 	
 	//	setup debug drawing	
 	if (true)

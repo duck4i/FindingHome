@@ -434,33 +434,6 @@
                         <PackedValue>4290822336</PackedValue>
                     </FillColor>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Player" Visible="true">
-                    <Position>
-                        <X>-2545</X>
-                        <Y>-995</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>1</X>
-                        <Y>1</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>dog.png</texture_filename>
-                    <asset_name>dog.png</asset_name>
-                    <Origin>
-                        <X>50</X>
-                        <Y>39</Y>
-                    </Origin>
-                </Item>
                 <Item xsi:type="PathItem" Name="Path_0077" Visible="true">
                     <Position>
                         <X>782</X>
@@ -735,6 +708,25 @@
                         <Y>32</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="CircleItem" Name="Circle_0096" Visible="true">
+                    <Position>
+                        <X>-2923</X>
+                        <Y>-845</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="player" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Radius>46</Radius>
+                    <FillColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>255</A>
+                        <PackedValue>4290773184</PackedValue>
+                    </FillColor>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -745,7 +737,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>95</NextItemNumber>
+        <NextItemNumber>96</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>-1810.925</X>

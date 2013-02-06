@@ -2335,7 +2335,11 @@
                         <X>9413</X>
                         <Y>420</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="dynamic" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -4774,8 +4778,8 @@
                 </Item>
                 <Item xsi:type="CircleItem" Name="Circle_0166" Visible="true">
                     <Position>
-                        <X>8072</X>
-                        <Y>352</Y>
+                        <X>6972</X>
+                        <Y>-158</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="player" Type="bool" Description="">
