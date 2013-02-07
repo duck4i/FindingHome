@@ -3,73 +3,59 @@
 ///
 ///	GameEntity
 ///	
-void GameEntity::preInit()
+bool GameEntity::preInit()
 {
+	return true;
 }
 
 bool GameEntity::init()
 {
+	//	init properties (if any)
 	this->m_customProps.parseFromNode(m_nodeInfo.xmlNode);
 	return true;
 }
 
-void GameEntity::postInit() 
-{ 
+bool GameEntity::postInit() 
+{
+	return true;
 }
 
-const CustomProperties& GameEntity::getProperties()
+CustomProperties& GameEntity::getProperties()
 {
 	return this->m_customProps;
 }
 
-const NODEINFO& GameEntity::getNodeInfo()
+NODEINFO& GameEntity::getNodeInfo()
 {
 	return this->m_nodeInfo;
 }
 
-
-///
-///	GameEntitySprite
-///	
-bool GameEntitySprite::init(char* overidePath)
+bool GameEntity::createBody(b2World* world)
 {
-	bool pre = GameEntity::init();
-	char* path = overidePath != NULL ? overidePath : m_nodeInfo.texture;
-	if (path == NULL)
+	if (!world)
 		return false;
-	
-	CCTextureCache* cache = CCTextureCache::sharedTextureCache();
-	if (cache == NULL)
-		return false;
-
-	CCTexture2D* tex = cache->textureForKey(path);
-	if (tex == NULL)
-		tex = cache->addImage(path);
-	
-	sprite = CCSprite::createWithTexture(tex);
-	return sprite != NULL;
+	m_b2World = world;
+	m_bPhysical = true;
+	m_b2FixtureDef.density = 1.0f;
+	return false;
 }
 
-///	
-///	Apply style to sprite using NODEINFO structure.
-///
-void GameEntitySprite::postInit()
+void GameEntity::removeBody()
 {
-	
+	if (m_b2World && m_b2Body)
+	{
+		m_b2World->DestroyBody(m_b2Body);
+		m_bPhysical = false;
+		this->release();
+	}
 }
 
-///
-///	GameEntityRectangle
-///
-bool GameEntityRectangle::init()
+void GameEntity::updatePosition(b2Vec2 pos)
 {
-	return GameEntitySprite::init(RESOURCE_BLOCK);
+
 }
 
-///
-///	GameEntityCircle
-///
-bool GameEntityCircle::init()
+void GameEntity::updateRotation(float32 angle)
 {
-	return GameEntitySprite::init(RESOURCE_CIRCLE);
+
 }

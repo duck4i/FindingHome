@@ -12,7 +12,7 @@ using namespace cocos2d;
 //	macro to create create func
 #define NINFO_CREATE_FUNC(T) static T* create(NODEINFO info){\
 	T* o = new T(info); if (o) {\
-		do { o->preInit(); bool ok = o->init(); if (!ok) break; o->postInit(); o->autorelease(); return o; }\
+		do { if (!o->preInit()) break; if (!o->init()) break; if (!o->postInit()) break; o->autorelease(); return o; }\
 		while(false); }\
 		CC_SAFE_DELETE(o); return NULL;\
 	}
@@ -31,76 +31,43 @@ protected:
 	CustomProperties m_customProps;
 
 	//	initialization, preInit and postInit can be used to preset and apply styles from nodeInfo diferently for each subclass
-	virtual void preInit();
+	virtual bool preInit();
 	virtual bool init();
-	virtual void postInit();
+	virtual bool postInit();
+
+	bool m_bPhysical;
+
+	b2World* m_b2World;
+	b2Body* m_b2Body;
+	b2FixtureDef m_b2FixtureDef;
 
 	//	constructor and destructor
 	GameEntity(NODEINFO info)
 	{
 		m_nodeInfo = info;
+		m_bPhysical = false;
+		m_b2World = NULL;
+		m_b2Body = NULL;
 	}
 
-public:	
+public:
 	
-	virtual const NODEINFO& getNodeInfo();
-	virtual const CustomProperties& getProperties();
+	//	info and properties
+	virtual NODEINFO& getNodeInfo();
+	virtual CustomProperties& getProperties();
+
+	//	physical objects
+	virtual bool createBody(b2World* world);
+	virtual void removeBody();
+
+	virtual void updatePosition(b2Vec2 pos);
+	virtual void updateRotation(float32 angle);
+
+	virtual bool isPhysical() { return m_bPhysical; }
+	virtual b2Body* getBody() { return m_b2Body; }
 	
 	//	public creation	
 	NINFO_CREATE_FUNC(GameEntity)
 };
-
-
-///
-///	GameEntity with sprite attached
-///
-class GameEntitySprite : public GameEntity
-{	
-
-protected:
-	
-	GameEntitySprite(NODEINFO info) : GameEntity(info)
-	{
-		sprite = NULL;
-	}
-
-	virtual bool init(char* overidePath = NULL);
-	virtual void postInit();	//	apply style from nodeInfo
-
-public:
-
-	CCSprite* sprite;
-
-	//	public creation
-	NINFO_CREATE_FUNC(GameEntitySprite)
-};
-
-
-///
-///	Rectangle Primitive Entity
-///
-class GameEntityRectangle : public GameEntitySprite
-{
-protected:
-	GameEntityRectangle(NODEINFO info) : GameEntitySprite(info) { }
-	virtual bool init();
-public:
-	NINFO_CREATE_FUNC(GameEntityRectangle);
-};
-
-///
-///	Circle Primitive Entity
-///
-class GameEntityCircle : public GameEntitySprite
-{
-protected:
-	GameEntityCircle(NODEINFO info) : GameEntitySprite(info) { }
-	virtual bool init();
-public:
-	NINFO_CREATE_FUNC(GameEntityCircle);
-};
-
-
-
 
 #endif

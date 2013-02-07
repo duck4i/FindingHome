@@ -103,6 +103,18 @@
     <ClInclude Include="..\Classes\GameEntity.h">
       <Filter>include\entities</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\GameEntitySprite.h">
+      <Filter>include\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameEntityRectangle.h">
+      <Filter>include\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameEntityCircle.h">
+      <Filter>include\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameEntities.h">
+      <Filter>include\entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -148,6 +160,15 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameEntity.cpp">
+      <Filter>source\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameEntitySprite.cpp">
+      <Filter>source\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameEntityRectangle.cpp">
+      <Filter>source\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameEntityCircle.cpp">
       <Filter>source\entities</Filter>
     </ClCompile>
   </ItemGroup>

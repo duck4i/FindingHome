@@ -13,9 +13,10 @@ enum NODEINFOType
 ///
 ///	Used to simplify function calls due to large number of params;
 ///
-typedef struct 
+class NODEINFO
 {
-	unsigned int type;
+public:
+
 	NODEINFOType nodeType;
 
 	CCPoint position;
@@ -36,9 +37,26 @@ typedef struct
 
 	xmlNodePtr xmlNode;
 	CCNode* cocosNode;
-	
 
-} NODEINFO;
+	NODEINFO()
+	{		
+		nodeType = NODEINFO_BLOCK;
+		position = ccp(0,0);
+		size = CCSizeMake(100, 100);
+		rotation = 0;
+		radius = 10;
+		scale = 1;
+		texture = NULL;
+		rawTexture = NULL;
+		assetTexture = NULL;
+		flipHorizontally = false;
+		flipVertically = false;
+		visible = true;
+		xmlNode = NULL;
+		cocosNode = NULL;
+	}
+
+};
 
 
 #endif

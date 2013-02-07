@@ -8,7 +8,7 @@
 #include "Settings.h"
 #include "LevelNodeInfo.h"
 #include "CustomProperty.h"
-#include "GameEntity.h"
+#include "GameEntities.h"
 
 USING_NS_CC;
 

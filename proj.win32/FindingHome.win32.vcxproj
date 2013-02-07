@@ -37,12 +37,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)..\bin</OutDir>
+    <OutDir>$(SolutionDir)..\bin\</OutDir>
     <IntDir>$(Configuration).win32\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)..\bin</OutDir>
+    <OutDir>$(SolutionDir)..\bin\</OutDir>
     <IntDir>$(Configuration).win32\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
@@ -130,7 +130,11 @@
     <ClInclude Include="..\Classes\extern\B2DebugDrawLayer.h" />
     <ClInclude Include="..\Classes\extern\CCTexture2DMutable.h" />
     <ClInclude Include="..\Classes\extern\GLES-Render.h" />
+    <ClInclude Include="..\Classes\GameEntities.h" />
     <ClInclude Include="..\Classes\GameEntity.h" />
+    <ClInclude Include="..\Classes\GameEntityCircle.h" />
+    <ClInclude Include="..\Classes\GameEntityRectangle.h" />
+    <ClInclude Include="..\Classes\GameEntitySprite.h" />
     <ClInclude Include="..\Classes\KeyboardHelper.h" />
     <ClInclude Include="..\Classes\LevelLoader.h" />
     <ClInclude Include="..\Classes\LevelNodeInfo.h" />
@@ -153,6 +157,9 @@
     <ClCompile Include="..\Classes\extern\CCTexture2DMutable.cpp" />
     <ClCompile Include="..\Classes\extern\GLES-Render.cpp" />
     <ClCompile Include="..\Classes\GameEntity.cpp" />
+    <ClCompile Include="..\Classes\GameEntityCircle.cpp" />
+    <ClCompile Include="..\Classes\GameEntityRectangle.cpp" />
+    <ClCompile Include="..\Classes\GameEntitySprite.cpp" />
     <ClCompile Include="..\Classes\KeyboardHelper.cpp" />
     <ClCompile Include="..\Classes\LevelLoader.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />

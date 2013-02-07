@@ -46,7 +46,8 @@ bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, floa
 	///
 	///	WAY TO SLOW!!! HASH THIS STUFF AND LOAD ONLY ONCE.
 	///
-
+	return false;	
+	
 	bool res = false;
 	CCLog("%s Name: %s", __FUNCTION__, name);
 	if (name == NULL)

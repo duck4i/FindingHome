@@ -384,21 +384,16 @@ void MainScene::updatePhysics(float delta)
 	this->boxWorld->Step(BOX_WOLRD_STEP, BOX_WORLD_VELOCITY_PASSES, BOX_WORLD_POSITION_PASSES);	
 
 	for (b2Body* b = this->boxWorld->GetBodyList(); b; b = b->GetNext())
-	{
-		CCSprite* s = (CCSprite*) b->GetUserData();
-		
-		if (s != NULL)
+	{		
+		GameEntity *userData = reinterpret_cast<GameEntity*> (b->GetUserData());
+		if (userData)
 		{
-			b2Vec2 pos = b->GetPosition();			
-			CCPoint posRecalc = ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y));			
-
-			if (s->getTag() == PLAYER_TAG)
-				posRecalc.y -= 15;
-
-			s->setPosition(posRecalc);
-			s->setRotation(-1 * CC_RADIANS_TO_DEGREES(b->GetAngle()));
+			userData->updatePosition(b->GetPosition());
+			userData->updateRotation(b->GetAngle());
 		}
 	}
+
+
 }
 
 void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)

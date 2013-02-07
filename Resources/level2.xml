@@ -3649,8 +3649,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0096" Visible="true">
                     <Position>
-                        <X>10</X>
-                        <Y>-34</Y>
+                        <X>470</X>
+                        <Y>-334</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="dynamic" Type="bool" Description="">
@@ -4776,17 +4776,17 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="CircleItem" Name="Circle_0166" Visible="true">
+                <Item xsi:type="CircleItem" Name="Player" Visible="true">
                     <Position>
-                        <X>6972</X>
-                        <Y>-158</Y>
+                        <X>-578</X>
+                        <Y>-298</Y>
                     </Position>
                     <CustomProperties>
-                        <Property Name="player" Type="bool" Description="">
+                        <Property Name="dynamic" Type="bool" Description="">
                             <boolean>true</boolean>
                         </Property>
                     </CustomProperties>
-                    <Radius>64</Radius>
+                    <Radius>187</Radius>
                     <FillColor>
                         <R>192</R>
                         <G>0</G>
@@ -4957,6 +4957,40 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0256" Visible="true">
+                    <Position>
+                        <X>-1005</X>
+                        <Y>-117</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="player" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                        <Property Name="dynamic" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.83121145</X>
+                        <Y>1.83121145</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>circle.png</texture_filename>
+                    <asset_name>circle.png</asset_name>
+                    <Origin>
+                        <X>32</X>
+                        <Y>32</Y>
+                    </Origin>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -4971,11 +5005,11 @@
         </Property>
     </CustomProperties>
     <EditorRelated>
-        <NextItemNumber>252</NextItemNumber>
+        <NextItemNumber>256</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>10560.375</X>
-            <Y>-291.991943</Y>
+            <X>90.375</X>
+            <Y>-111.991943</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

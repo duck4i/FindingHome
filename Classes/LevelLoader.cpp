@@ -21,7 +21,7 @@ bool LevelLoader::parse()
 	bool success = false;
 
 	sharedDoc = xmlReadFile(this->levelPath, "utf-8", XML_PARSE_RECOVER);
-	CCAssert(sharedDoc, "Cannot load level file");
+	CCAssert(sharedDoc, "Cannot load level file");	
 	
 	xmlNodePtr currNode = sharedDoc->children->children;
 	
@@ -107,31 +107,52 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	{
 		//CCLog("Node hidden. Skipping.");
 		return;
-	}
-	
-	
-	//PhysicalGameEntity *pgen = PhysicalGameEntity::create(info);
+	}	
 
 	//	check type
 	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
-	{
-		info.type = 0;
+	{		
+		info.nodeType = NODEINFO_BLOCK; 
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
 	{
-		info.type = 1;
+		info.nodeType = NODEINFO_CIRCLE;
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
-	{
-		info.type = 2;
+	{		
+		info.nodeType = NODEINFO_TEXTURE;
 	}
 
+		//	select layer to insert it into
+	CCNode* layer = type == 0 ? this->mainLayer : this->backgroundLayer;
+	CCNode* toInsert = NULL;
+	GameEntitySprite *sprite;
 
-	GameEntity* gen = GameEntity::create(info);
-	GameEntitySprite* sp = GameEntitySprite::create(info);
-	GameEntityRectangle *ger = GameEntityRectangle::create(info);
+	if (info.nodeType == NODEINFO_BLOCK)
+		sprite = GameEntityRectangle::create(info);
+	else if (info.nodeType == NODEINFO_CIRCLE)
+		sprite = GameEntityCircle::create(info);
+	else if (info.nodeType == NODEINFO_TEXTURE)
+		sprite = GameEntitySprite::create(info);
+
+	if (sprite)
+	{
+		layer->addChild(sprite->getSprite(), zOrder);
+		
+		if (type == 0)
+			sprite->createBody(this->boxWorld);
+
+		if (sprite->getProperties().isPlayerObject())
+		{
+			this->playerNode = sprite->getSprite();
+			this->playerBody = sprite->getBody();
+			bool ok = true;
+		}
+	}	
+		
 
 	//	FIRST PROCESS PROPERTIES
+	/*
 	CustomProperties props;
 	bool propsObtained = parseNodeProperties(info, &props);
 
@@ -141,17 +162,32 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	//	THEN PROCESS PHYSICS (main layer only)
 	if (type == 0 && inserted)
 		parseNodePhysics(info, props);
-
-	//	since parseNodeTexture allocates we release it here
-	if (info.texture)
-		delete [] info.texture;	
+	*/
+	//	since parseNodeTexture allocates we release it here	
+	//if (info.texture)
+	//	delete [] info.texture;	
 }
 
 bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , unsigned int type, unsigned int zOrder)
 {
+	return true;
+	/*
 	//	select layer to insert it into
 	CCNode* layer = type == 0 ? this->mainLayer : this->backgroundLayer;
 	CCNode* toInsert = NULL;
+	GameEntitySprite *sprite;
+
+	if (info.nodeType == NODEINFO_BLOCK)
+		sprite = GameEntityRectangle::create(info);
+	else if (info.nodeType == NODEINFO_CIRCLE)
+		sprite = GameEntityCircle::create(info);
+	else if (info.nodeType == NODEINFO_TEXTURE)
+		sprite = GameEntitySprite::create(info);
+
+	if (sprite)
+		layer->addChild(sprite->getSprite(), zOrder);
+
+	return true;
 
 	//	NOW DO ACTUAL WORLD CREATIONG -- LIKE A BOSS	
 	if (info.type == 0)
@@ -227,6 +263,7 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 
 	info.cocosNode = toInsert;
 	return toInsert != NULL;
+	*/
 }
 
 bool LevelLoader::parseNodeProperties(NODEINFO &info, __out CustomProperties *props)
@@ -237,6 +274,8 @@ bool LevelLoader::parseNodeProperties(NODEINFO &info, __out CustomProperties *pr
 
 bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 {
+	return false;
+	/*
 	bool skipPhysics = false;
 	if (!skipPhysics)
 	{
@@ -290,7 +329,9 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 
 			if (info.type == 1)
 			{
+						b2CircleShape cs;
 				cs.m_radius = SCREEN_TO_WORLD(info.radius);
+	
 				fd.shape = &cs;				
 			}
 			else
@@ -305,7 +346,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 			body->CreateFixture(&fd);
 		}					
 	}
-
+	*/
 	return true;
 }
 
