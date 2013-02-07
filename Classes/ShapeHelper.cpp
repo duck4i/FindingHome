@@ -43,10 +43,17 @@ Value ShapeHelper::itemWithName(char* name)
 
 bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, float density, float friction, bool bounce)
 {
+	///
+	///	WAY TO SLOW!!! HASH THIS STUFF AND LOAD ONLY ONCE.
+	///
+
 	bool res = false;
 	CCLog("%s Name: %s", __FUNCTION__, name);
+	if (name == NULL)
+		return res;	
 
 	Value v = itemWithName(name);
+
 	if (v != NULL && body != NULL)
 	{
 		Value polys = v["polygons"];
@@ -105,7 +112,7 @@ bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, floa
 		}		
 	}
 	else
-		CCLog("%s Cannot create shape, something is wrong. (%s)", __FUNCTION__, name);
+		CCLog("%s Shape not found in custom shapes or something is wrong. (%s)", __FUNCTION__, name);
 	
 	return res;
 }

@@ -73,20 +73,13 @@ bool LevelLoader::parse()
 
 	success = this->playerNode != NULL && this->playerBody != NULL;
 
-
-	//	Camera?
-	if (this->playerNode)
-	{
-		
-	}
-
 	return success;
 }
 
 void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned int zOrder)
 {
 	xmlChar* nodeName = xmlGetProp(node, (const xmlChar*) "Name");
-	xmlChar* nodeType = xmlGetProp(node, (const xmlChar*) "type");	
+	xmlChar* nodeType = xmlGetProp(node, (const xmlChar*) "type");
 
 	if (nodeType == NULL)
 		return;	//	skipp unknown or closing elements
@@ -108,21 +101,35 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	info.assetTexture = parseNodeAssetName(node);
 	info.flipHorizontally = parseNodeFlip(node);
 	info.flipVertically = parseNodeFlip(node, true);
-	info.visible = parseNodeVisible(node);
+	info.visible = parseNodeVisible(node);	
 
 	if (!info.visible)
 	{
 		//CCLog("Node hidden. Skipping.");
 		return;
 	}
+	
+	
+	//PhysicalGameEntity *pgen = PhysicalGameEntity::create(info);
 
 	//	check type
 	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
+	{
 		info.type = 0;
+	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
+	{
 		info.type = 1;
+	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
+	{
 		info.type = 2;
+	}
+
+
+	GameEntity* gen = GameEntity::create(info);
+	GameEntitySprite* sp = GameEntitySprite::create(info);
+	GameEntityRectangle *ger = GameEntityRectangle::create(info);
 
 	//	FIRST PROCESS PROPERTIES
 	CustomProperties props;
@@ -168,8 +175,7 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 		toInsert = a;
 	}
 	else if (info.type == 1)
-	{																
-		info.type = 1;
+	{
 		CCSprite *a = NULL;
 		if (props.isPlayerObject())
 		{
@@ -188,7 +194,6 @@ bool LevelLoader::parseNodeToCocosNode(NODEINFO &info, CustomProperties props , 
 	}
 	else if (info.type == 2)
 	{
-		info.type = 2;
 		CCSprite *a = CCSprite::create(info.texture);
 
 		info.size.width = a->getContentSize().width * info.scale;
@@ -249,7 +254,7 @@ bool LevelLoader::parseNodePhysics(NODEINFO &info, __in CustomProperties props)
 		def.position.Set(SCREEN_TO_WORLD(info.position.x), SCREEN_TO_WORLD(info.position.y));
 		def.angle = -1 * info.rotation;		
 
-		b2Body* body = this->boxWorld->CreateBody(&def);	
+		b2Body* body = this->boxWorld->CreateBody(&def);
 
 		//	now create fixtures for known shapes, or images without shape data
 		b2FixtureDef fd;

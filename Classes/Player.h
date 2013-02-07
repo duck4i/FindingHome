@@ -4,7 +4,7 @@
 #include "GameEntity.h"
 
 
-class Player : PhysicalGameEntity
+class Player : GameEntity
 {
 private:
 

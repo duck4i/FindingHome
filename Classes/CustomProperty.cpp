@@ -2,12 +2,10 @@
 
 bool CustomProperties::parseFromNode(xmlNodePtr node)
 {
-	bool res = false;
-
 	//	skip if no properties 
 	xmlNodePtr customProps = XMLHelper::findChildNodeWithName(node, "CustomProperties");
 	if (!customProps || xmlChildElementCount(customProps) == 0)
-		return res;
+		return false;
 
 	customProps = customProps->children;
 	while (customProps)
@@ -31,6 +29,8 @@ bool CustomProperties::parseFromNode(xmlNodePtr node)
 				foundPropNamedDynamic = true;
 			if (xmlStrcasecmp(name, (const xmlChar*) BOUNCE_TAG_NAME) == 0)
 				foundPropNamedBounce = true;
+			if (xmlStrcasecmp(name, (const xmlChar*) COLLECTABLE_TAG_NAME) == 0)
+				foundPropNamedCollectable = true;
 
 
 		}
@@ -38,5 +38,5 @@ bool CustomProperties::parseFromNode(xmlNodePtr node)
 		customProps = customProps->next;
 	}
 
-	return res;
+	return true;
 }

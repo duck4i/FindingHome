@@ -152,6 +152,7 @@
     <ClCompile Include="..\Classes\extern\B2DebugDrawLayer.cpp" />
     <ClCompile Include="..\Classes\extern\CCTexture2DMutable.cpp" />
     <ClCompile Include="..\Classes\extern\GLES-Render.cpp" />
+    <ClCompile Include="..\Classes\GameEntity.cpp" />
     <ClCompile Include="..\Classes\KeyboardHelper.cpp" />
     <ClCompile Include="..\Classes\LevelLoader.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />

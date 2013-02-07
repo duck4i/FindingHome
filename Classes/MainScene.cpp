@@ -21,11 +21,10 @@ MainScene::~MainScene()
 }
 
 bool MainScene::init()
-{	
-	winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
-
-	//	this->initWithColor(ccc4(100, 149, 237, 255));	//	cornflower blue
-	this->initWithColor(ccc4(0, 0, 0, 255));
+{		
+	CCLayerColor::initWithColor(ccc4(0, 0, 0, 255));
+	
+	winSize = CCDirector::sharedDirector()->getWinSizeInPixels();	
 
 	this->debugLayer = NULL;
 	this->boxDebugKeyIsDown = false;

@@ -3,11 +3,21 @@
 
 #include <cocos2d.h>
 
+enum NODEINFOType 
+{
+	NODEINFO_BLOCK = 0,
+	NODEINFO_CIRCLE,
+	NODEINFO_TEXTURE
+};
+
 ///
 ///	Used to simplify function calls due to large number of params;
 ///
 typedef struct 
 {
+	unsigned int type;
+	NODEINFOType nodeType;
+
 	CCPoint position;
 	CCSize size;
 	float rotation;
@@ -15,10 +25,10 @@ typedef struct
 	float scale;
 	ccColor4B color;
 	ccColor4B tint;
+	
 	char* texture;
 	char* rawTexture;
-	char* assetTexture;
-	unsigned int type;
+	char* assetTexture;	
 
 	bool flipHorizontally;
 	bool flipVertically;

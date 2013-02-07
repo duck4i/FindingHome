@@ -1,7 +1,8 @@
 #ifndef _CUSTOM_PROPERTY_H_
 #define _CUSTOM_PROPERTY_H_
 
-#include "LevelLoader.h"
+#include <cocos2d.h>
+#include "XMLHelper.h"
 
 //	Custom property mappings
 //	We wont check custom level property type, only if it exists. 
@@ -11,6 +12,7 @@
 #define FINISH_TAG_NAME		"Finish"
 #define DYNAMIC_TAG_NAME	"Dynamic"	//	dynamic Box2D objects
 #define BOUNCE_TAG_NAME		"Bounce"
+#define COLLECTABLE_TAG_NAME "Collectable"
 
 /*
 <Property Name="obicanItem" Type="Item" Description="">Rectangle_0010</Property>
@@ -27,7 +29,9 @@ class CustomProperty
 private:	
 	char name[255];	
 	char description[512];
+
 public:
+
 	CustomProperty(char* name, char* desc)
 	{
 		memcpy(this->name, name, sizeof(name));
@@ -61,11 +65,17 @@ class CustomProperties
 {
 private:
 	bool foundPropNamedPlayer;
-	bool foundPropNamedFinish;	
+	bool foundPropNamedFinish;
+
 	bool foundPropNamedDynamic;
 	bool foundPropNamedBounce;
+	bool foundPropNamedCollectable;
 
 public:
+
+	///	property list
+	std::vector<CustomProperty> properties;
+
 
 	CustomProperties()
 	{
@@ -73,19 +83,21 @@ public:
 		foundPropNamedFinish = false;
 		foundPropNamedDynamic = false;		
 		foundPropNamedBounce = false;
-	}
-		
-	std::vector<CustomProperty> properties;	
+	}		
 
-	bool parseFromNode(xmlNodePtr node);	
+	bool parseFromNode(xmlNodePtr node);
 
 	//	few helpers
 	bool isDynamicObject() { return foundPropNamedDynamic; }
 	bool isBouncable() { return foundPropNamedBounce; }
+	bool isCollectable() { return foundPropNamedCollectable; }
+
 	bool isMessageBoard();
 	
 	bool isPlayerObject() { return foundPropNamedPlayer; }
 	bool isFinishObject() { return foundPropNamedFinish; }
+
+	bool hasProperties() { return properties.size() > 0; }
 
 
 };

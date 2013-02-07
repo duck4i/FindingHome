@@ -28,6 +28,9 @@
     <Filter Include="include\entities">
       <UniqueIdentifier>{9bbacde0-61ca-41cd-8697-58d3c670a978}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\entities">
+      <UniqueIdentifier>{65747940-06d6-4fa6-a2ff-d0cfa9700c44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\FindingHome.ico">
@@ -143,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\ContactListerner.cpp">
       <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameEntity.cpp">
+      <Filter>source\entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
