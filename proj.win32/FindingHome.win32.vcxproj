@@ -133,6 +133,7 @@
     <ClInclude Include="..\Classes\GameEntities.h" />
     <ClInclude Include="..\Classes\GameEntity.h" />
     <ClInclude Include="..\Classes\GameEntityCircle.h" />
+    <ClInclude Include="..\Classes\GameEntityPlayer.h" />
     <ClInclude Include="..\Classes\GameEntityRectangle.h" />
     <ClInclude Include="..\Classes\GameEntitySprite.h" />
     <ClInclude Include="..\Classes\KeyboardHelper.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="..\Classes\extern\GLES-Render.cpp" />
     <ClCompile Include="..\Classes\GameEntity.cpp" />
     <ClCompile Include="..\Classes\GameEntityCircle.cpp" />
+    <ClCompile Include="..\Classes\GameEntityPlayer.cpp" />
     <ClCompile Include="..\Classes\GameEntityRectangle.cpp" />
     <ClCompile Include="..\Classes\GameEntitySprite.cpp" />
     <ClCompile Include="..\Classes\KeyboardHelper.cpp" />

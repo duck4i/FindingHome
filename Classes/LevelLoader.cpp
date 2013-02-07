@@ -135,19 +135,28 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	else if (info.nodeType == NODEINFO_TEXTURE)
 		sprite = GameEntitySprite::create(info);
 
-	if (sprite)
+	if (sprite && sprite->getProperties().isPlayerObject())
+	{
+		sprite->removeBody();
+		sprite->release();
+		sprite = NULL;
+		
+		GameEntityPlayer* player = GameEntityPlayer::create(info);		
+		if (player)
+		{
+			player->createBody(this->boxWorld);
+			layer->addChild(player->getSkin(), 1000000);
+
+			this->playerBody = player->getBody();
+			this->playerNode = player->getSkin();
+		}
+	}
+	else if (sprite)
 	{
 		layer->addChild(sprite->getSprite(), zOrder);
 		
 		if (type == 0)
 			sprite->createBody(this->boxWorld);
-
-		if (sprite->getProperties().isPlayerObject())
-		{
-			this->playerNode = sprite->getSprite();
-			this->playerBody = sprite->getBody();
-			bool ok = true;
-		}
 	}	
 		
 

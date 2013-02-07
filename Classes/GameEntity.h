@@ -50,6 +50,8 @@ protected:
 		m_b2Body = NULL;
 	}
 
+	virtual bool createFixture();
+
 public:
 	
 	//	info and properties

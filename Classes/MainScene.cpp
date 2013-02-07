@@ -381,7 +381,7 @@ void MainScene::update(float delta)
 
 void MainScene::updatePhysics(float delta)
 {
-	this->boxWorld->Step(BOX_WOLRD_STEP, BOX_WORLD_VELOCITY_PASSES, BOX_WORLD_POSITION_PASSES);	
+	this->boxWorld->Step(BOX_WOLRD_STEP, BOX_WORLD_VELOCITY_PASSES, BOX_WORLD_POSITION_PASSES);
 
 	for (b2Body* b = this->boxWorld->GetBodyList(); b; b = b->GetNext())
 	{		
@@ -392,8 +392,6 @@ void MainScene::updatePhysics(float delta)
 			userData->updateRotation(b->GetAngle());
 		}
 	}
-
-
 }
 
 void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)

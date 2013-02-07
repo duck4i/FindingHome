@@ -50,6 +50,11 @@ void GameEntity::removeBody()
 	}
 }
 
+bool GameEntity::createFixture()
+{
+	return true;
+}
+
 void GameEntity::updatePosition(b2Vec2 pos)
 {
 

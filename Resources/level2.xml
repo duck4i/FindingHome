@@ -4778,8 +4778,8 @@
                 </Item>
                 <Item xsi:type="CircleItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-578</X>
-                        <Y>-298</Y>
+                        <X>-588</X>
+                        <Y>-18</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="dynamic" Type="bool" Description="">
@@ -4991,6 +4991,33 @@
                         <Y>32</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0257" Visible="true">
+                    <Position>
+                        <X>-3444</X>
+                        <Y>204</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1</X>
+                        <Y>1</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>indiegraphicsbundle\platforms\GrndBrnP.png</texture_filename>
+                    <asset_name>GrndBrnP.png</asset_name>
+                    <Origin>
+                        <X>477</X>
+                        <Y>44</Y>
+                    </Origin>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -5005,7 +5032,7 @@
         </Property>
     </CustomProperties>
     <EditorRelated>
-        <NextItemNumber>256</NextItemNumber>
+        <NextItemNumber>257</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>90.375</X>
