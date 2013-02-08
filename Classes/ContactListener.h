@@ -5,6 +5,8 @@
 #include <Box2D\Box2D.h>
 using namespace cocos2d;
 
+#include "GameEntities.h"
+
 ///
 ///	Class used for collision detection with enemies, projectiles and other stuff.
 ///	

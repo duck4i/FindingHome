@@ -53,10 +53,10 @@ private:
 public:
 
 	CCNode* playerNode;
-	b2Body* playerBody;
-	//b2Fixture* playerSensorFixture;
-
+	b2Body* playerBody;	
 	CCNode* finishNode;
+
+	GameEntityPlayer *player;
 	
 private:
 

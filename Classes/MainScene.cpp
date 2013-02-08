@@ -140,15 +140,17 @@ void MainScene::addBodies()
 
 	LevelLoader l(this->worldLayer, level, this->boxWorld);
 	if (l.parse())
-	{		
+	{
 		this->playerBody = l.playerBody;
 		this->player = l.playerNode;
+		gamePlayer = l.player;
 		return;
 	}
 	
 #ifdef CC_PLATFORM_WIN32
 	MessageBox(NULL, "Player object is not found in this level.", "How are you gona play?", MB_ICONWARNING | MB_OK);
 #endif
+
 }
 
 void MainScene::toggleCameraProgress()

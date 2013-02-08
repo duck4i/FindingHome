@@ -57,6 +57,8 @@ private:
 	WeatherHelper *weather;
 
 	//	player
+	GameEntityPlayer* gamePlayer;
+
 	CCNode* player;
 	b2Body *playerBody;
 	PlayerDirection direction;

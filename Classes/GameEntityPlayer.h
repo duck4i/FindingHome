@@ -2,6 +2,7 @@
 #define _GAME_ENTITY_PLAYER_H_
 
 #include "GameEntitySprite.h"
+#include "KeyboardHelper.h"
 
 ///
 ///	Rectangle Primitive Entity
@@ -36,6 +37,8 @@ public:
 
 	virtual void updatePosition(b2Vec2 pos);
 	virtual void updateRotation(float32 angle);
+
+	virtual void updatePlayerMovement();
 
 	virtual CCNode* getSkin() { return m_skin; } 
 

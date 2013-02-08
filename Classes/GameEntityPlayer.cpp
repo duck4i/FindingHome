@@ -3,6 +3,9 @@
 bool GameEntityPlayer::init()
 {
 	m_skin = CCSprite::create(RESOURCE_PLAYER);
+	if (!m_skin)
+		return false;
+
 	m_skin->setPosition(m_nodeInfo.position);
 	m_skin->setScale(1.3f);
 
@@ -58,4 +61,9 @@ void GameEntityPlayer::updatePosition(b2Vec2 pos)
 void GameEntityPlayer::updateRotation(float32 angle)
 {
 	
+}
+
+void GameEntityPlayer::updatePlayerMovement()
+{
+
 }

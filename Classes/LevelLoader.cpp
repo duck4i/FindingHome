@@ -149,6 +149,8 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 
 			this->playerBody = player->getBody();
 			this->playerNode = player->getSkin();
+
+			this->player = player;
 		}
 	}
 	else if (sprite)

@@ -6,18 +6,54 @@ using namespace cocos2d;
 
 //	http://stackoverflow.com/questions/9149600/global-keyboard-hooks-in-c
 
-class KeyboardHelper
+enum KeyState
+{
+	KeyStateUp,
+	KeyStateDown
+};
+
+class KeyboardHelper 
 {
 private:
+	
+	HHOOK m_hook;
+	HINSTANCE m_module;
 
-	bool hookOK;
+	static LRESULT CALLBACK HookProc(int code, WPARAM wParam, LPARAM lParam);
 
-public:
+	bool init();
 
-	KeyboardHelper();
-	~KeyboardHelper();
+	KeyboardHelper()
+	{
+		m_hook = NULL;
+		m_module = NULL;
+	}
 
-	void initHook();
+	~KeyboardHelper()
+	{
+	}
+
+public:	
+
+	//	movement keys
+	KeyState b_up;
+	KeyState b_down;
+	KeyState b_left;
+	KeyState b_right;
+
+	//	special keys
+	KeyState b_shift;
+
+	//	utility keys
+	KeyState b_F1;
+	KeyState b_F2;
+	KeyState b_F4;
+	KeyState b_F7;
+	KeyState b_F8;
+	KeyState b_F9;
+	
+
+	static KeyboardHelper* sharedHelper();
 
 };
 
