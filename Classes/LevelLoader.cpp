@@ -31,34 +31,22 @@ bool LevelLoader::parse()
 			while (layers)
 			{
 				const xmlChar* name = xmlGetProp(layers, (const xmlChar*) "Name");
-				bool visible = parseNodeVisible(layers);	//
+				bool visible = parseNodeVisible(layers);
 				
-				if (visible && xmlStrcasecmp(name, (const xmlChar*) MAIN_LAYER_NAME) == 0)
-				{
-					xmlNodePtr mainLayers = layers->children->next;
-					short count = xmlChildElementCount(mainLayers);
-					CCLog("Found main layer with %d children", count);
+				bool main = xmlStrcasecmp(name, (const xmlChar*) MAIN_LAYER_NAME) == 0;
+				bool background = xmlStrcasecmp(name, (const xmlChar*) BACKGROUND_LAYER_NAME) == 0;
 
-					unsigned int zOrder = 0;
-					xmlNodePtr mainLayerChild = mainLayers->children;
-					while (mainLayerChild)
-					{
-						parseCurrentNode(mainLayerChild, 0, zOrder++);
-						mainLayerChild = mainLayerChild->next;
-					}
-				}
-				else if (visible && xmlStrcasecmp(name, (const xmlChar*) BACKGROUND_LAYER_NAME) == 0)
+				if (layers->children)
 				{
-					xmlNode *backLayers = layers->children->next;
-					short count = xmlChildElementCount(backLayers);
-					CCLog("Found background layer with %d children", count);
-
-					unsigned int zOrder = 0;
-					xmlNodePtr backLayerChild = backLayers->children;
-					while (backLayerChild)
+					xmlNodePtr subLayers = layers->children->next;
+					if (subLayers)
 					{						
-						parseCurrentNode(backLayerChild, 1, zOrder++);
-						backLayerChild = backLayerChild->next;
+						xmlNodePtr ptr = subLayers->children;
+						while (ptr)
+						{
+							parseCurrentNode(ptr, main ? 0 : 1, 0);
+							ptr = ptr->next;
+						}
 					}
 				}
 				layers = layers->next;

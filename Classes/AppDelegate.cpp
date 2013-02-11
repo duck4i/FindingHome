@@ -25,7 +25,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
 	
 	pDirector->setProjection(ccDirectorProjection::kCCDirectorProjection2D);
-	pDirector->setDepthTest(false);
+	pDirector->setDepthTest(false);	
 
     // turn on display FPS
     pDirector->setDisplayStats(false);

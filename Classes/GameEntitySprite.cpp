@@ -27,12 +27,14 @@ bool GameEntitySprite::init(char* overidePath)
 ///
 bool GameEntitySprite::postInit()
 {
+	//	params
+	//m_sprite->getTexture()->setAliasTexParameters();
+
 	//position rotation and scale
 	m_sprite->setPosition(m_nodeInfo.position);
 	m_sprite->setRotation(CC_RADIANS_TO_DEGREES(m_nodeInfo.rotation));
 	if (m_nodeInfo.scale)
 		m_sprite->setScale(m_nodeInfo.scale);
-
 	
 	if (m_nodeInfo.nodeType == NODEINFOType::NodeInfoTypeTexture)
 		m_sprite->setColor(cc4to3(m_nodeInfo.tint));
@@ -54,8 +56,12 @@ bool GameEntitySprite::createBody(b2World* world)
 	//	default 
 	GameEntity::createBody(world);
 
-	m_nodeInfo.size.width = m_sprite->getContentSize().width * m_nodeInfo.scale;
-	m_nodeInfo.size.height = m_sprite->getContentSize().height * m_nodeInfo.scale;
+	//	fix for texture
+	if (m_nodeInfo.nodeType == NodeInfoTypeTexture)
+	{
+		m_nodeInfo.size.width = m_sprite->getContentSize().width * m_nodeInfo.scale;
+		m_nodeInfo.size.height = m_sprite->getContentSize().height * m_nodeInfo.scale;
+	}
 
 	//	define and retain
 	b2BodyDef def;

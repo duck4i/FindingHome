@@ -3,6 +3,7 @@
 #include "CCEGLView.h"
 #include "Settings.h"
 #include <string>
+#include <Windows.h>
 
 USING_NS_CC;
 
@@ -29,12 +30,20 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	//	check double run
 	if (alreadyRunning())
-		return -1;
-	
+		return -1;	
+
 	if (lpCmdLine && strlen(lpCmdLine) > 0)
-	{				
+	{
 		commandLine = lpCmdLine + 1;
-		commandLine[strlen(commandLine) - 1] = 0;				
+		commandLine[strlen(commandLine) - 1] = 0;
+		
+		//	check if its really file and not some random stuff like "untitled"
+		unsigned short attrs = GetFileAttributes(commandLine);
+		if (attrs == INVALID_FILE_ATTRIBUTES || attrs & FILE_ATTRIBUTE_DIRECTORY)
+		{
+			commandLine = NULL;
+			return -2;
+		}
 	}	
 	
 	//commandLine = _strdup(lpCmdLine);

@@ -1046,6 +1046,11 @@ namespace GLEED2D
             Editor.Instance.togglePropertyForSelectedItems(c);
             propertyGrid1.Refresh();
         }
+
+        private void listView3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         
 
 

@@ -30,9 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Circle", 1);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Path", 2);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Circle", 1);
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Path", 2);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Exit condition", "EntityExit.png");
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -160,6 +162,9 @@
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.insertGameLayersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EntitiesTabPage = new System.Windows.Forms.TabPage();
+            this.entitiesListView = new System.Windows.Forms.ListView();
+            this.EnemiesTabPage = new System.Windows.Forms.TabPage();
+            this.entitiesImageList = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.CustomPropertyContextMenu.SuspendLayout();
@@ -184,6 +189,7 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.LevelContextMenu.SuspendLayout();
+            this.EntitiesTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -1193,6 +1199,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.EntitiesTabPage);
+            this.tabControl1.Controls.Add(this.EnemiesTabPage);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.HotTrack = true;
@@ -1250,7 +1257,7 @@
             // chooseFolder
             // 
             this.chooseFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chooseFolder.Location = new System.Drawing.Point(573, 6);
+            this.chooseFolder.Location = new System.Drawing.Point(527, 8);
             this.chooseFolder.Name = "chooseFolder";
             this.chooseFolder.Size = new System.Drawing.Size(60, 23);
             this.chooseFolder.TabIndex = 5;
@@ -1262,7 +1269,7 @@
             // 
             this.buttonFolderUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonFolderUp.Image = ((System.Drawing.Image)(resources.GetObject("buttonFolderUp.Image")));
-            this.buttonFolderUp.Location = new System.Drawing.Point(535, 6);
+            this.buttonFolderUp.Location = new System.Drawing.Point(489, 8);
             this.buttonFolderUp.Name = "buttonFolderUp";
             this.buttonFolderUp.Size = new System.Drawing.Size(32, 23);
             this.buttonFolderUp.TabIndex = 4;
@@ -1273,7 +1280,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(681, 11);
+            this.label2.Location = new System.Drawing.Point(627, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 3;
@@ -1284,7 +1291,7 @@
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(711, 8);
+            this.comboBox1.Location = new System.Drawing.Point(663, 9);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(74, 21);
             this.comboBox1.TabIndex = 2;
@@ -1297,7 +1304,7 @@
             this.textBox1.Location = new System.Drawing.Point(51, 8);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(478, 20);
+            this.textBox1.Size = new System.Drawing.Size(427, 20);
             this.textBox1.TabIndex = 1;
             // 
             // label1
@@ -1324,15 +1331,15 @@
             // 
             this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView2.HideSelection = false;
-            listViewItem4.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
+            listViewItem3.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
                 "n be scaled but not rotated.";
-            listViewItem5.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
+            listViewItem4.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
                 "ut not rotated.";
-            listViewItem6.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
+            listViewItem5.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
             this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
             listViewItem4,
-            listViewItem5,
-            listViewItem6});
+            listViewItem5});
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(3, 3);
             this.listView2.MultiSelect = false;
@@ -1453,6 +1460,7 @@
             // 
             // EntitiesTabPage
             // 
+            this.EntitiesTabPage.Controls.Add(this.entitiesListView);
             this.EntitiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.EntitiesTabPage.Name = "EntitiesTabPage";
             this.EntitiesTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -1460,6 +1468,36 @@
             this.EntitiesTabPage.TabIndex = 2;
             this.EntitiesTabPage.Text = "Game Entities ";
             this.EntitiesTabPage.UseVisualStyleBackColor = true;
+            // 
+            // entitiesListView
+            // 
+            this.entitiesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.entitiesListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2});
+            this.entitiesListView.LargeImageList = this.entitiesImageList;
+            this.entitiesListView.Location = new System.Drawing.Point(3, 3);
+            this.entitiesListView.Name = "entitiesListView";
+            this.entitiesListView.Size = new System.Drawing.Size(737, 161);
+            this.entitiesListView.TabIndex = 0;
+            this.entitiesListView.UseCompatibleStateImageBehavior = false;
+            this.entitiesListView.SelectedIndexChanged += new System.EventHandler(this.listView3_SelectedIndexChanged);
+            // 
+            // EnemiesTabPage
+            // 
+            this.EnemiesTabPage.Location = new System.Drawing.Point(4, 22);
+            this.EnemiesTabPage.Name = "EnemiesTabPage";
+            this.EnemiesTabPage.Size = new System.Drawing.Size(743, 167);
+            this.EnemiesTabPage.TabIndex = 3;
+            this.EnemiesTabPage.Text = "Enemies";
+            this.EnemiesTabPage.UseVisualStyleBackColor = true;
+            // 
+            // entitiesImageList
+            // 
+            this.entitiesImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("entitiesImageList.ImageStream")));
+            this.entitiesImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.entitiesImageList.Images.SetKeyName(0, "EntityExit.png");
+            this.entitiesImageList.Images.SetKeyName(1, "EntityPlayer.png");
             // 
             // MainForm
             // 
@@ -1508,6 +1546,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.LevelContextMenu.ResumeLayout(false);
+            this.EntitiesTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1642,5 +1681,8 @@
         private System.Windows.Forms.ToolStripButton togglePhysicalStripButton;
         private System.Windows.Forms.ToolStripButton toggleCollectableStripButton;
         private System.Windows.Forms.TabPage EntitiesTabPage;
+        private System.Windows.Forms.ListView entitiesListView;
+        private System.Windows.Forms.TabPage EnemiesTabPage;
+        private System.Windows.Forms.ImageList entitiesImageList;
     }
 }

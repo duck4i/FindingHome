@@ -3,33 +3,6 @@
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
-                <Item xsi:type="TextureItem" Name="Texture_0020" Visible="true">
-                    <Position>
-                        <X>-2541</X>
-                        <Y>-107</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>15.1612263</X>
-                        <Y>15.1612263</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>tropical\rocks\med_rock_3.png</texture_filename>
-                    <asset_name>med_rock_3.png</asset_name>
-                    <Origin>
-                        <X>37</X>
-                        <Y>30</Y>
-                    </Origin>
-                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0017" Visible="true">
                     <Position>
                         <X>-815</X>
@@ -55,6 +28,33 @@
                     <Origin>
                         <X>32</X>
                         <Y>36</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0020" Visible="true">
+                    <Position>
+                        <X>-2541</X>
+                        <Y>-107</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>15.1612263</X>
+                        <Y>15.1612263</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\rocks\med_rock_3.png</texture_filename>
+                    <asset_name>med_rock_3.png</asset_name>
+                    <Origin>
+                        <X>37</X>
+                        <Y>30</Y>
                     </Origin>
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0019" Visible="true">
@@ -5035,8 +5035,8 @@
         <NextItemNumber>257</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>2040.375</X>
-            <Y>-331.991943</Y>
+            <X>541.2842</X>
+            <Y>40.7353058</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

@@ -97,7 +97,10 @@ bool ShapeHelper::defineShapeFromData(Value data, list<b2PolygonShape> *shapes)
 
 bool ShapeHelper::shapeForKey(char* name, CCSize size, __out list<b2PolygonShape> *out)
 {
-	list<Shape*>::iterator pos;
+	if (name == NULL || out == NULL)
+		return false;
+
+	list<Shape*>::iterator pos;	
 	
 	//	for all shapes in the list
 	for (pos = shapes.begin(); pos != shapes.end(); pos++)
