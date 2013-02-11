@@ -60,10 +60,121 @@ void GameEntityPlayer::updatePosition(b2Vec2 pos)
 
 void GameEntityPlayer::updateRotation(float32 angle)
 {
-	
+	///	todo rotation when on steep hils etc
 }
 
 void GameEntityPlayer::updatePlayerMovement()
 {
+	KeyboardHelper *key = KeyboardHelper::sharedHelper();
+	float x = 0;
+	float y = 0;
+				
+	if (key->getLeft() == KeyStateDown)
+		x -= PLAYER_STEP_VALUE;
+	if (key->getRight() == KeyStateDown)
+		x += PLAYER_STEP_VALUE;
+	if (key->getUp() == KeyStateDown)
+		y += PLAYER_JUMP_VALUE;
 
+	float isMidAir = isPlayerMidAir();
+	if (x || y)
+	{
+		//	
+		//	Calculate and apply forces for movement
+		//
+		b2Vec2 vel = m_b2Body->GetLinearVelocity();
+
+		//	http://www.box2d.org/forum/viewtopic.php?f=3&t=4733
+		//	http://www.ikbentomas.nl/other/box2d/
+		//	http://www.cocos2d-iphone.org/forum/topic/13501				
+
+		float maxSpeed = PLAYER_SPEED;
+		const b2Vec2 velocity = m_b2Body->GetLinearVelocity();
+
+		//	no more jumping and only slight adjustment of direction when in air			
+		if (isMidAir)
+		{
+			x *= PLAYER_MID_AIR_FACTOR;
+			y = 0;	//	no jumping when mid air
+		}
+		
+		///
+		///	Shift button feature
+		///
+		if (key->getShift() == KeyStateDown)
+		{
+			x *= PLAYER_SHIFT_FACTOR;
+			maxSpeed *= PLAYER_SHIFT_FACTOR;
+			y *= PLAYER_SHIFT_FACTOR;
+		}
+
+		//	apply horizontal force - take care of max velocity
+		const float speed = abs(velocity.x);
+		if (speed >= maxSpeed)
+			x = 0;
+				
+		m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), m_b2Body->GetWorldCenter());
+	}
+
+	//	in any case constrol the jump velocity to look more real
+	b2Vec2 vel = this->m_b2Body->GetLinearVelocity();
+	if (vel.y <= 0)
+	{
+		vel.y -= 0.2f;
+		this->m_b2Body->SetLinearVelocity(vel);
+	}
+
+	//	Check player direction			
+	if (x < 0 && direction == PlayerDirectionRight)
+	{
+		direction = PlayerDirectionLeft;
+		this->m_skin->runAction(CCFlipX::create(true));
+	}
+	else if (x > 0 && direction == PlayerDirectionLeft)
+	{
+		direction = PlayerDirectionRight;
+		this->m_skin->runAction(CCFlipX::create(false));
+	}
+}
+
+bool GameEntityPlayer::isPlayerMidAir()
+{
+	bool midAir = true;
+
+	if (!this->m_b2Body)
+		return false;
+
+	b2ContactEdge *con = this->m_b2Body->GetContactList();
+	while (con)
+	{
+		if (con->contact->IsTouching())
+		{
+			midAir = false;
+			break;
+		}
+		con = con->next;
+	}
+
+	return midAir;
+}
+
+bool GameEntityPlayer::checkForDeath()
+{
+	//	check for death
+	if (m_bPlayerDied)
+		return true;
+
+	if (this->isPlayerMidAir())
+	{
+		m_secondsInAir += 1/60.0f;
+		if (m_secondsInAir >= IN_AIR_BEFORE_DEATH)
+		{
+			m_bPlayerDied = true;
+			return true;
+		}
+	}
+	else
+		m_secondsInAir = 0;
+
+	return false;
 }

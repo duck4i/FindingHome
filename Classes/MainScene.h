@@ -14,21 +14,10 @@
 using namespace cocos2d;
 
 #define DEFAULT_SCALE		0.5f
-#define DOG_SPEED			10.0f
-
-#define DOG_MID_AIR_FACTOR	0.3f
-#define DOG_SHIFT_FACTOR	1.45f
-#define DOG_JUMP_VALUE		280.0f
-#define DOG_STEP_VALUE		25.0f
-
 #define ZOOM_STEP			0.005f
-#define IN_AIR_BEFORE_DEATH	5.0f
 
-enum PlayerDirection
-{
-	PlayerDirectionLeft,
-	PlayerDirectionRight
-};
+
+
 
 class MainScene : public CCLayerColor
 {

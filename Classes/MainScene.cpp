@@ -203,175 +203,44 @@ void MainScene::updateKeyboard(float delta)
 	if (disableKeyboard)
 		return;
 
-	//CCLog("Tick keyboard");
-	short u2 = GetKeyState(VK_SPACE);
-	short f1 = GetKeyState(VK_F1);
-
-	short zoomIn = GetKeyState(VK_F7);
-	short zoomOut = GetKeyState(VK_F8);
-	short zoomReset = GetKeyState(VK_F9);	
-
-	short cameraContinue = GetKeyState(VK_F2);
-	short restart = GetKeyState(VK_F4);
-	
-	long down = 0x8000; // hi bit
-
-	//	Update player movement
-	if (player)
+	KeyboardHelper *key = KeyboardHelper::sharedHelper();
+	if (key->getF1() == KeyStateDown)
 	{
-		short l = GetKeyState(VK_LEFT);
-		short r = GetKeyState(VK_RIGHT);
-		short d = GetKeyState(VK_DOWN);
-		short u = GetKeyState(VK_UP);
-		short shift = GetKeyState(VK_LSHIFT);
-
-		//( when both left and right buttons pushed do nothing as that is some unknown state)
-		if (r & down && l & down)
-			return;
-
-		bool jumped = (u & down) || (u2 & down);		
-
-		float x = 0;
-		float y = 0;
-
-		if (l & down)
-			x -= DOG_STEP_VALUE;	
-		else if (r & down)
-			x += DOG_STEP_VALUE;
-		
-		//	jump key only once
-		if (jumped && jumpKeyIsDown < 1)
-		{
-			y += DOG_JUMP_VALUE;
-			jumpKeyIsDown++;
-		}
-		else if (!jumped)
-			jumpKeyIsDown = 0;
-
-		//	check is player in air
-		float midAir = isPlayerMidAir();		
-
-		//	check if anything to do
-		if (x || y)
-		{
-			//	
-			//	Calculate and apply forces for movement
-			//
-			b2Vec2 vel = playerBody->GetLinearVelocity();
-
-			//	http://www.box2d.org/forum/viewtopic.php?f=3&t=4733
-			//	http://www.ikbentomas.nl/other/box2d/
-			//	http://www.cocos2d-iphone.org/forum/topic/13501				
-
-			float maxSpeed = DOG_SPEED;
-			const b2Vec2 velocity = playerBody->GetLinearVelocity();
-
-			//	no more jumping and only slight adjustment of direction when in air			
-			if (midAir)
-			{
-				x *= DOG_MID_AIR_FACTOR;
-				y = 0;
-			}
-			
-			///
-			///	Shift button feature
-			///
-			if ((shift & down))
-			{
-				x *= DOG_SHIFT_FACTOR;
-				maxSpeed *= DOG_SHIFT_FACTOR;
-				y *= DOG_SHIFT_FACTOR;
-			}									
-
-			//	apply horizontal force - take care of max velocity
-			const float speed = abs(velocity.x);
-			if (speed >= maxSpeed)
-				x = 0;
-			
-			playerBody->ApplyLinearImpulse(b2Vec2(x, y), playerBody->GetWorldCenter());
-		}//	if (x || y)
-
-		//	in any case constrol the jump velocity to look more real
-		b2Vec2 vel = this->playerBody->GetLinearVelocity();
-		if (vel.y <= 0)
-		{
-			vel.y -= 0.2f;
-			this->playerBody->SetLinearVelocity(vel);
-		}
-
-		//	Check player direction			
-		if (l & down && direction == PlayerDirectionRight)
-		{
-			direction = PlayerDirectionLeft;
-			player->runAction(CCFlipX::create(true));
-		}
-		else if (r & down && direction == PlayerDirectionLeft)
-		{
-			direction = PlayerDirectionRight;
-			player->runAction(CCFlipX::create(false));
-		}
-
-		//	shift key
-		if ((shift & down))
-		{
-			if (!this->shiftSprite->isVisible())
-				this->shiftSprite->setVisible(true);
-		}
-		else if (this->shiftSprite->isVisible())
-			this->shiftSprite->setVisible(false);
-
-	}//if player
-
-	//	now check for scaling keys	
-	if (zoomIn & down)
+		this->debugLayer->setVisible(!this->debugLayer->isVisible());
+		CCDirector* d = CCDirector::sharedDirector();
+		d->setDisplayStats(!d->isDisplayStats());
+	}
+	else if (key->getF4() == KeyStateDown)	
+		playerDied();
+	else if (key->getF7() == KeyStateDown)
 		incSceneZoom();
-	else if (zoomOut & down)
+	else if (key->getF8() == KeyStateDown)
 		descSceneZoom();
-	else if (zoomReset & down)
-		resetSceneZoom();	
-	
-	//	Continue camera and reset scale
-	if (cameraContinue & down)
+	else if (key->getF9() == KeyStateDown)
+		resetSceneZoom();
+	else if (key->getF2() == KeyStateDown)
 	{
 		resetSceneZoom();
 		this->cameraMoveInProgress = false;
 	}
 
-	//
-	//	now check for box2D debug, the code bellow acts like WM_KEYUP	
-	//
-	if (f1 & down)
+	//	shift key sprite
+	if (key->getShift() == KeyStateDown)
 	{
-		if (!boxDebugKeyIsDown)
-		{
-			this->debugLayer->setVisible(!this->debugLayer->isVisible());
-			CCDirector* d = CCDirector::sharedDirector();
-			d->setDisplayStats(!d->isDisplayStats());
-			boxDebugKeyIsDown = true;
-		}
+		if (!this->shiftSprite->isVisible())
+			this->shiftSprite->setVisible(true);
 	}
-	else if (boxDebugKeyIsDown)
-		boxDebugKeyIsDown = false;
-
-	//
-	//	now restart	
-	//
-	if (restart & down)
-	{
-		if (!restartKeyIsDown)
-		{
-			restartKeyIsDown = true;									
-			playerDied();
-		}
-	}
-	else if (restartKeyIsDown)
-		restartKeyIsDown = false;
+	else if (this->shiftSprite->isVisible())
+		this->shiftSprite->setVisible(false);
 }
 
 void MainScene::update(float delta)
 {
 	//	Keyboard update
-	updateKeyboard(delta);	
+	updateKeyboard(delta);
+
+	if (this->gamePlayer)
+		gamePlayer->updatePlayerMovement();
 
 	//	PHYSICS UPDATE
 	updatePhysics(delta);
