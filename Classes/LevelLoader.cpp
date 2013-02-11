@@ -4,8 +4,6 @@
 ///	LevelLoader Class
 ///
 
-
-
 void LevelLoader::createLevelLayers()
 {
 	//	do not change the order of how we create layers, it will affect zOrder
@@ -112,15 +110,15 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	//	check type
 	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
 	{		
-		info.nodeType = NODEINFO_BLOCK; 
+		info.nodeType = NodeInfoTypeBlock; 
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
 	{
-		info.nodeType = NODEINFO_CIRCLE;
+		info.nodeType = NodeInfoTypeCircle;
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
 	{		
-		info.nodeType = NODEINFO_TEXTURE;
+		info.nodeType = NodeInfoTypeTexture;
 	}
 
 		//	select layer to insert it into
@@ -128,11 +126,11 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	CCNode* toInsert = NULL;
 	GameEntitySprite *sprite;
 
-	if (info.nodeType == NODEINFO_BLOCK)
+	if (info.nodeType == NodeInfoTypeBlock)
 		sprite = GameEntityRectangle::create(info);
-	else if (info.nodeType == NODEINFO_CIRCLE)
+	else if (info.nodeType == NodeInfoTypeCircle)
 		sprite = GameEntityCircle::create(info);
-	else if (info.nodeType == NODEINFO_TEXTURE)
+	else if (info.nodeType == NodeInfoTypeTexture)
 		sprite = GameEntitySprite::create(info);
 
 	if (sprite && sprite->getProperties().isPlayerObject())

@@ -11,6 +11,14 @@ CCScene* MainScene::scene()
 	return scene;
 }
 
+MainScene::MainScene()
+{
+	this->debugLayer = NULL;
+	this->boxWorld = NULL;	
+	this->weather = NULL;
+	this->gamePlayer = NULL;
+}
+
 MainScene::~MainScene()
 {
 	CCLog("MainScene destructor called");
@@ -24,17 +32,7 @@ bool MainScene::init()
 {		
 	CCLayerColor::initWithColor(ccc4(0, 0, 0, 255));
 	
-	winSize = CCDirector::sharedDirector()->getWinSizeInPixels();	
-
-	this->debugLayer = NULL;
-	this->boxDebugKeyIsDown = false;
-	this->player = NULL;
-	this->playerBody = NULL;	
-	this->boxWorld = NULL;	
-	this->weather = NULL;
-	this->totalTimeInAir = 0;
-
-	direction = PlayerDirectionRight;	
+	winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
 	
 	//	Create world layer
 	this->worldLayer = CCLayer::create();	
@@ -69,23 +67,22 @@ void MainScene::loadMap(float none)
 	this->addChild(this->shiftSprite, 100000);
 
 	//	schedule keyboard and touch events
-	this->jumpKeyIsDown = false;
 	this->disableKeyboard = false;
 	this->setKeypadEnabled(true);
 
 	this->touchesInProgress = false;
 
 	//	schedule camera update
-	if (this->player)
+	if (this->gamePlayer)
 	{
 		//	set rotation and friction damping and gravity scale
-		this->playerBody->SetFixedRotation(true);
-		this->playerBody->SetLinearDamping(0.5f);
-		this->playerBody->SetGravityScale(2);
+		this->gamePlayer->getBody()->SetFixedRotation(true);
+		this->gamePlayer->getBody()->SetLinearDamping(0.5f);
+		this->gamePlayer->getBody()->SetGravityScale(2);
 
 		this->cameraMoveInProgress = false;			
 		
-		CCPoint playerStart = this->worldLayer->convertToWorldSpace(player->getPosition());
+		CCPoint playerStart = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());
 
 		//	always start in (25%/25%) coordinates
 		float twentyPercent = 0.25f;
@@ -133,7 +130,7 @@ void MainScene::setupPhysics()
 void MainScene::addBodies()
 {
 	//	load level
-	char *level = "..\\Resources\\Level2.xml";
+	char *level = GAME_START_LEVEL;
 	extern char* commandLine;
 	if (commandLine && strlen(commandLine))
 		level = commandLine;
@@ -141,8 +138,6 @@ void MainScene::addBodies()
 	LevelLoader l(this->worldLayer, level, this->boxWorld);
 	if (l.parse())
 	{
-		this->playerBody = l.playerBody;
-		this->player = l.playerNode;
 		gamePlayer = l.player;
 		return;
 	}
@@ -164,7 +159,7 @@ void MainScene::updateCamera(float delta)
 	if (this->cameraMoveInProgress)
 		return;
 	
-	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->player->getPosition());
+	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());
 	CCPoint prevPos = this->worldLayer->getPosition();
 	
 	float margin = 0.35f;
@@ -237,10 +232,18 @@ void MainScene::updateKeyboard(float delta)
 void MainScene::update(float delta)
 {
 	//	Keyboard update
-	updateKeyboard(delta);
+	updateKeyboard(delta);	
 
 	if (this->gamePlayer)
+	{
+		if (this->gamePlayer->checkForDeath())
+		{
+			playerDied();
+			return;	//	stop update
+		}
+		
 		gamePlayer->updatePlayerMovement();
+	}
 
 	//	PHYSICS UPDATE
 	updatePhysics(delta);
@@ -253,10 +256,9 @@ void MainScene::update(float delta)
 void MainScene::updatePhysics(float delta)
 {
 	this->boxWorld->Step(BOX_WOLRD_STEP, BOX_WORLD_VELOCITY_PASSES, BOX_WORLD_POSITION_PASSES);
-
 	for (b2Body* b = this->boxWorld->GetBodyList(); b; b = b->GetNext())
 	{		
-		GameEntity *userData = reinterpret_cast<GameEntity*> (b->GetUserData());
+		GameEntity *userData = (GameEntity*) b->GetUserData();
 		if (userData)
 		{
 			userData->updatePosition(b->GetPosition());
@@ -300,15 +302,16 @@ void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 
 void MainScene::setSceneZoom(float val)
 {		
-	if (!player || !worldLayer)
+	if (!gamePlayer || !worldLayer)
 		return;
 
-	CCPoint oldPos = this->worldLayer->convertToWorldSpace(player->getPosition());		
+	CCPoint playerPos = gamePlayer->getSkin()->getPosition();
+	CCPoint oldPos = this->worldLayer->convertToWorldSpace(playerPos);
 	CCPoint oldWPos = this->convertToWorldSpace(worldLayer->getPosition());
 
 	this->worldLayer->setScale(this->sceneScale);
 
-	CCPoint pos = this->worldLayer->convertToWorldSpace(player->getPosition());
+	CCPoint pos = this->worldLayer->convertToWorldSpace(gamePlayer->getSkin()->getPosition());
 	CCPoint wPos = this->convertToWorldSpace(worldLayer->getPosition());
 	CCPoint worldPos = this->worldLayer->getPosition();
 		
@@ -343,32 +346,3 @@ void MainScene::playerDied()
 	CCDirector::sharedDirector()->replaceScene(MainScene::scene());			
 }
 
-bool MainScene::isPlayerMidAir()
-{
-	if (!playerBody)
-		return false;
-
-	bool midAir = true;
-	b2ContactEdge *con = playerBody->GetContactList();
-	while (con)
-	{
-		if (con->contact->IsTouching())
-		{
-			midAir = false;
-			break;
-		}
-		con = con->next;
-	}
-
-	//	check for death
-	if (midAir)
-	{
-		totalTimeInAir += 1/60.0f;
-		if (totalTimeInAir >= IN_AIR_BEFORE_DEATH)
-			playerDied();
-	}
-	else
-		totalTimeInAir = 0;
-
-	return midAir;
-}

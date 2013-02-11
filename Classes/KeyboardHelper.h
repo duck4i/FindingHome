@@ -69,8 +69,6 @@ private:
 
 public:	
 
-
-
 	KeyState getUp();
 	KeyState getDown();
 	KeyState getLeft();

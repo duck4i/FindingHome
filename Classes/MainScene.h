@@ -17,11 +17,9 @@ using namespace cocos2d;
 #define ZOOM_STEP			0.005f
 
 
-
-
 class MainScene : public CCLayerColor
 {
-private:	
+private:
 
 	void loadMap(float delta);
 	
@@ -32,12 +30,7 @@ private:
 	void toggleCameraProgress();
 	void updateCamera(float delta);
 
-	float sceneScale;		
-	
-	unsigned int jumpKeyIsDown;
-	bool restartKeyIsDown;
-	bool boxDebugKeyIsDown;
-	float totalTimeInAir;
+	float sceneScale;
 	
 	bool disableKeyboard;
 	void updateKeyboard(float delta);
@@ -47,11 +40,6 @@ private:
 
 	//	player
 	GameEntityPlayer* gamePlayer;
-
-	CCNode* player;
-	b2Body *playerBody;
-	PlayerDirection direction;
-
 	CCSprite* shiftSprite;
 	
 	//	world
@@ -78,7 +66,6 @@ private:
 	void descSceneZoom();
 	void resetSceneZoom();
 
-	bool isPlayerMidAir();
 	void playerDied();
 
 	//	contact listener
@@ -95,6 +82,7 @@ public:
     // implement the "static node()" method manually
 	CREATE_FUNC(MainScene);
 
+	MainScene();
 	~MainScene();
 };
 

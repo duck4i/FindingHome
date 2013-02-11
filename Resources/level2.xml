@@ -4778,8 +4778,8 @@
                 </Item>
                 <Item xsi:type="CircleItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-588</X>
-                        <Y>-18</Y>
+                        <X>-1218</X>
+                        <Y>-303</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="dynamic" Type="bool" Description="">
@@ -4959,8 +4959,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0256" Visible="true">
                     <Position>
-                        <X>-1005</X>
-                        <Y>-117</Y>
+                        <X>-785</X>
+                        <Y>-107</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="player" Type="bool" Description="">

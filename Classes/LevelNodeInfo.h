@@ -5,9 +5,9 @@
 
 enum NODEINFOType 
 {
-	NODEINFO_BLOCK = 0,
-	NODEINFO_CIRCLE,
-	NODEINFO_TEXTURE
+	NodeInfoTypeBlock = 0,
+	NodeInfoTypeCircle,
+	NodeInfoTypeTexture
 };
 
 ///
@@ -40,7 +40,7 @@ public:
 
 	NODEINFO()
 	{		
-		nodeType = NODEINFO_BLOCK;
+		nodeType = NodeInfoTypeBlock;
 		position = ccp(0,0);
 		size = CCSizeMake(100, 100);
 		rotation = 0;

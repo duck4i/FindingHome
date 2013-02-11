@@ -2,6 +2,7 @@
 #define _GAME_ENTITY_SPRITE_H_
 
 #include "GameEntity.h"
+#include "ShapeHelper.h"
 
 ///
 ///	GameEntity with sprite attached

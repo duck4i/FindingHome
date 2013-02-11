@@ -48,7 +48,7 @@ private:
 	void createLevelLayers();
 
 	b2World *boxWorld;
-	ShapeHelper *shapeHelper;
+	//ShapeHelper *shapeHelper;
 
 public:
 
@@ -90,7 +90,7 @@ public:
 		this->boxWorld = boxWorld;
 		this->playerBody = NULL;
 		this->playerNode = NULL;
-		this->shapeHelper = new ShapeHelper(SHAPE_DATA);
+		//this->shapeHelper = new ShapeHelper(SHAPE_DATA);
 
 		createLevelLayers();
 	}
@@ -99,8 +99,8 @@ public:
 	{
 		if (sharedDoc)
 			xmlFreeDoc(sharedDoc);
-		if (shapeHelper)
-			delete shapeHelper;
+		//if (shapeHelper)
+		//	delete shapeHelper;
 	}
 
 	bool parse();

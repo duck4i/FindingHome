@@ -1,5 +1,26 @@
 #include "ShapeHelper.h"
 
+ShapeHelper* globalShapeHelper = NULL;
+
+ShapeHelper* ShapeHelper::sharedHelper()
+{
+	if (globalShapeHelper)
+		return globalShapeHelper;
+
+	globalShapeHelper = new ShapeHelper(SHAPE_DATA);
+	if (globalShapeHelper != NULL && globalShapeHelper->init())
+	{
+		return globalShapeHelper;
+	}
+	else if (globalShapeHelper)
+	{
+		delete globalShapeHelper;
+		globalShapeHelper = NULL;
+	}
+
+	return NULL;
+}
+
 bool ShapeHelper::init()
 {
 	bool res = false;
@@ -15,15 +36,6 @@ bool ShapeHelper::init()
 	Value v;		
 	rigidBodies = root.get("rigidBodies", v);
 
-	CCLog("Returning %d", res);
-	return res;
-}
-
-Value ShapeHelper::itemWithName(char* name)
-{	
-	if (!initOK || name == NULL)
-		return NULL;
-
 	unsigned int size = rigidBodies.size();	
 	for (unsigned int i = 0; i < rigidBodies.size(); i++)
 	{
@@ -33,87 +45,113 @@ Value ShapeHelper::itemWithName(char* name)
 		
 		string shapeName = v["name"].asString();
 		string imageName = v["imagePath"].asString();
-		string s(name);
 		
-		if (!s.compare(shapeName) || !s.compare(imageName))		
-			return v;
+		//b2PolygonShape sh;
+		list<b2PolygonShape> sh;
+		if (defineShapeFromData(v, &sh))
+		{
+			Shape* s = new Shape(shapeName, imageName, sh);
+			shapes.push_front(s);
+		}
 	}
-	return NULL;
+
+	CCLog("Returning %d", res);
+	return res;
 }
 
-bool ShapeHelper::createShapeForItem(char* name, b2Body* body, CCSize size, float density, float friction, bool bounce)
+bool ShapeHelper::defineShapeFromData(Value data, list<b2PolygonShape> *shapes)
 {
-	///
-	///	WAY TO SLOW!!! HASH THIS STUFF AND LOAD ONLY ONCE.
-	///
-	return false;	
-	
+	if (data.empty() || shapes == NULL)
+		return false;
+
 	bool res = false;
-	CCLog("%s Name: %s", __FUNCTION__, name);
-	if (name == NULL)
-		return res;	
+	Value polys = data["polygons"];
 
-	Value v = itemWithName(name);
-
-	if (v != NULL && body != NULL)
+	for (unsigned int i = 0; i < polys.size(); i++)
 	{
-		Value polys = v["polygons"];
-		unsigned int numPoly = polys.size();
-		res = numPoly > 0;
+		Value curr = polys[(unsigned int) i];
 
-		for (unsigned int i = 0; i < numPoly; i++)
+		unsigned int numVertices = curr.size();
+		b2Vec2* vertices = (b2Vec2*) malloc(numVertices * sizeof(b2Vec2));
+		memset(vertices, 0, numVertices * sizeof(b2Vec2));
+
+		for (unsigned int j = 0; j < numVertices; j++)	//	all vertices of current poly
 		{
-			Value curr = polys[i];
-			unsigned int numVertices = curr.size();
-			b2Vec2* vertices = (b2Vec2*) malloc(numVertices * sizeof(b2Vec2));
+			Value set = curr[j];
+			float x = set["x"].asDouble();
+			float y = set["y"].asDouble();
+			vertices[j].Set(x, y);
+		}
 
-			for (unsigned int j = 0; j < curr.size(); j++)	//	all vertices of current poly
+		b2PolygonShape ps;
+		ps.Set(vertices, numVertices);
+		
+		shapes->push_front(ps);
+	}
+	
+	if (polys.size() > 0)	
+		return true;
+
+	return false;
+}
+
+bool ShapeHelper::shapeForKey(char* name, CCSize size, __out list<b2PolygonShape> *out)
+{
+	list<Shape*>::iterator pos;
+	
+	//	for all shapes in the list
+	for (pos = shapes.begin(); pos != shapes.end(); pos++)
+	{
+		Shape *s = *(pos);
+		if (_stricmp(s->name.c_str(), name) == 0)
+		{
+			list<b2PolygonShape>::iterator polPos;
+
+			//	for each polygon in shape
+			for (polPos = s->polygons.begin(); polPos != s->polygons.end(); polPos++)
 			{
-				Value set = curr[j];
-				float x = set["x"].asDouble();
-				float y = set["y"].asDouble();
+				b2PolygonShape current = *(polPos);
+			
+				unsigned int count = current.m_vertexCount;
+				b2Vec2* vert = (b2Vec2*) malloc(sizeof(b2Vec2) * count);
 
-				float width = SCREEN_TO_WORLD(size.width);
-				float height = SCREEN_TO_WORLD(size.height);
+				//	correct vertices for current item size
+				for (unsigned int i = 0; i < count; i++)
+				{
+					float x = current.m_vertices[i].x;
+					float y = current.m_vertices[i].y;
 
-				//	correct proportions
-				float xCorrector = 1.0f;
-				float yCorrector = 1.0f;
+					float width = SCREEN_TO_WORLD(size.width);
+					float height = SCREEN_TO_WORLD(size.height);
 
-				if(size.height < size.width)
-					yCorrector = size.width/size.height;
-				if(size.width < size.height)
-					xCorrector = size.height/size.width;				
+					//	correct proportions
+					float xCorrector = 1.0f;
+					float yCorrector = 1.0f;
+
+					if(size.height < size.width)
+						yCorrector = size.width/size.height;
+					if(size.width < size.height)
+						xCorrector = size.height/size.width;				
 				
-				//	scale properly from content size
-				x *= width * xCorrector;
-				y *= height * yCorrector;
+					//	scale properly from content size
+					x *= width * xCorrector;
+					y *= height * yCorrector;
 
-				//	adjusting anchor point (physics editor 0x0 but box2d 0.5x0.5x)
-				x -= width / 2.0f;
-				y -= height / 2.0f;				
-
-				vertices[j].Set(x, y);
+					//	adjusting anchor point (physics editor 0x0 but box2d 0.5x0.5x)
+					x -= width / 2.0f;
+					y -= height / 2.0f;
+							
+					vert[i].Set(x, y);
+				}
+			
+				b2PolygonShape ps;
+				ps.Set(vert, count);
+				out->push_front(ps);			
 			}
 
-			b2PolygonShape ps;
-			ps.Set(vertices, numVertices);		
-			
-			b2FixtureDef fd;
-			fd.shape = &ps;			
-			fd.density = density;
-			fd.friction = friction;
-
-			if (bounce)
-				fd.restitution = 0.5;
-
-			b2Fixture *f = body->CreateFixture(&fd);			
-
-			delete [] vertices;
+			return true;
 		}		
 	}
-	else
-		CCLog("%s Shape not found in custom shapes or something is wrong. (%s)", __FUNCTION__, name);
-	
-	return res;
+
+	return false;
 }

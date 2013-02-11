@@ -6,37 +6,53 @@
 #include <Box2D\Box2D.h>
 #include "json\json.h"
 #include "Physics.h"
+#include "Settings.h"
 
 using namespace cocos2d;
 using namespace Json;
 using namespace std;
 
-//	HELP HERE
+//	JSON LIB HELP HERE
 //	http://jsoncpp.sourceforge.net/
+
+
+class Shape 
+{
+public:
+	string name;
+	string imagePath;
+	list<b2PolygonShape> polygons;
+
+	Shape(string key, string path, list<b2PolygonShape> pol) : name(key), imagePath(path), polygons(pol)
+	{
+	}
+};
 
 class ShapeHelper
 {
 private:
 
-	const char* resourcePath;
+	list<Shape*> shapes;
 
-	bool initOK;
+	const char* resourcePath;
 	bool init();
 
 	Value rigidBodies;
-
 	Value itemWithName(char* name);
+
+	bool defineShapeFromData(Value data, __out list<b2PolygonShape> *shapes);
+
+	ShapeHelper(const char* resourcePath)
+	{
+		this->resourcePath = resourcePath;		
+	}
 
 public:
 	
-	ShapeHelper(const char* resourcePath)
-	{
-		this->resourcePath = resourcePath;
-		initOK = init();
-	}
+	static ShapeHelper* sharedHelper();
 
-	bool createShapeForItem(char* name, __in b2Body* body, CCSize size, float density = 1.0f, float friction = 1.0f, bool bounce = false);
-
+	///	Gets b2PolygonShape for asset name
+	bool shapeForKey(char* name, CCSize size, __out list<b2PolygonShape> *out);
 };
 
 

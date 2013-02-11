@@ -65,15 +65,15 @@ bool GameEntitySprite::createBody(b2World* world)
 	//	create
 	m_b2Body = m_b2World->CreateBody(&def);
 	if (m_b2Body == NULL)
-		return false;	
+		return false;
 
-	return createFixture();	
+	return createFixture();
 }
 
 void GameEntitySprite::updatePosition(b2Vec2 pos)
 {
 	if (m_sprite)
-	{	
+	{
 		CCPoint posRecalc = ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y));
 		m_sprite->setPosition(posRecalc);
 	}
@@ -81,17 +81,35 @@ void GameEntitySprite::updatePosition(b2Vec2 pos)
 
 void GameEntitySprite::updateRotation(float32 angle)
 {
-	if (!m_sprite)
+	if (m_sprite)
 		m_sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(angle));
 }
 
 bool GameEntitySprite::createFixture()
 {	
-	b2PolygonShape ps;	
-	ps.SetAsBox(SCREEN_TO_WORLD(m_nodeInfo.size.width / 2), SCREEN_TO_WORLD(m_nodeInfo.size.height / 2));
-
-	m_b2FixtureDef.shape = &ps;
-
-	b2Fixture* b = m_b2Body->CreateFixture(&m_b2FixtureDef);
-	return b != NULL;
+	std::list<b2PolygonShape> shapes;
+	if (ShapeHelper::sharedHelper()->shapeForKey(m_nodeInfo.assetTexture, m_nodeInfo.size, &shapes))
+	{
+		//	have to recalculate total weight?
+		//bool ok = true;
+		std::list<b2PolygonShape>::iterator pos;
+		for (pos = shapes.begin(); pos != shapes.end(); pos++)
+		{
+			b2FixtureDef fd;
+			b2PolygonShape p = *(pos);
+			fd.shape = &p;
+			m_b2Body->CreateFixture(&fd);
+		}
+		return true;
+	}
+	else
+	{
+		b2PolygonShape ps;
+		ps.SetAsBox(SCREEN_TO_WORLD(m_nodeInfo.size.width / 2), SCREEN_TO_WORLD(m_nodeInfo.size.height / 2));		
+		m_b2FixtureDef.shape = &ps;
+		b2Fixture* b = m_b2Body->CreateFixture(&m_b2FixtureDef);
+		return b != NULL;
+	}
+			
+	return false;
 }
