@@ -36,6 +36,7 @@ public:
 	virtual void updatePosition(b2Vec2 pos);
 	virtual void updateRotation(float32 angle);
 	
+	virtual void bodyRemovedFromWorld();
 
 	//	public creation
 	NINFO_CREATE_FUNC(GameEntitySprite)

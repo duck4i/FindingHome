@@ -98,15 +98,15 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	//	check type
 	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
 	{		
-		info.nodeType = NodeInfoTypeBlock; 
+		info.nodeType = NodeTypeBlock; 
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
 	{
-		info.nodeType = NodeInfoTypeCircle;
+		info.nodeType = NodeTypeCircle;
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
 	{		
-		info.nodeType = NodeInfoTypeTexture;
+		info.nodeType = NodeTypeTexture;
 	}
 
 		//	select layer to insert it into
@@ -114,11 +114,11 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	CCNode* toInsert = NULL;
 	GameEntitySprite *sprite;
 
-	if (info.nodeType == NodeInfoTypeBlock)
+	if (info.nodeType == NodeTypeBlock)
 		sprite = GameEntityRectangle::create(info);
-	else if (info.nodeType == NodeInfoTypeCircle)
+	else if (info.nodeType == NodeTypeCircle)
 		sprite = GameEntityCircle::create(info);
-	else if (info.nodeType == NodeInfoTypeTexture)
+	else if (info.nodeType == NodeTypeTexture)
 		sprite = GameEntitySprite::create(info);
 
 	if (sprite && sprite->getProperties().isPlayerObject())

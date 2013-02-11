@@ -17,6 +17,7 @@ MainScene::MainScene()
 	this->boxWorld = NULL;	
 	this->weather = NULL;
 	this->gamePlayer = NULL;
+	this->worldListener = NULL;
 }
 
 MainScene::~MainScene()
@@ -116,7 +117,9 @@ void MainScene::setupPhysics()
 
 	this->boxWorld = new b2World(gravity);
 	this->boxWorld->SetAllowSleeping(this->boxWorldSleep);
-	this->boxWorld->SetContactListener(&this->worldListener);	
+
+	this->worldListener = new ContactListener(this);
+	this->boxWorld->SetContactListener(this->worldListener);
 	
 	//	setup debug drawing	
 	if (true)
@@ -256,14 +259,30 @@ void MainScene::update(float delta)
 void MainScene::updatePhysics(float delta)
 {
 	this->boxWorld->Step(BOX_WOLRD_STEP, BOX_WORLD_VELOCITY_PASSES, BOX_WORLD_POSITION_PASSES);
-	for (b2Body* b = this->boxWorld->GetBodyList(); b; b = b->GetNext())
-	{		
+
+	b2Body* b = this->boxWorld->GetBodyList();
+	while (b)
+	{
 		GameEntity *userData = (GameEntity*) b->GetUserData();
 		if (userData)
 		{
-			userData->updatePosition(b->GetPosition());
-			userData->updateRotation(b->GetAngle());
+			if (!userData->isForRemoval())
+			{
+				userData->updatePosition(b->GetPosition());
+				userData->updateRotation(b->GetAngle());
+				b = b->GetNext();
+			}
+			else
+			{
+				//	remove from world
+				b2Body* b2 = b->GetNext();
+				this->boxWorld->DestroyBody(b);
+				userData->bodyRemovedFromWorld();	//	notify object that its body was removed
+				b = b2;
+			}
 		}
+
+		
 	}
 }
 

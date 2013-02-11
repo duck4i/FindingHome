@@ -83,6 +83,7 @@ public:
 		foundPropNamedFinish = false;
 		foundPropNamedDynamic = false;		
 		foundPropNamedBounce = false;
+		foundPropNamedCollectable = false;
 	}		
 
 	bool parseFromNode(xmlNodePtr node);

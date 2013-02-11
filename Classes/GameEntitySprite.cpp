@@ -36,7 +36,7 @@ bool GameEntitySprite::postInit()
 	if (m_nodeInfo.scale)
 		m_sprite->setScale(m_nodeInfo.scale);
 	
-	if (m_nodeInfo.nodeType == NODEINFOType::NodeInfoTypeTexture)
+	if (m_nodeInfo.nodeType == NodeTypeTexture)
 		m_sprite->setColor(cc4to3(m_nodeInfo.tint));
 	
 	//	transformation
@@ -57,7 +57,7 @@ bool GameEntitySprite::createBody(b2World* world)
 	GameEntity::createBody(world);
 
 	//	fix for texture
-	if (m_nodeInfo.nodeType == NodeInfoTypeTexture)
+	if (m_nodeInfo.nodeType == NodeTypeTexture)
 	{
 		m_nodeInfo.size.width = m_sprite->getContentSize().width * m_nodeInfo.scale;
 		m_nodeInfo.size.height = m_sprite->getContentSize().height * m_nodeInfo.scale;
@@ -120,6 +120,23 @@ bool GameEntitySprite::createFixture()
 		b2Fixture* b = m_b2Body->CreateFixture(&m_b2FixtureDef);
 		return b != NULL;
 	}
-			
+	
 	return false;
+}
+
+void GameEntitySprite::bodyRemovedFromWorld()
+{
+	GameEntity::bodyRemovedFromWorld();
+
+	//	remove collectable sprite
+	if (this->m_sprite && this->m_customProps.isCollectable())
+	{
+		float duration = 0.4f;
+		float move = 50.0f;
+
+		this->m_sprite->runAction(CCMoveBy::create(duration, ccp(0, move)));
+		this->m_sprite->runAction(CCFadeOut::create(duration));
+
+		//	remove from layer world
+	}
 }

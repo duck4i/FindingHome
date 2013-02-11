@@ -64,3 +64,13 @@ void GameEntity::updateRotation(float32 angle)
 {
 
 }
+
+void GameEntity::removeAtNextUpdate()
+{
+	m_bForRemoval = true;
+}
+
+void GameEntity::bodyRemovedFromWorld()
+{
+	m_b2Body = NULL;
+}

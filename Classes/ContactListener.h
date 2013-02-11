@@ -4,8 +4,9 @@
 #include <cocos2d.h>
 #include <Box2D\Box2D.h>
 using namespace cocos2d;
-
 #include "GameEntities.h"
+
+class MainScene;
 
 ///
 ///	Class used for collision detection with enemies, projectiles and other stuff.
@@ -13,8 +14,21 @@ using namespace cocos2d;
 ///
 class ContactListener : public b2ContactListener
 {
+private:
+
 	void BeginContact(b2Contact *con);
 	void EndContact(b2Contact *con);
+
+	MainScene* m_mainScene;
+
+	void CollectibleHit(GameEntity* entity);
+
+public:
+
+	ContactListener(MainScene* m) : m_mainScene(m)
+	{
+	}
+
 };
 
 

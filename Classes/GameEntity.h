@@ -36,6 +36,7 @@ protected:
 	virtual bool postInit();
 
 	bool m_bPhysical;
+	bool m_bForRemoval;
 
 	b2World* m_b2World;
 	b2Body* m_b2Body;
@@ -46,8 +47,9 @@ protected:
 	{
 		m_nodeInfo = info;
 		m_bPhysical = false;
+		m_bForRemoval = false;
 		m_b2World = NULL;
-		m_b2Body = NULL;
+		m_b2Body = NULL;		
 	}
 
 	virtual bool createFixture();
@@ -67,6 +69,11 @@ public:
 
 	virtual bool isPhysical() { return m_bPhysical; }
 	virtual b2Body* getBody() { return m_b2Body; }
+
+	virtual void removeAtNextUpdate();
+	virtual bool isForRemoval() { return m_bForRemoval; }
+
+	virtual void bodyRemovedFromWorld();
 	
 	//	public creation	
 	NINFO_CREATE_FUNC(GameEntity)

@@ -69,7 +69,7 @@ private:
 	void playerDied();
 
 	//	contact listener
-	ContactListener worldListener;
+	ContactListener* worldListener;
 
 public:
 

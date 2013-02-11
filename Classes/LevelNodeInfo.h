@@ -3,11 +3,12 @@
 
 #include <cocos2d.h>
 
-enum NODEINFOType 
+enum NodeType 
 {
-	NodeInfoTypeBlock = 0,
-	NodeInfoTypeCircle,
-	NodeInfoTypeTexture
+	NodeTypeBlock = 0,
+	NodeTypeCircle,
+	NodeTypeTexture,
+	NodeTypePlayer
 };
 
 ///
@@ -17,7 +18,7 @@ class NODEINFO
 {
 public:
 
-	NODEINFOType nodeType;
+	NodeType nodeType;
 
 	CCPoint position;
 	CCSize size;
@@ -40,7 +41,7 @@ public:
 
 	NODEINFO()
 	{		
-		nodeType = NodeInfoTypeBlock;
+		nodeType = NodeTypeBlock;
 		position = ccp(0,0);
 		size = CCSizeMake(100, 100);
 		rotation = 0;
