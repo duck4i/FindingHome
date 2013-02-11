@@ -302,8 +302,8 @@
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0055" Visible="true">
                     <Position>
-                        <X>-4040</X>
-                        <Y>230</Y>
+                        <X>-4032</X>
+                        <Y>192</Y>
                     </Position>
                     <CustomProperties />
                     <Width>6876</Width>
@@ -812,8 +812,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0110" Visible="true">
                     <Position>
-                        <X>16449</X>
-                        <Y>1572</Y>
+                        <X>16448</X>
+                        <Y>1600</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>-0.4473675</Rotation>
@@ -5035,8 +5035,8 @@
         <NextItemNumber>257</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>90.375</X>
-            <Y>-111.991943</Y>
+            <X>2040.375</X>
+            <Y>-331.991943</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

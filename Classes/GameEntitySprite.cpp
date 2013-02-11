@@ -32,6 +32,10 @@ bool GameEntitySprite::postInit()
 	m_sprite->setRotation(CC_RADIANS_TO_DEGREES(m_nodeInfo.rotation));
 	if (m_nodeInfo.scale)
 		m_sprite->setScale(m_nodeInfo.scale);
+
+	
+	if (m_nodeInfo.nodeType == NODEINFOType::NodeInfoTypeTexture)
+		m_sprite->setColor(cc4to3(m_nodeInfo.tint));
 	
 	//	transformation
 	if (m_nodeInfo.flipHorizontally)
@@ -72,7 +76,8 @@ bool GameEntitySprite::createBody(b2World* world)
 
 void GameEntitySprite::updatePosition(b2Vec2 pos)
 {
-	if (m_sprite)
+	bool shouldReposition = m_sprite && m_customProps.isDynamicObject();
+	if (shouldReposition)
 	{
 		CCPoint posRecalc = ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y));
 		m_sprite->setPosition(posRecalc);
@@ -81,7 +86,8 @@ void GameEntitySprite::updatePosition(b2Vec2 pos)
 
 void GameEntitySprite::updateRotation(float32 angle)
 {
-	if (m_sprite)
+	bool shouldUpdateRotation = m_sprite && m_customProps.isDynamicObject();
+	if (shouldUpdateRotation)
 		m_sprite->setRotation(-1 * CC_RADIANS_TO_DEGREES(angle));
 }
 
@@ -91,14 +97,12 @@ bool GameEntitySprite::createFixture()
 	if (ShapeHelper::sharedHelper()->shapeForKey(m_nodeInfo.assetTexture, m_nodeInfo.size, &shapes))
 	{
 		//	have to recalculate total weight?
-		//bool ok = true;
 		std::list<b2PolygonShape>::iterator pos;
 		for (pos = shapes.begin(); pos != shapes.end(); pos++)
 		{
-			b2FixtureDef fd;
 			b2PolygonShape p = *(pos);
-			fd.shape = &p;
-			m_b2Body->CreateFixture(&fd);
+			m_b2FixtureDef.shape = &p;
+			m_b2Body->CreateFixture(&m_b2FixtureDef);
 		}
 		return true;
 	}

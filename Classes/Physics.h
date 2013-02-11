@@ -1,5 +1,8 @@
 #ifndef __PHYSICS_GAME_H__
 #define __PHYSICS_GAME_H__
+#include <cocos2d.h>
+
+using namespace cocos2d;
 
 #define BOX_WOLRD_STEP	1.0f / 60.0f
 #define BOX_WORLD_VELOCITY_PASSES	8.0f
@@ -10,5 +13,10 @@
 #define WORLD_TO_SCREEN(n) ((n) * PTM_RATIO)
 #define B2_ANGLE_TO_COCOS_ROTATION(n) (-1 * CC_RADIANS_TO_DEGREES(n))
 #define COCOS_ROTATION_TO_B2_ANGLE(n) (CC_DEGREES_TO_RADIANS(-1 * n))
+
+static ccColor3B cc4to3(ccColor4B c)
+{
+	return ccc3(c.r, c.g, c.b);
+}
 
 #endif

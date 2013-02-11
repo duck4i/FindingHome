@@ -68,11 +68,15 @@ void GameEntityPlayer::updatePlayerMovement()
 	KeyboardHelper *key = KeyboardHelper::sharedHelper();
 	float x = 0;
 	float y = 0;
+
+	bool leftDown = key->getLeft() == KeyStateDown;
+	bool rightDown = key->getRight() == KeyStateDown;
 				
-	if (key->getLeft() == KeyStateDown)
+	if (leftDown)
 		x -= PLAYER_STEP_VALUE;
-	if (key->getRight() == KeyStateDown)
+	if (rightDown)
 		x += PLAYER_STEP_VALUE;
+
 	if (key->getUp() == KeyStateDown)
 		y += PLAYER_JUMP_VALUE;
 
@@ -124,13 +128,14 @@ void GameEntityPlayer::updatePlayerMovement()
 		this->m_b2Body->SetLinearVelocity(vel);
 	}
 
-	//	Check player direction			
-	if (x < 0 && direction == PlayerDirectionRight)
+	//	Check player direction
+	if (leftDown && rightDown); // do nothing if both directions on
+	else if (key->getLeft() == KeyStateDown && direction == PlayerDirectionRight)
 	{
 		direction = PlayerDirectionLeft;
 		this->m_skin->runAction(CCFlipX::create(true));
 	}
-	else if (x > 0 && direction == PlayerDirectionLeft)
+	else if (key->getRight() == KeyStateDown && direction == PlayerDirectionLeft)
 	{
 		direction = PlayerDirectionRight;
 		this->m_skin->runAction(CCFlipX::create(false));
