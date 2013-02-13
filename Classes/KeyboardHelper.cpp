@@ -74,7 +74,7 @@ LRESULT KeyboardHelper::HookProc(int code, WPARAM wParam, LPARAM lParam)
 				helper->b_up = KeyStateUp;
 			if (key == VK_DOWN)
 				helper->b_down = KeyStateUp;
-			if (key == VK_SHIFT || key == VK_LSHIFT)
+			if (key == VK_LSHIFT || key == VK_RSHIFT)
 				helper->b_shift = KeyStateUp;
 
 			if (key == VK_F1)

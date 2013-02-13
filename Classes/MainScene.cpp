@@ -18,6 +18,10 @@ MainScene::MainScene()
 	this->weather = NULL;
 	this->gamePlayer = NULL;
 	this->worldListener = NULL;
+	this->disableKeyboard = false;
+	this->touchesInProgress = false;
+	this->cameraMoveInProgress = false;		
+	this->zoomInProgress = false;
 }
 
 MainScene::~MainScene()
@@ -36,9 +40,13 @@ bool MainScene::init()
 	winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
 	
 	//	Create world layer
-	this->worldLayer = CCLayer::create();	
+	this->worldLayer = CCLayerColor::create(ccc4(255, 255, 255, 100));//CCLayer::create();	
 	sceneScale = DEFAULT_SCALE;
 	this->worldLayer->setScale(sceneScale);	
+
+	//this->worldLayer->ignoreAnchorPointForPosition(false);
+	//this->worldLayer->setAnchorPoint(ccp(0, 0));	
+
 	this->addChild(worldLayer, 1000);
 
 	//	add loading layer
@@ -65,37 +73,29 @@ void MainScene::loadMap(float none)
 	this->shiftSprite->setAnchorPoint(ccp(0, 0));
 	this->shiftSprite->setPosition(ccp(10, 30));
 	this->shiftSprite->setVisible(false);
-	this->addChild(this->shiftSprite, 100000);
-
-	//	schedule keyboard and touch events
-	this->disableKeyboard = false;
-	this->setKeypadEnabled(true);
-
-	this->touchesInProgress = false;
+	this->addChild(this->shiftSprite, 100000);	
 
 	//	schedule camera update
 	if (this->gamePlayer)
-	{
-		//	set rotation and friction damping and gravity scale
-		this->gamePlayer->getBody()->SetFixedRotation(true);
-		this->gamePlayer->getBody()->SetLinearDamping(0.5f);
-		this->gamePlayer->getBody()->SetGravityScale(2);
-
-		this->cameraMoveInProgress = false;			
-		
+	{		
 		CCPoint playerStart = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());
 
-		//	always start in (25%/25%) coordinates
-		float twentyPercent = 0.25f;
+		//	always start in (SCREEN_MARGIN/SCREEN_MARGIN) coordinates
+		float twentyPercent = SCREEN_MARGIN;
 		float xs = ( playerStart.x - (winSize.width * twentyPercent) ) * -1;
 		float ys = ( playerStart.y - (winSize.height * twentyPercent) ) * -1;	
 		this->worldLayer->setPosition(this->getPositionX() + xs, this->getPositionY() + ys);
-		
+
+#ifndef DISABLE_CAMERA		
 		this->schedule(schedule_selector(MainScene::updateCamera));
+#endif
 	}
 
 	//	schedule controls
 	char* message = "[F1] Enable debug mode [F2] Reset camera [F4] Restart game [F7] Zoom in [F8] Zoom out [F9] Reset zoom";
+#ifdef NO_MOUSE_MOVE
+	message = "[F1] Enable debug mode     [F4] Restart game     [F7] Zoom in [F8] Zoom out [F9] Reset zoom";
+#endif
 	CCLabelTTF* lab = CCLabelTTF::create(message, "Arial", 18.0f);		
 	lab->setPosition(ccp(CCDirector::sharedDirector()->getWinSizeInPixels().width / 2, CCDirector::sharedDirector()->getWinSizeInPixels().height - 15));
 	this->addChild(lab, 100000);
@@ -142,6 +142,12 @@ void MainScene::addBodies()
 	if (l.parse())
 	{
 		gamePlayer = l.player;
+
+		//	set rotation and friction damping and gravity scale
+		this->gamePlayer->getBody()->SetFixedRotation(true);
+		this->gamePlayer->getBody()->SetLinearDamping(0.5f);
+		this->gamePlayer->getBody()->SetGravityScale(2);
+
 		return;
 	}
 	
@@ -244,7 +250,20 @@ void MainScene::update(float delta)
 			playerDied();
 			return;	//	stop update
 		}
-		
+
+		//	update zoom
+		if (zoomInProgress)
+		{
+			/*CCPoint zoomCenter = ccp(100, 100);//gamePlayer->getSkin()->getPosition();
+			CCPoint screenCenter = ccp(winSize.width / 2, winSize.height / 2); //worldLayer->convertToWorldSpace(gamePlayer->getSkin()->getPosition());			
+
+			CCPoint offsetToCenter = ccpSub(screenCenter, zoomCenter);
+			
+			worldLayer->setPosition(ccpMult(offsetToCenter, worldLayer->getScale()));
+			worldLayer->setPosition(ccpSub(worldLayer->getPosition(), ccpMult(offsetToCenter, (sceneScale - worldLayer->getScale()) / (sceneScale - 1.0f))));*/
+		}	
+
+		//	
 		gamePlayer->updatePlayerMovement();
 	}
 
@@ -345,38 +364,94 @@ void MainScene::setSceneZoom(float newScale)
     yourLayer.position = ccpAdd(yourLayer.position, centerPointDelta);
 }
 	*/	
-	
-	CCPoint scaleCenter = this->gamePlayer->getSkin()->getPosition();
-	float currentScale = this->worldLayer->getScale();
-	CCPoint oldCenterPoint = ccp(scaleCenter.x * currentScale, scaleCenter.y * currentScale);
 
-	this->worldLayer->setScale(newScale);	
+	/*
+	//	If camera is tracking player then center on player, otherwise center to screen center
+	CCPoint scaleCenter = gamePlayer->getSkin()->getPosition();
+	float currentScale = worldLayer->getScale();
+
+	CCPoint oldCenterPoint = ccp(scaleCenter.x * currentScale, scaleCenter.y * currentScale);		
 	CCPoint newCenterPoint = ccp(scaleCenter.x * newScale, scaleCenter.y * newScale);
 
-	CCPoint centerDelta = ccpSub(oldCenterPoint, newCenterPoint);
+	worldLayer->setScale(newScale);	
+	CCPoint centerDelta = ccpSub(oldCenterPoint, newCenterPoint);	
+	CCPoint worldPos = ccpAdd(worldLayer->getPosition(), centerDelta);	
+	*/
+
+/*
+CGSize screenSize = [CCDirector sharedDirector].winSize;
+      CGPoint screenCenter = CGPointMake(screenSize.width * 0.5f, 
+                                                   screenSize.height * 0.5f);
+      
+      CGPoint offsetToCenter = ccpSub(screenCenter, player.position);
+      self.position = ccpMult(offsetToCenter, self.scale);
+      self.position = ccpSub(self.position, ccpMult(offsetToCenter, 
+                                            (kZoomInFactor - self.scale) / 
+                                            (kZoomInFactor - 1.0f)));
+*/
 	
-	CCPoint worldPos = ccpAdd(this->worldLayer->getPosition(), centerDelta);
-	this->worldLayer->setPosition(worldPos);
+	
+	/*
+	CCPoint zoomCenter = gamePlayer->getSkin()->getPosition();
+	CCPoint screenCenter = ccp(this->winSize.width / 2, this->winSize.height / 2);
+	
+	CCPoint offsetToCenter = ccpSub(screenCenter, zoomCenter);
+
+	worldLayer->setPosition(ccpMult(offsetToCenter, worldLayer->getScale()));
+	worldLayer->setPosition(ccpSub(worldLayer->getPosition(), ccpMult(offsetToCenter, (newScale - worldLayer->getScale()) / (newScale - 1.0f))));
+	*/
+	//worldLayer->setScale(newScale);
+	//	execute
+	
+	//worldLayer->setPosition(worldPos);	
+
+	if (zoomInProgress)
+		return;
+	
+	zoomInProgress = true;	
+
+	CCScaleTo* scale = CCScaleTo::create(ZOOM_TIME, newScale);
+	CCCallFunc* reset = CCCallFunc::create(this, callfunc_selector(MainScene::resetZoomInProgress));
+
+	//float diffScale = newScale - this->sceneScale;
+
+	CCSequence *s = CCSequence::createWithTwoActions(scale, reset);
+	worldLayer->runAction(s);
+
+	this->sceneScale = newScale;
+}
+
+void MainScene::resetZoomInProgress()
+{
+	zoomInProgress = false;
 }
 
 void MainScene::incSceneZoom()
 {
+	float newScale = min(2.0f, this->sceneScale + ZOOM_STEP);
+	setSceneZoom(newScale);
+
+	/*
 	this->sceneScale += ZOOM_STEP;
 	this->sceneScale = min(2.0f, this->sceneScale);
 	setSceneZoom(this->sceneScale);
+	*/
 }
 
 void MainScene::descSceneZoom()
 {
+	float newScale = max(0.005f, this->sceneScale - ZOOM_STEP);
+	setSceneZoom(newScale);
+	/*
 	this->sceneScale -= ZOOM_STEP;
 	this->sceneScale = max(0.005f, this->sceneScale);
 	setSceneZoom(this->sceneScale);
+	*/
 }
 
 void MainScene::resetSceneZoom()
-{
-	this->sceneScale = DEFAULT_SCALE;
-	setSceneZoom(this->sceneScale);
+{	
+	setSceneZoom(DEFAULT_SCALE);
 }
 
 void MainScene::playerDied()

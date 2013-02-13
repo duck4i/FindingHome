@@ -14,7 +14,9 @@
 using namespace cocos2d;
 
 #define DEFAULT_SCALE		0.5f
-#define ZOOM_STEP			0.005f
+#define SCREEN_MARGIN		0.35f
+#define ZOOM_STEP			0.1f
+#define ZOOM_TIME			0.5f
 
 
 class MainScene : public CCLayerColor
@@ -31,6 +33,8 @@ private:
 	void updateCamera(float delta);
 
 	float sceneScale;
+	bool zoomInProgress;
+	void resetZoomInProgress();
 	
 	bool disableKeyboard;
 	void updateKeyboard(float delta);
