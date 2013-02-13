@@ -4962,8 +4962,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0256" Visible="true">
                     <Position>
-                        <X>7895</X>
-                        <Y>353</Y>
+                        <X>-13355</X>
+                        <Y>-1177</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="player" Type="bool" Description="">
@@ -5035,11 +5035,11 @@
         </Property>
     </CustomProperties>
     <EditorRelated>
-        <NextItemNumber>257</NextItemNumber>
+        <NextItemNumber>259</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>12081.2842</X>
-            <Y>-169.2647</Y>
+            <X>-6908.716</X>
+            <Y>-1719.26465</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

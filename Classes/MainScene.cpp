@@ -319,25 +319,44 @@ void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 #endif
 }
 
-void MainScene::setSceneZoom(float val)
+void MainScene::setSceneZoom(float newScale)
 {		
 	if (!gamePlayer || !worldLayer)
 		return;
 
-	CCPoint playerPos = gamePlayer->getSkin()->getPosition();
-	CCPoint oldPos = this->worldLayer->convertToWorldSpace(playerPos);
-	CCPoint oldWPos = this->convertToWorldSpace(worldLayer->getPosition());
+	/*
+- (void) scale:(CGFloat) newScale scaleCenter:(CGPoint) scaleCenter {
+    // scaleCenter is the point to zoom to.. 
+    // If you are doing a pinch zoom, this should be the center of your pinch.
 
-	this->worldLayer->setScale(this->sceneScale);
+    // Get the original center point.
+    CGPoint oldCenterPoint = ccp(scaleCenter.x * yourLayer.scale, scaleCenter.y * yourLayer.scale); 
 
-	CCPoint pos = this->worldLayer->convertToWorldSpace(gamePlayer->getSkin()->getPosition());
-	CCPoint wPos = this->convertToWorldSpace(worldLayer->getPosition());
-	CCPoint worldPos = this->worldLayer->getPosition();
-		
-	CCPoint diff = ccpSub(pos, oldPos);
-	CCPoint wDiff = ccpSub(wPos, oldWPos);
-		
-	this->worldLayer->setPosition(worldPos.x + diff.x, worldPos.y + diff.y);	
+    // Set the scale.
+    yourLayer.scale = newScale;
+
+    // Get the new center point.
+    CGPoint newCenterPoint = ccp(scaleCenter.x * yourLayer.scale, scaleCenter.y * yourLayer.scale); 
+
+    // Then calculate the delta.
+    CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
+
+    // Now adjust your layer by the delta.
+    yourLayer.position = ccpAdd(yourLayer.position, centerPointDelta);
+}
+	*/	
+	
+	CCPoint scaleCenter = this->gamePlayer->getSkin()->getPosition();
+	float currentScale = this->worldLayer->getScale();
+	CCPoint oldCenterPoint = ccp(scaleCenter.x * currentScale, scaleCenter.y * currentScale);
+
+	this->worldLayer->setScale(newScale);	
+	CCPoint newCenterPoint = ccp(scaleCenter.x * newScale, scaleCenter.y * newScale);
+
+	CCPoint centerDelta = ccpSub(oldCenterPoint, newCenterPoint);
+	
+	CCPoint worldPos = ccpAdd(this->worldLayer->getPosition(), centerDelta);
+	this->worldLayer->setPosition(worldPos);
 }
 
 void MainScene::incSceneZoom()
