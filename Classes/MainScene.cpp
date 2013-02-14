@@ -171,7 +171,7 @@ void MainScene::updateCamera(float delta)
 	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());
 	CCPoint prevPos = this->worldLayer->getPosition();
 	
-	float margin = 0.35f;
+	float margin = SCREEN_MARGIN;
 
 #ifndef DISABLE_FLOAT_CAMERA
 	float rightMargin = winSize.width / 2;//winSize.width - winSize.width * margin;
