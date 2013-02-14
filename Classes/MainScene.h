@@ -31,10 +31,6 @@ private:
 	bool cameraMoveInProgress;
 	void toggleCameraProgress();
 	void updateCamera(float delta);
-
-	float sceneScale;
-	bool zoomInProgress;
-	void resetZoomInProgress();
 	
 	bool disableKeyboard;
 	void updateKeyboard(float delta);
@@ -69,6 +65,12 @@ private:
 	void incSceneZoom();
 	void descSceneZoom();
 	void resetSceneZoom();
+
+	CCPoint prevPlayerPos;
+	float sceneScale;
+	bool zoomInProgress;
+	void resetZoomInProgress();
+
 
 	void playerDied();
 

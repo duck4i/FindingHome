@@ -81,7 +81,7 @@ void MainScene::loadMap(float none)
 		CCPoint playerStart = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());
 
 		//	always start in (SCREEN_MARGIN/SCREEN_MARGIN) coordinates
-		float twentyPercent = SCREEN_MARGIN;
+		float twentyPercent = SCREEN_MARGIN - 0.15f;
 		float xs = ( playerStart.x - (winSize.width * twentyPercent) ) * -1;
 		float ys = ( playerStart.y - (winSize.height * twentyPercent) ) * -1;	
 		this->worldLayer->setPosition(this->getPositionX() + xs, this->getPositionY() + ys);
@@ -251,18 +251,6 @@ void MainScene::update(float delta)
 			return;	//	stop update
 		}
 
-		//	update zoom
-		if (zoomInProgress)
-		{
-			/*CCPoint zoomCenter = ccp(100, 100);//gamePlayer->getSkin()->getPosition();
-			CCPoint screenCenter = ccp(winSize.width / 2, winSize.height / 2); //worldLayer->convertToWorldSpace(gamePlayer->getSkin()->getPosition());			
-
-			CCPoint offsetToCenter = ccpSub(screenCenter, zoomCenter);
-			
-			worldLayer->setPosition(ccpMult(offsetToCenter, worldLayer->getScale()));
-			worldLayer->setPosition(ccpSub(worldLayer->getPosition(), ccpMult(offsetToCenter, (sceneScale - worldLayer->getScale()) / (sceneScale - 1.0f))));*/
-		}	
-
 		//	
 		gamePlayer->updatePlayerMovement();
 	}
@@ -343,77 +331,31 @@ void MainScene::setSceneZoom(float newScale)
 	if (!gamePlayer || !worldLayer)
 		return;
 
-	/*
-- (void) scale:(CGFloat) newScale scaleCenter:(CGPoint) scaleCenter {
-    // scaleCenter is the point to zoom to.. 
-    // If you are doing a pinch zoom, this should be the center of your pinch.
-
-    // Get the original center point.
-    CGPoint oldCenterPoint = ccp(scaleCenter.x * yourLayer.scale, scaleCenter.y * yourLayer.scale); 
-
-    // Set the scale.
-    yourLayer.scale = newScale;
-
-    // Get the new center point.
-    CGPoint newCenterPoint = ccp(scaleCenter.x * yourLayer.scale, scaleCenter.y * yourLayer.scale); 
-
-    // Then calculate the delta.
-    CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
-
-    // Now adjust your layer by the delta.
-    yourLayer.position = ccpAdd(yourLayer.position, centerPointDelta);
-}
-	*/	
-
-	/*
-	//	If camera is tracking player then center on player, otherwise center to screen center
-	CCPoint scaleCenter = gamePlayer->getSkin()->getPosition();
-	float currentScale = worldLayer->getScale();
-
-	CCPoint oldCenterPoint = ccp(scaleCenter.x * currentScale, scaleCenter.y * currentScale);		
-	CCPoint newCenterPoint = ccp(scaleCenter.x * newScale, scaleCenter.y * newScale);
-
-	worldLayer->setScale(newScale);	
-	CCPoint centerDelta = ccpSub(oldCenterPoint, newCenterPoint);	
-	CCPoint worldPos = ccpAdd(worldLayer->getPosition(), centerDelta);	
-	*/
-
-/*
-CGSize screenSize = [CCDirector sharedDirector].winSize;
-      CGPoint screenCenter = CGPointMake(screenSize.width * 0.5f, 
-                                                   screenSize.height * 0.5f);
-      
-      CGPoint offsetToCenter = ccpSub(screenCenter, player.position);
-      self.position = ccpMult(offsetToCenter, self.scale);
-      self.position = ccpSub(self.position, ccpMult(offsetToCenter, 
-                                            (kZoomInFactor - self.scale) / 
-                                            (kZoomInFactor - 1.0f)));
-*/
-	
-	
-	/*
-	CCPoint zoomCenter = gamePlayer->getSkin()->getPosition();
-	CCPoint screenCenter = ccp(this->winSize.width / 2, this->winSize.height / 2);
-	
-	CCPoint offsetToCenter = ccpSub(screenCenter, zoomCenter);
-
-	worldLayer->setPosition(ccpMult(offsetToCenter, worldLayer->getScale()));
-	worldLayer->setPosition(ccpSub(worldLayer->getPosition(), ccpMult(offsetToCenter, (newScale - worldLayer->getScale()) / (newScale - 1.0f))));
-	*/
-	//worldLayer->setScale(newScale);
-	//	execute
-	
-	//worldLayer->setPosition(worldPos);	
-
 	if (zoomInProgress)
 		return;
 	
-	zoomInProgress = true;	
+	zoomInProgress = true;
+	
+	float currScale = worldLayer->getScale();
 
 	CCScaleTo* scale = CCScaleTo::create(ZOOM_TIME, newScale);
 	CCCallFunc* reset = CCCallFunc::create(this, callfunc_selector(MainScene::resetZoomInProgress));
 
-	//float diffScale = newScale - this->sceneScale;
+	float diffScale = newScale - currScale;
+
+	//	Move to correct position
+	CCPoint pos = worldLayer->convertToWorldSpace(gamePlayer->getSkin()->getPosition());	
+	worldLayer->setScale(newScale);
+	
+	CCPoint posAfterScale = worldLayer->convertToWorldSpace(gamePlayer->getSkin()->getPosition());	
+	worldLayer->setScale(currScale);
+	
+	CCPoint dif = ccpSub(posAfterScale, pos);
+	CCPoint difWorld = ccpSub(worldLayer->getPosition(), dif);
+	worldLayer->runAction(CCMoveTo::create(ZOOM_TIME, difWorld));
+
+	prevPlayerPos = pos;
+	CCLog("POS: x: %f y: %f", pos.x, pos.y);
 
 	CCSequence *s = CCSequence::createWithTwoActions(scale, reset);
 	worldLayer->runAction(s);
@@ -430,23 +372,12 @@ void MainScene::incSceneZoom()
 {
 	float newScale = min(2.0f, this->sceneScale + ZOOM_STEP);
 	setSceneZoom(newScale);
-
-	/*
-	this->sceneScale += ZOOM_STEP;
-	this->sceneScale = min(2.0f, this->sceneScale);
-	setSceneZoom(this->sceneScale);
-	*/
 }
 
 void MainScene::descSceneZoom()
 {
 	float newScale = max(0.005f, this->sceneScale - ZOOM_STEP);
 	setSceneZoom(newScale);
-	/*
-	this->sceneScale -= ZOOM_STEP;
-	this->sceneScale = max(0.005f, this->sceneScale);
-	setSceneZoom(this->sceneScale);
-	*/
 }
 
 void MainScene::resetSceneZoom()
