@@ -26,6 +26,7 @@ namespace GLEED2D
         public Forms.Form winform;
         private IntPtr drawSurface;
 
+        public SpriteFont entitiesFont;
 
         public static Game1 Instance;
 
@@ -39,7 +40,7 @@ namespace GLEED2D
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 600;
 
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "Content";            
 
             Logger.Instance.log("Creating Winform.");
             this.drawSurface = drawSurface;
@@ -66,7 +67,6 @@ namespace GLEED2D
             winform.Visible = false;
         }
 
-
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -90,6 +90,7 @@ namespace GLEED2D
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            entitiesFont = Content.Load<SpriteFont>("Entities");
         }
 
         public void resizebackbuffer(int width, int height)

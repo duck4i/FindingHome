@@ -40,7 +40,7 @@ bool MainScene::init()
 	winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
 	
 	//	Create world layer
-	this->worldLayer = CCLayerColor::create(ccc4(255, 255, 255, 100));//CCLayer::create();	
+	this->worldLayer = CCLayer::create();	
 	sceneScale = DEFAULT_SCALE;
 	this->worldLayer->setScale(sceneScale);	
 

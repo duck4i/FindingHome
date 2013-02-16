@@ -125,6 +125,7 @@ move
 move fast
 center view at selected item
 zoom
+snap to grid
 
 ITEMS
 move
@@ -147,6 +148,7 @@ LeftControl + MiddleMouseButton
 
 
 MouseWheel
+
 
 
 LeftMouseButton

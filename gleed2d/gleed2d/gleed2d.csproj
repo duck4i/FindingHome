@@ -87,6 +87,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Items\EntityItem.cs" />
+    <Compile Include="src\Items\PlayerItem.Editable.cs" />
     <Compile Include="src\Layer.ICustomTypeDescriptor.cs" />
     <Compile Include="src\Forms\LinkItemsForm.cs">
       <SubType>Form</SubType>
@@ -188,6 +190,11 @@
     <EmbeddedResource Include="Resources\cursors\dragcopy.cur" />
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="Resources\EnemyBat.png" />
+    <Content Include="Resources\EnemyCrow.png" />
+    <Content Include="Resources\EntityExit.png" />
+    <Content Include="Resources\EntityPlayer.png" />
+    <Content Include="Resources\icon_item_entity.png" />
     <EmbeddedResource Include="Resources\circle.png" />
     <EmbeddedResource Include="Resources\folder.png" />
     <EmbeddedResource Include="Resources\icon_circle_item.png" />

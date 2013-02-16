@@ -189,6 +189,11 @@ namespace GLEED2D
             return true;
         }
 
+        public override bool CanRotate()
+        {
+            return true;
+        }
+
         public override Vector2 getScale()
         {
             return new Vector2(pWidth, pWidth);

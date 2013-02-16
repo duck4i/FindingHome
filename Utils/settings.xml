@@ -9,6 +9,7 @@
   <ShowGrid>true</ShowGrid>
   <SnapToGrid>false</SnapToGrid>
   <ShowWorldOrigin>true</ShowWorldOrigin>
+  <SaveEditorLayout>true</SaveEditorLayout>
   <ColorSelectionFirst>
     <R>255</R>
     <G>255</G>

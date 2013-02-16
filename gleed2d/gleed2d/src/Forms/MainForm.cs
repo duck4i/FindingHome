@@ -1051,6 +1051,14 @@ namespace GLEED2D
         {
 
         }
+
+        private void entitiesListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (entitiesListView.FocusedItem.Text == "Player")
+            {
+                Editor.Instance.createPlayerItem();
+            }
+        }
         
 
 

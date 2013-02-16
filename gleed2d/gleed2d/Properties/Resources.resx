@@ -142,4 +142,7 @@
   <data name="Rectangle_Started" xml:space="preserve">
     <value>(Left Click) = add rectangle to level      (LeftCtrl) = make square      (Right Click) = cancel rectangle</value>
   </data>
+  <data name="Player_Exists" xml:space="preserve">
+    <value>Only one Player object is allowed per level. Remove existing one if you want to add new Player object.</value>
+  </data>
 </root>

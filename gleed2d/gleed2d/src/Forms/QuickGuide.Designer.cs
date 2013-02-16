@@ -41,9 +41,10 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 260);
+            this.label1.Size = new System.Drawing.Size(139, 273);
             this.label1.TabIndex = 0;
             this.label1.Text = resources.GetString("label1.Text");
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -51,7 +52,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Location = new System.Drawing.Point(171, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(164, 260);
+            this.label2.Size = new System.Drawing.Size(164, 273);
             this.label2.TabIndex = 1;
             this.label2.Text = resources.GetString("label2.Text");
             // 
@@ -63,7 +64,7 @@
             this.label3.Size = new System.Drawing.Size(167, 195);
             this.label3.TabIndex = 1;
             this.label3.Text = "KEYBOARD\r\n\r\n\r\nW, A, S, D\r\nW, A, S, D + LeftShift\r\nF4\r\nKeys \"NUMPAD+\" / \"NUMPAD-\"\r" +
-                "\n\r\n\r\n1\r\n2\r\n3\r\nLeftControl + move item\r\nH\r\nV";
+                "\nG\r\n\r\n1\r\n2\r\n3\r\nLeftControl + move item\r\nH\r\nV";
             // 
             // button1
             // 

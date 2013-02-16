@@ -140,6 +140,8 @@ namespace GLEED2D
     [XmlInclude(typeof(RectangleItem))]
     [XmlInclude(typeof(CircleItem))]
     [XmlInclude(typeof(PathItem))]
+    [XmlInclude(typeof(EntityItem))]
+    [XmlInclude(typeof(PlayerItem))]
     public partial class Item
     {
         /// <summary>
@@ -272,13 +274,13 @@ namespace GLEED2D
     public partial class RectangleItem : Item
     {
         public float Width;
-        public float Height;
+        public float Height;        
         public Color FillColor;
 
         public RectangleItem()
         {
         }
-    }
+    }    
 
 
     public partial class CircleItem : Item
@@ -303,6 +305,11 @@ namespace GLEED2D
         public PathItem()
         {
         }
+    }
+
+    public partial class EntityItem : Item
+    {
+
     }
 
 

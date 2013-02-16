@@ -21,7 +21,8 @@ namespace GLEED2D
         rotating,       //user is rotating an item
         scaling,        //user is scaling an item
         selecting,      //user has opened a select box by dragging the mouse (windows style)
-        brush_primitive //use is adding a primitive item
+        brush_primitive, //user is adding a primitive item
+        entity          // user is adding entity item type
     }
 
     enum PrimitiveType
@@ -29,10 +30,16 @@ namespace GLEED2D
         Rectangle, Circle, Path
     }
 
+    enum EntityType
+    {
+        Player, Exit
+    }
+
     class Editor
     {
         public static Editor Instance;
         EditorState state;
+        EntityType entityType;
         Brush currentbrush;
         PrimitiveType currentprimitive;
         bool primitivestarted;
@@ -276,6 +283,7 @@ namespace GLEED2D
             l2.Items.Insert(index2, i1);
             i1.layer = l2;
         }
+
         public void moveSelectedItemsToLayer(Layer chosenlayer)
         {
             if (chosenlayer == SelectedLayer) return;
@@ -289,6 +297,7 @@ namespace GLEED2D
             SelectedItems.Clear();
             updatetreeview();
         }
+
         public void copySelectedItemsToLayer(Layer chosenlayer)
         {
             //if (chosenlayer == SelectedLayer) return;
@@ -334,14 +343,55 @@ namespace GLEED2D
             Editor.Instance.endCommand();
         }
 
-        public void paintTextureBrush(bool continueAfterPaint)
+        public bool checkLayerIsSelected()
         {
             if (SelectedLayer == null)
             {
                 System.Windows.Forms.MessageBox.Show(Resources.No_Layer);
-                destroyTextureBrush();
-                return;
+                return false;
             }
+            return true;
+        }
+
+        public void createPlayerItem()
+        {
+            if (!checkLayerIsSelected())
+                return;
+                        
+            state = EditorState.entity;
+            entityType = EntityType.Player;
+            clickedPoints.Clear();
+        }
+
+        public void paintEntity()
+        {
+            EntityItem i = null;
+            if (entityType == EntityType.Player)
+            {
+                if (PlayerItem.Instance != null)
+                    Forms.MessageBox.Show(Resources.Player_Exists, "Player already exists!", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Warning);
+                else
+                    i = new PlayerItem();
+            }
+
+            //  insert item
+            if (i != null)
+            {
+                i.Position = new Vector2(mouseworldpos.X, mouseworldpos.Y);
+                i.layer = SelectedLayer;
+                i.Name = i.getName(level.getNextItemNumber());
+                beginCommand("Add Entity \"" + i.Name + "\"");
+                addItem(i);
+                endCommand();
+                updatetreeview();
+            }
+        }
+
+        public void paintTextureBrush(bool continueAfterPaint)
+        {
+            if (!checkLayerIsSelected())
+                return;
+
             Item i = new TextureItem(currentbrush.fullpath, new Vector2((int)mouseworldpos.X, (int)mouseworldpos.Y));
             i.Name = i.getNamePrefix() + level.getNextItemNumber();
             i.layer = SelectedLayer;
@@ -555,6 +605,7 @@ namespace GLEED2D
                     if (item is RectangleItem) imageindex = 2;
                     if (item is CircleItem) imageindex = 3;
                     if (item is PathItem) imageindex = 4;
+                    if (item is EntityItem) imageindex = 6;
                     itemnode.ImageIndex = itemnode.SelectedImageIndex = imageindex;
                 }
                 layernode.Expand();
@@ -757,7 +808,7 @@ namespace GLEED2D
             if (kstate.IsKeyDown(Keys.W) && kstate.IsKeyUp(Keys.LeftControl)) camera.Position += (new Vector2(0, -delta));
             if (kstate.IsKeyDown(Keys.S) && kstate.IsKeyUp(Keys.LeftControl)) camera.Position += (new Vector2(0, +delta));
             if (kstate.IsKeyDown(Keys.A) && kstate.IsKeyUp(Keys.LeftControl)) camera.Position += (new Vector2(-delta, 0));
-            if (kstate.IsKeyDown(Keys.D) && kstate.IsKeyUp(Keys.LeftControl)) camera.Position += (new Vector2(+delta, 0));
+            if (kstate.IsKeyDown(Keys.D) && kstate.IsKeyUp(Keys.LeftControl)) camera.Position += (new Vector2(+delta, 0));                            
 
 
             if (kstate.IsKeyDown(Keys.Subtract))
@@ -1081,6 +1132,20 @@ namespace GLEED2D
                 }
                 if (mstate.RightButton == ButtonState.Pressed && oldmstate.RightButton == ButtonState.Released) state = EditorState.idle;
                 if (mstate.LeftButton == ButtonState.Pressed && oldmstate.LeftButton == ButtonState.Released) paintTextureBrush(true);
+            }
+
+            if (state == EditorState.entity)
+            {
+                if (Constants.Instance.SnapToGrid || kstate.IsKeyDown(Keys.G))
+                {
+                    mouseworldpos = -snapToGrid(mouseworldpos);
+                }
+
+                if (mstate.RightButton == ButtonState.Pressed & oldmstate.RightButton == ButtonState.Released) 
+                    state = EditorState.idle;
+
+                if (mstate.LeftButton == ButtonState.Pressed && oldmstate.LeftButton == ButtonState.Released)
+                    paintEntity();
             }
 
 

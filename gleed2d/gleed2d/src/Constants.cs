@@ -45,8 +45,13 @@ namespace GLEED2D
             GridLineThickness = 1;
             GridNumberOfGridLines = 500;
             GridSpacing = new Microsoft.Xna.Framework.Vector2(64, 64);
+            SaveEditorLayout = true;
 
         }
+
+
+        [Category("General"), Description("If enabled size of panels and state of the layout and window will be saved.")]
+        public bool SaveEditorLayout { get; set; }
 
 
         [Editor(typeof(XNAColorUITypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
@@ -82,7 +87,6 @@ namespace GLEED2D
 
         [Category("General"), Description("The default LineWidth of each new PathItem added to the level.")]
         public int DefaultPathItemLineWidth { get; set; }
-
 
         [EditorAttribute(typeof(FolderUITypeEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [Category("General"), Description("When a new level is created, its ContentRootFolder will be initially set to this.")]
