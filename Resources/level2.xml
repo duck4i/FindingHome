@@ -2330,6 +2330,13 @@
         </Layer>
         <Layer Name="Main" Visible="true">
             <Items>
+                <Item xsi:type="PlayerItem" Name="Player" Visible="true">
+                    <Position>
+                        <X>-13334</X>
+                        <Y>-1155</Y>
+                    </Position>
+                    <CustomProperties />
+                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0236" Visible="true">
                     <Position>
                         <X>9413</X>
@@ -4779,25 +4786,6 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="CircleItem" Name="Player" Visible="true">
-                    <Position>
-                        <X>-1218</X>
-                        <Y>-303</Y>
-                    </Position>
-                    <CustomProperties>
-                        <Property Name="dynamic" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                    </CustomProperties>
-                    <Radius>187</Radius>
-                    <FillColor>
-                        <R>192</R>
-                        <G>0</G>
-                        <B>192</B>
-                        <A>255</A>
-                        <PackedValue>4290773184</PackedValue>
-                    </FillColor>
-                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0227" Visible="true">
                     <Position>
                         <X>10051</X>
@@ -4960,40 +4948,6 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0256" Visible="true">
-                    <Position>
-                        <X>-13355</X>
-                        <Y>-1177</Y>
-                    </Position>
-                    <CustomProperties>
-                        <Property Name="player" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                        <Property Name="dynamic" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                    </CustomProperties>
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>1.83121145</X>
-                        <Y>1.83121145</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>circle.png</texture_filename>
-                    <asset_name>circle.png</asset_name>
-                    <Origin>
-                        <X>32</X>
-                        <Y>32</Y>
-                    </Origin>
-                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0257" Visible="true">
                     <Position>
                         <X>-3444</X>
@@ -5035,11 +4989,11 @@
         </Property>
     </CustomProperties>
     <EditorRelated>
-        <NextItemNumber>259</NextItemNumber>
+        <NextItemNumber>260</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>-6908.716</X>
-            <Y>-1719.26465</Y>
+            <X>-12488.7158</X>
+            <Y>-1200.93127</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

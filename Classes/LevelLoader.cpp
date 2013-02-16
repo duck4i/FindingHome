@@ -95,6 +95,8 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 		return;
 	}	
 
+	bool playerLoaded = false;
+
 	//	check type
 	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
 	{		
@@ -107,6 +109,22 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
 	{		
 		info.nodeType = NodeTypeTexture;
+	}
+	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_PLAYER) == 0)
+	{
+		playerLoaded = true;
+		GameEntityPlayer* player = GameEntityPlayer::create(info);		
+		if (player)
+		{
+			player->createBody(this->boxWorld);
+			this->mainLayer->addChild(player->getSkin(), 1000000);
+
+			this->playerBody = player->getBody();
+			this->playerNode = player->getSkin();
+
+			this->player = player;			
+		}
+		return;
 	}
 
 		//	select layer to insert it into
@@ -121,7 +139,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	else if (info.nodeType == NodeTypeTexture)
 		sprite = GameEntitySprite::create(info);
 
-	if (sprite && sprite->getProperties().isPlayerObject())
+	if (!playerLoaded && sprite && sprite->getProperties().isPlayerObject())
 	{
 		sprite->removeBody();
 		sprite->release();

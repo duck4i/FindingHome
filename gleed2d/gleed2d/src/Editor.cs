@@ -365,9 +365,12 @@ namespace GLEED2D
 
         public void paintEntity()
         {
+            bool clearSelection = false;
+
             EntityItem i = null;
             if (entityType == EntityType.Player)
             {
+                clearSelection = true;
                 if (PlayerItem.Instance != null)
                     Forms.MessageBox.Show(Resources.Player_Exists, "Player already exists!", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Warning);
                 else
@@ -383,7 +386,20 @@ namespace GLEED2D
                 beginCommand("Add Entity \"" + i.Name + "\"");
                 addItem(i);
                 endCommand();
-                updatetreeview();
+                updatetreeview();                                
+            }
+
+            releaseEntity(clearSelection);
+        }
+
+        public void releaseEntity(bool unfocus)
+        {
+            if (unfocus)
+            {
+                state = EditorState.idle;
+
+                MainForm.Instance.entitiesListView.Select();
+                MainForm.Instance.entitiesListView.Cursor = Forms.Cursors.Default;
             }
         }
 
