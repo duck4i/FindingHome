@@ -347,7 +347,8 @@ namespace GLEED2D
         {
             if (SelectedLayer == null)
             {
-                System.Windows.Forms.MessageBox.Show(Resources.No_Layer);
+                System.Windows.Forms.MessageBox.Show(Resources.No_Layer, "Parent layer is not selected", 
+                    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
                 return false;
             }
             return true;

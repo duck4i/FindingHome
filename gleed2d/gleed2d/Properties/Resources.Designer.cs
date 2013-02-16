@@ -86,7 +86,7 @@ namespace GLEED2D.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is no layer in the level. Please add a new layer before adding items..
+        ///   Looks up a localized string similar to Either there is no layer in the level or no layer is currently selected. Please add a new layer before adding items..
         /// </summary>
         internal static string No_Layer {
             get {

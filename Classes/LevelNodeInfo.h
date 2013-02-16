@@ -31,6 +31,7 @@ public:
 	char* texture;
 	char* rawTexture;
 	char* assetTexture;	
+	char* nextLevel;
 
 	bool flipHorizontally;
 	bool flipVertically;
@@ -55,6 +56,7 @@ public:
 		visible = true;
 		xmlNode = NULL;
 		cocosNode = NULL;
+		nextLevel = NULL;
 	}
 
 };

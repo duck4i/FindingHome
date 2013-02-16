@@ -316,7 +316,8 @@ namespace GLEED2D
     public partial class ExitItem : EntityItem
     {
         public float Width;
-        public float Height;                
+        public float Height;
+        public Vector2 Scale;    
         public string NextLevel;
     }
 

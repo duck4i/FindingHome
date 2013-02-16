@@ -4,6 +4,10 @@
 
 bool GameEntityExit::postInit()
 {
+	//	take scale in consideration
+	m_nodeInfo.size.width *= m_nodeInfo.scale;
+	m_nodeInfo.size.height *= m_nodeInfo.scale;
+
 	//	fix anchor point
 	m_nodeInfo.position.x += m_nodeInfo.size.width / 2;
 	m_nodeInfo.position.y -= m_nodeInfo.size.height / 2;
@@ -33,12 +37,8 @@ bool GameEntityExit::createFixture()
 
 bool GameEntityExit::loadNextLevel()
 {
-	xmlNodePtr np = XMLHelper::findChildNodeWithName(m_nodeInfo.xmlNode, "NextLevel");
-	if (!np)
-		return false;
-
 	//	if next level path is set load that, otherwise load same level again
-	char* name = XMLHelper::readNodeContent(np);
+	char* name = m_nodeInfo.nextLevel;
 	if (name != NULL)
 	{
 		char tmp[MAX_PATH];

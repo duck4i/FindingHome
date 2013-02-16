@@ -51,7 +51,6 @@ private:
 	void createLevelLayers();
 
 	b2World *boxWorld;
-	//ShapeHelper *shapeHelper;
 
 public:
 
@@ -63,13 +62,8 @@ public:
 	
 private:
 
-	//	type 0: main layer; type 1: background layer
-	void parseCurrentNode(xmlNodePtr node, unsigned int type = 0, unsigned int zOrder = 0);
-	
-	bool parseNodeToCocosNode(NODEINFO &info, __in CustomProperties props, unsigned int type = 0, unsigned int zOrder = 0);
-	bool parseNodeProperties(NODEINFO &info, __out CustomProperties *props);	
-	bool parseNodePhysics(NODEINFO &info, __in CustomProperties props);
-	
+	///	type 0: main layer; type 1: background layer
+	void parseCurrentNode(xmlNodePtr node, unsigned int type = 0, unsigned int zOrder = 0);	
 	
 	//	parser helpers
 	CCPoint		parseNodePosition(xmlNodePtr node);
@@ -93,8 +87,7 @@ public:
 		this->boxWorld = boxWorld;
 		this->playerBody = NULL;
 		this->playerNode = NULL;
-		loadedPlayer = false;
-		//this->shapeHelper = new ShapeHelper(SHAPE_DATA);
+		loadedPlayer = false;		
 
 		createLevelLayers();
 	}
@@ -103,8 +96,7 @@ public:
 	{
 		if (sharedDoc)
 			xmlFreeDoc(sharedDoc);
-		//if (shapeHelper)
-		//	delete shapeHelper;
+
 	}
 
 	bool parse();

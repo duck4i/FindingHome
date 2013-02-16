@@ -47,7 +47,6 @@ void ContactListener::ExitHit(GameEntity* entity)
 		return;
 	
 	CCLog("Exit hit!");
-	reachedEndOfTheScene = true;
-	exit->removeAtNextUpdate();
+	reachedEndOfTheScene = true;	
 	exit->loadNextLevel();
 }

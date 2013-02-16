@@ -128,7 +128,7 @@
     <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="No_Layer" xml:space="preserve">
-    <value>There is no layer in the level. Please add a new layer before adding items.</value>
+    <value>Either there is no layer in the level or no layer is currently selected. Please add a new layer before adding items.</value>
   </data>
   <data name="Path_Entered" xml:space="preserve">
     <value>(Left Click) = start new path      (Right Click) = exit path draw mode</value>

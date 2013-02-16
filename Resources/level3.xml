@@ -13,8 +13,8 @@
             <Items>
                 <Item xsi:type="PlayerItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-891</X>
-                        <Y>-83</Y>
+                        <X>-81</X>
+                        <Y>-153</Y>
                     </Position>
                     <CustomProperties />
                 </Item>
@@ -36,12 +36,30 @@
                 </Item>
                 <Item xsi:type="ExitItem" Name="Exit" Visible="true">
                     <Position>
-                        <X>739</X>
-                        <Y>-144</Y>
+                        <X>991</X>
+                        <Y>-539</Y>
                     </Position>
                     <CustomProperties />
-                    <Width>200</Width>
-                    <Height>200</Height>
+                    <Width>400</Width>
+                    <Height>400</Height>
+                    <Scale>
+                        <X>1.90590334</X>
+                        <Y>1.90590334</Y>
+                    </Scale>
+                    <NextLevel>Level3.xml</NextLevel>
+                </Item>
+                <Item xsi:type="ExitItem" Name="Exit_0008" Visible="true">
+                    <Position>
+                        <X>-1289</X>
+                        <Y>-364</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>400</Width>
+                    <Height>400</Height>
+                    <Scale>
+                        <X>1</X>
+                        <Y>1</Y>
+                    </Scale>
                     <NextLevel>Level2.xml</NextLevel>
                 </Item>
             </Items>
@@ -54,7 +72,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>7</NextItemNumber>
+        <NextItemNumber>8</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>962.8148</X>
