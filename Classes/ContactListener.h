@@ -20,13 +20,16 @@ private:
 	void EndContact(b2Contact *con);
 
 	MainScene* m_mainScene;
+	bool reachedEndOfTheScene;
 
 	void CollectibleHit(GameEntity* entity);
+	void ExitHit(GameEntity* entity);
 
 public:
 
 	ContactListener(MainScene* m) : m_mainScene(m)
 	{
+		reachedEndOfTheScene = false;
 	}
 
 };

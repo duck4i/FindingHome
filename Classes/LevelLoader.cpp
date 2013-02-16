@@ -93,9 +93,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	{
 		//CCLog("Node hidden. Skipping.");
 		return;
-	}	
-
-	bool playerLoaded = false;
+	}
 
 	//	check type
 	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
@@ -110,9 +108,9 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	{		
 		info.nodeType = NodeTypeTexture;
 	}
-	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_PLAYER) == 0)
+	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_PLAYER) == 0 && !loadedPlayer)
 	{
-		playerLoaded = true;
+		loadedPlayer = true;
 		GameEntityPlayer* player = GameEntityPlayer::create(info);		
 		if (player)
 		{
@@ -124,6 +122,13 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 
 			this->player = player;			
 		}
+		return;
+	}
+	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_EXIT) == 0)
+	{
+		GameEntityExit* ge = GameEntityExit::create(info);
+		ge->createBody(this->boxWorld);
+		ge->createFixture();
 		return;
 	}
 
@@ -139,45 +144,16 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	else if (info.nodeType == NodeTypeTexture)
 		sprite = GameEntitySprite::create(info);
 
-	if (!playerLoaded && sprite && sprite->getProperties().isPlayerObject())
-	{
-		sprite->removeBody();
-		sprite->release();
-		sprite = NULL;
-		
-		GameEntityPlayer* player = GameEntityPlayer::create(info);		
-		if (player)
-		{
-			player->createBody(this->boxWorld);
-			layer->addChild(player->getSkin(), 1000000);
-
-			this->playerBody = player->getBody();
-			this->playerNode = player->getSkin();
-
-			this->player = player;
-		}
-	}
-	else if (sprite)
+	
+	//	then instert to view
+	if (sprite)
 	{
 		layer->addChild(sprite->getSprite(), zOrder);
 		
 		if (type == 0)
 			sprite->createBody(this->boxWorld);
-	}	
-		
+	}
 
-	//	FIRST PROCESS PROPERTIES
-	/*
-	CustomProperties props;
-	bool propsObtained = parseNodeProperties(info, &props);
-
-	//	THEN PARSE NODE AND INSERT IT INTO COCOS WORLD
-	bool inserted = parseNodeToCocosNode(info, props, type, zOrder);
-
-	//	THEN PROCESS PHYSICS (main layer only)
-	if (type == 0 && inserted)
-		parseNodePhysics(info, props);
-	*/
 	//	since parseNodeTexture allocates we release it here	
 	//if (info.texture)
 	//	delete [] info.texture;	

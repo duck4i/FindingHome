@@ -13,22 +13,15 @@
             <Items>
                 <Item xsi:type="PlayerItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-896</X>
-                        <Y>-128</Y>
-                    </Position>
-                    <CustomProperties />
-                </Item>
-                <Item xsi:type="ExitItem" Name="Exit" Visible="true">
-                    <Position>
-                        <X>640</X>
-                        <Y>-128</Y>
+                        <X>-891</X>
+                        <Y>-83</Y>
                     </Position>
                     <CustomProperties />
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0003" Visible="true">
                     <Position>
                         <X>-1017</X>
-                        <Y>21</Y>
+                        <Y>26</Y>
                     </Position>
                     <CustomProperties />
                     <Width>1958</Width>
@@ -41,6 +34,16 @@
                         <PackedValue>2445279424</PackedValue>
                     </FillColor>
                 </Item>
+                <Item xsi:type="ExitItem" Name="Exit" Visible="true">
+                    <Position>
+                        <X>739</X>
+                        <Y>-144</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>200</Width>
+                    <Height>200</Height>
+                    <NextLevel>Level2.xml</NextLevel>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -51,11 +54,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>3</NextItemNumber>
+        <NextItemNumber>7</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>0</X>
-            <Y>0</Y>
+            <X>962.8148</X>
+            <Y>2.333332</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

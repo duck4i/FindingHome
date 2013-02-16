@@ -20,6 +20,7 @@ USING_NS_CC;
 #define ITEM_TYPE_TEXTURE		"TextureItem"
 #define ITEM_TYPE_PLAYER		"PlayerItem"
 #define ITEM_TYPE_ENTITY		"EntityItem"
+#define ITEM_TYPE_EXIT			"ExitItem"
 
 
 //	Z-INDEX IS DEFINED USING ORDER IN XML FILE > THE LATEST WE PARSE IT THE HIGHER IS Z-ORDER
@@ -40,7 +41,7 @@ private:
 	const char* levelPath;
 
 	xmlDocPtr sharedDoc;
-
+	bool loadedPlayer;
 	
 	CCNode* frontLayer; // this one is displayed before main layer, eg. play gets behind something...
 	CCNode* mainLayer;	
@@ -92,6 +93,7 @@ public:
 		this->boxWorld = boxWorld;
 		this->playerBody = NULL;
 		this->playerNode = NULL;
+		loadedPlayer = false;
 		//this->shapeHelper = new ShapeHelper(SHAPE_DATA);
 
 		createLevelLayers();

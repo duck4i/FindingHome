@@ -14,7 +14,7 @@ bool GameEntityPlayer::init()
 
 bool GameEntityPlayer::createBody(b2World *world)
 {
-	GameEntity::createBody(world);
+	//GameEntity::createBody(world);
 
 	b2BodyDef def;
 

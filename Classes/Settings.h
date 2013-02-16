@@ -12,7 +12,7 @@
 
 #define SHAPE_DATA					RESOURCE_DIR "ShapeData.json"
 #define WEATHER_CONTROLLER_DATA		RESOURCE_DIR "weather_controller.png"
-#define GAME_START_LEVEL			RESOURCE_DIR "Level2.xml"
+#define GAME_START_LEVEL			RESOURCE_DIR "Level3.xml"
 
 #define STAR_PATH					RESOURCE_DIR "star.png"
 
@@ -24,5 +24,18 @@
 #define RESOURCE_LOADING	RESOURCE_DIR	"loading.png"
 
 #define RESOURCE_SHIFT		RESOURCE_DIR	"shift.png"
+
+
+inline static bool doesFileExits(char* file)
+{
+#ifdef CC_PLATFORM_WIN32
+
+	unsigned short attrs = GetFileAttributes(file);
+	if (!(attrs == INVALID_FILE_ATTRIBUTES || attrs & FILE_ATTRIBUTE_DIRECTORY))
+		return true;
+
+#endif
+	return false;
+}
 
 #endif

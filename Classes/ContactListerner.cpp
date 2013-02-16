@@ -3,6 +3,8 @@
 void ContactListener::BeginContact(b2Contact *con)
 {
 	//CCLog("Contact listerner fired");
+	if (reachedEndOfTheScene)
+		return;
 
 	GameEntity* a = (GameEntity*) con->GetFixtureA()->GetBody()->GetUserData();
 	GameEntity* b = (GameEntity*) con->GetFixtureB()->GetBody()->GetUserData();
@@ -20,7 +22,8 @@ void ContactListener::BeginContact(b2Contact *con)
 
 		//	now check for hits
 		CollectibleHit(other);
-	}		
+		ExitHit(other);
+	}
 }
 
 void ContactListener::EndContact(b2Contact *con) 
@@ -35,4 +38,16 @@ void ContactListener::CollectibleHit(GameEntity* entity)
 	//	mark for removal
 	CCLog("Collectable hit!");
 	entity->removeAtNextUpdate();
+}
+
+void ContactListener::ExitHit(GameEntity* entity)
+{	
+	GameEntityExit* exit = dynamic_cast<GameEntityExit*>(entity);
+	if (!exit)
+		return;
+	
+	CCLog("Exit hit!");
+	reachedEndOfTheScene = true;
+	exit->removeAtNextUpdate();
+	exit->loadNextLevel();
 }

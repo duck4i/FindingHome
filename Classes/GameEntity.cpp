@@ -34,10 +34,16 @@ bool GameEntity::createBody(b2World* world)
 {
 	if (!world)
 		return false;
+
 	m_b2World = world;
 	m_bPhysical = true;
 	m_b2FixtureDef.density = 1.0f;
-	return false;
+	
+	m_b2BodyDef.type = b2_staticBody;
+	m_b2BodyDef.position.Set(SCREEN_TO_WORLD(m_nodeInfo.position.x), SCREEN_TO_WORLD(m_nodeInfo.position.y));
+	m_b2BodyDef.userData = this;
+
+	return m_b2Body != NULL;
 }
 
 void GameEntity::removeBody()

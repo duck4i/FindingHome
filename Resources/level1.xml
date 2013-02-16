@@ -66,6 +66,13 @@
         </Layer>
         <Layer Name="Main" Visible="true">
             <Items>
+                <Item xsi:type="PlayerItem" Name="Player" Visible="true">
+                    <Position>
+                        <X>-596</X>
+                        <Y>-745</Y>
+                    </Position>
+                    <CustomProperties />
+                </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0002" Visible="true">
                     <Position>
                         <X>-3138</X>
@@ -318,25 +325,6 @@
                         <B>255</B>
                         <A>145</A>
                         <PackedValue>2436078079</PackedValue>
-                    </FillColor>
-                </Item>
-                <Item xsi:type="CircleItem" Name="Circle_0036" Visible="true">
-                    <Position>
-                        <X>-144</X>
-                        <Y>-740</Y>
-                    </Position>
-                    <CustomProperties>
-                        <Property Name="player" Type="bool" Description="">
-                            <boolean>false</boolean>
-                        </Property>
-                    </CustomProperties>
-                    <Radius>64</Radius>
-                    <FillColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>0</B>
-                        <A>255</A>
-                        <PackedValue>4294967040</PackedValue>
                     </FillColor>
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0048" Visible="true">
@@ -737,7 +725,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>96</NextItemNumber>
+        <NextItemNumber>98</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>-1810.925</X>

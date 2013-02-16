@@ -118,6 +118,12 @@
     <ClInclude Include="..\Classes\GameEntityPlayer.h">
       <Filter>include\entities</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\GameEntityExit.h">
+      <Filter>include\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game.h">
+      <Filter>include\entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -175,6 +181,9 @@
       <Filter>source\entities</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameEntityPlayer.cpp">
+      <Filter>source\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameEntityExit.cpp">
       <Filter>source\entities</Filter>
     </ClCompile>
   </ItemGroup>

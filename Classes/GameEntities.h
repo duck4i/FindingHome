@@ -5,5 +5,5 @@
 #include "GameEntityCircle.h"
 #include "GameEntityRectangle.h"
 #include "GameEntityPlayer.h"
-
+#include "GameEntityExit.h"
 

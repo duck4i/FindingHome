@@ -311,7 +311,14 @@ namespace GLEED2D
     public partial class EntityItem : Item
     {
 
-    }    
+    }
+
+    public partial class ExitItem : EntityItem
+    {
+        public float Width;
+        public float Height;                
+        public string NextLevel;
+    }
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////

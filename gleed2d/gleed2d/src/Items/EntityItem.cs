@@ -14,20 +14,22 @@ namespace GLEED2D
 {
     public partial class EntityItem : Item
     {
+        
         [XmlIgnore()]
-        const int shapeWidth = 100;
+        protected const int shapeWidth = 100;
 
         [XmlIgnore()]
-        const int shapeHeight = 100;
+        protected const int shapeHeight = 100;
+        
 
         [XmlIgnore()]
-        Color fontColor;
+        protected Color fontColor;
 
         [XmlIgnore()]
-        Color shapeColor;
+        protected Color shapeColor;
 
         [XmlIgnore()]
-        Color hoverShapeColor;
+        protected Color hoverShapeColor;
 
         public EntityItem() : base()
         {
@@ -64,15 +66,7 @@ namespace GLEED2D
             //  draw shape
             Primitives.Instance.drawBoxFilled(sb, rc, hovering ? hoverShapeColor : shapeColor);
 
-            //  measure, center and draw string on shape
-            SpriteFont sf = Game1.Instance.entitiesFont;
-            Vector2 smes = sf.MeasureString(Name);
-
-            Vector2 pos = Position;
-            pos.X += shapeWidth / 2 - smes.X / 2;
-            pos.Y += shapeHeight / 2 - smes.Y / 2;
-
-            sb.DrawString(Game1.Instance.entitiesFont, Name, pos, Color.Navy);
+            drawStringInCenter(sb, Name, rc);
         }
 
         public override void drawSelectionFrame(SpriteBatch sb, Matrix matrix, Color color)
@@ -97,6 +91,19 @@ namespace GLEED2D
         public virtual string getName(string refCount)
         {
             return getNamePrefix() + refCount;
+        }
+
+        public virtual void drawStringInCenter(SpriteBatch sb, string text, Rectangle rc)
+        {
+            //  measure, center and draw string on shape
+            SpriteFont sf = Game1.Instance.entitiesFont;
+            Vector2 smes = sf.MeasureString(Name);
+
+            Vector2 pos = Position;
+            pos.X += rc.Width / 2 - smes.X / 2;
+            pos.Y += rc.Height / 2 - smes.Y / 2;
+
+            sb.DrawString(Game1.Instance.entitiesFont, text, pos, Color.Navy);
         }
     }
 }

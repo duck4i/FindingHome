@@ -41,6 +41,7 @@ protected:
 	b2World* m_b2World;
 	b2Body* m_b2Body;
 	b2FixtureDef m_b2FixtureDef;
+	b2BodyDef m_b2BodyDef;
 
 	//	constructor and destructor
 	GameEntity(NODEINFO info)
