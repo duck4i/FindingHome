@@ -8,7 +8,18 @@ enum NodeType
 	NodeTypeBlock = 0,
 	NodeTypeCircle,
 	NodeTypeTexture,
-	NodeTypePlayer
+	NodeTypePlayer,
+	NodeTypeExit
+};
+
+enum EnemyType
+{
+	EnemyUndefined,
+	EnemyTypeBat,
+	EnemyTypeCrow,
+	EnemyTypeSquirel,
+	EnemyTypeSquirelBlack,
+	EnemyTypeBore
 };
 
 ///
@@ -19,6 +30,7 @@ class NODEINFO
 public:
 
 	NodeType nodeType;
+	EnemyType enemyType;
 
 	CCPoint position;
 	CCSize size;

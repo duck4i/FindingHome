@@ -45,6 +45,12 @@ bool GameEntitySprite::postInit()
 	if (m_nodeInfo.flipVertically)
 		m_sprite->runAction(CCFlipY::create(true));
 
+	//	transaprency channel
+	if (m_nodeInfo.nodeType == NodeTypeTexture)
+		m_sprite->setOpacity(m_nodeInfo.tint.a);
+	else
+		m_sprite->setOpacity(m_nodeInfo.color.a);
+
 	return GameEntity::postInit();
 }
 
