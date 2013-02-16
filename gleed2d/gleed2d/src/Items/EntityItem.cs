@@ -38,7 +38,7 @@ namespace GLEED2D
 
         public override Item clone()
         {
-            PlayerItem res = (PlayerItem)MemberwiseClone();
+            EntityItem res = (EntityItem)MemberwiseClone();
             res.CustomProperties = new SerializableDictionary(CustomProperties);
             res.hovering = false;
             return res;

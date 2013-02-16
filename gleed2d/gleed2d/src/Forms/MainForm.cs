@@ -1054,10 +1054,13 @@ namespace GLEED2D
 
         private void entitiesListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (entitiesListView.FocusedItem.Text == "Player")
-            {
+            String selected = entitiesListView.FocusedItem.Text;
+
+            if (selected == "Player")
                 Editor.Instance.createPlayerItem();
-            }
+            else if (selected == "Exit")
+                Editor.Instance.createExitItem();
+            
         }
         
 

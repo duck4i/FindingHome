@@ -142,6 +142,7 @@ namespace GLEED2D
     [XmlInclude(typeof(PathItem))]
     [XmlInclude(typeof(EntityItem))]
     [XmlInclude(typeof(PlayerItem))]
+    [XmlInclude(typeof(ExitItem))]
     public partial class Item
     {
         /// <summary>

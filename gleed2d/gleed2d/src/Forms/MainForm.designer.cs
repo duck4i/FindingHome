@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Exit condition", "EntityExit.png");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Bat", 0);
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Crow", 1);
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
@@ -1244,7 +1244,7 @@
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.ShowItemToolTips = true;
-            this.listView1.Size = new System.Drawing.Size(796, 127);
+            this.listView1.Size = new System.Drawing.Size(800, 127);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
@@ -1263,7 +1263,7 @@
             // chooseFolder
             // 
             this.chooseFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chooseFolder.Location = new System.Drawing.Point(547, 8);
+            this.chooseFolder.Location = new System.Drawing.Point(551, 8);
             this.chooseFolder.Name = "chooseFolder";
             this.chooseFolder.Size = new System.Drawing.Size(60, 23);
             this.chooseFolder.TabIndex = 5;
@@ -1275,7 +1275,7 @@
             // 
             this.buttonFolderUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonFolderUp.Image = ((System.Drawing.Image)(resources.GetObject("buttonFolderUp.Image")));
-            this.buttonFolderUp.Location = new System.Drawing.Point(509, 8);
+            this.buttonFolderUp.Location = new System.Drawing.Point(513, 8);
             this.buttonFolderUp.Name = "buttonFolderUp";
             this.buttonFolderUp.Size = new System.Drawing.Size(32, 23);
             this.buttonFolderUp.TabIndex = 4;
@@ -1286,7 +1286,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(647, 12);
+            this.label2.Location = new System.Drawing.Point(651, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 3;
@@ -1297,7 +1297,7 @@
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(683, 9);
+            this.comboBox1.Location = new System.Drawing.Point(687, 9);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(74, 21);
             this.comboBox1.TabIndex = 2;
@@ -1310,7 +1310,7 @@
             this.textBox1.Location = new System.Drawing.Point(51, 8);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(447, 20);
+            this.textBox1.Size = new System.Drawing.Size(451, 20);
             this.textBox1.TabIndex = 1;
             // 
             // label1
@@ -1364,7 +1364,7 @@
             this.EnemiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.EnemiesTabPage.Name = "EnemiesTabPage";
             this.EnemiesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.EnemiesTabPage.Size = new System.Drawing.Size(743, 167);
+            this.EnemiesTabPage.Size = new System.Drawing.Size(739, 167);
             this.EnemiesTabPage.TabIndex = 3;
             this.EnemiesTabPage.Text = "Enemies";
             this.EnemiesTabPage.UseVisualStyleBackColor = true;
@@ -1380,7 +1380,7 @@
             this.listView3.Location = new System.Drawing.Point(3, 3);
             this.listView3.MultiSelect = false;
             this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(737, 161);
+            this.listView3.Size = new System.Drawing.Size(733, 161);
             this.listView3.TabIndex = 0;
             this.listView3.UseCompatibleStateImageBehavior = false;
             // 

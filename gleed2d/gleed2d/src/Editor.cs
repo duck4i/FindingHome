@@ -363,6 +363,16 @@ namespace GLEED2D
             clickedPoints.Clear();
         }
 
+        public void createExitItem()
+        {
+            if (!checkLayerIsSelected())
+                return;
+
+            state = EditorState.entity;
+            entityType = EntityType.Exit;
+            clickedPoints.Clear();
+        }
+
         public void paintEntity()
         {
             bool clearSelection = false;
@@ -376,6 +386,8 @@ namespace GLEED2D
                 else
                     i = new PlayerItem();
             }
+            else if (entityType == EntityType.Exit)
+                i = new ExitItem();
 
             //  insert item
             if (i != null)
@@ -397,9 +409,9 @@ namespace GLEED2D
             if (unfocus)
             {
                 state = EditorState.idle;
-
                 MainForm.Instance.entitiesListView.Select();
                 MainForm.Instance.entitiesListView.Cursor = Forms.Cursors.Default;
+
             }
         }
 
