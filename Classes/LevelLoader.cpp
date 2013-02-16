@@ -6,6 +6,8 @@
 
 void LevelLoader::createLevelLayers()
 {
+	//CCParallaxNode *n = CCParallaxNode::create();
+
 	//	do not change the order of how we create layers, it will affect zOrder
 	this->backgroundLayer = CCLayer::create();
 	this->worldNode->addChild(this->backgroundLayer);
@@ -111,6 +113,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_PLAYER) == 0 && !loadedPlayer)
 	{
 		loadedPlayer = true;
+		info.nodeType = NodeTypePlayer;
 		GameEntityPlayer* player = GameEntityPlayer::create(info);		
 		if (player)
 		{
@@ -126,7 +129,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_EXIT) == 0)
 	{
-		
+		info.nodeType = NodeTypeExit;
 		xmlNodePtr np = XMLHelper::findChildNodeWithName(info.xmlNode, "NextLevel");
 		if (np)		
 			info.nextLevel = XMLHelper::readNodeContent(np);		

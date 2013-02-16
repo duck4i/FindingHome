@@ -14,7 +14,7 @@ enum NodeType
 
 enum EnemyType
 {
-	EnemyUndefined,
+	EnemyTypeUndefined,
 	EnemyTypeBat,
 	EnemyTypeCrow,
 	EnemyTypeSquirel,
@@ -69,6 +69,7 @@ public:
 		xmlNode = NULL;
 		cocosNode = NULL;
 		nextLevel = NULL;
+		enemyType = EnemyTypeUndefined;
 	}
 
 };
