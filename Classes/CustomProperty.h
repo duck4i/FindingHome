@@ -8,11 +8,12 @@
 //	We wont check custom level property type, only if it exists. 
 //	Maybe later if needed (for message boards, etc...) we can add value check for those types.
 
-#define PLAYER_TAG_NAME		"Player"
-#define FINISH_TAG_NAME		"Finish"
-#define DYNAMIC_TAG_NAME	"Dynamic"	//	dynamic Box2D objects
-#define BOUNCE_TAG_NAME		"Bounce"
-#define COLLECTABLE_TAG_NAME "Collectable"
+
+#define SOLID_TAG_NAME			"Solid"
+#define DYNAMIC_TAG_NAME		"Movable"	//	dynamic Box2D objects
+#define BOUNCE_TAG_NAME			"Bouncable"
+#define COLLECTABLE_TAG_NAME	"Collectable"
+
 
 /*
 <Property Name="obicanItem" Type="Item" Description="">Rectangle_0010</Property>
@@ -64,9 +65,8 @@ private:
 class CustomProperties
 {
 private:
-	bool foundPropNamedPlayer;
-	bool foundPropNamedFinish;
 
+	bool foundPropNamedSolid;
 	bool foundPropNamedDynamic;
 	bool foundPropNamedBounce;
 	bool foundPropNamedCollectable;
@@ -79,9 +79,8 @@ public:
 
 	CustomProperties()
 	{
-		foundPropNamedPlayer = false;
-		foundPropNamedFinish = false;
-		foundPropNamedDynamic = false;		
+		foundPropNamedSolid = false;
+		foundPropNamedDynamic = false;
 		foundPropNamedBounce = false;
 		foundPropNamedCollectable = false;
 	}		
@@ -92,11 +91,8 @@ public:
 	bool isDynamicObject() { return foundPropNamedDynamic; }
 	bool isBouncable() { return foundPropNamedBounce; }
 	bool isCollectable() { return foundPropNamedCollectable; }
+	bool isSolid() { return foundPropNamedSolid; }
 
-	bool isMessageBoard();
-	
-	bool isPlayerObject() { return foundPropNamedPlayer; }
-	bool isFinishObject() { return foundPropNamedFinish; }
 
 	bool hasProperties() { return properties.size() > 0; }
 

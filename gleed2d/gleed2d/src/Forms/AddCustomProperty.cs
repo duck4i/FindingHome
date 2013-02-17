@@ -11,7 +11,6 @@ namespace GLEED2D
 
         SerializableDictionary customproperties;
 
-
         public AddCustomProperty(SerializableDictionary currentproperties)
         {
             InitializeComponent();

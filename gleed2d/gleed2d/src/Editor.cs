@@ -333,7 +333,23 @@ namespace GLEED2D
             currentbrush = null;
         }
 
-        public void togglePropertyForSelectedItems(CustomProperty prop)
+        public void addBehaviorForSelectedItems(CustomProperty prop, bool applyToAll)
+        {
+            beginCommand("Adding custom property - " + prop.name);
+            foreach (Item i in SelectedItems)
+            {
+                if (!i.CustomProperties.ContainsKey(prop.name))
+                {
+                    i.CustomProperties[prop.name] = prop;
+                }
+
+                if (!applyToAll)
+                    break;
+            }
+            Editor.Instance.endCommand();
+        }
+
+        public void togglePropertyForSelectedItems(CustomProperty prop, bool applyToAll)
         {
             beginCommand("Toggling custom property - " + prop.name);
             foreach (Item i in SelectedItems)
@@ -343,9 +359,38 @@ namespace GLEED2D
                     i.CustomProperties.Remove(prop.name);
                 }
                 else
-                {                    
+                {
                     i.CustomProperties[prop.name] = prop;
                 }
+
+                if (!applyToAll)
+                    break;
+            }
+            Editor.Instance.endCommand();
+        }
+
+        public void removeBehaviorForSelectedItems(CustomProperty prop, bool applyToAll)
+        {
+            beginCommand("Removing custom property - " + prop.name);
+            foreach (Item i in SelectedItems)
+            {
+                if (i.CustomProperties.ContainsKey(prop.name))
+                {
+                    i.CustomProperties.Remove(prop.name);
+                }
+
+                if (!applyToAll)
+                    break;
+            }
+            Editor.Instance.endCommand();
+        }
+
+        public void removeAllBehaviorsForSelectedItems()
+        {
+            beginCommand("Removing all custom properties for selected items");
+            foreach (Item i in SelectedItems)
+            {
+                i.CustomProperties.Clear();
             }
             Editor.Instance.endCommand();
         }
@@ -419,7 +464,7 @@ namespace GLEED2D
                 state = EditorState.idle;
                 MainForm.Instance.entitiesListView.Select();
                 MainForm.Instance.entitiesListView.Cursor = Forms.Cursors.Default;
-
+                MainForm.Instance.pictureBox1.Cursor = Forms.Cursors.Default;
             }
         }
 

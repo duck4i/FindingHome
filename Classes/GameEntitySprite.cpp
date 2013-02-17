@@ -83,6 +83,9 @@ bool GameEntitySprite::createBody(b2World* world)
 	if (m_b2Body == NULL)
 		return false;
 
+	
+
+
 	return createFixture();
 }
 

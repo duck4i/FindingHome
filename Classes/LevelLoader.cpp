@@ -169,7 +169,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 		{
 			layer->addChild(sprite->getSprite());
 		
-			if (isMainLayer)
+			if (isMainLayer || sprite->getProperties().isSolid() || sprite->getProperties().isCollectable())
 				sprite->createBody(this->boxWorld);
 		}
 	}

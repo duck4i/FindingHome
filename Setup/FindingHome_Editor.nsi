@@ -3,14 +3,14 @@
 ;General
 
 	;Name and file
-	Name "Finding Home DEMO"
+	Name "Finding Home Tools"
 	OutFile "SetupEditor.exe"
 
 	;Default installation folder
-	InstallDir "$LOCALAPPDATA\FindingHomeDemo"
+	InstallDir "$DESKTOP\FindingHomeTools"
 
 	;Get installation folder from registry if available
-	InstallDirRegKey HKCU "Software\FindingHomeDemo" ""
+	InstallDirRegKey HKCU "Software\FindingHomeTools" ""
 
 	;Request application privileges for Windows Vista
 	RequestExecutionLevel user
@@ -64,7 +64,7 @@ Section "Install"
 	File /r "..\Resources\*.xml"
 	File /r "..\Resources\*.json"
 	File /r "..\Resources\*.vsh"
-	File /r "..\Resources\*.fsh"
+	File /r "..\Resources\*.fsh"	
 	
 	SetOutPath "$INSTDIR\Utils\"
 	File /r "..\Utils\*.*"
@@ -75,7 +75,7 @@ Section "Install"
 	File "readme.txt"
 
 	;Store installation folder
-	WriteRegStr HKCU "Software\FindingHomeDemo" "" $INSTDIR
+	WriteRegStr HKCU "Software\FindingHomeTools" "" $INSTDIR
 
 	;Create uninstaller
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
@@ -89,6 +89,8 @@ Section "Install"
 	
 	;	write desktop
 	CreateShortCut "$DESKTOP\Finding Home.lnk" "$INSTDIR\bin\FindingHome.win32.exe" "" "$INSTDIR\game.ico" 0
+	
+	SetOutPath "$INSTDIR\utils\"	
 	CreateShortCut "$DESKTOP\Finding Home Editor.lnk" "$INSTDIR\Utils\gleed2d.exe" "" "$INSTDIR\game.ico" 0
 	
 	SetOutPath "$INSTDIR"
@@ -124,7 +126,7 @@ Section "Uninstall"
 	
 	RMDir "$INSTDIR"
 
-	DeleteRegKey /ifempty HKCU "Software\FindingHomeDemo"
+	DeleteRegKey /ifempty HKCU "Software\FindingHomeTools"
 	
 	;	remove icons
 	Delete "$SMPROGRAMS\FindingHome\Uninstall.lnk"

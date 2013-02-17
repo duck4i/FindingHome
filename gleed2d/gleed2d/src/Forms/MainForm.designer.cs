@@ -30,14 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Circle", 1);
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Text", 3);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Path", 2);
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Bat", 0);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Crow", 1);
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Circle", 1);
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Text", 3);
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Path", 2);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Bat", 0);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Crow", 1);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -76,9 +76,10 @@
             this.ViewGrid = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewSnapToGrid = new System.Windows.Forms.ToolStripMenuItem();
             this.ViewWorldOrigin = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runLevelInYourOwnApplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.physicsEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runPhysicsEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.moveSelectedItemsToLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copySelectedItemsToLayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,6 +96,8 @@
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.sendErrorLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.reportAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quickGuideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,6 +126,8 @@
             this.removeBehaviorButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.clearAllBehaviors = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
             this.toggleSolidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toggleCollectableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -452,6 +457,7 @@
             this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.runToolStripMenuItem,
+            this.physicsEditorToolStripMenuItem,
             this.ToolsMenu,
             this.updatesToolStripMenuItem,
             this.helpToolStripMenuItem});
@@ -573,8 +579,7 @@
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ViewGrid,
             this.ViewSnapToGrid,
-            this.ViewWorldOrigin,
-            this.toolStripSeparator24});
+            this.ViewWorldOrigin});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -607,11 +612,6 @@
             this.ViewWorldOrigin.Text = "World Origin";
             this.ViewWorldOrigin.CheckedChanged += new System.EventHandler(this.ViewWorldOrigin_CheckedChanged);
             // 
-            // toolStripSeparator24
-            // 
-            this.toolStripSeparator24.Name = "toolStripSeparator24";
-            this.toolStripSeparator24.Size = new System.Drawing.Size(139, 6);
-            // 
             // runToolStripMenuItem
             // 
             this.runToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -630,6 +630,22 @@
             this.runLevelInYourOwnApplicationToolStripMenuItem.ToolTipText = "Run Level in your own application. To use this, define the appropriate settings i" +
                 "n the Tools->Settings dialog.";
             this.runLevelInYourOwnApplicationToolStripMenuItem.Click += new System.EventHandler(this.RunLevel);
+            // 
+            // physicsEditorToolStripMenuItem
+            // 
+            this.physicsEditorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runPhysicsEditorToolStripMenuItem});
+            this.physicsEditorToolStripMenuItem.Name = "physicsEditorToolStripMenuItem";
+            this.physicsEditorToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
+            this.physicsEditorToolStripMenuItem.Text = "Physics Editor";
+            // 
+            // runPhysicsEditorToolStripMenuItem
+            // 
+            this.runPhysicsEditorToolStripMenuItem.Image = global::GLEED2D.Properties.Resources._74;
+            this.runPhysicsEditorToolStripMenuItem.Name = "runPhysicsEditorToolStripMenuItem";
+            this.runPhysicsEditorToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.runPhysicsEditorToolStripMenuItem.Text = "Run physics editor";
+            this.runPhysicsEditorToolStripMenuItem.Click += new System.EventHandler(this.runPhysicsEditorToolStripMenuItem_Click);
             // 
             // ToolsMenu
             // 
@@ -760,7 +776,9 @@
             this.updatesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.checkForUpdatesToolStripMenuItem,
             this.toolStripSeparator14,
-            this.sendErrorLogFileToolStripMenuItem});
+            this.sendErrorLogFileToolStripMenuItem,
+            this.toolStripSeparator26,
+            this.reportAToolStripMenuItem});
             this.updatesToolStripMenuItem.Name = "updatesToolStripMenuItem";
             this.updatesToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.updatesToolStripMenuItem.Text = "Support";
@@ -769,22 +787,35 @@
             // 
             this.checkForUpdatesToolStripMenuItem.Image = global::GLEED2D.Properties.Resources._68;
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "Check for updates";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // toolStripSeparator14
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(238, 6);
+            this.toolStripSeparator14.Size = new System.Drawing.Size(270, 6);
             // 
             // sendErrorLogFileToolStripMenuItem
             // 
             this.sendErrorLogFileToolStripMenuItem.Image = global::GLEED2D.Properties.Resources._58;
             this.sendErrorLogFileToolStripMenuItem.Name = "sendErrorLogFileToolStripMenuItem";
-            this.sendErrorLogFileToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.sendErrorLogFileToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
             this.sendErrorLogFileToolStripMenuItem.Text = "Send error log file to developers";
             this.sendErrorLogFileToolStripMenuItem.Click += new System.EventHandler(this.sendErrorLogFileToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator26
+            // 
+            this.toolStripSeparator26.Name = "toolStripSeparator26";
+            this.toolStripSeparator26.Size = new System.Drawing.Size(270, 6);
+            // 
+            // reportAToolStripMenuItem
+            // 
+            this.reportAToolStripMenuItem.Image = global::GLEED2D.Properties.Resources._77;
+            this.reportAToolStripMenuItem.Name = "reportAToolStripMenuItem";
+            this.reportAToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.reportAToolStripMenuItem.Text = "Report a bug or request improvement";
+            this.reportAToolStripMenuItem.Click += new System.EventHandler(this.reportAToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -1054,6 +1085,8 @@
             // toolStripSplitButton1
             // 
             this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearAllBehaviors,
+            this.toolStripSeparator25,
             this.toggleSolidToolStripMenuItem,
             this.toolStripMenuItem3,
             this.toggleCollectableToolStripMenuItem,
@@ -1066,52 +1099,63 @@
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
             this.toolStripSplitButton1.Size = new System.Drawing.Size(67, 22);
             this.toolStripSplitButton1.Text = "Quick";
-            
+            // 
+            // clearAllBehaviors
+            // 
+            this.clearAllBehaviors.Name = "clearAllBehaviors";
+            this.clearAllBehaviors.Size = new System.Drawing.Size(170, 22);
+            this.clearAllBehaviors.Text = "Clear all behaviors";
+            this.clearAllBehaviors.Click += new System.EventHandler(this.clearAllBehaviors_Click);
+            // 
+            // toolStripSeparator25
+            // 
+            this.toolStripSeparator25.Name = "toolStripSeparator25";
+            this.toolStripSeparator25.Size = new System.Drawing.Size(167, 6);
             // 
             // toggleSolidToolStripMenuItem
             // 
             this.toggleSolidToolStripMenuItem.Name = "toggleSolidToolStripMenuItem";
-            this.toggleSolidToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.toggleSolidToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.toggleSolidToolStripMenuItem.Text = "Set Solid";
             this.toggleSolidToolStripMenuItem.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(170, 22);
             this.toolStripMenuItem3.Text = "Set Dynamic";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // toggleCollectableToolStripMenuItem
             // 
             this.toggleCollectableToolStripMenuItem.Name = "toggleCollectableToolStripMenuItem";
-            this.toggleCollectableToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.toggleCollectableToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.toggleCollectableToolStripMenuItem.Text = "Set Collectable";
             this.toggleCollectableToolStripMenuItem.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // toolStripSeparator23
             // 
             this.toolStripSeparator23.Name = "toolStripSeparator23";
-            this.toolStripSeparator23.Size = new System.Drawing.Size(157, 6);
+            this.toolStripSeparator23.Size = new System.Drawing.Size(167, 6);
             // 
             // clearSolidToolStripMenuItem
             // 
             this.clearSolidToolStripMenuItem.Name = "clearSolidToolStripMenuItem";
-            this.clearSolidToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.clearSolidToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.clearSolidToolStripMenuItem.Text = "Clear Solid";
             this.clearSolidToolStripMenuItem.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // clearDynamciToolStripMenuItem
             // 
             this.clearDynamciToolStripMenuItem.Name = "clearDynamciToolStripMenuItem";
-            this.clearDynamciToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.clearDynamciToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.clearDynamciToolStripMenuItem.Text = "Clear Dynamic";
             this.clearDynamciToolStripMenuItem.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // clearCollectibleToolStripMenuItem
             // 
             this.clearCollectibleToolStripMenuItem.Name = "clearCollectibleToolStripMenuItem";
-            this.clearCollectibleToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.clearCollectibleToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.clearCollectibleToolStripMenuItem.Text = "Clear Collectible";
             this.clearCollectibleToolStripMenuItem.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
@@ -1552,16 +1596,16 @@
             // 
             this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView2.HideSelection = false;
-            listViewItem5.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
+            listViewItem9.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
                 "n be scaled but not rotated.";
-            listViewItem6.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
+            listViewItem10.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
                 "ut not rotated.";
-            listViewItem8.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
+            listViewItem12.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
             this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6,
-            listViewItem7,
-            listViewItem8});
+            listViewItem9,
+            listViewItem10,
+            listViewItem11,
+            listViewItem12});
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(3, 3);
             this.listView2.MultiSelect = false;
@@ -1599,8 +1643,8 @@
             this.entitiesListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.entitiesListView.HideSelection = false;
             this.entitiesListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem9,
-            listViewItem10});
+            listViewItem1,
+            listViewItem2});
             this.entitiesListView.LargeImageList = this.entitiesImageList;
             this.entitiesListView.Location = new System.Drawing.Point(3, 3);
             this.entitiesListView.MultiSelect = false;
@@ -1626,7 +1670,7 @@
             this.EnemiesTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.EnemiesTabPage.Size = new System.Drawing.Size(739, 167);
             this.EnemiesTabPage.TabIndex = 3;
-            this.EnemiesTabPage.Text = "Enemies";
+            this.EnemiesTabPage.Text = "Game Enemies";
             this.EnemiesTabPage.UseVisualStyleBackColor = true;
             // 
             // listView3
@@ -1634,8 +1678,8 @@
             this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView3.HideSelection = false;
             this.listView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem3,
+            listViewItem4});
             this.listView3.LargeImageList = this.enemiesImageList;
             this.listView3.Location = new System.Drawing.Point(3, 3);
             this.listView3.MultiSelect = false;
@@ -1971,6 +2015,11 @@
         private System.Windows.Forms.ToolStripMenuItem clearSolidToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearDynamciToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearCollectibleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;
+        private System.Windows.Forms.ToolStripMenuItem clearAllBehaviors;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
+        private System.Windows.Forms.ToolStripMenuItem reportAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem physicsEditorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runPhysicsEditorToolStripMenuItem;
     }
 }

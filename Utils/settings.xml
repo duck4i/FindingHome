@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Constants xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RunLevelStartApplication>true</RunLevelStartApplication>
-  <RunLevelApplicationToStart>FindingHome.win32.exe</RunLevelApplicationToStart>
+  <RunLevelApplicationToStart>..\bin\FindingHome.win32.exe</RunLevelApplicationToStart>
   <RunLevelAppendLevelFilename>true</RunLevelAppendLevelFilename>
   <SaveLevelStartApplication>false</SaveLevelStartApplication>
   <SaveLevelApplicationToStart />
@@ -86,5 +86,5 @@
     <X>64</X>
     <Y>64</Y>
   </GridSpacing>
-  <ZoomFactor>0.01</ZoomFactor>
+  <ZoomFactor>0.02</ZoomFactor>
 </Constants>

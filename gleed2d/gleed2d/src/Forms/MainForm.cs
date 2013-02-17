@@ -21,8 +21,7 @@ namespace GLEED2D
     {
         public static MainForm Instance;
         String levelfilename;
-        //BackgroundWorker bgw = new BackgroundWorker();
-
+        //BackgroundWorker bgw = new BackgroundWorker();        
 
         bool dirtyflag;
         public bool DirtyFlag
@@ -1046,24 +1045,24 @@ namespace GLEED2D
 
         private void togglePhysicalStripButton_Click(object sender, EventArgs e)
         {
-            CustomProperty c = new CustomProperty();
-            c.name = "dynamic";
-            c.type = typeof(bool);
-            c.value = true;
-            c.description = "";
-            Editor.Instance.togglePropertyForSelectedItems(c);
-            propertyGrid1.Refresh();
+            //CustomProperty c = new CustomProperty();
+            //c.name = "dynamic";
+            //c.type = typeof(bool);
+            //c.value = true;
+            //c.description = "";
+            //Editor.Instance.togglePropertyForSelectedItems(c);
+            //propertyGrid1.Refresh();
         }
 
         private void toggleCollectableStripButton_Click(object sender, EventArgs e)
         {
-            CustomProperty c = new CustomProperty();
-            c.name = "collectable";
-            c.type = typeof(bool);
-            c.value = true;
-            c.description = "";
-            Editor.Instance.togglePropertyForSelectedItems(c);
-            propertyGrid1.Refresh();
+            //CustomProperty c = new CustomProperty();
+            //c.name = "collectable";
+            //c.type = typeof(bool);
+            //c.value = true;
+            //c.description = "";
+            //Editor.Instance.togglePropertyForSelectedItems(c);
+            //propertyGrid1.Refresh();
         }
 
         private void listView3_SelectedIndexChanged(object sender, EventArgs e)
@@ -1119,53 +1118,117 @@ namespace GLEED2D
 
         }
 
-        private BehaviorType getBehaviorSelection()
+
+
+        public string BehaviorNameSolid         = "Solid";
+        public string BehaviorNameMovable       = "Movable";
+        public string BehaviorNameCollectable   = "Collectable";
+        public string BehaviorNameBouncable     = "Bouncable";
+
+        private BehaviorOptions getBehaviorSelection()
         {
             SelectBehavior b = new SelectBehavior();
             b.ShowDialog();
-            return b.behavior;
+
+            BehaviorOptions o = new BehaviorOptions();
+            o.behavior = b.behavior;
+            o.applyToAll = b.applyToAll;
+            
+            return o;
         }
+
+        private CustomProperty getPropertyFromType(BehaviorType type)
+        {
+            if (type == BehaviorType.Unkown)
+                return null;
+
+            CustomProperty cp = new CustomProperty();
+            if (type == BehaviorType.Solid)
+            {
+                cp.type = typeof(bool);
+                cp.value = true;
+                cp.name = BehaviorNameSolid;                
+            }
+            else if (type == BehaviorType.Movable)
+            {
+                cp.type = typeof(bool);
+                cp.value = true;
+                cp.name = BehaviorNameMovable;
+            }
+            else if (type == BehaviorType.Collectable)
+            {
+                cp.type = typeof(bool);
+                cp.value = true;
+                cp.name = BehaviorNameCollectable;
+            }
+            else if (type == BehaviorType.Bouncable)
+            {
+                cp.type = typeof(bool);
+                cp.value = true;
+                cp.name = BehaviorNameBouncable;
+            }
+
+            return cp;
+        }
+
 
         private void addBehaviorStripButton_Click(object sender, EventArgs e)
         {
-            BehaviorType b = getBehaviorSelection();
+            BehaviorOptions b = getBehaviorSelection();
 
-            if (b == BehaviorType.Unkown)
+            if (b.behavior == BehaviorType.Unkown)
                 return;
-
-            if (b == BehaviorType.Platform)
+            else if (b.behavior == BehaviorType.Platform)
             {
                 featureNotImplemented();
                 return;
+            }
+
+            CustomProperty cp = getPropertyFromType(b.behavior);
+            if (cp != null)
+            {
+                Editor.Instance.addBehaviorForSelectedItems(cp, b.applyToAll);
+                Editor.Instance.updatetreeview();
             }
         }
 
- 
-
         private void toggleBehaviorButton_Click(object sender, EventArgs e)
         {
-            BehaviorType b = getBehaviorSelection();
-            if (b == BehaviorType.Unkown)
-                return;
+            BehaviorOptions b = getBehaviorSelection();
 
-            if (b == BehaviorType.Platform)
+            if (b.behavior == BehaviorType.Unkown)
+                return;
+            else if (b.behavior == BehaviorType.Platform)
             {
                 featureNotImplemented();
                 return;
             }
 
+            CustomProperty cp = getPropertyFromType(b.behavior);
+            if (cp != null)
+            {
+                Editor.Instance.togglePropertyForSelectedItems(cp, b.applyToAll);
+                Editor.Instance.updatetreeview();
+            }
         }
 
         private void removeBehaviorButton_Click(object sender, EventArgs e)
         {
-            BehaviorType b = getBehaviorSelection();
-            if (b == BehaviorType.Unkown)
-                return;
+            BehaviorOptions b = getBehaviorSelection();
 
-            if (b == BehaviorType.Platform)
+            if (b.behavior == BehaviorType.Unkown)
+                return;
+            else if (b.behavior == BehaviorType.Platform)
             {
                 featureNotImplemented();
                 return;
+            }
+
+            CustomProperty cp = getPropertyFromType(b.behavior);
+            if (cp != null)
+            {
+                Editor.Instance.removeBehaviorForSelectedItems(cp, b.applyToAll);
+                Editor.Instance.updatetreeview();
             }
         }
 
@@ -1175,7 +1238,44 @@ namespace GLEED2D
             featureNotImplemented();
         }
 
+        private void clearAllBehaviors_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Clear all behavior settings for selected items?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Editor.Instance.removeAllBehaviorsForSelectedItems();
+            }
+        }
+
+        private void reportAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("http://recapture.freeforums.net/board/13/support-improvements");
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void runPhysicsEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("physics-body-editor.jar");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Could not start Physisc Editor. Do you have Java installed?", "Error starting editor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
 
 
     }
+
+    public class BehaviorOptions
+    {
+        public BehaviorType behavior;
+        public bool applyToAll;
+    };
 }

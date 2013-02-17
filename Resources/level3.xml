@@ -95,7 +95,11 @@
                         <X>-489</X>
                         <Y>-453</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Movable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Radius>332.8438</Radius>
                     <FillColor>
                         <R>192</R>

@@ -15,12 +15,14 @@ namespace GLEED2D
         Solid,
         Movable,
         Collectable,
+        Bouncable,
         Platform
     };
 
     public partial class SelectBehavior : Form
     {
         public BehaviorType behavior;
+        public bool applyToAll;
 
         public SelectBehavior()
         {
@@ -30,18 +32,18 @@ namespace GLEED2D
         private void button2_Click(object sender, EventArgs e)
         {
             behavior = BehaviorType.Unkown;
+            applyToAll = false;
             Close();
         }
 
         private void SelectBehavior_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-
+            applyToAll = checkBox1.Checked;
             Close();
         }
 
@@ -73,7 +75,7 @@ namespace GLEED2D
             {
                 title = "Bouncable Items";
                 description = "Items bounce when hit. Must be movable.";
-                behavior = BehaviorType.Movable;
+                behavior = BehaviorType.Bouncable;
             }
             else if (s == "Platform")
             {

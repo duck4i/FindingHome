@@ -119,7 +119,7 @@ namespace GLEED2D
 
         public override string Category
         {
-            get { return "Custom Properties"; }
+            get { return /*"Custom Properties"*/ "Item Behavior"; }
         }
 
         public override string DisplayName
