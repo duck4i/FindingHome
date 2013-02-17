@@ -3,12 +3,18 @@
 //
 using System;
 using System.IO;
+using System.Windows.Forms;
+using SendFileTo;
+//  send email
+//http://stackoverflow.com/questions/1195111/c-sharp-mailto-with-attachment
 
 namespace GLEED2D
 {
 
     public class Logger
     {
+        private const long MaxLogFileSize = 3 * 1024 * 1024;// 3MB
+
         private static Logger instance;
         public static Logger Instance
         {
@@ -24,7 +30,13 @@ namespace GLEED2D
 
         public Logger()
         {
-            sw = new StreamWriter(logfilename, true);
+            bool continueWork = true;
+
+            float fileSize = new System.IO.FileInfo(logfilename).Length;
+            if (fileSize >= MaxLogFileSize)
+                continueWork = false;
+
+            sw = new StreamWriter(logfilename, continueWork);
             sw.WriteLine(box("Log File created.\r\n\r\n"));
             sw.Close();
         }
@@ -32,7 +44,6 @@ namespace GLEED2D
 
         public void log(string message)
         {
-
             sw = new StreamWriter(logfilename, true);
             sw.WriteLine(box(message));
             sw.Close();            
@@ -41,6 +52,23 @@ namespace GLEED2D
         string box(string message)
         {
             return DateTime.Now + "." + DateTime.Now.Millisecond.ToString("000") + " - " + message;
+        }
+
+        public void emailToDevelopers()
+        {
+            try
+            {
+                MAPI m = new MAPI();
+                m.AddAttachment(logfilename);
+                m.AddRecipientTo("vasamajka@gmail.com");
+                String subject = "[LevelEditor] Please review my error log";
+                String body = "";
+                m.SendMailPopup(subject, body);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Hmmm... Something bad happened...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
     }

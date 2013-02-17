@@ -194,6 +194,10 @@
     <Content Include="Resources\EnemyCrow.png" />
     <Content Include="Resources\EntityExit.png" />
     <Content Include="Resources\EntityPlayer.png" />
+    <None Include="Resources\glyphs\16x16-free-toolbar-icons\png\8.png" />
+    <None Include="Resources\glyphs\16x16-free-toolbar-icons\png\15.png" />
+    <None Include="Resources\glyphs\16x16-free-toolbar-icons\png\68.png" />
+    <None Include="Resources\glyphs\16x16-free-toolbar-icons\png\58.png" />
     <Content Include="Resources\icon_item_entity.png" />
     <EmbeddedResource Include="Resources\circle.png" />
     <EmbeddedResource Include="Resources\folder.png" />
@@ -291,6 +295,7 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
     <Compile Include="src\Items\ExitItem.Editable.cs" />
+    <Compile Include="src\SendFileTo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

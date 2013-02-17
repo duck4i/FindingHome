@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("GLEED2D")]
 [assembly: AssemblyProduct("GLEED2D")]
-[assembly: AssemblyDescription("Generic Level Editor 2D")]
+[assembly: AssemblyDescription("Finding Home Editor based on Gleed2D")]
 [assembly: AssemblyCompany("")]
 
 [assembly: AssemblyCopyright("")]
@@ -30,4 +30,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.3.0.0")]
+[assembly: AssemblyVersion("1.5.0.0")]

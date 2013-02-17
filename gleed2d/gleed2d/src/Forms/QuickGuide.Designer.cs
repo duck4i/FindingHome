@@ -100,7 +100,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "QuickGuide";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GLEED2D QuickGuide";
+            this.Text = "Quick Guide";
             this.ResumeLayout(false);
             this.PerformLayout();
 

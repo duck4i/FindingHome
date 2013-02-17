@@ -12,7 +12,7 @@ using CustomUITypeEditors;
 using Microsoft.Xna.Framework;
 
 namespace GLEED2D
-{
+{    
     public partial class Level
     {
         [XmlIgnore()]
@@ -43,6 +43,22 @@ namespace GLEED2D
             {
                 EditorRelated.ContentRootFolder = value;
             }
+        }
+
+        [XmlIgnore()]
+        [DisplayName("Weather Enabled"), Category(" Level Settings"), Description("Controls Weather system. Disable for indoor levels to improve speed.")]
+        public bool pWeatherEnabled
+        {
+            get { return WeatherActive; }
+            set { WeatherActive = value; }
+        }
+
+        [XmlIgnore()]
+        [DisplayName("Scene Zoom"), Category(" Level Settings"), Description("Controls how close camera is to the player.")]
+        public float pCameraZoom
+        {
+            get { return CameraZoom; }
+            set { CameraZoom = value; }
         }
 
         EditorVars editorrelated = new EditorVars();

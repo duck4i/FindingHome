@@ -54,7 +54,7 @@ namespace GLEED2D
         }
         public void updatetitlebar()
         {
-            Text = "GLEED2D - " + levelfilename + (DirtyFlag ? "*" : "");
+            Text = "Finding Home Editor - " + levelfilename + (DirtyFlag ? "*" : "");
         }
 
         public static Image getThumbNail(Bitmap bmp, int imgWidth, int imgHeight)
@@ -1078,8 +1078,38 @@ namespace GLEED2D
                 Editor.Instance.createExitItem();
             
         }
-        
 
+        private void clearDynamciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void viewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void featureNotImplemented()
+        {
+            MessageBox.Show(
+                "Sorry, but for now this feature is currently in development.\r\n\r\nWe are fully aware how much you need it and are working as fast as we can to provide you the best workflow possible.\r\n\r\nWe thank you for understanding.",
+                "Feature currently unavailable", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            featureNotImplemented();
+        }
+
+        private void sendErrorLogFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Logger.Instance.emailToDevelopers();
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            featureNotImplemented();
+        }
 
     }
 }

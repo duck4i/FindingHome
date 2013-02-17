@@ -830,6 +830,7 @@ namespace GLEED2D
             {
                 zoomUpdateInProgress = true;                
                 camera.Scale += zoomFactor * multiple;
+                camera.Scale = (float) Math.Round(camera.Scale, 2);
                 MainForm.Instance.zoomcombo.Text = (camera.Scale * 100).ToString() + "%";
                 zoomUpdateInProgress = false;
             }
@@ -839,6 +840,7 @@ namespace GLEED2D
                 camera.Scale -= zoomFactor * multiple;
                 if (camera.Scale <= 0.01f)
                     camera.Scale = 0.01f;
+                camera.Scale = (float) Math.Round(camera.Scale, 2);
                 MainForm.Instance.zoomcombo.Text = (camera.Scale * 100).ToString() + "%";
                 zoomUpdateInProgress = false;
             }

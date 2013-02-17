@@ -21,6 +21,13 @@ namespace GLEED2D
         [XmlAttribute()]
         public bool Visible;
 
+        [XmlAttribute()]
+        public bool WeatherActive;
+
+        [XmlAttribute()]
+        public float CameraZoom;
+
+
         /// <summary>
         /// A Level contains several Layers. Each Layer contains several Items.
         /// </summary>
@@ -37,6 +44,8 @@ namespace GLEED2D
             Visible = true;
             Layers = new List<Layer>();
             CustomProperties = new SerializableDictionary();
+            WeatherActive = true;
+            CameraZoom = 1.0f;
         }
 
         public static Level FromFile(string filename, ContentManager cm)
