@@ -25,7 +25,6 @@
 
 #define RESOURCE_BLOCK		RESOURCE_DIR	"block.png"
 #define RESOURCE_CIRCLE		RESOURCE_DIR	"circle.png"
-#define RESOURCE_PLAYER		RESOURCE_DIR	"dog.png"
 #define RESOURCE_LOADING	RESOURCE_DIR	"loading.png"
 
 #define RESOURCE_SHIFT		RESOURCE_DIR	"shift.png"

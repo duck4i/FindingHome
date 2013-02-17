@@ -28,6 +28,16 @@ namespace GLEED2D
         public float CameraZoom;
 
 
+        [XmlAttribute()]
+        public float PlayerSpeed;
+
+        [XmlAttribute()]
+        public float PlayerJump;
+
+        [XmlAttribute()]
+        public float PlayerShiftModifier;
+
+
         /// <summary>
         /// A Level contains several Layers. Each Layer contains several Items.
         /// </summary>
@@ -46,6 +56,11 @@ namespace GLEED2D
             CustomProperties = new SerializableDictionary();
             WeatherActive = true;
             CameraZoom = 1.0f;
+
+            PlayerSpeed = 0;
+            PlayerJump = 0;
+            PlayerShiftModifier = 0;
+
         }
 
         public static Level FromFile(string filename, ContentManager cm)

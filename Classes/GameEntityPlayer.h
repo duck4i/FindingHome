@@ -12,6 +12,11 @@
 #define PLAYER_STEP_VALUE		25.0f
 #define IN_AIR_BEFORE_DEATH		5.0f
 
+#define RESOURCE_PLAYER			RESOURCE_DIR	"dog.png"
+#define RESOURCE_PLAYER2		RESOURCE_DIR	"dog2.png"
+#define RESOURCE_PLAYER3		RESOURCE_DIR	"dog3.png"
+#define RESOURCE_PLAYER4		RESOURCE_DIR	"dog4.png"
+
 ///	Player direction
 enum PlayerDirection
 {

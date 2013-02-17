@@ -63,6 +63,11 @@ namespace GLEED2D
                 m.AddRecipientTo("vasamajka@gmail.com");
                 String subject = "[LevelEditor] Please review my error log";
                 String body = "";
+
+                body += "\r\nOperating System: " + Environment.OSVersion.ToString();
+                body += "\r\nEditor Version: " + Editor.Instance.Version + "\r\n";
+
+
                 m.SendMailPopup(subject, body);
             }
             catch (Exception)

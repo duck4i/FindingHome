@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_01" Visible="true">
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_01" Visible="true" WeatherActive="true" CameraZoom="1" PlayerSpeed="0" PlayerJump="0" PlayerShiftModifier="0">
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
@@ -731,6 +731,6 @@
             <X>-1810.925</X>
             <Y>-485.3546</Y>
         </CameraPosition>
-        <Version>1.3.0.0</Version>
+        <Version>1.5.0.0</Version>
     </EditorRelated>
 </Level>

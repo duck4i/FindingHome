@@ -825,7 +825,7 @@ namespace GLEED2D
             mstate = Mouse.GetState();
 
             int mwheeldelta = mstate.ScrollWheelValue - oldmstate.ScrollWheelValue;
-            float multiple = kstate.IsKeyDown(Keys.LeftControl) ? 5 : 1;
+            float multiple = kstate.IsKeyDown(Keys.LeftShift) ? 5 : 1;
             if (mwheeldelta > 0 /* && kstate.IsKeyDown(Keys.LeftControl)*/)
             {
                 zoomUpdateInProgress = true;                

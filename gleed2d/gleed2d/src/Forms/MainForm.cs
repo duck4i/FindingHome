@@ -928,7 +928,10 @@ namespace GLEED2D
             {
                 Editor.Instance.createPrimitiveBrush(PrimitiveType.Path);
             }
-
+            if (listView2.FocusedItem.Text == "Text")
+            {
+                featureNotImplemented();
+            }
         }
 
 
@@ -1109,6 +1112,16 @@ namespace GLEED2D
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             featureNotImplemented();
+        }
+
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addBehaviorStripButton_Click(object sender, EventArgs e)
+        {
+            new SelectBehavior().ShowDialog();
         }
 
     }

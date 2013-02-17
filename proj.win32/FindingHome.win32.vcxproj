@@ -143,7 +143,6 @@
     <ClInclude Include="..\Classes\LevelNodeInfo.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\Physics.h" />
-    <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\Settings.h" />
     <ClInclude Include="..\Classes\ShapeHelper.h" />
     <ClInclude Include="..\Classes\TintShader.h" />
