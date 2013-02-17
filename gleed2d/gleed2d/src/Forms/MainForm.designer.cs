@@ -30,14 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Circle", 1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Text", 3);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Path", 2);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Bat", 0);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Crow", 1);
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Circle", 1);
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Text", 3);
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Path", 2);
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Bat", 0);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Crow", 1);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -119,8 +119,8 @@
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.addBehaviorStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toggleBehaviorButton = new System.Windows.Forms.ToolStripButton();
+            this.removeBehaviorButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.toggleSolidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -835,8 +835,8 @@
             this.toolStripSeparator21,
             this.toolStripLabel2,
             this.addBehaviorStripButton,
-            this.toolStripButton3,
-            this.toolStripButton5,
+            this.toggleBehaviorButton,
+            this.removeBehaviorButton,
             this.toolStripSeparator22,
             this.toolStripSplitButton1,
             this.toolStripSeparator19,
@@ -1023,23 +1023,28 @@
             this.addBehaviorStripButton.Name = "addBehaviorStripButton";
             this.addBehaviorStripButton.Size = new System.Drawing.Size(49, 22);
             this.addBehaviorStripButton.Text = "Add";
+            this.addBehaviorStripButton.ToolTipText = "Add behavior to selected item or items.";
             this.addBehaviorStripButton.Click += new System.EventHandler(this.addBehaviorStripButton_Click);
             // 
-            // toolStripButton3
+            // toggleBehaviorButton
             // 
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(64, 22);
-            this.toolStripButton3.Text = "Toggle";
+            this.toggleBehaviorButton.Image = ((System.Drawing.Image)(resources.GetObject("toggleBehaviorButton.Image")));
+            this.toggleBehaviorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleBehaviorButton.Name = "toggleBehaviorButton";
+            this.toggleBehaviorButton.Size = new System.Drawing.Size(64, 22);
+            this.toggleBehaviorButton.Text = "Toggle";
+            this.toggleBehaviorButton.ToolTipText = "Toggle behavior on selected item or items.";
+            this.toggleBehaviorButton.Click += new System.EventHandler(this.toggleBehaviorButton_Click);
             // 
-            // toolStripButton5
+            // removeBehaviorButton
             // 
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(70, 22);
-            this.toolStripButton5.Text = "Remove";
+            this.removeBehaviorButton.Image = ((System.Drawing.Image)(resources.GetObject("removeBehaviorButton.Image")));
+            this.removeBehaviorButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.removeBehaviorButton.Name = "removeBehaviorButton";
+            this.removeBehaviorButton.Size = new System.Drawing.Size(70, 22);
+            this.removeBehaviorButton.Text = "Remove";
+            this.removeBehaviorButton.ToolTipText = "Remove behavior from selected item or items.";
+            this.removeBehaviorButton.Click += new System.EventHandler(this.removeBehaviorButton_Click);
             // 
             // toolStripSeparator22
             // 
@@ -1061,24 +1066,28 @@
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
             this.toolStripSplitButton1.Size = new System.Drawing.Size(67, 22);
             this.toolStripSplitButton1.Text = "Quick";
+            
             // 
             // toggleSolidToolStripMenuItem
             // 
             this.toggleSolidToolStripMenuItem.Name = "toggleSolidToolStripMenuItem";
             this.toggleSolidToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.toggleSolidToolStripMenuItem.Text = "Set Solid";
+            this.toggleSolidToolStripMenuItem.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(160, 22);
             this.toolStripMenuItem3.Text = "Set Dynamic";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // toggleCollectableToolStripMenuItem
             // 
             this.toggleCollectableToolStripMenuItem.Name = "toggleCollectableToolStripMenuItem";
             this.toggleCollectableToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.toggleCollectableToolStripMenuItem.Text = "Set Collectable";
+            this.toggleCollectableToolStripMenuItem.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // toolStripSeparator23
             // 
@@ -1090,19 +1099,21 @@
             this.clearSolidToolStripMenuItem.Name = "clearSolidToolStripMenuItem";
             this.clearSolidToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.clearSolidToolStripMenuItem.Text = "Clear Solid";
+            this.clearSolidToolStripMenuItem.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // clearDynamciToolStripMenuItem
             // 
             this.clearDynamciToolStripMenuItem.Name = "clearDynamciToolStripMenuItem";
             this.clearDynamciToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.clearDynamciToolStripMenuItem.Text = "Clear Dynamic";
-            this.clearDynamciToolStripMenuItem.Click += new System.EventHandler(this.clearDynamciToolStripMenuItem_Click);
+            this.clearDynamciToolStripMenuItem.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // clearCollectibleToolStripMenuItem
             // 
             this.clearCollectibleToolStripMenuItem.Name = "clearCollectibleToolStripMenuItem";
             this.clearCollectibleToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.clearCollectibleToolStripMenuItem.Text = "Clear Collectible";
+            this.clearCollectibleToolStripMenuItem.Click += new System.EventHandler(this.toggleSolidToolStripMenuItem_Click);
             // 
             // toolStripSeparator19
             // 
@@ -1541,16 +1552,16 @@
             // 
             this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView2.HideSelection = false;
-            listViewItem1.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
+            listViewItem5.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
                 "n be scaled but not rotated.";
-            listViewItem2.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
+            listViewItem6.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
                 "ut not rotated.";
-            listViewItem4.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
+            listViewItem8.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
             this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4});
+            listViewItem5,
+            listViewItem6,
+            listViewItem7,
+            listViewItem8});
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(3, 3);
             this.listView2.MultiSelect = false;
@@ -1588,8 +1599,8 @@
             this.entitiesListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.entitiesListView.HideSelection = false;
             this.entitiesListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem9,
+            listViewItem10});
             this.entitiesListView.LargeImageList = this.entitiesImageList;
             this.entitiesListView.Location = new System.Drawing.Point(3, 3);
             this.entitiesListView.MultiSelect = false;
@@ -1623,8 +1634,8 @@
             this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView3.HideSelection = false;
             this.listView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem1,
+            listViewItem2});
             this.listView3.LargeImageList = this.enemiesImageList;
             this.listView3.Location = new System.Drawing.Point(3, 3);
             this.listView3.MultiSelect = false;
@@ -1945,13 +1956,13 @@
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.ToolStripButton addBehaviorStripButton;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton toggleBehaviorButton;
         private System.Windows.Forms.ToolStripMenuItem updatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripMenuItem sendErrorLogFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton removeBehaviorButton;
         private System.Windows.Forms.ToolStripDropDownButton toolStripSplitButton1;
         private System.Windows.Forms.ToolStripMenuItem toggleSolidToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;

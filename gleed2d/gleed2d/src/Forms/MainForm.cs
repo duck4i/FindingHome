@@ -1068,7 +1068,7 @@ namespace GLEED2D
 
         private void listView3_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void entitiesListView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1119,10 +1119,63 @@ namespace GLEED2D
 
         }
 
+        private BehaviorType getBehaviorSelection()
+        {
+            SelectBehavior b = new SelectBehavior();
+            b.ShowDialog();
+            return b.behavior;
+        }
+
         private void addBehaviorStripButton_Click(object sender, EventArgs e)
         {
-            new SelectBehavior().ShowDialog();
+            BehaviorType b = getBehaviorSelection();
+
+            if (b == BehaviorType.Unkown)
+                return;
+
+            if (b == BehaviorType.Platform)
+            {
+                featureNotImplemented();
+                return;
+            }
         }
+
+ 
+
+        private void toggleBehaviorButton_Click(object sender, EventArgs e)
+        {
+            BehaviorType b = getBehaviorSelection();
+            if (b == BehaviorType.Unkown)
+                return;
+
+            if (b == BehaviorType.Platform)
+            {
+                featureNotImplemented();
+                return;
+            }
+
+        }
+
+        private void removeBehaviorButton_Click(object sender, EventArgs e)
+        {
+            BehaviorType b = getBehaviorSelection();
+            if (b == BehaviorType.Unkown)
+                return;
+
+            if (b == BehaviorType.Platform)
+            {
+                featureNotImplemented();
+                return;
+            }
+        }
+
+
+        private void toggleSolidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            featureNotImplemented();
+        }
+
+
 
     }
 }
