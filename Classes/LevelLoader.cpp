@@ -112,20 +112,8 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 		return;
 	}
 
-	//	check type
-	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
-	{		
-		info.nodeType = NodeTypeBlock; 
-	}
-	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
-	{
-		info.nodeType = NodeTypeCircle;
-	}
-	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
-	{		
-		info.nodeType = NodeTypeTexture;
-	}
-	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_PLAYER) == 0 && !loadedPlayer)
+
+	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_PLAYER) == 0 && !loadedPlayer)
 	{
 		loadedPlayer = true;
 		info.nodeType = NodeTypePlayer;
@@ -140,7 +128,6 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 
 			this->player = player;			
 		}
-		return;
 	}
 	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_EXIT) == 0)
 	{
@@ -152,29 +139,39 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 		GameEntityExit* ge = GameEntityExit::create(info);
 		ge->createBody(this->boxWorld);
 		ge->createFixture();
-		return;
 	}
-
-		//	select layer to insert it into
-	CCNode* layer = isMainLayer ? this->mainLayer : parent;
-	CCNode* toInsert = NULL;
-	GameEntitySprite *sprite;
-
-	if (info.nodeType == NodeTypeBlock)
-		sprite = GameEntityRectangle::create(info);
-	else if (info.nodeType == NodeTypeCircle)
-		sprite = GameEntityCircle::create(info);
-	else if (info.nodeType == NodeTypeTexture)
-		sprite = GameEntitySprite::create(info);
-
-	
-	//	then instert to view
-	if (sprite)
+	else
 	{
-		layer->addChild(sprite->getSprite());
+		//	select layer to insert it into
+		CCNode* layer = isMainLayer ? this->mainLayer : parent;
+		CCNode* toInsert = NULL;
+		GameEntitySprite *sprite;
+
+		//	check type
+		if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
+		{		
+			info.nodeType = NodeTypeTexture;
+			sprite = GameEntitySprite::create(info);
+		}	
+		if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
+		{		
+			info.nodeType = NodeTypeBlock; 
+			sprite = GameEntityRectangle::create(info);
+		}
+		else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_CIRCLE) == 0)
+		{
+			info.nodeType = NodeTypeCircle;
+			sprite = GameEntityCircle::create(info);
+		}
+	
+		//	then instert to view
+		if (sprite)
+		{
+			layer->addChild(sprite->getSprite());
 		
-		if (isMainLayer)
-			sprite->createBody(this->boxWorld);
+			if (isMainLayer)
+				sprite->createBody(this->boxWorld);
+		}
 	}
 
 	//	since parseNodeTexture allocates we release it here	

@@ -4982,6 +4982,14 @@
             </ScrollSpeed>
             <CustomProperties />
         </Layer>
+        <Layer Name="Front" Visible="true">
+            <Items />
+            <ScrollSpeed>
+                <X>1</X>
+                <Y>1</Y>
+            </ScrollSpeed>
+            <CustomProperties />
+        </Layer>
     </Layers>
     <CustomProperties>
         <Property Name="scale" Type="string" Description="">
