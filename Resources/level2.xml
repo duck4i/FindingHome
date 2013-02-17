@@ -2332,8 +2332,8 @@
             <Items>
                 <Item xsi:type="PlayerItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-701</X>
-                        <Y>-121</Y>
+                        <X>-13466</X>
+                        <Y>-1237</Y>
                     </Position>
                     <CustomProperties />
                 </Item>
@@ -4885,8 +4885,8 @@
         <NextItemNumber>267</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>532.786743</X>
-            <Y>-64.41199</Y>
+            <X>-7817.21436</X>
+            <Y>-881.078735</Y>
         </CameraPosition>
         <Version>1.5.0.0</Version>
     </EditorRelated>

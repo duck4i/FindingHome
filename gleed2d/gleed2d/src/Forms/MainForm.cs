@@ -1013,7 +1013,7 @@ namespace GLEED2D
         }
 
         private void addGameLayers()
-        {            
+        {
             Editor.Instance.level.Layers.Add(new Layer("Background"));
             Editor.Instance.level.Layers.Add(new Layer("Main"));
             Editor.Instance.updatetreeview();
@@ -1022,25 +1022,12 @@ namespace GLEED2D
 
         private void sendToMainStripButton_Click(object sender, EventArgs e)
         {
-            Layer main = Editor.Instance.layerWithName("Main");
-            if (main != null)
-            {
-                Editor.Instance.moveSelectedItemsToLayer(main);
-            }
+            Editor.Instance.moveSelectedItemsToLayerAbove();
         }
 
         private void sendToBackStripButton_Click(object sender, EventArgs e)
         {
-            Layer main = Editor.Instance.layerWithName("Background");
-            if (main != null)
-            {
-                Editor.Instance.moveSelectedItemsToLayer(main);                
-                dirtyflag = true;
-
-                propertyGrid1.Refresh();
-                propertyGrid1.Update();
-                Editor.Instance.updatetreeview();
-            }
+            Editor.Instance.moveSelectedItemsToLayerBellow();
         }
 
         private void togglePhysicalStripButton_Click(object sender, EventArgs e)
@@ -1243,6 +1230,7 @@ namespace GLEED2D
             if (MessageBox.Show("Clear all behavior settings for selected items?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Editor.Instance.removeAllBehaviorsForSelectedItems();
+                Editor.Instance.updatetreeview();
             }
         }
 

@@ -99,6 +99,9 @@
                         <Property Name="Movable" Type="bool" Description="">
                             <boolean>true</boolean>
                         </Property>
+                        <Property Name="Bouncable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
                     </CustomProperties>
                     <Radius>332.8438</Radius>
                     <FillColor>
@@ -108,6 +111,40 @@
                         <A>255</A>
                         <PackedValue>4290773184</PackedValue>
                     </FillColor>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0011" Visible="true">
+                    <Position>
+                        <X>-262</X>
+                        <Y>-57</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="Movable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                        <Property Name="Bouncable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.77011049</X>
+                        <Y>1.77011049</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>coin.png</texture_filename>
+                    <asset_name>coin.png</asset_name>
+                    <Origin>
+                        <X>17</X>
+                        <Y>17</Y>
+                    </Origin>
                 </Item>
             </Items>
             <ScrollSpeed>
@@ -119,7 +156,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>10</NextItemNumber>
+        <NextItemNumber>11</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>571.14624</X>

@@ -83,8 +83,9 @@ bool GameEntitySprite::createBody(b2World* world)
 	if (m_b2Body == NULL)
 		return false;
 
-	
-
+	//	bouncable
+	if (m_customProps.isBouncable())
+		m_b2FixtureDef.restitution = 0.5f;
 
 	return createFixture();
 }

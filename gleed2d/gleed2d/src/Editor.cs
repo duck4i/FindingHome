@@ -184,6 +184,43 @@ namespace GLEED2D
             MainForm.Instance.propertyGrid1.SelectedObject = l;
         }
 
+
+        public void moveSelectedItemsToLayerAbove()
+        {            
+            try
+            {
+                int index = level.Layers.IndexOf(SelectedLayer) - 1;                                
+                if (index < 0)
+                    return;
+
+                beginCommand("Moving selected items to layer above");
+                Layer l = level.Layers[index];
+                moveSelectedItemsToLayer(l);
+                updatetreeview();
+                selectlayer(l);
+                endCommand();
+            }
+            catch (Exception) { }            
+        }
+
+        public void moveSelectedItemsToLayerBellow()
+        {            
+            try
+            {
+                int index = level.Layers.IndexOf(SelectedLayer) + 1;
+                if (index > level.Layers.Count)
+                    return;
+
+                beginCommand("Moving selected items to the layer bellow");
+                Layer l = level.Layers[index];
+                moveSelectedItemsToLayer(l);
+                updatetreeview();
+                selectlayer(l);
+                endCommand();
+            }
+            catch (Exception) { }            
+        }
+
         public void addItem(Item i)
         {
             if (!i.layer.Items.Contains(i)) i.layer.Items.Add(i);
