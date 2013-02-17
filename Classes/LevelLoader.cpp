@@ -6,14 +6,9 @@
 
 void LevelLoader::createLevelLayers()
 {
-	//CCParallaxNode *n = CCParallaxNode::create();
-
-	//	do not change the order of how we create layers, it will affect zOrder
-	this->backgroundLayer = CCLayer::create();
-	this->worldNode->addChild(this->backgroundLayer);
-
-	this->mainLayer = CCLayer::create();
-	this->worldNode->addChild(this->mainLayer);
+	paralaxNode = CCParallaxNode::create();
+	paralaxNode->setPosition(0, 0);
+	this->worldNode->addChild(paralaxNode);
 }
 
 bool LevelLoader::parse()
@@ -28,15 +23,35 @@ bool LevelLoader::parse()
 	while (currNode)
 	{		
 		if (xmlStrcasecmp(currNode->name, (const xmlChar*) "Layers") == 0)
-		{						
+		{
 			xmlNodePtr layers = currNode->children;
+
 			while (layers)
 			{
-				const xmlChar* name = xmlGetProp(layers, (const xmlChar*) "Name");
 				bool visible = parseNodeVisible(layers);
-				
+				const xmlChar* name = xmlGetProp(layers, (const xmlChar*) "Name");
 				bool main = xmlStrcasecmp(name, (const xmlChar*) MAIN_LAYER_NAME) == 0;
-				bool background = xmlStrcasecmp(name, (const xmlChar*) BACKGROUND_LAYER_NAME) == 0;
+				
+				//	get paralax info
+				CCPoint parallax = ccp(1, 1);	//default
+				CCLayer *parent = CCLayer::create();
+				if (main)
+					mainLayer = parent;
+				
+				xmlNodePtr speed = XMLHelper::findChildNodeWithName(layers, "ScrollSpeed");
+				if (speed)
+				{
+					xmlNodePtr xn = XMLHelper::findChildNodeWithName(speed, "X");
+					if (xn)
+						parallax.x = XMLHelper::readNodeContentF(xn);
+					xmlNodePtr yn = XMLHelper::findChildNodeWithName(speed, "Y");
+					if (yn)
+						parallax.y = XMLHelper::readNodeContentF(yn);
+				}
+
+				paralaxNode->addChild(parent, 0, parallax, ccp(0, 0));			
+
+						
 
 				if (layers->children)
 				{
@@ -46,7 +61,7 @@ bool LevelLoader::parse()
 						xmlNodePtr ptr = subLayers->children;
 						while (ptr)
 						{
-							parseCurrentNode(ptr, main ? 0 : 1, 0);
+							parseCurrentNode(ptr, parallax, parent, main);
 							ptr = ptr->next;
 						}
 					}
@@ -64,7 +79,7 @@ bool LevelLoader::parse()
 	return success;
 }
 
-void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned int zOrder)
+void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* parent, bool isMainLayer)
 {
 	xmlChar* nodeName = xmlGetProp(node, (const xmlChar*) "Name");
 	xmlChar* nodeType = xmlGetProp(node, (const xmlChar*) "type");
@@ -141,7 +156,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	}
 
 		//	select layer to insert it into
-	CCNode* layer = type == 0 ? this->mainLayer : this->backgroundLayer;
+	CCNode* layer = isMainLayer ? this->mainLayer : parent;
 	CCNode* toInsert = NULL;
 	GameEntitySprite *sprite;
 
@@ -156,9 +171,9 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, unsigned int type, unsigned 
 	//	then instert to view
 	if (sprite)
 	{
-		layer->addChild(sprite->getSprite(), zOrder);
+		layer->addChild(sprite->getSprite());
 		
-		if (type == 0)
+		if (isMainLayer)
 			sprite->createBody(this->boxWorld);
 	}
 

@@ -43,9 +43,9 @@ private:
 	xmlDocPtr sharedDoc;
 	bool loadedPlayer;
 	
-	CCNode* frontLayer; // this one is displayed before main layer, eg. play gets behind something...
+	CCParallaxNode* paralaxNode; // this one is displayed before main layer, eg. play gets behind something...
 	CCNode* mainLayer;	
-	CCNode* backgroundLayer;
+	//CCNode* backgroundLayer;
 	
 	CCNode* levelLayers;
 	void createLevelLayers();
@@ -63,7 +63,7 @@ public:
 private:
 
 	///	type 0: main layer; type 1: background layer
-	void parseCurrentNode(xmlNodePtr node, unsigned int type = 0, unsigned int zOrder = 0);	
+	void parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer *parent, bool isMainLayer = false);	
 	
 	//	parser helpers
 	CCPoint		parseNodePosition(xmlNodePtr node);
