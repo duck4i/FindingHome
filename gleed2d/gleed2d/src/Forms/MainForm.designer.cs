@@ -935,21 +935,21 @@
             // 
             // sendToMainStripButton
             // 
-            this.sendToMainStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.sendToMainStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.sendToMainStripButton.Image = ((System.Drawing.Image)(resources.GetObject("sendToMainStripButton.Image")));
             this.sendToMainStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.sendToMainStripButton.Name = "sendToMainStripButton";
-            this.sendToMainStripButton.Size = new System.Drawing.Size(81, 22);
+            this.sendToMainStripButton.Size = new System.Drawing.Size(23, 22);
             this.sendToMainStripButton.Text = "Send to Main";
             this.sendToMainStripButton.Click += new System.EventHandler(this.sendToMainStripButton_Click);
             // 
             // sendToBackStripButton
             // 
-            this.sendToBackStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.sendToBackStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.sendToBackStripButton.Image = ((System.Drawing.Image)(resources.GetObject("sendToBackStripButton.Image")));
             this.sendToBackStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.sendToBackStripButton.Name = "sendToBackStripButton";
-            this.sendToBackStripButton.Size = new System.Drawing.Size(79, 22);
+            this.sendToBackStripButton.Size = new System.Drawing.Size(23, 22);
             this.sendToBackStripButton.Text = "Send to Back";
             this.sendToBackStripButton.Click += new System.EventHandler(this.sendToBackStripButton_Click);
             // 
@@ -1244,7 +1244,7 @@
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.ShowItemToolTips = true;
-            this.listView1.Size = new System.Drawing.Size(800, 127);
+            this.listView1.Size = new System.Drawing.Size(804, 127);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
@@ -1263,7 +1263,7 @@
             // chooseFolder
             // 
             this.chooseFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chooseFolder.Location = new System.Drawing.Point(551, 8);
+            this.chooseFolder.Location = new System.Drawing.Point(555, 8);
             this.chooseFolder.Name = "chooseFolder";
             this.chooseFolder.Size = new System.Drawing.Size(60, 23);
             this.chooseFolder.TabIndex = 5;
@@ -1275,7 +1275,7 @@
             // 
             this.buttonFolderUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonFolderUp.Image = ((System.Drawing.Image)(resources.GetObject("buttonFolderUp.Image")));
-            this.buttonFolderUp.Location = new System.Drawing.Point(513, 8);
+            this.buttonFolderUp.Location = new System.Drawing.Point(517, 8);
             this.buttonFolderUp.Name = "buttonFolderUp";
             this.buttonFolderUp.Size = new System.Drawing.Size(32, 23);
             this.buttonFolderUp.TabIndex = 4;
@@ -1286,7 +1286,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(651, 12);
+            this.label2.Location = new System.Drawing.Point(655, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 3;
@@ -1297,7 +1297,7 @@
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(687, 9);
+            this.comboBox1.Location = new System.Drawing.Point(691, 9);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(74, 21);
             this.comboBox1.TabIndex = 2;
@@ -1310,7 +1310,7 @@
             this.textBox1.Location = new System.Drawing.Point(51, 8);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(451, 20);
+            this.textBox1.Size = new System.Drawing.Size(455, 20);
             this.textBox1.TabIndex = 1;
             // 
             // label1
@@ -1328,7 +1328,7 @@
             this.EntitiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.EntitiesTabPage.Name = "EntitiesTabPage";
             this.EntitiesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.EntitiesTabPage.Size = new System.Drawing.Size(743, 167);
+            this.EntitiesTabPage.Size = new System.Drawing.Size(739, 167);
             this.EntitiesTabPage.TabIndex = 2;
             this.EntitiesTabPage.Text = "Game Entities ";
             this.EntitiesTabPage.UseVisualStyleBackColor = true;
@@ -1345,7 +1345,7 @@
             this.entitiesListView.Location = new System.Drawing.Point(3, 3);
             this.entitiesListView.MultiSelect = false;
             this.entitiesListView.Name = "entitiesListView";
-            this.entitiesListView.Size = new System.Drawing.Size(737, 161);
+            this.entitiesListView.Size = new System.Drawing.Size(733, 161);
             this.entitiesListView.TabIndex = 0;
             this.entitiesListView.UseCompatibleStateImageBehavior = false;
             this.entitiesListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.entitiesListView_MouseDoubleClick);

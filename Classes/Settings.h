@@ -12,7 +12,12 @@
 
 #define SHAPE_DATA					RESOURCE_DIR "ShapeData.json"
 #define WEATHER_CONTROLLER_DATA		RESOURCE_DIR "weather_controller.png"
+
+#ifdef _DEBUG
 #define GAME_START_LEVEL			RESOURCE_DIR "Level3.xml"
+#else
+#define GAME_START_LEVEL			RESOURCE_DIR "Level2.xml"
+#endif
 
 #define STAR_PATH					RESOURCE_DIR "star.png"
 
