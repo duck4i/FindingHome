@@ -82,11 +82,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 307);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(613, 26);
+            this.label4.Size = new System.Drawing.Size(616, 39);
             this.label4.TabIndex = 1;
-            this.label4.Text = "* holding down LeftControl snaps rotation to multiples of 45°\r\n** holding down Le" +
-                "ftControl snaps scale factor to multiples of 0.1, holding down [X] or [Y] limits" +
-                " scaling to the according dimension";
+            this.label4.Text = resources.GetString("label4.Text");
             // 
             // QuickGuide
             // 

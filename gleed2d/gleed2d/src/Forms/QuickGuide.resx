@@ -124,7 +124,7 @@ CAMERA
 move
 move fast
 center view at selected item
-zoom
+zoom***
 snap to grid
 
 ITEMS
@@ -162,5 +162,10 @@ LeftControl + move item
 click on item
 LeftShift + click on item
 LeftClick + Drag (Windows style)</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>* holding down LeftControl snaps rotation to multiples of 45°
+** holding down LeftControl snaps scale factor to multiples of 0.1, holding down [X] or [Y] limits scaling to the according dimension.
+*** holding down LeftControl provides 5x zoom speed.</value>
   </data>
 </root>

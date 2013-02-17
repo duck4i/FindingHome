@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Tutorial Level" Visible="true">
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Tutorial Level" Visible="true" WeatherActive="true">
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
@@ -4991,17 +4991,13 @@
             <CustomProperties />
         </Layer>
     </Layers>
-    <CustomProperties>
-        <Property Name="scale" Type="string" Description="">
-            <string>1</string>
-        </Property>
-    </CustomProperties>
+    <CustomProperties />
     <EditorRelated>
         <NextItemNumber>260</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>-12488.7158</X>
-            <Y>-1200.93127</Y>
+            <X>-6403.61328</X>
+            <Y>-1982.88232</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

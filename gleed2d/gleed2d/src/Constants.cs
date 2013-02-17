@@ -46,7 +46,7 @@ namespace GLEED2D
             GridNumberOfGridLines = 500;
             GridSpacing = new Microsoft.Xna.Framework.Vector2(64, 64);
             SaveEditorLayout = true;
-
+            ZoomFactor = 0.01f;
         }
 
 
@@ -123,10 +123,11 @@ namespace GLEED2D
 
         [Category("Grid"), Description("The grid spacing in X and Y direction in WorldUnits.")]
         public Microsoft.Xna.Framework.Vector2 GridSpacing { get; set; }
+
+        [DisplayName("Zoom Speed"), Category("General"), Description("Zoom speed factor")]
+        public float ZoomFactor { get; set; }
         
-        
-        
-        
+
         public bool RunLevelStartApplication;
         public string RunLevelApplicationToStart;
         public bool RunLevelAppendLevelFilename;

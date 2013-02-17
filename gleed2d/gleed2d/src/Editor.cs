@@ -73,7 +73,9 @@ namespace GLEED2D
         bool drawSnappedPoint = false;
         Vector2 posSnappedPoint = Vector2.Zero;
         public string Version;
-
+        public bool zoomUpdateInProgress;
+        
+        public float zoomFactor = 0.01f;
 
         public Editor()
         {
@@ -81,6 +83,7 @@ namespace GLEED2D
 
             Instance = this;
             state = EditorState.idle;
+            zoomUpdateInProgress = false;
 
             SelectedItems = new List<Item>();
             initialpos = new List<Vector2>();
@@ -112,7 +115,11 @@ namespace GLEED2D
             MainForm.Instance.newLevel();
             Logger.Instance.log("New level created.");
 
+            Logger.Instance.log("Setting zoom factor.");
+            zoomFactor = Constants.Instance.ZoomFactor;
+
             Logger.Instance.log("Editor creation ended.");
+            
         }
 
 
@@ -807,6 +814,7 @@ namespace GLEED2D
             return result;
         }
 
+        
         public void update(GameTime gt)
         {
             if (level == null) return;
@@ -815,19 +823,24 @@ namespace GLEED2D
             oldmstate = mstate;
             kstate = Keyboard.GetState();
             mstate = Mouse.GetState();
+
             int mwheeldelta = mstate.ScrollWheelValue - oldmstate.ScrollWheelValue;
+            float multiple = kstate.IsKeyDown(Keys.LeftControl) ? 5 : 1;
             if (mwheeldelta > 0 /* && kstate.IsKeyDown(Keys.LeftControl)*/)
             {
-                float zoom = (float)Math.Round(camera.Scale * 10) * 10.0f + 10.0f;
-                MainForm.Instance.zoomcombo.Text = zoom.ToString() + "%";
-                camera.Scale = zoom / 100.0f;
+                zoomUpdateInProgress = true;                
+                camera.Scale += zoomFactor * multiple;
+                MainForm.Instance.zoomcombo.Text = (camera.Scale * 100).ToString() + "%";
+                zoomUpdateInProgress = false;
             }
             if (mwheeldelta < 0 /* && kstate.IsKeyDown(Keys.LeftControl)*/)
             {
-                float zoom = (float)Math.Round(camera.Scale * 10) * 10.0f - 10.0f;
-                if (zoom <= 0.0f) return;
-                MainForm.Instance.zoomcombo.Text = zoom.ToString() + "%";
-                camera.Scale = zoom / 100.0f;
+                zoomUpdateInProgress = true;                
+                camera.Scale -= zoomFactor * multiple;
+                if (camera.Scale <= 0.01f)
+                    camera.Scale = 0.01f;
+                MainForm.Instance.zoomcombo.Text = (camera.Scale * 100).ToString() + "%";
+                zoomUpdateInProgress = false;
             }
 
             //Camera movement

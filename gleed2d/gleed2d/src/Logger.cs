@@ -24,8 +24,8 @@ namespace GLEED2D
 
         public Logger()
         {
-            sw = new StreamWriter(logfilename, false);
-            sw.WriteLine(box("Log File created."));
+            sw = new StreamWriter(logfilename, true);
+            sw.WriteLine(box("Log File created.\r\n\r\n"));
             sw.Close();
         }
 

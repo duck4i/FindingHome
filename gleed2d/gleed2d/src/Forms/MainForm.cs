@@ -79,7 +79,7 @@ namespace GLEED2D
             linkItemsForm = new LinkItemsForm();
 
             //fill zoom combobox
-            for (int i = 25; i <= 200; i += 25)
+            for (int i = 5; i <= 120; i += 5)
             {
                 zoomcombo.Items.Add(i.ToString() + "%");
             }
@@ -601,11 +601,27 @@ namespace GLEED2D
 
         private void zoomcombo_TextChanged(object sender, EventArgs e)
         {
+            if (Editor.Instance == null || Editor.Instance.zoomUpdateInProgress)
+                return;
+
             toolStripStatusLabel1.Text = zoomcombo.SelectedText;
             if (zoomcombo.Text.Length > 0 && Editor.Instance != null)
             {
-                float zoom = float.Parse(zoomcombo.Text.Substring(0, zoomcombo.Text.Length - 1));
-                Editor.Instance.camera.Scale = zoom / 100;
+                float multiplier = 100;
+                float zoom = Editor.Instance.camera.Scale * multiplier;
+                try
+                {
+                    if (zoomcombo.Text.IndexOf("%") == -1)
+                        zoom = float.Parse(zoomcombo.Text);
+                    else
+                        zoom = float.Parse(zoomcombo.Text.Substring(0, zoomcombo.Text.Length - 1));
+
+                    Editor.Instance.camera.Scale = zoom / multiplier;
+                }
+                catch (Exception)
+                {                    
+                    zoomcombo.Text = zoom + "%";
+                }
             }
         }
 
