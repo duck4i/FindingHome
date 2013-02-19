@@ -41,6 +41,7 @@ xcopy /E ..\Utils\*.exe Utils\*.*
 xcopy /E ..\Utils\*.xnb Utils\*.*
 xcopy /E ..\Utils\*.xml Utils\*.*
 xcopy /E ..\Utils\*.jar Utils\*.*
+xcopy /E ..\Utils\*.txt Utils\*.*
 
 zip.exe -r -9 SetupTools.zip "Utils\*.*"
 del Utils\*.* /f /q
