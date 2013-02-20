@@ -32,10 +32,11 @@ class GameEntityPlayer : public GameEntity
 protected:
 
 	CCNode* m_skin;
+	CCAnimation* m_animationStill;
 	
 	///	Keeps permanent record of player death state in case of tunneling
 	bool m_bPlayerDied;
-	PlayerDirection direction;
+	PlayerDirection direction;	
 
 	GameEntityPlayer(NODEINFO info) : GameEntity(info) 
 	{

@@ -74,7 +74,6 @@ namespace GLEED2D
                 body += "\r\nOperating System: " + Environment.OSVersion.ToString();
                 body += "\r\nEditor Version: " + Editor.Instance.Version + "\r\n";
 
-
                 m.SendMailPopup(subject, body);
             }
             catch (Exception)

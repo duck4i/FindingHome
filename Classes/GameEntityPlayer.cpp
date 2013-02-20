@@ -2,9 +2,23 @@
 
 bool GameEntityPlayer::init()
 {
-	m_skin = CCSprite::create(RESOURCE_PLAYER);
+	CCTextureCache *cache = CCTextureCache::sharedTextureCache();
+	CCTexture2D *player1 = cache->addImage(RESOURCE_PLAYER);
+		
+	m_animationStill = CCAnimation::create();
+	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER);
+	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER2);
+	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER3);
+	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER4);
+	m_animationStill->setDelayPerUnit(0.2f);
+
+	CCAction* a = CCRepeatForever::create(CCAnimate::create(m_animationStill));	
+
+	m_skin = CCSprite::createWithTexture(player1);
 	if (!m_skin)
 		return false;
+
+	m_skin->runAction(a);
 
 	m_skin->setPosition(m_nodeInfo.position);
 	m_skin->setScale(1.3f);
@@ -14,8 +28,6 @@ bool GameEntityPlayer::init()
 
 bool GameEntityPlayer::createBody(b2World *world)
 {
-	//GameEntity::createBody(world);
-
 	b2BodyDef def;
 
 	def.userData = this;
