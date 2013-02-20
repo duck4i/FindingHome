@@ -32,7 +32,14 @@ namespace GLEED2D
         {
             bool continueWork = true;
 
-            float fileSize = new System.IO.FileInfo(logfilename).Length;
+            float fileSize = 0;
+            if (File.Exists(logfilename))
+            {
+                FileInfo info = new System.IO.FileInfo(logfilename);
+                if (info != null)
+                    fileSize = info.Length;
+            }
+
             if (fileSize >= MaxLogFileSize)
                 continueWork = false;
 

@@ -7,18 +7,18 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Mihailo\Desktop\cocos2d-x\FindingHome\bin\Content\Entities.xnb</Output>
-      <Time>2013-02-16T15:28:37.4868764+01:00</Time>
+      <Output>F:\Games\cocos2d-x\FindingHome\bin\Content\Entities.xnb</Output>
+      <Time>2013-02-18T13:20:00.3029448+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Mihailo\Desktop\cocos2d-x\FindingHome\gleed2d\gleed2d\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Mihailo\Desktop\cocos2d-x\FindingHome\gleed2d\gleed2d\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Mihailo\Desktop\cocos2d-x\FindingHome\gleed2d\gleed2d\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Mihailo\Desktop\cocos2d-x\FindingHome\bin\Content\</OutputDirectory>
+      <RootDirectory>F:\Games\cocos2d-x\FindingHome\gleed2d\gleed2d\Content\</RootDirectory>
+      <LoggerRootDirectory>F:\Games\cocos2d-x\FindingHome\gleed2d\gleed2d\</LoggerRootDirectory>
+      <IntermediateDirectory>F:\Games\cocos2d-x\FindingHome\gleed2d\gleed2d\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>F:\Games\cocos2d-x\FindingHome\bin\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -47,7 +47,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.1.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2013-02-05T21:09:07.3361564+01:00</Value>
+        <Value>2013-01-22T13:50:08.5607749+01:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
