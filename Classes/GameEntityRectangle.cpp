@@ -18,6 +18,8 @@ bool GameEntityRectangle::preInit()
 
 bool GameEntityRectangle::postInit()
 {
+	m_sprite->getTexture()->setAliasTexParameters();
+
 	float sx = m_nodeInfo.size.width / m_sprite->getContentSize().width;
 	float sy = m_nodeInfo.size.height / m_sprite->getContentSize().height;
 	

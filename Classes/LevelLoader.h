@@ -58,6 +58,9 @@ public:
 	b2Body* playerBody;	
 	CCNode* finishNode;
 
+	float levelScale;
+	bool enableWeather;
+
 	GameEntityPlayer *player;
 	
 private:

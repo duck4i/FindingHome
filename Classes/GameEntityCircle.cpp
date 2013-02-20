@@ -10,6 +10,8 @@ bool GameEntityCircle::init()
 
 bool GameEntityCircle::postInit()
 {
+	//m_sprite->getTexture()->setAliasTexParameters();
+
 	float width = m_sprite->getContentSize().width;
 	m_nodeInfo.scale =  m_nodeInfo.radius * 2 / width; //	diametar is 2xradius
 

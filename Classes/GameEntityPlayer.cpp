@@ -11,6 +11,7 @@ bool GameEntityPlayer::init()
 	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER3);
 	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER4);
 	m_animationStill->setDelayPerUnit(0.2f);
+	
 
 	CCAction* a = CCRepeatForever::create(CCAnimate::create(m_animationStill));	
 
@@ -18,6 +19,8 @@ bool GameEntityPlayer::init()
 	if (!m_skin)
 		return false;
 
+	//m_skin->setBlendFunc( (ccBlendFunc){GL_ONE, GL_ZERO} ); 
+	
 	m_skin->runAction(a);
 
 	m_skin->setPosition(m_nodeInfo.position);

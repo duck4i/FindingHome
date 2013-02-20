@@ -28,7 +28,9 @@ bool GameEntitySprite::init(char* overidePath)
 bool GameEntitySprite::postInit()
 {
 	//	params
-	//m_sprite->getTexture()->setAliasTexParameters();
+#ifdef DISABLE_ANTIALISING
+	m_sprite->getTexture()->setAliasTexParameters();
+#endif
 
 	//position rotation and scale
 	m_sprite->setPosition(m_nodeInfo.position);
