@@ -31,6 +31,10 @@ MainScene::~MainScene()
 		delete boxWorld;	
 	if (weather)
 		delete weather;	
+
+	BatchManager* mgr = BatchManager::sharedManager();
+	if (mgr)
+		delete mgr;
 }
 
 bool MainScene::init()
@@ -271,7 +275,7 @@ void MainScene::updatePhysics(float delta)
 	while (b)
 	{
 		GameEntity *userData = (GameEntity*) b->GetUserData();
-		if (userData)
+		if (userData )
 		{
 			if (!userData->isForRemoval())
 			{

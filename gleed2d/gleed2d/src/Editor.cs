@@ -498,8 +498,7 @@ namespace GLEED2D
         {
             if (unfocus)
             {
-                state = EditorState.idle;
-                MainForm.Instance.entitiesListView.Select();
+                state = EditorState.idle;                
                 MainForm.Instance.entitiesListView.Cursor = Forms.Cursors.Default;
                 MainForm.Instance.pictureBox1.Cursor = Forms.Cursors.Default;
             }

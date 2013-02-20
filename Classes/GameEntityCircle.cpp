@@ -18,6 +18,9 @@ bool GameEntityCircle::postInit()
 	//	add color
 	m_sprite->setColor(ccc3(m_nodeInfo.color.r, m_nodeInfo.color.g, m_nodeInfo.color.b));
 
+	m_nodeInfo.texture = RESOURCE_CIRCLE;
+	m_nodeInfo.assetTexture = "circle.png";
+
 	return GameEntitySprite::postInit();
 }
 

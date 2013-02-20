@@ -34,7 +34,10 @@ bool LevelLoader::parse()
 				
 				//	get paralax info
 				CCPoint parallax = ccp(1, 1);	//default
-				CCLayer *parent = CCLayer::create();
+				CCLayer *parent = NULL;
+				
+				parent = CCLayer::create();
+
 				if (main)
 					mainLayer = parent;
 				
@@ -49,15 +52,13 @@ bool LevelLoader::parse()
 						parallax.y = XMLHelper::readNodeContentF(yn);
 				}
 
-				paralaxNode->addChild(parent, 0, parallax, ccp(0, 0));			
-
-						
+				paralaxNode->addChild(parent, 0, parallax, ccp(0, 0));						
 
 				if (layers->children)
 				{
 					xmlNodePtr subLayers = layers->children->next;
 					if (subLayers)
-					{						
+					{
 						xmlNodePtr ptr = subLayers->children;
 						while (ptr)
 						{
@@ -143,7 +144,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 	else
 	{
 		//	select layer to insert it into
-		CCNode* layer = isMainLayer ? this->mainLayer : parent;
+		CCNode* layer = /*isMainLayer ? this->mainLayer :*/ parent;
 		CCNode* toInsert = NULL;
 		GameEntitySprite *sprite;
 
@@ -167,7 +168,8 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 		//	then instert to view
 		if (sprite)
 		{
-			layer->addChild(sprite->getSprite());
+			//layer->addChild(sprite->getSprite());
+			BatchManager::sharedManager()->addItem(sprite, layer, parallax);
 		
 			if (isMainLayer || sprite->getProperties().isSolid() || sprite->getProperties().isCollectable())
 				sprite->createBody(this->boxWorld);

@@ -93,6 +93,44 @@ namespace GLEED2D
             return getNamePrefix() + refCount;
         }
 
+        /// <summary>
+        /// Draws the given string as large as possible inside the boundaries Rectangle without going
+        /// outside of it.  This is accomplished by scaling the string (since the SpriteFont has a specific
+        /// size).
+        /// 
+        /// If the string is not a perfect match inside of the boundaries (which it would rarely be), then
+        /// the string will be absolutely-centered inside of the boundaries.
+        /// </summary>
+        /// <param name="font"></param>
+        /// <param name="strToDraw"></param>
+        /// <param name="boundaries"></param>
+        static public void DrawString(SpriteBatch spriteBatch, SpriteFont font, string strToDraw, Rectangle boundaries)
+        {
+            Vector2 size = font.MeasureString(strToDraw);
+
+            float xScale = (boundaries.Width / size.X);
+            float yScale = (boundaries.Height / size.Y);
+
+            // Taking the smaller scaling value will result in the text always fitting in the boundaires.
+            float scale = Math.Min(xScale, yScale);
+
+            // Figure out the location to absolutely-center it in the boundaries rectangle.
+            int strWidth = (int)Math.Round(size.X * scale);
+            int strHeight = (int)Math.Round(size.Y * scale);
+            Vector2 position = new Vector2();
+            position.X = (((boundaries.Width - strWidth) / 2) + boundaries.X);
+            position.Y = (((boundaries.Height - strHeight) / 2) + boundaries.Y);
+
+            // A bunch of settings where we just want to use reasonable defaults.
+            float rotation = 0.0f;
+            Vector2 spriteOrigin = new Vector2(0, 0);
+            float spriteLayer = 0.0f; // all the way in the front
+            SpriteEffects spriteEffects = new SpriteEffects();
+
+            // Draw the string to the sprite batch!
+            spriteBatch.DrawString(font, strToDraw, position, Color.White, rotation, spriteOrigin, scale, spriteEffects, spriteLayer);
+        } // end DrawString()
+
         public virtual void drawStringInCenter(SpriteBatch sb, string text, Rectangle rc)
         {
             //  measure, center and draw string on shape
@@ -104,6 +142,8 @@ namespace GLEED2D
             pos.Y += rc.Height / 2 - smes.Y / 2;
 
             sb.DrawString(Game1.Instance.entitiesFont, text, pos, Color.Navy);
+            //Rectangle rec = new Rectangle((int)pos.X, (int)pos.Y, (int)smes.X * 2, (int)smes.Y * 2);
+            //DrawString(sb, sf, text, rec);
         }
     }
 }

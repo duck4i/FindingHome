@@ -7,3 +7,4 @@
 #include "GameEntityPlayer.h"
 #include "GameEntityExit.h"
 
+#include "BatchManager.h"

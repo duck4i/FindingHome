@@ -14,7 +14,7 @@ namespace GLEED2D
 {
     public partial class PlayerItem : EntityItem
     {
-        public static PlayerItem Instance;
+        public static PlayerItem Instance;        
 
         public PlayerItem() : base()
         {
