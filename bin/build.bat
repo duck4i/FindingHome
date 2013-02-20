@@ -1,3 +1,6 @@
+call clear.bat
+call _CopyDLLFilesHere.bat
+
 @echo off
 
 echo./*

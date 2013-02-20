@@ -474,7 +474,9 @@ namespace GLEED2D
                 if (PlayerItem.Instance != null)
                     Forms.MessageBox.Show(Resources.Player_Exists, "Player already exists!", Forms.MessageBoxButtons.OK, Forms.MessageBoxIcon.Warning);
                 else
+                {
                     i = new PlayerItem();
+                }
             }
             else if (entityType == EntityType.Exit)
                 i = new ExitItem();
@@ -633,6 +635,7 @@ namespace GLEED2D
 
         public void loadLevel(Level l)
         {
+            PlayerItem.Instance = null;
             if (l.ContentRootFolder == null)
             {
                 l.ContentRootFolder = Constants.Instance.DefaultContentRootFolder;

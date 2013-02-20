@@ -5,8 +5,8 @@
             <Items>
                 <Item xsi:type="TextureItem" Name="Texture_0009" Visible="true">
                     <Position>
-                        <X>454</X>
-                        <Y>-63</Y>
+                        <X>212</X>
+                        <Y>357</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
@@ -18,8 +18,8 @@
                         <R>255</R>
                         <G>255</G>
                         <B>255</B>
-                        <A>112</A>
-                        <PackedValue>1895825407</PackedValue>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
@@ -30,105 +30,16 @@
                         <Y>47</Y>
                     </Origin>
                 </Item>
-            </Items>
-            <ScrollSpeed>
-                <X>1.1</X>
-                <Y>1.1</Y>
-            </ScrollSpeed>
-            <CustomProperties />
-        </Layer>
-        <Layer Name="Main" Visible="true">
-            <Items>
-                <Item xsi:type="PlayerItem" Name="Player" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0014" Visible="true">
                     <Position>
-                        <X>-46</X>
-                        <Y>-68</Y>
+                        <X>1519</X>
+                        <Y>178</Y>
                     </Position>
                     <CustomProperties />
-                </Item>
-                <Item xsi:type="RectangleItem" Name="Rectangle_0003" Visible="true">
-                    <Position>
-                        <X>-1017</X>
-                        <Y>26</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Width>1958</Width>
-                    <Height>196</Height>
-                    <FillColor>
-                        <R>0</R>
-                        <G>0</G>
-                        <B>192</B>
-                        <A>145</A>
-                        <PackedValue>2432696512</PackedValue>
-                    </FillColor>
-                </Item>
-                <Item xsi:type="ExitItem" Name="Exit" Visible="true">
-                    <Position>
-                        <X>991</X>
-                        <Y>-539</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Width>400</Width>
-                    <Height>400</Height>
-                    <Scale>
-                        <X>2.48113</X>
-                        <Y>2.48113</Y>
-                    </Scale>
-                    <NextLevel>Level4.xml</NextLevel>
-                </Item>
-                <Item xsi:type="ExitItem" Name="Exit_0008" Visible="true">
-                    <Position>
-                        <X>-1289</X>
-                        <Y>-364</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Width>400</Width>
-                    <Height>400</Height>
-                    <Scale>
-                        <X>1</X>
-                        <Y>1</Y>
-                    </Scale>
-                    <NextLevel>Level3.xml</NextLevel>
-                </Item>
-                <Item xsi:type="CircleItem" Name="Circle_0010" Visible="true">
-                    <Position>
-                        <X>-489</X>
-                        <Y>-453</Y>
-                    </Position>
-                    <CustomProperties>
-                        <Property Name="Movable" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                        <Property Name="Bouncable" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                    </CustomProperties>
-                    <Radius>332.8438</Radius>
-                    <FillColor>
-                        <R>192</R>
-                        <G>0</G>
-                        <B>192</B>
-                        <A>255</A>
-                        <PackedValue>4290773184</PackedValue>
-                    </FillColor>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0011" Visible="true">
-                    <Position>
-                        <X>-262</X>
-                        <Y>-57</Y>
-                    </Position>
-                    <CustomProperties>
-                        <Property Name="Movable" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                        <Property Name="Bouncable" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>1.77011049</X>
-                        <Y>1.77011049</Y>
+                        <X>3</X>
+                        <Y>3</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -139,11 +50,459 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>coin.png</texture_filename>
-                    <asset_name>coin.png</asset_name>
+                    <texture_filename>tropical\palm\palm_4.png</texture_filename>
+                    <asset_name>palm_4.png</asset_name>
                     <Origin>
-                        <X>17</X>
-                        <Y>17</Y>
+                        <X>36</X>
+                        <Y>47</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0015" Visible="true">
+                    <Position>
+                        <X>969</X>
+                        <Y>159</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>2.47959471</X>
+                        <Y>2.47959471</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\palm\palm_2.png</texture_filename>
+                    <asset_name>palm_2.png</asset_name>
+                    <Origin>
+                        <X>40</X>
+                        <Y>71</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0021" Visible="true">
+                    <Position>
+                        <X>5469</X>
+                        <Y>628</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>3</X>
+                        <Y>3</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\palm\palm_4.png</texture_filename>
+                    <asset_name>palm_4.png</asset_name>
+                    <Origin>
+                        <X>36</X>
+                        <Y>47</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0022" Visible="true">
+                    <Position>
+                        <X>4919</X>
+                        <Y>609</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>2.47959471</X>
+                        <Y>2.47959471</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\palm\palm_2.png</texture_filename>
+                    <asset_name>palm_2.png</asset_name>
+                    <Origin>
+                        <X>40</X>
+                        <Y>71</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0023" Visible="true">
+                    <Position>
+                        <X>3692</X>
+                        <Y>617</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>3</X>
+                        <Y>3</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\palm\palm_4.png</texture_filename>
+                    <asset_name>palm_4.png</asset_name>
+                    <Origin>
+                        <X>36</X>
+                        <Y>47</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0024" Visible="true">
+                    <Position>
+                        <X>4189</X>
+                        <Y>618</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>3</X>
+                        <Y>3</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\palm\palm_4.png</texture_filename>
+                    <asset_name>palm_4.png</asset_name>
+                    <Origin>
+                        <X>36</X>
+                        <Y>47</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0025" Visible="true">
+                    <Position>
+                        <X>2529</X>
+                        <Y>169</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>2.47959471</X>
+                        <Y>2.47959471</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\palm\palm_2.png</texture_filename>
+                    <asset_name>palm_2.png</asset_name>
+                    <Origin>
+                        <X>40</X>
+                        <Y>71</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0026" Visible="true">
+                    <Position>
+                        <X>2909</X>
+                        <Y>149</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>2.47959471</X>
+                        <Y>2.47959471</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\palm\palm_2.png</texture_filename>
+                    <asset_name>palm_2.png</asset_name>
+                    <Origin>
+                        <X>40</X>
+                        <Y>71</Y>
+                    </Origin>
+                </Item>
+            </Items>
+            <ScrollSpeed>
+                <X>1.05</X>
+                <Y>1.05</Y>
+            </ScrollSpeed>
+            <CustomProperties />
+        </Layer>
+        <Layer Name="Main" Visible="true">
+            <Items>
+                <Item xsi:type="PlayerItem" Name="Player" Visible="true">
+                    <Position>
+                        <X>-919</X>
+                        <Y>248</Y>
+                    </Position>
+                    <CustomProperties />
+                </Item>
+                <Item xsi:type="ExitItem" Name="Exit" Visible="true">
+                    <Position>
+                        <X>6537</X>
+                        <Y>333</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>400</Width>
+                    <Height>400</Height>
+                    <Scale>
+                        <X>1.12585127</X>
+                        <Y>1.12585127</Y>
+                    </Scale>
+                    <NextLevel>Level4.xml</NextLevel>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0012" Visible="true">
+                    <Position>
+                        <X>-368</X>
+                        <Y>600</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>2.0058763</X>
+                        <Y>2.0058763</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>indiegraphicsbundle\platforms\MdBrnP.png</texture_filename>
+                    <asset_name>MdBrnP.png</asset_name>
+                    <Origin>
+                        <X>408</X>
+                        <Y>89</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0013" Visible="true">
+                    <Position>
+                        <X>1193</X>
+                        <Y>384</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.47310817</X>
+                        <Y>1.47310817</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>indiegraphicsbundle\platforms\MdBrnP.png</texture_filename>
+                    <asset_name>MdBrnP.png</asset_name>
+                    <Origin>
+                        <X>408</X>
+                        <Y>89</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0017" Visible="true">
+                    <Position>
+                        <X>2533</X>
+                        <Y>384</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.47310817</X>
+                        <Y>1.47310817</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>indiegraphicsbundle\platforms\MdBrnP.png</texture_filename>
+                    <asset_name>MdBrnP.png</asset_name>
+                    <Origin>
+                        <X>408</X>
+                        <Y>89</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0018" Visible="true">
+                    <Position>
+                        <X>3832</X>
+                        <Y>830</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.35957956</X>
+                        <Y>1.35957956</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>indiegraphicsbundle\platforms\MdBrnP.png</texture_filename>
+                    <asset_name>MdBrnP.png</asset_name>
+                    <Origin>
+                        <X>408</X>
+                        <Y>89</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0019" Visible="true">
+                    <Position>
+                        <X>5132</X>
+                        <Y>830</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.35957956</X>
+                        <Y>1.35957956</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>indiegraphicsbundle\platforms\MdBrnP.png</texture_filename>
+                    <asset_name>MdBrnP.png</asset_name>
+                    <Origin>
+                        <X>408</X>
+                        <Y>89</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0020" Visible="true">
+                    <Position>
+                        <X>6382</X>
+                        <Y>830</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.35957956</X>
+                        <Y>1.35957956</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>indiegraphicsbundle\platforms\MdBrnP.png</texture_filename>
+                    <asset_name>MdBrnP.png</asset_name>
+                    <Origin>
+                        <X>408</X>
+                        <Y>89</Y>
+                    </Origin>
+                </Item>
+            </Items>
+            <ScrollSpeed>
+                <X>1</X>
+                <Y>1</Y>
+            </ScrollSpeed>
+            <CustomProperties />
+        </Layer>
+        <Layer Name="front" Visible="true">
+            <Items>
+                <Item xsi:type="TextureItem" Name="Texture_0027" Visible="true">
+                    <Position>
+                        <X>6728</X>
+                        <Y>569</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="Solid" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>3.06843519</X>
+                        <Y>3.06843519</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\objects\house.png</texture_filename>
+                    <asset_name>house.png</asset_name>
+                    <Origin>
+                        <X>41</X>
+                        <Y>74</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0016" Visible="true">
+                    <Position>
+                        <X>-24</X>
+                        <Y>369</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1</X>
+                        <Y>1</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\rocks\big_rock_1.png</texture_filename>
+                    <asset_name>big_rock_1.png</asset_name>
+                    <Origin>
+                        <X>42</X>
+                        <Y>100</Y>
                     </Origin>
                 </Item>
             </Items>
@@ -156,11 +515,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>11</NextItemNumber>
+        <NextItemNumber>27</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>571.14624</X>
-            <Y>2.333332</Y>
+            <X>6464.003</X>
+            <Y>502.3333</Y>
         </CameraPosition>
         <Version>1.5.0.0</Version>
     </EditorRelated>

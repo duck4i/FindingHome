@@ -89,10 +89,6 @@ void MainScene::loadMap(float none)
 		float xs = ( playerStart.x - (winSize.width * twentyPercent) ) * -1;
 		float ys = ( playerStart.y - (winSize.height * twentyPercent) ) * -1;	
 		this->worldLayer->setPosition(this->getPositionX() + xs, this->getPositionY() + ys);
-
-#ifndef DISABLE_CAMERA		
-		this->schedule(schedule_selector(MainScene::updateCamera));
-#endif
 	}
 
 	//	schedule controls
@@ -184,7 +180,8 @@ void MainScene::updateCamera(float delta)
 #else
 	float rightMargin = winSize.width - winSize.width * margin;
 	float leftMargin = winSize.width * margin;
-	float timeDelay = 1;
+	float modifier = ((delta - 1/60.0f));
+	float timeDelay = 1 - modifier;
 #endif
 
 	float topMargin = winSize.height - winSize.height * margin;
@@ -261,7 +258,11 @@ void MainScene::update(float delta)
 
 	//	PHYSICS UPDATE
 	updatePhysics(delta);
-	
+
+#ifndef DISABLE_CAMERA				
+	//	Update camera here
+	updateCamera(delta);
+#endif	
 	//	And weather ofcourse
 	if (weather)
 		weather->update(delta);

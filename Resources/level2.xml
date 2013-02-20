@@ -2332,8 +2332,8 @@
             <Items>
                 <Item xsi:type="PlayerItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-13466</X>
-                        <Y>-1237</Y>
+                        <X>-13418</X>
+                        <Y>-1189</Y>
                     </Position>
                     <CustomProperties />
                 </Item>
@@ -2342,7 +2342,11 @@
                         <X>9413</X>
                         <Y>420</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2369,7 +2373,11 @@
                         <X>8489</X>
                         <Y>182</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2396,7 +2404,11 @@
                         <X>8898</X>
                         <Y>72</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2423,7 +2435,11 @@
                         <X>9224</X>
                         <Y>-24</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2450,7 +2466,11 @@
                         <X>10395</X>
                         <Y>-24</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2477,7 +2497,11 @@
                         <X>10522</X>
                         <Y>-24</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2504,7 +2528,11 @@
                         <X>10053</X>
                         <Y>-24</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2531,7 +2559,11 @@
                         <X>9715</X>
                         <Y>-24</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2558,7 +2590,11 @@
                         <X>9337</X>
                         <Y>-24</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2585,7 +2621,11 @@
                         <X>12894</X>
                         <Y>-34</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2612,7 +2652,11 @@
                         <X>13270</X>
                         <Y>128</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2639,7 +2683,11 @@
                         <X>12460</X>
                         <Y>-212</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2666,7 +2714,11 @@
                         <X>11985</X>
                         <Y>-212</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2693,7 +2745,11 @@
                         <X>10953</X>
                         <Y>-212</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -2720,7 +2776,11 @@
                         <X>11470</X>
                         <Y>-212</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>2</X>
@@ -3591,7 +3651,11 @@
                         <X>4467</X>
                         <Y>-192</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Movable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.519523144</X>
@@ -3625,6 +3689,9 @@
                         <Property Name="bounce" Type="bool" Description="">
                             <boolean>true</boolean>
                         </Property>
+                        <Property Name="Movable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
@@ -3652,7 +3719,11 @@
                         <X>14170</X>
                         <Y>406</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Movable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3187927</X>
@@ -4462,7 +4533,11 @@
                         <X>17947</X>
                         <Y>-627</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Movable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.31766203</X>
@@ -4489,7 +4564,11 @@
                         <X>19670</X>
                         <Y>-604</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Movable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3187927</X>
@@ -4513,10 +4592,14 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0203" Visible="true">
                     <Position>
-                        <X>20497</X>
-                        <Y>1433</Y>
+                        <X>20530</X>
+                        <Y>1466</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Movable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>1.46451926</X>
@@ -4872,6 +4955,20 @@
                         <Y>256</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="ExitItem" Name="Exit_0268" Visible="true">
+                    <Position>
+                        <X>18693</X>
+                        <Y>1319</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>100</Width>
+                    <Height>140</Height>
+                    <Scale>
+                        <X>4.43202162</X>
+                        <Y>4.43202162</Y>
+                    </Scale>
+                    <NextLevel>Level3.xml</NextLevel>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -4882,11 +4979,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>267</NextItemNumber>
+        <NextItemNumber>270</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>-7817.21436</X>
-            <Y>-881.078735</Y>
+            <X>-12944.4072</X>
+            <Y>-1570.55481</Y>
         </CameraPosition>
         <Version>1.5.0.0</Version>
     </EditorRelated>

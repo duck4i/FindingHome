@@ -30,5 +30,11 @@ namespace GLEED2D
         {
             return "Player";
         }
+
+        public override void load(Microsoft.Xna.Framework.Content.ContentManager cm)
+        {
+            base.load(cm);
+            PlayerItem.Instance = this;            
+        }
     }
 }
