@@ -8,7 +8,7 @@ void ContactListener::BeginContact(b2Contact *con)
 
 	GameEntity* a = (GameEntity*) con->GetFixtureA()->GetBody()->GetUserData();
 	GameEntity* b = (GameEntity*) con->GetFixtureB()->GetBody()->GetUserData();
-
+	
 	GameEntityPlayer* pA = dynamic_cast<GameEntityPlayer*>(a);
 	GameEntityPlayer* pB = dynamic_cast<GameEntityPlayer*>(b);
 

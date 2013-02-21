@@ -4,23 +4,45 @@
 #include <cocos2d.h>
 #include "XMLHelper.h"
 
+#define STRING_TRUE(s) xmlStrcasecmp(s, (xmlChar*) "true") == 0
+
 class LevelProperties
 {
 public:
 
-	bool playerFlipped;
-	bool weatherEnabled;
+	bool PlayerFlipped;
+	bool WeatherActive;
+	float CameraZoom;
+	float PlayerSpeed;
+	float PlayerJump;
+	float PlayerShiftModifier;
 
-	LevelProperties()
+	void reset()
 	{
-		playerFlipped = false;
-		weatherEnabled = false;
+		CameraZoom = 0;
+		PlayerSpeed = 0;
+		PlayerJump = 0;
+		PlayerShiftModifier = 0;
+		PlayerFlipped = false;
+		WeatherActive = false;
 	}
+
+	LevelProperties(xmlNodePtr node)
+	{
+		reset();
+		m_node = node;
+	}
+
+	~LevelProperties();
+
+private:
+
+	xmlNodePtr m_node;
+	bool init();
 
 public:
 
-	static LevelProperties* sharedProperties();
-
+	static LevelProperties* sharedProperties(xmlNodePtr node = NULL);
 };
 
 

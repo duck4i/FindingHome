@@ -60,9 +60,7 @@ public:
 	b2Body* playerBody;	
 	CCNode* finishNode;
 
-	LevelProperties levelProperties;
-
-	GameEntityPlayer *player;
+	GameEntityPlayer* player;
 	
 private:
 

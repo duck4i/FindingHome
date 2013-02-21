@@ -72,12 +72,18 @@ void MainScene::loadMap(float none)
 {
 	PROFILE_FUNC();
 
-	//	weather data
-	this->weather = new WeatherHelper(this, this->worldLayer, WEATHER_CONTROLLER_DATA);	
-
 	//	setup physics object 
 	this->setupPhysics();
-	this->addBodies();
+	this->addBodies();	//	<-- load level!!!
+
+	//level settings
+	LevelProperties* lp = LevelProperties::sharedProperties();
+	if (lp->CameraZoom)
+		this->worldLayer->setScale(lp->CameraZoom);
+
+	//	weather data
+	if (lp && lp->WeatherActive)
+		this->weather = new WeatherHelper(this, this->worldLayer, WEATHER_CONTROLLER_DATA);	
 
 	this->shiftSprite = CCSprite::create(RESOURCE_SHIFT);
 	this->shiftSprite->setAnchorPoint(ccp(0, 0));
@@ -102,6 +108,7 @@ void MainScene::loadMap(float none)
 #ifdef NO_MOUSE_MOVE
 	message = "[F1] Enable debug mode     [F4] Restart game     [F7] Zoom in [F8] Zoom out [F9] Reset zoom";
 #endif
+
 	CCLabelTTF* lab = CCLabelTTF::create(message, "Arial", 18.0f);		
 	lab->setPosition(ccp(CCDirector::sharedDirector()->getWinSizeInPixels().width / 2, CCDirector::sharedDirector()->getWinSizeInPixels().height - 15));
 	this->addChild(lab, 100000);
@@ -193,7 +200,7 @@ void MainScene::updateCamera(float delta)
 	float rightMargin = winSize.width - winSize.width * margin;
 	float leftMargin = winSize.width * margin;
 	float modifier = ((delta - 1/60.0f));
-	float timeDelay = 1 - modifier;
+	float timeDelay = 1 ;
 #endif
 
 	float topMargin = winSize.height - winSize.height * margin;

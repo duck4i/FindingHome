@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Tutorial Level" Visible="true" WeatherActive="true" CameraZoom="0.5" PlayerSpeed="0" PlayerJump="0" PlayerShiftModifier="0">
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Tutorial Level" Visible="true" WeatherActive="false" CameraZoom="0" PlayerSpeed="0" PlayerJump="0" PlayerShiftModifier="0">
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>

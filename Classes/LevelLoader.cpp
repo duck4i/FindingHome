@@ -287,6 +287,6 @@ char* LevelLoader::parseNodeAssetName(xmlNodePtr node)
 void LevelLoader::parseLevelProperties()
 {
 	
-
+	LevelProperties::sharedProperties(sharedDoc->children);
 
 }
