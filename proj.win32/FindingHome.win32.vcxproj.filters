@@ -195,6 +195,9 @@
     <ClCompile Include="..\Classes\BatchManager.cpp">
       <Filter>source\entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\LevelProperties.cpp">
+      <Filter>source\levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Resources\TintShader.fsh">

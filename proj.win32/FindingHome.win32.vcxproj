@@ -174,6 +174,7 @@
     <ClCompile Include="..\Classes\GameEntitySprite.cpp" />
     <ClCompile Include="..\Classes\KeyboardHelper.cpp" />
     <ClCompile Include="..\Classes\LevelLoader.cpp" />
+    <ClCompile Include="..\Classes\LevelProperties.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\ShapeHelper.cpp" />
     <ClCompile Include="..\Classes\TintShader.cpp" />
