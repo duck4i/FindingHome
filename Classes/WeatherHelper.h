@@ -4,6 +4,7 @@
 #include <cocos2d.h>
 #include "extern\CCTexture2DMutable.h"
 #include "TintShader.h"
+#include "Performance.h"
 using namespace cocos2d;
 
 #define MOON_RESOURCE RESOURCE_DIR "moon.png"

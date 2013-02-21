@@ -9,6 +9,7 @@
 #include "LevelNodeInfo.h"
 #include "CustomProperty.h"
 #include "GameEntities.h"
+#include "Performance.h"
 
 USING_NS_CC;
 

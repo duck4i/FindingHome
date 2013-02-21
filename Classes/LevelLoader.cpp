@@ -13,6 +13,8 @@ void LevelLoader::createLevelLayers()
 
 bool LevelLoader::parse()
 {
+	PROFILE_FUNC();
+
 	bool success = false;
 
 	sharedDoc = xmlReadFile(this->levelPath, "utf-8", XML_PARSE_RECOVER);
@@ -82,6 +84,8 @@ bool LevelLoader::parse()
 
 void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* parent, bool isMainLayer)
 {
+	PROFILE_FUNC();
+
 	xmlChar* nodeName = xmlGetProp(node, (const xmlChar*) "Name");
 	xmlChar* nodeType = xmlGetProp(node, (const xmlChar*) "type");
 
@@ -144,7 +148,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 	else
 	{
 		//	select layer to insert it into
-		CCNode* layer = /*isMainLayer ? this->mainLayer :*/ parent;
+		CCNode* layer = parent;
 		CCNode* toInsert = NULL;
 		GameEntitySprite *sprite;
 

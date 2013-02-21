@@ -3,6 +3,8 @@
 
 bool WeatherHelper::init()
 {
+	PROFILE_FUNC();
+
 	controllerImage = new CCImage;	
 	if (!controllerImage->initWithImageFile(this->controllerPath))
 	{
@@ -61,6 +63,8 @@ bool WeatherHelper::init()
 
 void WeatherHelper::createStarrySky()
 {
+	PROFILE_FUNC();
+
 	char* starPath = STAR_PATH;
 	CCTexture2D *tex = CCTextureCache::sharedTextureCache()->addImage(STAR_PATH);	
 	CCSize sajz = CCDirector::sharedDirector()->getWinSizeInPixels();
@@ -102,6 +106,8 @@ void WeatherHelper::createStarrySky()
 
 void WeatherHelper::createMoon()
 {
+	PROFILE_FUNC();
+
 	CCSize sajz = CCDirector::sharedDirector()->getWinSizeInPixels();
 
 	moon = CCSprite::create(MOON_RESOURCE);
@@ -121,6 +127,8 @@ void WeatherHelper::createMoon()
 
 void WeatherHelper::createClouds()
 {
+	PROFILE_FUNC();
+
 	CCSize size = CCDirector::sharedDirector()->getWinSizeInPixels();
 	this->clouds = CCLayer::create();
 	this->clouds->setPosition(0, size.height - 200);		
@@ -194,6 +202,7 @@ void WeatherHelper::createClouds()
 
 void WeatherHelper::colorAtThisTime(ccColor4B &start, ccColor4B &end)
 {
+	PROFILE_FUNC();
 	if (!this->controller)
 		return;
 	
@@ -203,32 +212,21 @@ void WeatherHelper::colorAtThisTime(ccColor4B &start, ccColor4B &end)
 
 bool WeatherHelper::isNight()
 {
-	//float margin = 32;
-	//return this->controllerPosition <= margin || this->controllerPosition >= (unsigned int) (this->controllerImage->getWidth() - margin) ;
+	PROFILE_FUNC();
 	int index = getColorPercivedBrigthness(lastStart.r, lastStart.g, lastStart.b);
 	bool night = index <= 60;
 	return night;
 }
 
 int WeatherHelper::tintStrengthAtThisTime(ccColor3B c)
-{	
-	return 255;
-	if (isNight())
-		return 160;	//	fix for nights
-
-	int colorBrightness = getColorPercivedBrigthness(c.r, c.g, c.b);
-	
-	//	min 20, max 130
-	int ret = min(80, max(255 - colorBrightness, 20));
-	return ret;
+{
+	return 255;	
 }
 
 ccColor3B WeatherHelper::tintColorAtThisTime(unsigned int index)
 {	
+	PROFILE_FUNC();
 	ccColor3B c;
-	//if (controllerPosition > (unsigned int)(controllerImage->getWidth() / 2) )
-	//	c = ccc3(lastStart.r, lastStart.g, lastStart.b);
-
 	float y = 0;
 
 	if (index == 0)
@@ -245,6 +243,8 @@ ccColor3B WeatherHelper::tintColorAtThisTime(unsigned int index)
 
 int WeatherHelper::getColorPercivedBrigthness(int r, int g, int b)
 {
+	PROFILE_FUNC();
+
 	float ret = 
 		r * r * 0.241f +
 		g * g * 0.691f +
@@ -254,6 +254,8 @@ int WeatherHelper::getColorPercivedBrigthness(int r, int g, int b)
 
 void WeatherHelper::update(float delta)
 {
+	PROFILE_FUNC();
+
 	if (!initOK)
 		return;
 
@@ -364,6 +366,8 @@ void WeatherHelper::update(float delta)
 
 void WeatherHelper::flipStarVisibility()
 {
+	PROFILE_FUNC();
+
 	bool show = starrySky->getTag() == 0;
 
 	//	show / hide all items since BatchSprite knows no opacity
@@ -384,6 +388,8 @@ void WeatherHelper::flipStarVisibility()
 
 void WeatherHelper::backgroundDoneChanging()
 {
+	PROFILE_FUNC();
+
 	this->background->setStartColor(this->backgroundNext->getStartColor());
 	this->background->setEndColor(this->backgroundNext->getEndColor());	
 	this->backgroundNext->setOpacity(0);
@@ -394,6 +400,8 @@ void WeatherHelper::backgroundDoneChanging()
 
 void WeatherHelper::updateCloudColors()
 {
+	PROFILE_FUNC();
+
 	ccColor3B color = tintColorAtThisTime(0);
 	CCArray* bigChildren = bigOnes->getChildren();
 	for (unsigned int i = 0; i < bigChildren->count(); i++)

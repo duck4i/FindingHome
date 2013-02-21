@@ -294,7 +294,7 @@ void MainScene::updatePhysics(float delta)
 	while (b)
 	{
 		GameEntity *userData = (GameEntity*) b->GetUserData();
-		if (userData )
+		if (userData)
 		{
 			if (!userData->isForRemoval())
 			{
