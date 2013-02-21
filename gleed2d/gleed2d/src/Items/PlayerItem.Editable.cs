@@ -31,10 +31,10 @@ namespace GLEED2D
             return "Player";
         }
 
-        public override void load(Microsoft.Xna.Framework.Content.ContentManager cm)
+        public override bool loadIntoEditor()
         {
-            base.load(cm);
-            PlayerItem.Instance = this;            
+            PlayerItem.Instance = this;
+            return base.loadIntoEditor();
         }
     }
 }

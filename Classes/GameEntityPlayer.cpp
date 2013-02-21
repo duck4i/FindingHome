@@ -10,8 +10,7 @@ bool GameEntityPlayer::init()
 	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER2);
 	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER3);
 	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER4);
-	m_animationStill->setDelayPerUnit(0.2f);
-	
+	m_animationStill->setDelayPerUnit(0.2f);	
 
 	CCAction* a = CCRepeatForever::create(CCAnimate::create(m_animationStill));	
 
