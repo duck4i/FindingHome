@@ -146,6 +146,7 @@
     <ClInclude Include="..\Classes\KeyboardHelper.h" />
     <ClInclude Include="..\Classes\LevelLoader.h" />
     <ClInclude Include="..\Classes\LevelNodeInfo.h" />
+    <ClInclude Include="..\Classes\LevelProperties.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\Performance.h" />
     <ClInclude Include="..\Classes\Physics.h" />

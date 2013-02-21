@@ -19,6 +19,9 @@ bool LevelLoader::parse()
 
 	sharedDoc = xmlReadFile(this->levelPath, "utf-8", XML_PARSE_RECOVER);
 	CCAssert(sharedDoc, "Cannot load level file");	
+
+	//	now parse level properties
+	parseLevelProperties();
 	
 	xmlNodePtr currNode = sharedDoc->children->children;
 	
@@ -278,4 +281,12 @@ char* LevelLoader::parseNodeAssetName(xmlNodePtr node)
 	char* ret = NULL;
 	char* read = XMLHelper::readNodeContent(XMLHelper::findChildNodeWithName(node, "asset_name"));
 	return read;
+}
+
+
+void LevelLoader::parseLevelProperties()
+{
+	
+
+
 }

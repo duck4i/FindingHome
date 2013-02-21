@@ -9,6 +9,7 @@
 #include "LevelNodeInfo.h"
 #include "CustomProperty.h"
 #include "GameEntities.h"
+#include "LevelProperties.h"
 #include "Performance.h"
 
 USING_NS_CC;
@@ -59,8 +60,7 @@ public:
 	b2Body* playerBody;	
 	CCNode* finishNode;
 
-	float levelScale;
-	bool enableWeather;
+	LevelProperties levelProperties;
 
 	GameEntityPlayer *player;
 	
@@ -80,6 +80,9 @@ private:
 	char*		parseNodeAssetName(xmlNodePtr node);
 	bool		parseNodeFlip(xmlNodePtr node, bool vertical = false);
 	bool		parseNodeVisible(xmlNodePtr node);
+
+	///	read properties of main level object
+	void		parseLevelProperties();
 
 public:
 

@@ -127,6 +127,9 @@
     <ClInclude Include="..\Classes\Performance.h">
       <Filter>include\support</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\LevelProperties.h">
+      <Filter>include\levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">

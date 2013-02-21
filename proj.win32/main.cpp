@@ -82,7 +82,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 #if defined(_DEBUG) && !defined(DISABLE_SHINY)
 	PROFILER_UPDATE();
-	Shiny::ProfileManager::instance.output("profiler_out.txt");
+	PROFILER_OUTPUT("profiler_out.txt");
 #endif
 	
 
