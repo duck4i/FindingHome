@@ -1,2 +1,1 @@
-F:\Games\cocos2d-x\FindingHome\gleed2d\gleed2d\Content\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Mihailo\Desktop\cocos2d-x\FindingHome\gleed2d\gleed2d\Content\obj\x86\Debug\ResolveAssemblyReference.cache

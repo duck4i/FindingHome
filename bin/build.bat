@@ -1,5 +1,5 @@
 call clear.bat
-call _CopyDLLFilesHere.bat
+call _CopyDLLFilesHere_Debug.bat
 
 @echo off
 

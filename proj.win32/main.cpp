@@ -5,6 +5,8 @@
 #include <string>
 #include <Windows.h>
 #include "Settings.h"
+#include "Performance.h"
+
 
 USING_NS_CC;
 
@@ -40,11 +42,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		
 		if (!doesFileExits(commandLine))
 			return -2;
-	}	
-	
-	//commandLine = _strdup(lpCmdLine);
-	//MessageBox(NULL, lpCmdLine, "line", MB_OK);
-
+	}
 
 #ifdef USE_WIN32_CONSOLE
     AllocConsole();
@@ -81,6 +79,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 #ifdef USE_WIN32_CONSOLE
     FreeConsole();
 #endif
+
+#if defined(_DEBUG) && !defined(DISABLE_SHINY)
+	PROFILER_UPDATE();
+	Shiny::ProfileManager::instance.output("profiler_out.txt");
+#endif
+	
 
     return ret;
 }

@@ -22,7 +22,10 @@ BatchManager::~BatchManager()
 	{
 		BatchManagerItem* item = *ptr;
 		if (item)
+		{
 			delete item;
+			*ptr = NULL;
+		}
 	}
 
 	_smanager = NULL;

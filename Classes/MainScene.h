@@ -10,6 +10,7 @@
 #include "LevelLoader.h"
 #include "WeatherHelper.h"
 #include "ContactListener.h"
+#include "Performance.h"
 
 using namespace cocos2d;
 

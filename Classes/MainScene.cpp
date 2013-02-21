@@ -35,37 +35,43 @@ MainScene::~MainScene()
 	BatchManager* mgr = BatchManager::sharedManager();
 	if (mgr)
 		delete mgr;
+
+	
 }
 
 bool MainScene::init()
-{		
+{
+	PROFILE_FUNC();
+
 	CCLayerColor::initWithColor(ccc4(0, 0, 0, 255));
 	
 	winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
 	
 	//	Create world layer
-	this->worldLayer = CCLayer::create();	
+	this->worldLayer = CCLayer::create();
 	sceneScale = DEFAULT_SCALE;
-	this->worldLayer->setScale(sceneScale);	
+	this->worldLayer->setScale(sceneScale);
 
 	//this->worldLayer->ignoreAnchorPointForPosition(false);
-	//this->worldLayer->setAnchorPoint(ccp(0, 0));	
+	//this->worldLayer->setAnchorPoint(ccp(0, 0));
 
 	this->addChild(worldLayer, 1000);
 
 	//	add loading layer
-	this->loadLayer = CCSprite::create(RESOURCE_LOADING);	
+	this->loadLayer = CCSprite::create(RESOURCE_LOADING);
 	loadLayer->setPosition(ccp(winSize.width / 2, winSize.height / 2));
 	this->addChild(loadLayer, 10000);
 
 	//	load map after 1 second
-	this->scheduleOnce(schedule_selector(MainScene::loadMap), 0.0f);	
+	this->scheduleOnce(schedule_selector(MainScene::loadMap), 0.0f);
 
 	return true;
 }
 
 void MainScene::loadMap(float none)
 {
+	PROFILE_FUNC();
+
 	//	weather data
 	this->weather = new WeatherHelper(this, this->worldLayer, WEATHER_CONTROLLER_DATA);	
 
@@ -111,6 +117,8 @@ void MainScene::loadMap(float none)
 
 void MainScene::setupPhysics()
 {
+	PROFILE_FUNC();
+
 	//	setup Physics
 	const b2Vec2 gravity(0.0f, -10.0f);
 	this->boxWorldSleep = true;
@@ -132,6 +140,8 @@ void MainScene::setupPhysics()
 
 void MainScene::addBodies()
 {
+	PROFILE_FUNC();
+
 	//	load level
 	char *level = GAME_START_LEVEL;
 	extern char* commandLine;
@@ -164,6 +174,8 @@ void MainScene::toggleCameraProgress()
 
 void MainScene::updateCamera(float delta)
 {	
+	PROFILE_FUNC();
+
 	//CCLog("DELTA CAMERA: %f", delta);
 	if (this->cameraMoveInProgress)
 		return;
@@ -205,6 +217,8 @@ void MainScene::updateCamera(float delta)
 
 void MainScene::updateKeyboard(float delta)
 {
+	PROFILE_FUNC();
+
 	if (disableKeyboard)
 		return;
 
@@ -241,6 +255,8 @@ void MainScene::updateKeyboard(float delta)
 
 void MainScene::update(float delta)
 {
+	PROFILE_FUNC();
+
 	//	Keyboard update
 	updateKeyboard(delta);	
 
@@ -270,6 +286,8 @@ void MainScene::update(float delta)
 
 void MainScene::updatePhysics(float delta)
 {
+	PROFILE_FUNC();
+
 	this->boxWorld->Step(BOX_WOLRD_STEP, BOX_WORLD_VELOCITY_PASSES, BOX_WORLD_POSITION_PASSES);
 
 	b2Body* b = this->boxWorld->GetBodyList();
@@ -333,6 +351,8 @@ void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 
 void MainScene::setSceneZoom(float newScale)
 {		
+	PROFILE_FUNC();
+
 	if (!gamePlayer || !worldLayer)
 		return;
 
@@ -392,6 +412,7 @@ void MainScene::resetSceneZoom()
 
 void MainScene::playerDied()
 {
+	PROFILE_FUNC();
 	CCDirector::sharedDirector()->replaceScene(MainScene::scene());			
 }
 

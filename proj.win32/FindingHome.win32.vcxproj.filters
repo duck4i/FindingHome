@@ -124,6 +124,9 @@
     <ClInclude Include="..\Classes\BatchManager.h">
       <Filter>include\entities</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Performance.h">
+      <Filter>include\support</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">

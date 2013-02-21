@@ -1,0 +1,14 @@
+
+Code base profiler (quite simple!)
+http://sourceforge.net/projects/shinyprofiler/?source=dlp
+
+Visual Leaks Detector:
+http://vld.codeplex.com/
+
+
+Memory leaks detection:
+http://msdn.microsoft.com/en-us/library/e5ewb1h3(v=vs.80).aspx
+
+
+MS (too large to download, probably good but with MS issues)
+http://msdn.microsoft.com/en-us/library/hh448170.aspx

@@ -48,23 +48,24 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\Classes\VisualLeakDetector\include;$(SolutionDir)..\Classes\Shiny\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <MinimalRebuild>true</MinimalRebuild>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>DISABLE_CAMERAx;DISABLE_FLOAT_CAMERA; NO_MOUSE_MOVEx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DISABLE_MEMORY_TRACE;DISABLE_CAMERAx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVEx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;4099;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\Classes\json\;$(SolutionDir)..\..\Debug.win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;libXML2.lib;json_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\Classes\json\;$(SolutionDir)..\..\Debug.win32;$(SolutionDir)..\Classes\VisualLeakDetector\lib\Win32;$(SolutionDir)..\Classes\Shiny\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;libXML2.lib;json_debug.lib;vld.lib;ShinyDebug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
     </Link>
     <ResourceCompile>
       <Culture>0x0409</Culture>
@@ -91,7 +92,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Async</ExceptionHandling>
       <DebugInformationFormat />
-      <PreprocessorDefinitions>DISABLE_CAMERAxxx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVE;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DISABLE_MEMORY_TRACE;DISABLE_SHINY;DISABLE_CAMERAxxx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVE;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -145,6 +146,7 @@
     <ClInclude Include="..\Classes\LevelLoader.h" />
     <ClInclude Include="..\Classes\LevelNodeInfo.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
+    <ClInclude Include="..\Classes\Performance.h" />
     <ClInclude Include="..\Classes\Physics.h" />
     <ClInclude Include="..\Classes\Settings.h" />
     <ClInclude Include="..\Classes\ShapeHelper.h" />
