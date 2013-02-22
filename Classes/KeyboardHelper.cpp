@@ -28,13 +28,12 @@ LRESULT KeyboardHelper::HookProc(int code, WPARAM wParam, LPARAM lParam)
 {
 	KeyboardHelper* helper = KeyboardHelper::sharedHelper();
 	KBDLLHOOKSTRUCT *pKeyBoard = (KBDLLHOOKSTRUCT *)lParam;
+	unsigned int key = pKeyBoard->vkCode;
 
 	switch (wParam)
 	{
 		case WM_KEYDOWN:
 		{
-			unsigned int key = pKeyBoard->vkCode;
-
 			if (key == VK_LEFT)
 				helper->b_left = KeyStateDown;
 			if (key == VK_RIGHT)
@@ -64,8 +63,6 @@ LRESULT KeyboardHelper::HookProc(int code, WPARAM wParam, LPARAM lParam)
 		}
 		case WM_KEYUP:
 		{
-			unsigned int key = pKeyBoard->vkCode;
-
 			if (key == VK_LEFT)
 				helper->b_left = KeyStateUp;
 			if (key == VK_RIGHT)
@@ -94,6 +91,9 @@ LRESULT KeyboardHelper::HookProc(int code, WPARAM wParam, LPARAM lParam)
 			break;
 		}
 	}
+
+	if (key == VK_LSHIFT || key == VK_RSHIFT)
+		return 0;
 
 	return CallNextHookEx(NULL, code, wParam, lParam);
 }

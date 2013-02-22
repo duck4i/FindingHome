@@ -36,7 +36,6 @@ protected:
 	
 	///	Keeps permanent record of player death state in case of tunneling
 	bool m_bPlayerDied;
-	PlayerDirection direction;	
 
 	GameEntityPlayer(NODEINFO info) : GameEntity(info) 
 	{
@@ -60,6 +59,8 @@ public:
 		CC_SAFE_DELETE(p);
 		return p;
 	}
+
+	PlayerDirection direction;	
 
 	virtual bool createBody(b2World* world);
 

@@ -49,6 +49,8 @@ bool GameEntityPlayer::createBody(b2World *world)
 	m_b2FixtureDef.friction = 0.8f;
 	m_b2FixtureDef.restitution = 0;
 	m_b2FixtureDef.shape = &doggyShape;	
+	m_b2FixtureDef.filter.categoryBits = 0x0002;
+	//m_b2FixtureDef.filter.maskBits = 0x0004;	//	filter out collectables
 
 	m_b2Body->CreateFixture(&m_b2FixtureDef);
 			
