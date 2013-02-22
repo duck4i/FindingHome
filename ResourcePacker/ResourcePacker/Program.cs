@@ -96,7 +96,18 @@ namespace ResourcePacker
                     string line = proc.StandardOutput.ReadLine();
                     Console.WriteLine(line);
                 }
-                Console.WriteLine("\r\nDONE!");    
+
+                bool success = false;
+                if (File.Exists(dir + outData) && File.Exists(dir + outImage))
+                    success = true;
+                
+                Console.WriteLine("\r\nDONE!");
+
+                Console.ForegroundColor = success ? ConsoleColor.Green : ConsoleColor.Red;
+
+                Console.WriteLine(success ? "SUCCESS" : "FAILURE");
+                Console.ResetColor();
+
             }
             catch (Exception)
             {
