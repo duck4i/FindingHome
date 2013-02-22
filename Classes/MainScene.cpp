@@ -97,7 +97,7 @@ void MainScene::loadMap(float none)
 		CCPoint playerStart = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());
 
 		//	always start in (SCREEN_MARGIN/SCREEN_MARGIN) coordinates
-		float twentyPercent = SCREEN_MARGIN - 0.15f;
+		float twentyPercent = SCREEN_MARGIN_BOTTOM;
 		float xs = ( playerStart.x - (winSize.width * twentyPercent) ) * -1;
 		float ys = ( playerStart.y - (winSize.height * twentyPercent) ) * -1;	
 		this->worldLayer->setPosition(this->getPositionX() + xs, this->getPositionY() + ys);
@@ -165,6 +165,15 @@ void MainScene::addBodies()
 		this->gamePlayer->getBody()->SetLinearDamping(0.5f);
 		this->gamePlayer->getBody()->SetGravityScale(2);
 
+
+		/*CCRect r = LevelProperties::sharedProperties()->SceneSize;
+		CCLayerColor* l = CCLayerColor::create(ccc4(255, 255, 255, 255));
+		l->ignoreAnchorPointForPosition(false);
+		l->setAnchorPoint(ccp(0, 0));
+		l->setPosition(r.origin);
+		l->setContentSize(r.size);
+		this->worldLayer->addChild(l);
+		*/
 		return;
 	}
 	
@@ -189,37 +198,32 @@ void MainScene::updateCamera(float delta)
 	
 	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());
 	CCPoint prevPos = this->worldLayer->getPosition();
-	
-	float margin = SCREEN_MARGIN;
+	CCRect sceneSize = LevelProperties::sharedProperties()->SceneSize;	
 
-#ifndef DISABLE_FLOAT_CAMERA
-	float rightMargin = winSize.width / 2;//winSize.width - winSize.width * margin;
-	float leftMargin = winSize.width / 2; //winSize.width * margin;
-	float timeDelay = delta * 2;//delta /* / (1.0f / 60.0f)*/;
-#else
-	float rightMargin = winSize.width - winSize.width * margin;
-	float leftMargin = winSize.width * margin;
+	float rightMargin = winSize.width - winSize.width * SCREEN_MARGIN_FRONT;
+	float leftMargin = winSize.width * SCREEN_MARGIN_LEFT;
 	float modifier = ((delta - 1/60.0f));
 	float timeDelay = 1 ;
-#endif
 
-	float topMargin = winSize.height - winSize.height * margin;
-	float bottomMargin = winSize.height * 0.25;
+
+	float topMargin = winSize.height - winSize.height * SCREEN_MARGIN_TOP;
+	float bottomMargin = winSize.height * SCREEN_MARGIN_BOTTOM;
 
 	float xm = prevPos.x;
-	float ym = prevPos.y;	
+	float ym = prevPos.y;
 
 	if (realPos.x >= rightMargin)
-		xm -= (realPos.x - rightMargin) * sceneScale * timeDelay;
+		xm -= realPos.x - rightMargin;
 	else if (realPos.x <= leftMargin)
-		xm += (leftMargin - realPos.x) * sceneScale * timeDelay;
+		xm += leftMargin - realPos.x;
 
 	if (realPos.y <= bottomMargin)
-		ym += (bottomMargin - realPos.y) * sceneScale * timeDelay;
+		ym += bottomMargin - realPos.y;
 	else if (realPos.y >= topMargin)
-		ym -= (realPos.y - topMargin) * sceneScale * timeDelay;
-	
+		ym -= realPos.y - topMargin;
+
 	this->worldLayer->setPosition(xm, ym);
+
 }
 
 void MainScene::updateKeyboard(float delta)

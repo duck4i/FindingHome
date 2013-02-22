@@ -4,7 +4,7 @@ static LevelProperties* _sLevelProperties;
 
 LevelProperties* LevelProperties::sharedProperties(xmlNodePtr node)
 {
-	if (_sLevelProperties == NULL)
+	if (_sLevelProperties == NULL && node != NULL)
 	{
 		_sLevelProperties = new LevelProperties(node);
 		bool ok = _sLevelProperties->init();

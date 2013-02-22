@@ -3,6 +3,7 @@
 
 #include "GameEntity.h"
 #include "ShapeHelper.h"
+#include "LevelProperties.h"
 
 ///
 ///	GameEntity with sprite attached

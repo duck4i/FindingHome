@@ -100,6 +100,25 @@ void GameEntitySprite::updatePosition(b2Vec2 pos)
 		CCPoint posRecalc = ccp(WORLD_TO_SCREEN(pos.x), WORLD_TO_SCREEN(pos.y));
 		m_sprite->setPosition(posRecalc);
 	}
+
+	/*
+	//	Performance optimization - do not draw (set invisible) items outside of screen
+	bool isVisible = true;
+	LevelProperties* pr = LevelProperties::sharedProperties();
+	if (pr)
+	{
+		CCNode* world = pr->WorldLayer;
+		if (world)
+		{			
+			CCPoint pos = world->convertToWorldSpace(m_sprite->getPosition());
+			CCSize screen = CCDirector::sharedDirector()->getWinSizeInPixels();
+			if (pos.x > screen.width || pos.x < 0 || pos.y > screen.height || pos.y < 0)
+				isVisible = false;
+
+			this->m_sprite->setVisible(isVisible);
+		}
+	}
+	*/
 }
 
 void GameEntitySprite::updateRotation(float32 angle)

@@ -21,10 +21,9 @@ AppDelegate::~AppDelegate()
 bool AppDelegate::applicationDidFinishLaunching()
 {
     // initialize director
-    CCDirector *pDirector = CCDirector::sharedDirector();
+    CCDirector *pDirector = CCDirector::sharedDirector();		
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
-	
-	
+
 	pDirector->setProjection(ccDirectorProjection::kCCDirectorProjection2D);
 	pDirector->setDepthTest(false);	
 

@@ -16,6 +16,9 @@ public:
 	float PlayerSpeed;
 	float PlayerJump;
 	float PlayerShiftModifier;
+	CCRect SceneSize;
+
+	CCNode* WorldLayer;
 
 	void reset()
 	{
@@ -25,6 +28,7 @@ public:
 		PlayerShiftModifier = 0;
 		PlayerFlipped = false;
 		WeatherActive = false;
+		WorldLayer = NULL;
 	}
 
 	LevelProperties(xmlNodePtr node)

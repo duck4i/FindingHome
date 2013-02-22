@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Tutorial Level" Visible="true" WeatherActive="false" CameraZoom="0" PlayerSpeed="0" PlayerJump="0" PlayerShiftModifier="0">
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Tutorial Level" Visible="true" WeatherActive="true" CameraZoom="0" PlayerSpeed="0" PlayerJump="0" PlayerShiftModifier="0">
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
@@ -2319,6 +2319,22 @@
                         <B>73</B>
                         <A>255</A>
                         <PackedValue>4290283081</PackedValue>
+                    </FillColor>
+                </Item>
+                <Item xsi:type="RectangleItem" Name="Rectangle_0271" Visible="false">
+                    <Position>
+                        <X>-15161</X>
+                        <Y>-1904</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>40588</Width>
+                    <Height>5430</Height>
+                    <FillColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>145</A>
+                        <PackedValue>2445279424</PackedValue>
                     </FillColor>
                 </Item>
             </Items>
@@ -4979,11 +4995,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>270</NextItemNumber>
+        <NextItemNumber>271</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>-12944.4072</X>
-            <Y>-1570.55481</Y>
+            <X>8522.261</X>
+            <Y>-2303.88818</Y>
         </CameraPosition>
         <Version>1.5.0.0</Version>
     </EditorRelated>

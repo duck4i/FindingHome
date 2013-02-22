@@ -14,8 +14,13 @@
 
 using namespace cocos2d;
 
-#define DEFAULT_SCALE		0.5f
-#define SCREEN_MARGIN		0.35f
+#define DEFAULT_SCALE			0.5f
+
+#define SCREEN_MARGIN_LEFT		0.35f
+#define SCREEN_MARGIN_FRONT		0.5f
+#define SCREEN_MARGIN_BOTTOM	0.25f
+#define SCREEN_MARGIN_TOP		0.35f
+
 #define ZOOM_STEP			0.1f
 #define ZOOM_TIME			0.5f
 

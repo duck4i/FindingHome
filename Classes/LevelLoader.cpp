@@ -114,12 +114,9 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 	info.flipVertically = parseNodeFlip(node, true);
 	info.visible = parseNodeVisible(node);	
 
+	///	skip invisible nodes
 	if (!info.visible)
-	{
-		//CCLog("Node hidden. Skipping.");
-		return;
-	}
-
+		return;	
 
 	if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_PLAYER) == 0 && !loadedPlayer)
 	{
@@ -177,6 +174,26 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 		{
 			//layer->addChild(sprite->getSprite());
 			BatchManager::sharedManager()->addItem(sprite, layer, parallax);
+
+			//	calculate max positions of the scene
+			LevelProperties *lp = LevelProperties::sharedProperties();
+			CCPoint pos = sprite->getNodeInfo().position;
+			CCSize size = sprite->getNodeInfo().size;
+
+			//	further to the left
+			if (pos.x < lp->SceneSize.origin.x)
+				lp->SceneSize.origin.x = pos.x;
+
+			float toRight = pos.x + size.width;
+			if (toRight > lp->SceneSize.size.width)
+				lp->SceneSize.size.width = toRight;
+
+			if (pos.y < lp->SceneSize.origin.y)
+				lp->SceneSize.origin.y = pos.y;
+
+			float toTop = pos.y + size.height;
+			if (toTop > lp->SceneSize.size.height)
+				lp->SceneSize.size.height = toTop;
 		
 			if (isMainLayer || sprite->getProperties().isSolid() || sprite->getProperties().isCollectable())
 				sprite->createBody(this->boxWorld);
@@ -285,8 +302,8 @@ char* LevelLoader::parseNodeAssetName(xmlNodePtr node)
 
 
 void LevelLoader::parseLevelProperties()
-{
-	
-	LevelProperties::sharedProperties(sharedDoc->children);
-
+{	
+	LevelProperties* l = LevelProperties::sharedProperties(sharedDoc->children);
+	if (l)
+		l->WorldLayer = this->worldNode;
 }
