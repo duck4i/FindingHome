@@ -47,3 +47,12 @@ zip.exe -r -9 SetupTools.zip "Utils\*.*"
 del Utils\*.* /f /q
 rd Utils /S /Q
 
+REM add shortucts
+
+xcopy ..\start.bat *.*
+zip.exe -r -9 -D SetupTools.zip start.bat
+xcopy ..\start_forest_test.bat *.*
+zip.exe -r -9 -D SetupTools.zip start_forest_test.bat
+
+del start.bat /f /q
+del start_forest_test.bat /f /q

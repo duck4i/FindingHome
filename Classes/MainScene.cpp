@@ -22,6 +22,10 @@ MainScene::MainScene()
 	this->touchesInProgress = false;
 	this->cameraMoveInProgress = false;		
 	this->zoomInProgress = false;
+
+	if (LevelProperties::sharedProperties() != NULL)
+		LevelProperties::sharedProperties()->reset();
+
 }
 
 MainScene::~MainScene()

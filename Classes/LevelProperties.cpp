@@ -16,9 +16,17 @@ LevelProperties* LevelProperties::sharedProperties(xmlNodePtr node)
 	return _sLevelProperties;
 }
 
-LevelProperties::~LevelProperties()
+void LevelProperties::purge()
 {
-	_sLevelProperties = NULL;
+	if (_sLevelProperties)
+	{
+		delete _sLevelProperties;
+		_sLevelProperties = NULL;
+	}
+}
+
+LevelProperties::~LevelProperties()
+{	
 }
 
 //Name="Tutorial Level" Visible="true" WeatherActive="true" 

@@ -302,7 +302,9 @@ char* LevelLoader::parseNodeAssetName(xmlNodePtr node)
 
 
 void LevelLoader::parseLevelProperties()
-{	
+{
+	LevelProperties::purge();
+
 	LevelProperties* l = LevelProperties::sharedProperties(sharedDoc->children);
 	if (l)
 		l->WorldLayer = this->worldNode;

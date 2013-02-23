@@ -47,6 +47,7 @@ private:
 public:
 
 	static LevelProperties* sharedProperties(xmlNodePtr node = NULL);
+	static void purge();
 };
 
 
