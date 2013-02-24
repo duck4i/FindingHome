@@ -98,14 +98,10 @@ bool GameEntitySprite::createBody(b2World* world)
 	//	bouncable
 	if (m_customProps.isBouncable())
 		m_b2FixtureDef.restitution = 0.5f;
-
-	//m_b2FixtureDef.filter.categoryBits = 0x0002;
-	if (m_customProps.isCollectable())
-	{
-		m_b2FixtureDef.filter.maskBits = 0x0002;
-		m_b2FixtureDef.filter.categoryBits = 0x0004;
-	}
-		//m_b2FixtureDef.friction = 0;	//	no slowing down on touching the players
+	
+	//	collectable
+	if (m_customProps.isCollectable())	
+		m_b2FixtureDef.isSensor = true;
 
 	return createFixture();
 }
