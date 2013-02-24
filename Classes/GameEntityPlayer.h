@@ -35,6 +35,8 @@ protected:
 	CCNode* m_skin;
 	CCAnimation* m_animationStill;
 	
+	b2Fixture* m_sensorFixture;
+	
 	///	Keeps permanent record of player death state in case of tunneling
 	bool m_bPlayerDied;
 

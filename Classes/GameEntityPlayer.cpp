@@ -75,13 +75,17 @@ bool GameEntityPlayer::createBody(b2World *world)
 	b2FixtureDef groundBody;
 	b2PolygonShape groundBodyShape;
 	
-	playerSize.height += 60;	//	more than player size - so it goes into ground
-	groundBodyShape.SetAsBox(SCREEN_TO_WORLD(playerSize.width / 2), SCREEN_TO_WORLD(playerSize.height / 2));
+	playerSize.height = 60;	//	more than player size - so it goes into ground
+	playerSize.width -= 20;
+	b2Vec2 center = m_b2Body->GetLocalCenter();
+	center.y -= SCREEN_TO_WORLD(40);
+
+	groundBodyShape.SetAsBox(SCREEN_TO_WORLD(playerSize.width / 2), SCREEN_TO_WORLD(playerSize.height / 2), center, 0);	
 
 	groundBody.isSensor = true;
 	groundBody.shape = &groundBodyShape;
 
-	m_b2Body->CreateFixture(&groundBody);
+	m_sensorFixture = m_b2Body->CreateFixture(&groundBody);
 
 	return true;
 }
@@ -185,11 +189,14 @@ bool GameEntityPlayer::isPlayerMidAir()
 
 	b2ContactEdge *con = this->m_b2Body->GetContactList();
 	while (con)
-	{
+	{		
 		if (con->contact->IsTouching())
 		{
-			midAir = false;
-			break;
+			if (con->contact->GetFixtureA() == m_sensorFixture || con->contact->GetFixtureB() == m_sensorFixture)
+			{
+				midAir = false;
+				break;
+			}
 		}
 		con = con->next;
 	}

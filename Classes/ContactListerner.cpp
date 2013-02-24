@@ -49,6 +49,8 @@ void ContactListener::ExitHit(GameEntity* entity)
 	GameEntityExit* exit = dynamic_cast<GameEntityExit*>(entity);
 	if (!exit)
 		return;
+
+	PROFILE_FUNC();
 	
 	CCLog("Exit hit!");
 	reachedEndOfTheScene = true;	

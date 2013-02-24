@@ -37,6 +37,7 @@ B2DebugDrawLayer::~B2DebugDrawLayer()
 
 bool B2DebugDrawLayer::init()
 {
+	PROFILE_FUNC();
   //////////////////////////////
   // 1. super init first
 
@@ -62,6 +63,7 @@ bool B2DebugDrawLayer::init()
 
 void B2DebugDrawLayer::draw()
 {
+	PROFILE_FUNC();
   ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
   
   kmGLPushMatrix();

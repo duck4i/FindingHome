@@ -137,7 +137,7 @@ void MainScene::drawDebugControls()
 	return;
 #endif
 	
-	char* message = "[F1] Enable debug mode\r\n[F4] Restart game\r\n[F7] Zoom in\r\n[F8] Zoom out\r\n[F9] Reset camera";
+	char* message = "[F1] Toggle debug modes\r\n[F4] Restart game\r\n[F7] Zoom in\r\n[F8] Zoom out\r\n[F9] Reset camera";
 
 	int zOrder = 100000;
 	CCLabelTTF* lab = CCLabelTTF::create(message, "Consolas", 12.0f);
@@ -470,11 +470,13 @@ void MainScene::updatePhysics(float delta)
 
 void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 {
+	PROFILE_FUNC();
 	CCLog("Touches began");	
 }
 
 void MainScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
+	PROFILE_FUNC();
 	CCLog("Touches ended");
 	this->touchesInProgress = false;	
 }
@@ -482,6 +484,8 @@ void MainScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
 void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 {
 #ifndef NO_MOUSE_MOVE
+
+	PROFILE_FUNC();
 
 	CCLog("Touch moved");
 	this->touchesInProgress = true;
