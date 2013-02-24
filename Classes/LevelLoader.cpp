@@ -158,13 +158,13 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 		CCNode* layer = parent;
 		CCNode* toInsert = NULL;
 		GameEntitySprite *sprite;
-
+		
 		//	check type
 		if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_TEXTURE) == 0)
 		{		
 			info.nodeType = NodeTypeTexture;
 			sprite = GameEntitySprite::create(info);
-		}	
+		}
 		if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_RECTANGLE) == 0)
 		{		
 			info.nodeType = NodeTypeBlock; 
@@ -177,30 +177,34 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 		}
 	
 		//	then instert to view
-		if (sprite)
+		if (sprite && info.nodeType != NodeType::NodeTypeUndefined)
 		{
 			//layer->addChild(sprite->getSprite());
-			BatchManager::sharedManager()->addItem(sprite, layer, parallax);
+			BatchManager* manager = BatchManager::sharedManager();
+			if (manager)
+			{
+				manager->addItem(sprite, layer, parallax);
 
-			//	calculate max positions of the scene
-			LevelProperties *lp = LevelProperties::sharedProperties();
-			CCPoint pos = sprite->getNodeInfo().position;
-			CCSize size = sprite->getNodeInfo().size;
+				//	calculate max positions of the scene
+				LevelProperties *lp = LevelProperties::sharedProperties();
+				CCPoint pos = sprite->getNodeInfo().position;
+				CCSize size = sprite->getNodeInfo().size;
 
-			//	further to the left
-			if (pos.x < lp->SceneSize.origin.x)
-				lp->SceneSize.origin.x = pos.x;
+				//	further to the left
+				if (pos.x < lp->SceneSize.origin.x)
+					lp->SceneSize.origin.x = pos.x;
 
-			float toRight = pos.x + size.width;
-			if (toRight > lp->SceneSize.size.width)
-				lp->SceneSize.size.width = toRight;
+				float toRight = pos.x + size.width;
+				if (toRight > lp->SceneSize.size.width)
+					lp->SceneSize.size.width = toRight;
 
-			if (pos.y < lp->SceneSize.origin.y)
-				lp->SceneSize.origin.y = pos.y;
+				if (pos.y < lp->SceneSize.origin.y)
+					lp->SceneSize.origin.y = pos.y;
 
-			float toTop = pos.y + size.height;
-			if (toTop > lp->SceneSize.size.height)
-				lp->SceneSize.size.height = toTop;
+				float toTop = pos.y + size.height;
+				if (toTop > lp->SceneSize.size.height)
+					lp->SceneSize.size.height = toTop;
+			}
 		
 			if (isMainLayer || sprite->getProperties().isSolid() || sprite->getProperties().isCollectable())
 				sprite->createBody(this->boxWorld);

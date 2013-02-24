@@ -8,12 +8,13 @@
 #endif
 
 enum NodeType 
-{
+{	
 	NodeTypeBlock = 0,
 	NodeTypeCircle,
 	NodeTypeTexture,
 	NodeTypePlayer,
-	NodeTypeExit
+	NodeTypeExit,
+	NodeTypeUndefined
 };
 
 enum EnemyType
@@ -58,7 +59,7 @@ public:
 
 	NODEINFO()
 	{		
-		nodeType = NodeTypeBlock;
+		nodeType = NodeTypeUndefined;
 		position = ccp(0,0);
 		size = CCSizeMake(100, 100);
 		rotation = 0;

@@ -30,14 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Circle", 1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Text", 3);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Path", 2);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Bat", 0);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Crow", 1);
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Circle", 1);
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Text", 3);
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Path", 2);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Bat", 0);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Crow", 1);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -238,7 +238,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(751, 440);
+            this.pictureBox1.Size = new System.Drawing.Size(755, 440);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
@@ -322,7 +322,7 @@
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 5;
-            this.treeView1.Size = new System.Drawing.Size(239, 275);
+            this.treeView1.Size = new System.Drawing.Size(235, 275);
             this.treeView1.TabIndex = 2;
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
@@ -353,7 +353,7 @@
             this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.propertyGrid1.Size = new System.Drawing.Size(239, 333);
+            this.propertyGrid1.Size = new System.Drawing.Size(235, 333);
             this.propertyGrid1.TabIndex = 3;
             this.propertyGrid1.ToolbarVisible = false;
             this.propertyGrid1.Enter += new System.EventHandler(this.propertyGrid1_Enter);
@@ -1272,7 +1272,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(1002, 645);
-            this.splitContainer1.SplitterDistance = 243;
+            this.splitContainer1.SplitterDistance = 239;
             this.splitContainer1.TabIndex = 6;
             // 
             // splitContainer3
@@ -1291,7 +1291,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.propertyGrid1);
-            this.splitContainer3.Size = new System.Drawing.Size(243, 645);
+            this.splitContainer3.Size = new System.Drawing.Size(239, 645);
             this.splitContainer3.SplitterDistance = 304;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -1301,11 +1301,11 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.treeView1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(239, 275);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(235, 275);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(239, 300);
+            this.toolStripContainer1.Size = new System.Drawing.Size(235, 300);
             this.toolStripContainer1.TabIndex = 0;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -1396,7 +1396,7 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer2.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer2.Size = new System.Drawing.Size(755, 645);
+            this.splitContainer2.Size = new System.Drawing.Size(759, 645);
             this.splitContainer2.SplitterDistance = 444;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -1411,7 +1411,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(751, 193);
+            this.tabControl1.Size = new System.Drawing.Size(755, 193);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -1420,7 +1420,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(743, 167);
+            this.tabPage1.Size = new System.Drawing.Size(747, 167);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Textures";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1440,7 +1440,7 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.listView1);
-            this.splitContainer4.Size = new System.Drawing.Size(737, 161);
+            this.splitContainer4.Size = new System.Drawing.Size(741, 161);
             this.splitContainer4.SplitterDistance = 32;
             this.splitContainer4.TabIndex = 8;
             // 
@@ -1454,7 +1454,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(737, 32);
+            this.panel1.Size = new System.Drawing.Size(741, 32);
             this.panel1.TabIndex = 7;
             // 
             // panel5
@@ -1464,7 +1464,7 @@
             this.panel5.Location = new System.Drawing.Point(43, 0);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.panel5.Size = new System.Drawing.Size(462, 32);
+            this.panel5.Size = new System.Drawing.Size(466, 32);
             this.panel5.TabIndex = 3;
             // 
             // textBox1
@@ -1473,7 +1473,7 @@
             this.textBox1.Location = new System.Drawing.Point(0, 5);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(462, 20);
+            this.textBox1.Size = new System.Drawing.Size(466, 20);
             this.textBox1.TabIndex = 1;
             // 
             // panel4
@@ -1499,7 +1499,7 @@
             this.panel3.Controls.Add(this.buttonFolderUp);
             this.panel3.Controls.Add(this.chooseFolder);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(505, 0);
+            this.panel3.Location = new System.Drawing.Point(509, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(113, 32);
             this.panel3.TabIndex = 1;
@@ -1531,7 +1531,7 @@
             this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(618, 0);
+            this.panel2.Location = new System.Drawing.Point(622, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(119, 32);
             this.panel2.TabIndex = 0;
@@ -1567,7 +1567,7 @@
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.ShowItemToolTips = true;
-            this.listView1.Size = new System.Drawing.Size(737, 125);
+            this.listView1.Size = new System.Drawing.Size(741, 125);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
@@ -1598,16 +1598,16 @@
             // 
             this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView2.HideSelection = false;
-            listViewItem1.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
+            listViewItem9.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
                 "n be scaled but not rotated.";
-            listViewItem2.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
+            listViewItem10.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
                 "ut not rotated.";
-            listViewItem4.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
+            listViewItem12.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
             this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4});
+            listViewItem9,
+            listViewItem10,
+            listViewItem11,
+            listViewItem12});
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(3, 3);
             this.listView2.MultiSelect = false;
@@ -1645,8 +1645,8 @@
             this.entitiesListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.entitiesListView.HideSelection = false;
             this.entitiesListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2});
             this.entitiesListView.LargeImageList = this.entitiesImageList;
             this.entitiesListView.Location = new System.Drawing.Point(3, 3);
             this.entitiesListView.MultiSelect = false;
@@ -1680,8 +1680,8 @@
             this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView3.HideSelection = false;
             this.listView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
             this.listView3.LargeImageList = this.enemiesImageList;
             this.listView3.Location = new System.Drawing.Point(3, 3);
             this.listView3.MultiSelect = false;
