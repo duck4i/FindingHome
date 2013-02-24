@@ -80,11 +80,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     FreeConsole();
 #endif
 
-
+	/*
 #if defined(_DEBUG) && !defined(DISABLE_SHINY)
 	PROFILER_UPDATE();
 	PROFILER_OUTPUT("profiler_out.txt");
 #endif
+	*/
 	
 
     return ret;

@@ -22,6 +22,9 @@ MainScene::MainScene()
 	this->touchesInProgress = false;
 	this->cameraMoveInProgress = false;		
 	this->zoomInProgress = false;
+	this->statsLapse = 0;
+	this->stats = NULL;
+	this->shinyConsole = NULL;
 }
 
 MainScene::~MainScene()
@@ -47,7 +50,7 @@ MainScene::~MainScene()
 	BatchManager::purge();
 	LevelProperties::purge();
 	KeyboardHelper::purge();
-	ShapeHelper::purge();
+	ShapeHelper::purge();	
 }
 
 bool MainScene::init()
@@ -62,10 +65,6 @@ bool MainScene::init()
 	this->worldLayer = CCLayer::create();
 	sceneScale = DEFAULT_SCALE;
 	this->worldLayer->setScale(sceneScale);
-
-	//this->worldLayer->ignoreAnchorPointForPosition(false);
-	//this->worldLayer->setAnchorPoint(ccp(0, 0));
-
 	this->addChild(worldLayer, 1000);
 
 	//	add loading layer
@@ -114,23 +113,97 @@ void MainScene::loadMap(float none)
 		this->worldLayer->setPosition(this->getPositionX() + xs, this->getPositionY() + ys);
 	}
 
-	//	schedule controls
-	char* message = "[F1] Enable debug mode [F2] Reset camera [F4] Restart game [F7] Zoom in [F8] Zoom out [F9] Reset zoom";
-#ifdef NO_MOUSE_MOVE
-	message = "[F1] Enable debug mode     [F4] Restart game     [F7] Zoom in [F8] Zoom out [F9] Reset zoom";
-#endif
 
-	CCLabelTTF* lab = CCLabelTTF::create(message, "Arial", 18.0f);		
-	lab->setPosition(ccp(CCDirector::sharedDirector()->getWinSizeInPixels().width / 2, CCDirector::sharedDirector()->getWinSizeInPixels().height - 15));
-	this->addChild(lab, 100000);
+
+#if defined(_DEBUG) && !defined(DISABLE_SHINY)
+	PROFILER_UPDATE();
+	PROFILER_OUTPUT("profiler_load.txt");
+#endif
+	
+	//	schedule controls
+	drawDebugControls();
 
 	//	remove loading layer
-	//this->loadLayer->removeFromParentAndCleanup(true);
 	this->loadLayer->runAction(CCFadeTo::create(1.0f, 0));
 
 	//	now do UPDATE schedule
 	this->setTouchEnabled(true);
 	this->scheduleUpdate();
+}
+
+void MainScene::drawDebugControls()
+{
+#ifdef DISABLE_CONTROLS_TEXT
+	return;
+#endif
+	
+	char* message = "[F1] Enable debug mode\r\n[F4] Restart game\r\n[F7] Zoom in\r\n[F8] Zoom out\r\n[F9] Reset camera";
+
+	int zOrder = 100000;
+	CCLabelTTF* lab = CCLabelTTF::create(message, "Consolas", 12.0f);
+	lab->setAnchorPoint(ccp(0, 1));
+	lab->setHorizontalAlignment(CCTextAlignment::kCCTextAlignmentLeft);
+	lab->setPosition(ccp(10, CCDirector::sharedDirector()->getWinSizeInPixels().height - 15));
+	this->addChild(lab, zOrder);
+
+	//	make background
+	CCLayerColor *labOut = CCLayerColor::create(ccc4(0, 0, 0,  100));
+	labOut->ignoreAnchorPointForPosition(false);
+	labOut->setAnchorPoint(ccp(0, 1));
+
+	//	calculate size
+	float extend = 30;
+	CCSize labOutS = lab->getContentSize();
+	labOutS.width += 6;
+	labOutS.height += extend;
+	labOut->setContentSize(labOutS);
+	CCPoint labOutPos = lab->getPosition();
+	labOutPos.x -= 3;
+	labOutPos.y += 3;
+	labOut->setPosition(labOutPos);
+	this->addChild(labOut, zOrder - 1);
+
+	labOutS.height -= extend;
+	stats = CCLabelTTF::create("FPS:", "Consolas", 12.0f);
+
+	labOutPos.x = lab->getPositionX();
+	labOutPos.y -= labOutS.height + 10;
+	stats->setPosition(labOutPos);
+	stats->setAnchorPoint(ccp(0, 1));
+	this->addChild(stats, zOrder);
+
+#ifndef DISABLE_SHINY
+
+	PROFILER_UPDATE();
+	std::string shinyOut = PROFILER_OUTPUT_TREE_STRING();
+
+	shinyConsole = CCLabelTTF::create(shinyOut.c_str(), "Consolas", 12);
+	
+	CCPoint pos = lab->getPosition();
+	pos.x = winSize.width - 10;
+
+	shinyConsole->setPosition(pos);
+	shinyConsole->setAnchorPoint(ccp(1, 1));
+
+	this->addChild(shinyConsole, zOrder);
+
+	CCSize s = shinyConsole->getContentSize();
+	
+	shinyConsoleBackground = CCLayerColor::create(ccc4(0, 0, 0, 100));
+	shinyConsoleBackground->ignoreAnchorPointForPosition(false);
+	shinyConsoleBackground->setContentSize(s);
+	shinyConsoleBackground->setPosition(pos);
+	shinyConsoleBackground->setAnchorPoint(shinyConsole->getAnchorPoint());
+	this->addChild(shinyConsoleBackground, zOrder - 1);
+
+
+	shinyConsole->setVisible(false);
+	shinyConsoleBackground->setVisible(false);
+	
+	Shiny::ProfileManager::instance.clear();	//	clear prev data
+
+
+#endif
 }
 
 void MainScene::setupPhysics()
@@ -175,7 +248,6 @@ void MainScene::addBodies()
 		this->gamePlayer->getBody()->SetFixedRotation(true);
 		this->gamePlayer->getBody()->SetLinearDamping(0.5f);
 		this->gamePlayer->getBody()->SetGravityScale(2);
-
 
 		/*CCRect r = LevelProperties::sharedProperties()->SceneSize;
 		CCLayerColor* l = CCLayerColor::create(ccc4(255, 255, 255, 255));
@@ -247,9 +319,28 @@ void MainScene::updateKeyboard(float delta)
 	KeyboardHelper *key = KeyboardHelper::sharedHelper();
 	if (key->getF1() == KeyStateDown)
 	{
-		this->debugLayer->setVisible(!this->debugLayer->isVisible());
-		CCDirector* d = CCDirector::sharedDirector();
-		d->setDisplayStats(!d->isDisplayStats());
+#ifndef DISABLE_SHINY		
+		//	hide if both shown
+		if (debugLayer->isVisible() && shinyConsole->isVisible())
+		{
+			debugLayer->setVisible(false);
+			shinyConsole->setVisible(false);
+			shinyConsoleBackground->setVisible(false);
+		}
+		//	if shiny visible show debug next
+		else if (!debugLayer->isVisible() && shinyConsole->isVisible())		
+			debugLayer->setVisible(true);
+		//	if nothing shown show shiny
+		else if (!shinyConsole->isVisible())
+		{
+			shinyConsoleBackground->setVisible(true);
+			shinyConsole->setVisible(true);
+		}
+		
+#else
+		debugLayer->setVisible(!debugLayer->isVisible());
+#endif
+
 	}
 	else if (key->getF4() == KeyStateDown)	
 		playerDied();
@@ -258,11 +349,11 @@ void MainScene::updateKeyboard(float delta)
 	else if (key->getF8() == KeyStateDown)
 		descSceneZoom();
 	else if (key->getF9() == KeyStateDown)
-		resetSceneZoom();
-	else if (key->getF2() == KeyStateDown)
 	{
-		resetSceneZoom();
-		this->cameraMoveInProgress = false;
+		if (cameraMoveInProgress)
+			cameraMoveInProgress = false;
+		else
+			resetSceneZoom();
 	}
 
 	//	shift key sprite
@@ -275,9 +366,50 @@ void MainScene::updateKeyboard(float delta)
 		this->shiftSprite->setVisible(false);
 }
 
+void MainScene::updateFPS(float delta)
+{	
+	PROFILE_FUNC(); //- unimportant
+
+	if (stats && statsLapse == 0)
+	{
+		float times = 1.0f / delta;
+		char tmp[50];
+		sprintf(tmp, "FPS: %.2f", times);
+		stats->setString(tmp);
+		statsLapse += delta;
+
+#ifndef DISABLE_SHINY
+
+	//	update Shiny data if debug layer ON
+	if (this->shinyConsole && this->shinyConsole->isVisible())
+	{
+		PROFILER_UPDATE();
+		std::string out = PROFILER_OUTPUT_TREE_STRING();
+		shinyConsole->setString(out.c_str());
+		Shiny::ProfileManager::instance.clear();
+
+		//	resize console if needed
+		CCSize sc = shinyConsole->getContentSize();
+		CCSize scb = shinyConsoleBackground->getContentSize();
+		if (sc.width != scb.width || sc.height != scb.height)
+			shinyConsoleBackground->setContentSize(sc);
+	}
+
+#endif
+
+	}//	if time is right
+	else if (statsLapse >= 1.0f) //update every half second
+		statsLapse = 0;
+	else
+		statsLapse += delta;
+}
+
 void MainScene::update(float delta)
 {
 	PROFILE_FUNC();
+
+	//	stats update
+	updateFPS(delta);
 
 	//	Keyboard update
 	updateKeyboard(delta);	

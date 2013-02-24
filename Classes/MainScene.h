@@ -77,6 +77,14 @@ private:
 	bool zoomInProgress;
 	void resetZoomInProgress();
 
+	CCLabelTTF *stats;
+	CCLabelTTF *shinyConsole;
+	CCLayerColor* shinyConsoleBackground;
+
+	void drawDebugControls();
+	
+	float statsLapse;
+	void updateFPS(float delta);
 
 	void playerDied();
 

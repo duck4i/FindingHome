@@ -2,6 +2,8 @@
 
 void ContactListener::BeginContact(b2Contact *con)
 {
+	PROFILE_FUNC();
+
 	//CCLog("Contact listerner fired");
 	if (reachedEndOfTheScene)
 		return;
@@ -33,15 +35,17 @@ void ContactListener::EndContact(b2Contact *con)
 void ContactListener::CollectibleHit(GameEntity* entity)
 {
 	if (!entity->getProperties().isCollectable())
-		return;
+		return;	
 	
+	PROFILE_FUNC();
+
 	//	mark for removal
 	CCLog("Collectable hit!");
 	entity->removeAtNextUpdate();
 }
 
 void ContactListener::ExitHit(GameEntity* entity)
-{	
+{
 	GameEntityExit* exit = dynamic_cast<GameEntityExit*>(entity);
 	if (!exit)
 		return;
