@@ -613,12 +613,13 @@ namespace GLEED2D
             Vector2 maincameraposition = camera.Position;
             if (SelectedLayer != null) camera.Position *= SelectedLayer.ScrollSpeed;
             mouseworldpos = Vector2.Transform(new Vector2(screenx, screeny), Matrix.Invert(camera.matrix));
-            if (Constants.Instance.SnapToGrid || kstate.IsKeyDown(Keys.G))
-            {
+            
+            
+            if ( !Constants.Instance.SnapToGrid && kstate.IsKeyDown(Keys.G) )            
                 mouseworldpos = snapToGrid(mouseworldpos);
-            }
+            
             camera.Position = maincameraposition;
-        }
+        }        
 
         public Item getItemAtPos(Vector2 mouseworldpos)
         {
@@ -983,6 +984,8 @@ namespace GLEED2D
                     (kstate.IsKeyDown(Keys.D1) && oldkstate.IsKeyUp(Keys.D1)))
                 {
                     if (item != null) item.onMouseButtonDown(mouseworldpos);
+
+                    //  copy - i think
                     if (kstate.IsKeyDown(Keys.LeftControl) && item != null)
                     {
                         if (!SelectedItems.Contains(item)) selectitem(item);
@@ -992,13 +995,18 @@ namespace GLEED2D
                         List<Item> selecteditemscopy = new List<Item>();
                         foreach (Item selitem in SelectedItems)
                         {
-                            Item i2 = (Item)selitem.clone();
+                            Item i2 = (Item)selitem.clone();                            
                             selecteditemscopy.Add(i2);
                         }
+
                         foreach (Item selitem in selecteditemscopy)
                         {
                             selitem.Name = selitem.getNamePrefix() + level.getNextItemNumber();
-                            addItem(selitem);
+
+                            //  move to the right
+                            //selitem.Position.X += selitem.get;                            
+
+                            addItem(selitem);                            
                         }
                         selectitem(selecteditemscopy[0]);
                         updatetreeview();

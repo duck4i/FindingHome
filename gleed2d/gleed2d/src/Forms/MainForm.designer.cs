@@ -30,21 +30,20 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Circle", 1);
-            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Text", 3);
-            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Path", 2);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Bat", 0);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Crow", 1);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Circle", 1);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Text", 3);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Path", 2);
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Bat", 0);
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Crow", 1);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.treeView1 = new CustomTreeView();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.CustomPropertyContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -194,8 +193,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-            this.insertGameLayersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeView1 = new CustomTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.CustomPropertyContextMenu.SuspendLayout();
@@ -309,31 +307,6 @@
             this.toolStripStatusLabel4.Size = new System.Drawing.Size(60, 17);
             this.toolStripStatusLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // treeView1
-            // 
-            this.treeView1.AllowDrop = true;
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.treeView1.HideSelection = false;
-            this.treeView1.ImageIndex = 5;
-            this.treeView1.ImageList = this.imageList2;
-            this.treeView1.LabelEdit = true;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.SelectedImageIndex = 5;
-            this.treeView1.Size = new System.Drawing.Size(235, 275);
-            this.treeView1.TabIndex = 2;
-            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
-            this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
-            this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
-            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
-            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
-            this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
-            this.treeView1.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView1_DragOver);
-            // 
             // imageList2
             // 
             this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
@@ -388,6 +361,7 @@
             this.addCustomPropertyToolStripMenuItem});
             this.ItemContextMenu.Name = "ItemContextMenu";
             this.ItemContextMenu.Size = new System.Drawing.Size(190, 154);
+            this.ItemContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.ItemContextMenu_Opening);
             // 
             // ItemCenterViewEntry
             // 
@@ -592,7 +566,7 @@
             this.ViewGrid.CheckOnClick = true;
             this.ViewGrid.Image = ((System.Drawing.Image)(resources.GetObject("ViewGrid.Image")));
             this.ViewGrid.Name = "ViewGrid";
-            this.ViewGrid.Size = new System.Drawing.Size(142, 22);
+            this.ViewGrid.Size = new System.Drawing.Size(181, 22);
             this.ViewGrid.Text = "Grid";
             this.ViewGrid.CheckedChanged += new System.EventHandler(this.ViewGrid_CheckedChanged);
             // 
@@ -601,7 +575,8 @@
             this.ViewSnapToGrid.CheckOnClick = true;
             this.ViewSnapToGrid.Image = ((System.Drawing.Image)(resources.GetObject("ViewSnapToGrid.Image")));
             this.ViewSnapToGrid.Name = "ViewSnapToGrid";
-            this.ViewSnapToGrid.Size = new System.Drawing.Size(142, 22);
+            this.ViewSnapToGrid.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.ViewSnapToGrid.Size = new System.Drawing.Size(181, 22);
             this.ViewSnapToGrid.Text = "Snap to Grid";
             this.ViewSnapToGrid.CheckedChanged += new System.EventHandler(this.ViewSnapToGrid_CheckedChanged);
             // 
@@ -610,7 +585,7 @@
             this.ViewWorldOrigin.CheckOnClick = true;
             this.ViewWorldOrigin.Image = ((System.Drawing.Image)(resources.GetObject("ViewWorldOrigin.Image")));
             this.ViewWorldOrigin.Name = "ViewWorldOrigin";
-            this.ViewWorldOrigin.Size = new System.Drawing.Size(142, 22);
+            this.ViewWorldOrigin.Size = new System.Drawing.Size(181, 22);
             this.ViewWorldOrigin.Text = "World Origin";
             this.ViewWorldOrigin.CheckedChanged += new System.EventHandler(this.ViewWorldOrigin_CheckedChanged);
             // 
@@ -627,7 +602,7 @@
             this.runLevelInYourOwnApplicationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("runLevelInYourOwnApplicationToolStripMenuItem.Image")));
             this.runLevelInYourOwnApplicationToolStripMenuItem.Name = "runLevelInYourOwnApplicationToolStripMenuItem";
             this.runLevelInYourOwnApplicationToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.runLevelInYourOwnApplicationToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.runLevelInYourOwnApplicationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.runLevelInYourOwnApplicationToolStripMenuItem.Text = "Run Level";
             this.runLevelInYourOwnApplicationToolStripMenuItem.ToolTipText = "Run Level in your own application. To use this, define the appropriate settings i" +
                 "n the Tools->Settings dialog.";
@@ -1589,7 +1564,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(739, 167);
+            this.tabPage2.Size = new System.Drawing.Size(747, 167);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Primitives";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1598,22 +1573,22 @@
             // 
             this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView2.HideSelection = false;
-            listViewItem9.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
+            listViewItem1.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
                 "n be scaled but not rotated.";
-            listViewItem10.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
+            listViewItem2.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
                 "ut not rotated.";
-            listViewItem12.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
+            listViewItem4.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
             this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem9,
-            listViewItem10,
-            listViewItem11,
-            listViewItem12});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4});
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(3, 3);
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.ShowItemToolTips = true;
-            this.listView2.Size = new System.Drawing.Size(733, 161);
+            this.listView2.Size = new System.Drawing.Size(741, 161);
             this.listView2.TabIndex = 0;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView2_MouseDoubleClick);
@@ -1634,7 +1609,7 @@
             this.EntitiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.EntitiesTabPage.Name = "EntitiesTabPage";
             this.EntitiesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.EntitiesTabPage.Size = new System.Drawing.Size(739, 167);
+            this.EntitiesTabPage.Size = new System.Drawing.Size(747, 167);
             this.EntitiesTabPage.TabIndex = 2;
             this.EntitiesTabPage.Text = "Game Entities ";
             this.EntitiesTabPage.UseVisualStyleBackColor = true;
@@ -1645,13 +1620,13 @@
             this.entitiesListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.entitiesListView.HideSelection = false;
             this.entitiesListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem5,
+            listViewItem6});
             this.entitiesListView.LargeImageList = this.entitiesImageList;
             this.entitiesListView.Location = new System.Drawing.Point(3, 3);
             this.entitiesListView.MultiSelect = false;
             this.entitiesListView.Name = "entitiesListView";
-            this.entitiesListView.Size = new System.Drawing.Size(733, 161);
+            this.entitiesListView.Size = new System.Drawing.Size(741, 161);
             this.entitiesListView.TabIndex = 0;
             this.entitiesListView.UseCompatibleStateImageBehavior = false;
             this.entitiesListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.entitiesListView_MouseDoubleClick);
@@ -1670,7 +1645,7 @@
             this.EnemiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.EnemiesTabPage.Name = "EnemiesTabPage";
             this.EnemiesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.EnemiesTabPage.Size = new System.Drawing.Size(739, 167);
+            this.EnemiesTabPage.Size = new System.Drawing.Size(747, 167);
             this.EnemiesTabPage.TabIndex = 3;
             this.EnemiesTabPage.Text = "Game Enemies";
             this.EnemiesTabPage.UseVisualStyleBackColor = true;
@@ -1680,13 +1655,13 @@
             this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView3.HideSelection = false;
             this.listView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem7,
+            listViewItem8});
             this.listView3.LargeImageList = this.enemiesImageList;
             this.listView3.Location = new System.Drawing.Point(3, 3);
             this.listView3.MultiSelect = false;
             this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(733, 161);
+            this.listView3.Size = new System.Drawing.Size(741, 161);
             this.listView3.TabIndex = 0;
             this.listView3.UseCompatibleStateImageBehavior = false;
             // 
@@ -1737,12 +1712,10 @@
             this.toolStripSeparator13,
             this.toolStripMenuItem2,
             this.toolStripSeparator15,
-            this.toolStripMenuItem6,
-            this.toolStripSeparator20,
-            this.insertGameLayersToolStripMenuItem});
+            this.toolStripMenuItem6});
             this.LevelContextMenu.Name = "ItemContextMenu";
             this.LevelContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.LevelContextMenu.Size = new System.Drawing.Size(190, 132);
+            this.LevelContextMenu.Size = new System.Drawing.Size(190, 104);
             this.LevelContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.LevelContextMenu_Opening);
             // 
             // centerViewToolStripMenuItem
@@ -1785,17 +1758,30 @@
             this.toolStripMenuItem6.Text = "Add Custom Property";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.ActionAddCustomProperty);
             // 
-            // toolStripSeparator20
+            // treeView1
             // 
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(186, 6);
-            // 
-            // insertGameLayersToolStripMenuItem
-            // 
-            this.insertGameLayersToolStripMenuItem.Name = "insertGameLayersToolStripMenuItem";
-            this.insertGameLayersToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.insertGameLayersToolStripMenuItem.Text = "Insert Game Layers";
-            this.insertGameLayersToolStripMenuItem.Click += new System.EventHandler(this.insertGameLayersToolStripMenuItem_Click);
+            this.treeView1.AllowDrop = true;
+            this.treeView1.CheckBoxes = true;
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.treeView1.HideSelection = false;
+            this.treeView1.ImageIndex = 5;
+            this.treeView1.ImageList = this.imageList2;
+            this.treeView1.LabelEdit = true;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.SelectedImageIndex = 5;
+            this.treeView1.Size = new System.Drawing.Size(235, 275);
+            this.treeView1.TabIndex = 2;
+            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
+            this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
+            this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
+            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
+            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
+            this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
+            this.treeView1.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView1_DragOver);
             // 
             // MainForm
             // 
@@ -1981,8 +1967,6 @@
         public System.Windows.Forms.ToolStripMenuItem ViewSnapToGrid;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
-        private System.Windows.Forms.ToolStripMenuItem insertGameLayersToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton sendToMainStripButton;
         private System.Windows.Forms.ToolStripButton sendToBackStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;

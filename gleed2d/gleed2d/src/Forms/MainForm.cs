@@ -1009,10 +1009,7 @@ namespace GLEED2D
 
         }
 
-        private void insertGameLayersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            addGameLayers();
-        }
+
 
         private void addGameLayers()
         {
@@ -1262,6 +1259,11 @@ namespace GLEED2D
         private void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
             
+        }
+
+        private void ItemContextMenu_Opening(object sender, CancelEventArgs e)
+        {
+
         }
     }
 
