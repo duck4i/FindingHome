@@ -43,9 +43,11 @@ bool LevelProperties::init()
 			xmlChar* Visible = xmlGetProp(currNode, (xmlChar*) "Visible");
 			xmlChar* WeatherActive = xmlGetProp(currNode, (xmlChar*) "WeatherActive");
 			xmlChar* CameraZoom = xmlGetProp(currNode, (xmlChar*) "CameraZoom");
-			xmlChar* PlayerSpeed = xmlGetProp(currNode, (xmlChar*) "PlayerSpeed");
+			xmlChar* PlayerThrust = xmlGetProp(currNode, (xmlChar*) "PlayerThrust");
 			xmlChar* PlayerJump = xmlGetProp(currNode, (xmlChar*) "PlayerJump");
+			xmlChar* PlayerMaxSpeed = xmlGetProp(currNode, (xmlChar*) "PlayerMaxSpeed");
 			xmlChar* PlayerShiftModifier = xmlGetProp(currNode, (xmlChar*) "PlayerShiftModifier");
+			xmlChar* PlayerMidAirModifier = xmlGetProp(currNode, (xmlChar*) "PlayerMidAirModifier");
 
 #ifdef CC_PLATFORM_WIN32
 			//	Set window title
@@ -55,16 +57,21 @@ bool LevelProperties::init()
 #endif
 
 			if (STRING_TRUE(WeatherActive))
-				this->WeatherActive = true;
-			
+				this->WeatherActive = true;			
 			if (CameraZoom)
 				this->CameraZoom = atof((char*) CameraZoom);
-			if (PlayerSpeed)
-				this->PlayerSpeed = atof((char*) PlayerSpeed);
+
+			if (PlayerThrust)
+				this->PlayerThrust = atof((char*) PlayerThrust);
 			if (PlayerJump)
 				this->PlayerJump = atof((char*) PlayerJump);
+			if (PlayerMaxSpeed)
+				this->PlayerMaxSpeed = atof((char*) PlayerMaxSpeed);
+			
 			if (PlayerShiftModifier)
 				this->PlayerShiftModifier = atof((char*) PlayerShiftModifier);
+			if (PlayerMidAirModifier)
+				this->PlayerMidAirModifier = atof((char*) PlayerMidAirModifier);
 
 			break;
 		}

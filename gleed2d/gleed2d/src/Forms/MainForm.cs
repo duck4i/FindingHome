@@ -14,6 +14,7 @@ using System.Threading;
 using System.Xml;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 
 namespace GLEED2D
 {
@@ -95,7 +96,8 @@ namespace GLEED2D
 
             pictureBox1.AllowDrop = true;
 
-            //  already set up game layers            
+            //treeView1.DrawNode += DrawTreeNodeHighlightSelectedEvenWithoutFocus;
+            //treeView1.DrawMode = TreeViewDrawMode.OwnerDrawText;
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -1257,8 +1259,10 @@ namespace GLEED2D
             }
         }
 
-
-
+        private void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            
+        }
     }
 
     public class BehaviorOptions

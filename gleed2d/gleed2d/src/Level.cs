@@ -20,22 +20,29 @@ namespace GLEED2D
 
         [XmlAttribute()]
         public bool Visible;
-
+        
+        //  SCENE SETTINGS
         [XmlAttribute()]
         public bool WeatherActive;
 
         [XmlAttribute()]
         public float CameraZoom;
 
-
+        //  PLAYER SETTINGS
         [XmlAttribute()]
-        public float PlayerSpeed;
+        public float PlayerThrust;
 
         [XmlAttribute()]
         public float PlayerJump;
 
         [XmlAttribute()]
+        public float PlayerMaxSpeed;
+
+        [XmlAttribute()]
         public float PlayerShiftModifier;
+
+        [XmlAttribute()]
+        public float PlayerMidAirModifier;
 
 
         /// <summary>
@@ -57,10 +64,12 @@ namespace GLEED2D
             WeatherActive = true;
             CameraZoom = 1.0f;
 
-            PlayerSpeed = 0;
+            //  player zeros - no override
+            PlayerThrust = 0;
             PlayerJump = 0;
+            PlayerMaxSpeed = 0;
             PlayerShiftModifier = 0;
-
+            PlayerMidAirModifier = 0;
         }
 
         public static Level FromFile(string filename, ContentManager cm)

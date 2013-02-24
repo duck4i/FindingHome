@@ -2,9 +2,11 @@
 
 bool GameEntityPlayer::init()
 {
+	//	init main image
 	CCTextureCache *cache = CCTextureCache::sharedTextureCache();
 	CCTexture2D *player1 = cache->addImage(RESOURCE_PLAYER);
 		
+	//	add sprite frames
 	m_animationStill = CCAnimation::create();
 	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER);
 	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER2);
@@ -12,16 +14,32 @@ bool GameEntityPlayer::init()
 	m_animationStill->addSpriteFrameWithFileName(RESOURCE_PLAYER4);
 	m_animationStill->setDelayPerUnit(0.2f);	
 
+	LevelProperties* opt = LevelProperties::sharedProperties();
+	if (opt)
+	{
+		if (opt->PlayerJump)
+			jumpValue = opt->PlayerJump;
+		if (opt->PlayerMaxSpeed)
+			maxSpeed = opt->PlayerMaxSpeed;
+		if (opt->PlayerThrust)
+			stepValue = opt->PlayerThrust;
+		if (opt->PlayerMidAirModifier)
+			midAirFactor = opt->PlayerMidAirModifier;
+		if (opt->PlayerShiftModifier)
+			shiftFactor = opt->PlayerShiftModifier;
+	}
+	
+	//	Create animation
 	CCAction* a = CCRepeatForever::create(CCAnimate::create(m_animationStill));	
 
 	m_skin = CCSprite::createWithTexture(player1);
 	if (!m_skin)
 		return false;
-
-	//m_skin->setBlendFunc( (ccBlendFunc){GL_ONE, GL_ZERO} ); 
 	
+	//	run animation
 	m_skin->runAction(a);
 
+	//	set scale
 	m_skin->setPosition(m_nodeInfo.position);
 	m_skin->setScale(1.3f);
 
@@ -87,14 +105,14 @@ void GameEntityPlayer::updatePlayerMovement()
 
 	bool leftDown = key->getLeft() == KeyStateDown;
 	bool rightDown = key->getRight() == KeyStateDown;
-				
+
 	if (leftDown)
-		x -= PLAYER_STEP_VALUE;
+		x -= stepValue;
 	if (rightDown)
-		x += PLAYER_STEP_VALUE;
+		x += stepValue;
 
 	if (key->getUp() == KeyStateDown)
-		y += PLAYER_JUMP_VALUE;
+		y += jumpValue;
 
 	float isMidAir = isPlayerMidAir();
 	if (x || y)
@@ -108,24 +126,24 @@ void GameEntityPlayer::updatePlayerMovement()
 		//	http://www.ikbentomas.nl/other/box2d/
 		//	http://www.cocos2d-iphone.org/forum/topic/13501				
 
-		float maxSpeed = PLAYER_SPEED;
+		float maxSpeed = this->maxSpeed;
 		const b2Vec2 velocity = m_b2Body->GetLinearVelocity();
 
 		//	no more jumping and only slight adjustment of direction when in air			
 		if (isMidAir)
 		{
-			x *= PLAYER_MID_AIR_FACTOR;
+			x *= midAirFactor;
 			y = 0;	//	no jumping when mid air
 		}
 		
 		///
 		///	Shift button feature
 		///
-		if (key->getShift() == KeyStateDown)
+		if (key->getShift() == KeyStateDown && !isMidAir)
 		{
-			x *= PLAYER_SHIFT_FACTOR;
-			maxSpeed *= PLAYER_SHIFT_FACTOR;
-			y *= PLAYER_SHIFT_FACTOR;
+			x *= shiftFactor;
+			maxSpeed *= shiftFactor;
+			y *= shiftFactor;
 		}
 
 		//	apply horizontal force - take care of max velocity

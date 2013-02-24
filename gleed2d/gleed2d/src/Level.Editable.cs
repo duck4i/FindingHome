@@ -61,6 +61,47 @@ namespace GLEED2D
             set { CameraZoom = value; }
         }
 
+        [XmlIgnore()]
+        [DisplayName("Forward Thrust"), Category(" Player Settings"), Description("(D: 25.0) Maximum speed of the player.")]
+        public float pPlayerThrust
+        {
+            get { return PlayerThrust; }
+            set { PlayerThrust = value; }
+        }
+
+        [XmlIgnore()]
+        [DisplayName("Jump Height"), Category(" Player Settings"), Description("(D: 280.0) Jump height setting for player.")]
+        public float pPlayerJump
+        {
+            get { return PlayerJump; }
+            set { PlayerJump = value; }
+        }
+
+        [XmlIgnore()]
+        [DisplayName("Max Speed"), Category(" Player Settings"), Description("(D: 10.0) Maximum speed of the player.")]
+        public float pPlayerMaxSpeed
+        {
+            get { return PlayerMaxSpeed; }
+            set { PlayerMaxSpeed = value; }
+        }
+
+        [XmlIgnore()]
+        [DisplayName("Shift Modifier"), Category(" Player Settings"), Description("(D: 1.45) Multiplies jump and speed values.")]
+        public float pShiftModifier
+        {
+            get { return PlayerShiftModifier; }
+            set { PlayerShiftModifier = value; }
+        }
+
+
+        [XmlIgnore()]
+        [DisplayName("In Air Modifier"), Category(" Player Settings"), Description("(D: 0.3) Multiplies speed values when player mid air.")]
+        public float pMidAirModifier
+        {
+            get { return PlayerMidAirModifier; }
+            set { PlayerMidAirModifier = value; }
+        }     
+
         EditorVars editorrelated = new EditorVars();
         [Browsable(false)]
         public EditorVars EditorRelated

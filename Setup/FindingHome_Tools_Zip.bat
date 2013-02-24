@@ -4,14 +4,14 @@ echo off
 
 
 REM remove old version
-del SetupTools.zip /f /q
+del FindingHomeTools.zip /f /q
 
 REM pack Bin directory
 md Bin
 xcopy ..\bin\FindingHome.win32.exe Bin\*.*
 xcopy ..\bin\*.dll Bin\*.*
 
-zip.exe -r -9 SetupTools.zip "Bin\*.*"
+zip.exe -r -9 FindingHomeTools.zip "Bin\*.*"
 del bin\*.* /f /q
 rd bin /S /Q
 
@@ -23,7 +23,7 @@ xcopy /E ..\Resources\*.json Resources\*.*
 xcopy /E ..\Resources\*.vsh Resources\*.*
 xcopy /E ..\Resources\*.fsh Resources\*.*
 
-zip.exe -r -9 SetupTools.zip "Resources\*.*"
+zip.exe -r -9 FindingHomeTools.zip "Resources\*.*"
 del Resources\*.* /f /q
 rd Resources /S /Q
 
@@ -31,7 +31,7 @@ REM pack Docs
 md Docs
 xcopy ..\Docs\*.* Docs\*.*
 
-zip.exe -r -9 SetupTools.zip "Docs\*.*"
+zip.exe -r -9 FindingHomeTools.zip "Docs\*.*"
 del Docs\*.* /f /q
 rd Docs /S /Q
 
@@ -43,16 +43,16 @@ xcopy /E ..\Utils\*.xml Utils\*.*
 xcopy /E ..\Utils\*.jar Utils\*.*
 xcopy /E ..\Utils\*.txt Utils\*.*
 
-zip.exe -r -9 SetupTools.zip "Utils\*.*"
+zip.exe -r -9 FindingHomeTools.zip "Utils\*.*"
 del Utils\*.* /f /q
 rd Utils /S /Q
 
 REM add shortucts
 
 xcopy ..\start.bat *.*
-zip.exe -r -9 -D SetupTools.zip start.bat
+zip.exe -r -9 -D FindingHomeTools.zip start.bat
 xcopy ..\start_forest_test.bat *.*
-zip.exe -r -9 -D SetupTools.zip start_forest_test.bat
+zip.exe -r -9 -D FindingHomeTools.zip start_forest_test.bat
 
 del start.bat /f /q
 del start_forest_test.bat /f /q

@@ -300,6 +300,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <Compile Include="src\CustomTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\Forms\SelectBehavior.cs">
       <SubType>Form</SubType>
     </Compile>

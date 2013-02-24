@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Forest Test - Ibrahim" Visible="true" WeatherActive="false" CameraZoom="0.5" PlayerSpeed="0" PlayerJump="0" PlayerShiftModifier="0">
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Forest Test - Ibrahim" Visible="true" WeatherActive="false" CameraZoom="0.5" PlayerThrust="0" PlayerJump="0" PlayerMaxSpeed="0" PlayerShiftModifier="0" PlayerMidAirModifier="0">
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
                 <Item xsi:type="TextureItem" Name="Texture_0002" Visible="true">
                     <Position>
-                        <X>-24</X>
-                        <Y>-61</Y>
+                        <X>-140</X>
+                        <Y>-278</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
@@ -32,8 +32,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0007" Visible="true">
                     <Position>
-                        <X>3350</X>
-                        <Y>-59</Y>
+                        <X>3234</X>
+                        <Y>-276</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
@@ -59,8 +59,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0017" Visible="true">
                     <Position>
-                        <X>-3399</X>
-                        <Y>-61</Y>
+                        <X>-3515</X>
+                        <Y>-278</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
@@ -86,8 +86,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0042" Visible="true">
                     <Position>
-                        <X>6728</X>
-                        <Y>-61</Y>
+                        <X>6612</X>
+                        <Y>-278</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
@@ -114,7 +114,7 @@
             </Items>
             <ScrollSpeed>
                 <X>0.6</X>
-                <Y>0.6</Y>
+                <Y>1</Y>
             </ScrollSpeed>
             <CustomProperties />
         </Layer>
@@ -993,8 +993,8 @@
         <NextItemNumber>44</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>367.8669</X>
-            <Y>-673.3383</Y>
+            <X>351.2002</X>
+            <Y>-598.3384</Y>
         </CameraPosition>
         <Version>1.5.0.0</Version>
     </EditorRelated>

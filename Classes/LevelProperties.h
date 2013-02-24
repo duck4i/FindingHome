@@ -9,13 +9,17 @@
 class LevelProperties
 {
 public:
-
-	bool PlayerFlipped;
+		
 	bool WeatherActive;
 	float CameraZoom;
-	float PlayerSpeed;
+		
+	float PlayerThrust;
 	float PlayerJump;
+	float PlayerMaxSpeed;	
+
+	float PlayerMidAirModifier;
 	float PlayerShiftModifier;
+
 	CCRect SceneSize;
 
 	CCNode* WorldLayer;
@@ -23,10 +27,11 @@ public:
 	void reset()
 	{
 		CameraZoom = 0;
-		PlayerSpeed = 0;
+		PlayerThrust = 0;
+		PlayerMaxSpeed = 0;
 		PlayerJump = 0;
+		PlayerMidAirModifier = 0;
 		PlayerShiftModifier = 0;
-		PlayerFlipped = false;
 		WeatherActive = false;
 		WorldLayer = NULL;
 	}

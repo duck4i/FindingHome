@@ -5,11 +5,12 @@
 #include "KeyboardHelper.h"
 
 #define PLAYER_SPEED			10.0f
+#define PLAYER_JUMP_VALUE		280.0f
+#define PLAYER_STEP_VALUE		25.0f
 
 #define PLAYER_MID_AIR_FACTOR	0.3f
 #define PLAYER_SHIFT_FACTOR		1.45f
-#define PLAYER_JUMP_VALUE		280.0f
-#define PLAYER_STEP_VALUE		25.0f
+
 #define IN_AIR_BEFORE_DEATH		2.5f
 
 #define RESOURCE_PLAYER			RESOURCE_DIR	"dog.png"
@@ -37,11 +38,23 @@ protected:
 	///	Keeps permanent record of player death state in case of tunneling
 	bool m_bPlayerDied;
 
+	float stepValue;
+	float jumpValue;
+	float maxSpeed;
+	float shiftFactor;
+	float midAirFactor;
+
 	GameEntityPlayer(NODEINFO info) : GameEntity(info) 
 	{
 		m_secondsInAir = 0;
 		m_bPlayerDied = false;
 		direction = PlayerDirectionRight;
+
+		stepValue = PLAYER_STEP_VALUE;
+		jumpValue = PLAYER_JUMP_VALUE;		
+		maxSpeed = PLAYER_SPEED;
+		shiftFactor = PLAYER_SHIFT_FACTOR;
+		midAirFactor = PLAYER_MID_AIR_FACTOR;
 	}
 	
 	virtual bool init();
