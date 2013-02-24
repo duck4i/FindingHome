@@ -56,7 +56,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>DISABLE_MEMORY_TRACE;DISABLE_CAMERAx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVEx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DISABLE_MEMORY_TRACExx;DISABLE_SHINY;DISABLE_CAMERAx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVEx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;4099;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -83,6 +83,10 @@
       <TypeLibraryName>$(IntDir)/FindingHome.tlb</TypeLibraryName>
       <DllDataFileName />
     </Midl>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

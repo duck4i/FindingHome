@@ -17,6 +17,11 @@ KeyboardHelper* KeyboardHelper::sharedHelper()
 	return NULL;
 }
 
+void KeyboardHelper::purge()
+{
+	CC_SAFE_DELETE(singleInstanceHelper);
+}
+
 bool KeyboardHelper::init()
 {
 	m_module = (HINSTANCE) GetModuleHandle(NULL);

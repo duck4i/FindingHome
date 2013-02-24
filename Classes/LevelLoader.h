@@ -46,8 +46,7 @@ private:
 	bool loadedPlayer;
 	
 	CCParallaxNode* paralaxNode; // this one is displayed before main layer, eg. play gets behind something...
-	CCNode* mainLayer;	
-	//CCNode* backgroundLayer;
+	CCNode* mainLayer;
 	
 	CCNode* levelLayers;
 	void createLevelLayers();

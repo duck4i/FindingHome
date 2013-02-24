@@ -820,8 +820,8 @@
             <Items>
                 <Item xsi:type="TextureItem" Name="Texture_0029" Visible="true">
                     <Position>
-                        <X>-3972</X>
-                        <Y>47</Y>
+                        <X>-4030</X>
+                        <Y>80</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="Solid" Type="bool" Description="">
@@ -830,8 +830,8 @@
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>5.11501</X>
-                        <Y>5.11501</Y>
+                        <X>8.921402</X>
+                        <Y>8.921402</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -861,7 +861,7 @@
                         <X>8.132763</X>
                         <Y>8.132763</Y>
                     </Scale>
-                    <NextLevel>Level2.xml</NextLevel>
+                    <NextLevel />
                 </Item>
             </Items>
             <ScrollSpeed>
@@ -993,8 +993,8 @@
         <NextItemNumber>44</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>1770.791</X>
-            <Y>-540.488037</Y>
+            <X>367.8669</X>
+            <Y>-673.3383</Y>
         </CameraPosition>
         <Version>1.5.0.0</Version>
     </EditorRelated>

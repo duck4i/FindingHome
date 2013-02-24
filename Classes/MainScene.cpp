@@ -22,25 +22,32 @@ MainScene::MainScene()
 	this->touchesInProgress = false;
 	this->cameraMoveInProgress = false;		
 	this->zoomInProgress = false;
-
-	if (LevelProperties::sharedProperties() != NULL)
-		LevelProperties::sharedProperties()->reset();
-
 }
 
 MainScene::~MainScene()
 {
 	CCLog("MainScene destructor called");
-	if (boxWorld)
-		delete boxWorld;	
-	if (weather)
-		delete weather;	
+	this->unscheduleAllSelectors();
+	this->removeAllChildrenWithCleanup(true);
 
-	BatchManager* mgr = BatchManager::sharedManager();
-	if (mgr)
-		delete mgr;
-
+	//	release all physics references created in world
+	b2Body* list = boxWorld->GetBodyList();
+	while (list)
+	{		
+		GameEntity* e = (GameEntity*) list->GetUserData();		
+		CC_SAFE_RELEASE(e);
+		
+		list = list->GetNext();
+	}
 	
+	CC_SAFE_DELETE(worldListener);
+	CC_SAFE_DELETE(boxWorld);
+	CC_SAFE_DELETE(weather);
+	
+	BatchManager::purge();
+	LevelProperties::purge();
+	KeyboardHelper::purge();
+	ShapeHelper::purge();
 }
 
 bool MainScene::init()
@@ -87,7 +94,7 @@ void MainScene::loadMap(float none)
 
 	//	weather data
 	if (lp && lp->WeatherActive)
-		this->weather = new WeatherHelper(this, this->worldLayer, WEATHER_CONTROLLER_DATA);	
+		this->weather = WeatherHelper::create(this, this->worldLayer, WEATHER_CONTROLLER_DATA);
 
 	this->shiftSprite = CCSprite::create(RESOURCE_SHIFT);
 	this->shiftSprite->setAnchorPoint(ccp(0, 0));
@@ -326,8 +333,6 @@ void MainScene::updatePhysics(float delta)
 				b = b2;
 			}
 		}
-
-		
 	}
 }
 

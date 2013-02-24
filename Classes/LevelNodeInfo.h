@@ -3,6 +3,10 @@
 
 #include <cocos2d.h>
 
+#ifndef MAX_PATH
+	#define MAX_PATH 255
+#endif
+
 enum NodeType 
 {
 	NodeTypeBlock = 0,
@@ -40,7 +44,7 @@ public:
 	ccColor4B color;
 	ccColor4B tint;
 	
-	char* texture;
+	char texture[MAX_PATH]; 
 	char* rawTexture;
 	char* assetTexture;	
 	char* nextLevel;
@@ -60,7 +64,7 @@ public:
 		rotation = 0;
 		radius = 10;
 		scale = 1;
-		texture = NULL;
+		memset(texture, 0, sizeof(texture));
 		rawTexture = NULL;
 		assetTexture = NULL;
 		flipHorizontally = false;

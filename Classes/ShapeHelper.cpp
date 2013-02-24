@@ -21,6 +21,11 @@ ShapeHelper* ShapeHelper::sharedHelper()
 	return NULL;
 }
 
+void ShapeHelper::purge()
+{
+	CC_SAFE_DELETE(globalShapeHelper);
+}
+
 bool ShapeHelper::init()
 {
 	bool res = false;
@@ -87,6 +92,7 @@ bool ShapeHelper::defineShapeFromData(Value data, list<b2PolygonShape> *shapes)
 		ps.Set(vertices, numVertices);
 		
 		shapes->push_front(ps);
+		free(vertices);
 	}
 	
 	if (polys.size() > 0)	
@@ -149,7 +155,9 @@ bool ShapeHelper::shapeForKey(char* name, CCSize size, __out list<b2PolygonShape
 			
 				b2PolygonShape ps;
 				ps.Set(vert, count);
-				out->push_front(ps);			
+				out->push_front(ps);
+
+				free(vert);
 			}
 
 			return true;

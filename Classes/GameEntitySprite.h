@@ -4,6 +4,7 @@
 #include "GameEntity.h"
 #include "ShapeHelper.h"
 #include "LevelProperties.h"
+#include "Settings.h"
 
 ///
 ///	GameEntity with sprite attached
@@ -19,6 +20,12 @@ protected:
 		m_sprite = NULL;
 	}
 
+	~GameEntitySprite()
+	{
+		
+	}
+
+	///	overridePath is used for Block and Circle sprites to override texture
 	virtual bool init(char* overidePath = NULL);
 
 	///	

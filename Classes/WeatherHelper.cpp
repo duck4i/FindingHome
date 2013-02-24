@@ -18,9 +18,9 @@ bool WeatherHelper::init()
 	if (!controller->initWithData(controllerImage->getData(), kCCTexture2DPixelFormat_RGBA8888, s.width, s.height, s))
 	{
 		CCLog("Error creating mutable weather texture");
-		delete controllerImage;
+		CC_SAFE_DELETE(controller);
 		return false;
-	}
+	}	
 
 	//	now init layer
 	this->background = CCLayerGradient::create();
@@ -226,6 +226,9 @@ int WeatherHelper::tintStrengthAtThisTime(ccColor3B c)
 ccColor3B WeatherHelper::tintColorAtThisTime(unsigned int index)
 {	
 	PROFILE_FUNC();
+	if (!this->controller)
+		return ccc3(0, 0, 0);
+
 	ccColor3B c;
 	float y = 0;
 
@@ -244,7 +247,6 @@ ccColor3B WeatherHelper::tintColorAtThisTime(unsigned int index)
 int WeatherHelper::getColorPercivedBrigthness(int r, int g, int b)
 {
 	PROFILE_FUNC();
-
 	float ret = 
 		r * r * 0.241f +
 		g * g * 0.691f +
@@ -256,7 +258,7 @@ void WeatherHelper::update(float delta)
 {
 	PROFILE_FUNC();
 
-	if (!initOK)
+	if (!initOK || !controller)
 		return;
 
 	updateTimer += delta;
@@ -401,6 +403,8 @@ void WeatherHelper::backgroundDoneChanging()
 void WeatherHelper::updateCloudColors()
 {
 	PROFILE_FUNC();
+	if (!controller)
+		return;
 
 	ccColor3B color = tintColorAtThisTime(0);
 	CCArray* bigChildren = bigOnes->getChildren();

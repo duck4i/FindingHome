@@ -11,11 +11,14 @@ using namespace cocos2d;
 
 //	macro to create create func
 #define NINFO_CREATE_FUNC(T) static T* create(NODEINFO info){\
-	T* o = new T(info); if (o) {\
+	T* o = new T(info);\
+	if (o) {\
 		do { if (!o->preInit()) break; if (!o->init()) break; if (!o->postInit()) break; o->autorelease(); return o; }\
-		while(false); }\
-		CC_SAFE_DELETE(o); return NULL;\
-	}
+		while(false); \
+	}\
+	CC_SAFE_DELETE(o);\
+	return NULL;\
+}
 
 
 ///

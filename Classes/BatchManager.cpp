@@ -15,6 +15,11 @@ BatchManager::BatchManager()
 {
 }
 
+void BatchManager::purge()
+{
+	CC_SAFE_DELETE(_smanager);
+}
+
 BatchManager::~BatchManager()
 {
 	std::list<BatchManagerItem*>::iterator ptr;

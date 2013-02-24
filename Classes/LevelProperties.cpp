@@ -1,6 +1,6 @@
 #include "LevelProperties.h"
 
-static LevelProperties* _sLevelProperties;
+LevelProperties* _sLevelProperties;
 
 LevelProperties* LevelProperties::sharedProperties(xmlNodePtr node)
 {

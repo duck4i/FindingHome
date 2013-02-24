@@ -4,12 +4,22 @@
 ///	GameEntitySprite
 ///	
 bool GameEntitySprite::init(char* overidePath)
-{
+{	
 	bool pre = GameEntity::init();
+	if (!pre)
+		return false;
+
 	char* path = overidePath != NULL ? overidePath : m_nodeInfo.texture;
 	if (path == NULL)
 		return false;
-	
+
+	//	check if asset file exists
+	if (!doesFileExits(path))
+	{
+		CCLog("Path does not exist:\t%s", path);
+		return false;
+	}
+
 	CCTextureCache* cache = CCTextureCache::sharedTextureCache();
 	if (cache == NULL)
 		return false;

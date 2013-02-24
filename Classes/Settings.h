@@ -2,6 +2,9 @@
 #define __SETTINGS_H__
 #include "Physics.h"
 
+
+
+
 #define WINDOW_WIDTH	960
 #define WINDOW_HEIGHT	640
 
@@ -37,9 +40,10 @@ inline static bool doesFileExits(char* file)
 	unsigned short attrs = GetFileAttributes(file);
 	if (!(attrs == INVALID_FILE_ATTRIBUTES || attrs & FILE_ATTRIBUTE_DIRECTORY))
 		return true;
+	return false;
 
 #endif
-	return false;
+	return true;
 }
 
 #endif

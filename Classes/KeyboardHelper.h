@@ -85,6 +85,7 @@ public:
 	KeyState getF9();
 
 	static KeyboardHelper* sharedHelper();
+	static void purge();
 
 };
 

@@ -30,6 +30,11 @@ B2DebugDrawLayer::B2DebugDrawLayer(b2World* pB2World, float pPtmRatio)
 {
 }
 
+B2DebugDrawLayer::~B2DebugDrawLayer()
+{
+	CC_SAFE_DELETE(mB2DebugDraw);
+}
+
 bool B2DebugDrawLayer::init()
 {
   //////////////////////////////

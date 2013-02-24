@@ -6,7 +6,7 @@
 #include <Windows.h>
 #include "Settings.h"
 #include "Performance.h"
-
+#include "LevelProperties.h"
 
 USING_NS_CC;
 
@@ -79,6 +79,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 #ifdef USE_WIN32_CONSOLE
     FreeConsole();
 #endif
+
 
 #if defined(_DEBUG) && !defined(DISABLE_SHINY)
 	PROFILER_UPDATE();

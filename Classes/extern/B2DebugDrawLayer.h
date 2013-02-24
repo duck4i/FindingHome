@@ -21,6 +21,8 @@ class B2DebugDrawLayer : public cocos2d::CCLayer
  
 public:
   B2DebugDrawLayer(b2World* pB2World, float pPtmRatio);
+  ~B2DebugDrawLayer();
+
   static B2DebugDrawLayer* create(b2World* pB2World, float pPtmRatio);
   virtual bool init();
   

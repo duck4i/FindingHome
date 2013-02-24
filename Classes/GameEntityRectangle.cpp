@@ -31,8 +31,10 @@ bool GameEntityRectangle::postInit()
 	//	add color
 	m_sprite->setColor(ccc3(m_nodeInfo.color.r, m_nodeInfo.color.g, m_nodeInfo.color.b));
 
-	m_nodeInfo.texture = RESOURCE_BLOCK;
+	
+	strcpy_s(m_nodeInfo.texture, RESOURCE_BLOCK);
 	m_nodeInfo.assetTexture = "block.png";
+	m_nodeInfo.rawTexture = m_nodeInfo.assetTexture;
 
 	return GameEntitySprite::postInit();	
 }

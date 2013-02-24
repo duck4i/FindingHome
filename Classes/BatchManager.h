@@ -29,6 +29,7 @@ public:
 	list<BatchManagerItem*> items;	
 
 	static BatchManager* sharedManager();
+	static void purge();
 
 	bool addItem(GameEntitySprite* entity, CCNode* layer, CCPoint parallax);
 

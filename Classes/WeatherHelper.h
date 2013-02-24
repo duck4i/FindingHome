@@ -142,9 +142,6 @@ private:
 	bool backgroundChanging;
 	void backgroundDoneChanging();
 	
-
-public:
-
 	WeatherHelper(CCNode* parent, CCNode* worldLayer, char* controllerPath)
 	{
 		this->parent = parent;
@@ -165,15 +162,27 @@ public:
 		starrySkyNaturalRotation.y = 0;
 
 		moon = NULL;
-		clouds = NULL;
-		
-		this->initOK = init();
+		clouds = NULL;				
 	}
 
+public:
+
 	~WeatherHelper()
-	{		
-		//if (this->controller)
-		//	delete controller;
+	{
+		CC_SAFE_FREE(controller);
+		CC_SAFE_FREE(controllerImage);
+	}
+
+	static WeatherHelper* create(CCNode* parent, CCNode* worldLayer, char* controllerPath)
+	{
+		WeatherHelper* w = new WeatherHelper(parent, worldLayer, controllerPath);
+		if (w && w->init())
+		{
+			w->initOK = true;
+			return w;
+		}
+		CC_SAFE_DELETE(w);
+		return NULL;
 	}
 
 	//	call this method on scene update

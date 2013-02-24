@@ -47,9 +47,19 @@ private:
 		this->resourcePath = resourcePath;		
 	}
 
+	~ShapeHelper()
+	{
+		list<Shape*>::iterator ptr;
+		for (ptr = shapes.begin(); ptr != shapes.end(); ptr++)
+		{
+			CC_SAFE_DELETE(*ptr);
+		}
+	}
+
 public:
 	
 	static ShapeHelper* sharedHelper();
+	static void purge();
 
 	///	Gets b2PolygonShape for asset name
 	bool shapeForKey(char* name, CCSize size, __out list<b2PolygonShape> *out);

@@ -106,13 +106,20 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 	info.radius = parseNodeRadius(node);
 	info.scale = parseNodeScale(node);
 	info.color = parseNodeColor(node);
-	info.tint = parseNodeColor(node, true);
-	info.texture = parseNodeTexture(node);
+	info.tint = parseNodeColor(node, true);	
 	info.rawTexture = parseNodeTexture(node, true);
 	info.assetTexture = parseNodeAssetName(node);
 	info.flipHorizontally = parseNodeFlip(node);
 	info.flipVertically = parseNodeFlip(node, true);
 	info.visible = parseNodeVisible(node);	
+
+	//	copy allocated string and free it
+	char* tmp = parseNodeTexture(node);
+	if (tmp)
+	{
+		strcpy_s(info.texture, tmp);
+		delete [] tmp;
+	}
 
 	///	skip invisible nodes
 	if (!info.visible)
@@ -199,10 +206,6 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 				sprite->createBody(this->boxWorld);
 		}
 	}
-
-	//	since parseNodeTexture allocates we release it here	
-	//if (info.texture)
-	//	delete [] info.texture;	
 }
 
 CCPoint LevelLoader::parseNodePosition(xmlNodePtr node)
