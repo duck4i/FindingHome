@@ -344,6 +344,33 @@
         </Layer>
         <Layer Name="Main" Visible="true">
             <Items>
+                <Item xsi:type="TextureItem" Name="Texture_0044" Visible="true">
+                    <Position>
+                        <X>-159</X>
+                        <Y>-124</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.57945454</X>
+                        <Y>1.57945454</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Ibrahim\forest\ground_flip.png</texture_filename>
+                    <asset_name>ground_flip.png</asset_name>
+                    <Origin>
+                        <X>750</X>
+                        <Y>500</Y>
+                    </Origin>
+                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0003" Visible="true">
                     <Position>
                         <X>2202</X>
@@ -782,16 +809,20 @@
                         <Y>256</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0044" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0046" Visible="true">
                     <Position>
-                        <X>-159</X>
-                        <Y>-124</Y>
+                        <X>1383</X>
+                        <Y>-438</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>1.57945454</X>
-                        <Y>1.57945454</Y>
+                        <X>1.49730492</X>
+                        <Y>1.49730492</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -802,11 +833,73 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Ibrahim\forest\ground_flip.png</texture_filename>
-                    <asset_name>ground_flip.png</asset_name>
+                    <texture_filename>coin.png</texture_filename>
+                    <asset_name>coin.png</asset_name>
                     <Origin>
-                        <X>750</X>
-                        <Y>500</Y>
+                        <X>17</X>
+                        <Y>17</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0047" Visible="true">
+                    <Position>
+                        <X>1029</X>
+                        <Y>-526</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.49730492</X>
+                        <Y>1.49730492</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>coin.png</texture_filename>
+                    <asset_name>coin.png</asset_name>
+                    <Origin>
+                        <X>17</X>
+                        <Y>17</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0048" Visible="true">
+                    <Position>
+                        <X>633</X>
+                        <Y>-453</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.49730492</X>
+                        <Y>1.49730492</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>coin.png</texture_filename>
+                    <asset_name>coin.png</asset_name>
+                    <Origin>
+                        <X>17</X>
+                        <Y>17</Y>
                     </Origin>
                 </Item>
             </Items>
@@ -1099,11 +1192,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>45</NextItemNumber>
+        <NextItemNumber>48</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>351.2002</X>
-            <Y>-598.3384</Y>
+            <X>2843.508</X>
+            <Y>-536.7999</Y>
         </CameraPosition>
         <Version>1.5.0.0</Version>
     </EditorRelated>
