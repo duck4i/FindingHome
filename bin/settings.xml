@@ -6,6 +6,7 @@
   <SaveLevelStartApplication>false</SaveLevelStartApplication>
   <SaveLevelApplicationToStart />
   <SaveLevelAppendLevelFilename>false</SaveLevelAppendLevelFilename>
+  <CustomCommandLine>-fullscreen</CustomCommandLine>
   <ShowGrid>true</ShowGrid>
   <SnapToGrid>false</SnapToGrid>
   <ShowWorldOrigin>true</ShowWorldOrigin>
@@ -60,7 +61,7 @@
     <A>255</A>
     <PackedValue>4294902015</PackedValue>
   </ColorTextureTransparent>
-  <DefaultPathItemLineWidth>4</DefaultPathItemLineWidth>
+  <DefaultPathItemLineWidth>8</DefaultPathItemLineWidth>
   <DefaultContentRootFolder>..\Resources\</DefaultContentRootFolder>
   <CameraSpeed>500</CameraSpeed>
   <CameraFastSpeed>2000</CameraFastSpeed>

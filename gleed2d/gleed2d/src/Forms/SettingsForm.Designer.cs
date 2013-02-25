@@ -45,6 +45,8 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.customCommandLineText = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -113,6 +115,8 @@
             // 
             this.tabPage2.BackColor = System.Drawing.Color.Transparent;
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.customCommandLineText);
             this.tabPage2.Controls.Add(this.buttonBrowse);
             this.tabPage2.Controls.Add(this.textBox1);
             this.tabPage2.Controls.Add(this.checkBox2);
@@ -243,6 +247,22 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Each time the level is saved, ";
             // 
+            // customCommandLineText
+            // 
+            this.customCommandLineText.Location = new System.Drawing.Point(30, 169);
+            this.customCommandLineText.Name = "customCommandLineText";
+            this.customCommandLineText.Size = new System.Drawing.Size(470, 20);
+            this.customCommandLineText.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 143);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(170, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Append custom command options:";
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.buttonOK;
@@ -289,5 +309,7 @@
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox customCommandLineText;
     }
 }

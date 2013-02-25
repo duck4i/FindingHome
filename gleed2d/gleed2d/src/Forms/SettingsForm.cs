@@ -31,13 +31,14 @@ namespace GLEED2D
             textBox2.Text = Constants.Instance.SaveLevelApplicationToStart;
             checkBox3.Checked = Constants.Instance.SaveLevelAppendLevelFilename;
 
-        
+            customCommandLineText.Text = Constants.Instance.CustomCommandLine;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
             Constants.Instance.RunLevelApplicationToStart = textBox1.Text;
             Constants.Instance.SaveLevelApplicationToStart = textBox2.Text;
+            Constants.Instance.CustomCommandLine = customCommandLineText.Text;
             Constants.Instance.export("settings.xml");
             Close();
         }

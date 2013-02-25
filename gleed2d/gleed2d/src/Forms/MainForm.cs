@@ -977,14 +977,16 @@ namespace GLEED2D
                 }
 
                 FileSave(sender, e);
+
+                String param = "";
                 if (Constants.Instance.RunLevelAppendLevelFilename)
                 {
-                    System.Diagnostics.Process.Start(Constants.Instance.RunLevelApplicationToStart, "\"" + levelfilename + "\"");
+                    param = "\"" + levelfilename + "\"";
                 }
-                else
-                {
-                    System.Diagnostics.Process.Start(Constants.Instance.RunLevelApplicationToStart);
-                }
+
+                param += " " + Constants.Instance.CustomCommandLine;
+
+                System.Diagnostics.Process.Start(Constants.Instance.RunLevelApplicationToStart, param);
             }
         }
 

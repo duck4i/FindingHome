@@ -47,6 +47,7 @@ namespace GLEED2D
             GridSpacing = new Microsoft.Xna.Framework.Vector2(64, 64);
             SaveEditorLayout = true;
             ZoomFactor = 0.01f;
+            CustomCommandLine = "";
         }
 
 
@@ -137,6 +138,7 @@ namespace GLEED2D
         public string SaveLevelApplicationToStart;
         public bool SaveLevelAppendLevelFilename;
 
+        public string CustomCommandLine;
 
         public bool ShowGrid;
         public bool SnapToGrid;

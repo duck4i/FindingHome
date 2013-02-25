@@ -67,8 +67,9 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		for (ptr = list.begin(); ptr != list.end(); ptr++)
 		{
 			std::string line = *ptr;
-			const char* linec = line.c_str();
+			const char* linec = line.c_str();			
 			
+			//	fullscreen ;)
 			if (_strcmpi(linec, "-fullscreen") == 0)
 			{
 				fullScreen = true;
@@ -76,13 +77,14 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 				linec = line.c_str();				
 			}
 
-			if (_strcmpi(linec, "untitled"))
+			//	empty level from editor
+			if (_strcmpi(linec, "\"untitled\"") == 0)
 			{
 				return 0;
 			}
 
 
-			//	check for file path
+			//	check for file path - if split across multiple lines join it
 			if (line.find_first_of('"') != line.npos)
 			{
 				int i = line.find_first_of('"');

@@ -940,7 +940,7 @@
             <Items>
                 <Item xsi:type="PathItem" Name="Path_0045" Visible="true">
                     <Position>
-                        <X>51</X>
+                        <X>63</X>
                         <Y>-217</Y>
                     </Position>
                     <CustomProperties />
@@ -988,43 +988,43 @@
                     </LocalPoints>
                     <WorldPoints>
                         <Vector2>
-                            <X>51</X>
+                            <X>63</X>
                             <Y>-217</Y>
                         </Vector2>
                         <Vector2>
-                            <X>377</X>
+                            <X>389</X>
                             <Y>-270</Y>
                         </Vector2>
                         <Vector2>
-                            <X>697</X>
+                            <X>709</X>
                             <Y>-390</Y>
                         </Vector2>
                         <Vector2>
-                            <X>951</X>
+                            <X>963</X>
                             <Y>-450</Y>
                         </Vector2>
                         <Vector2>
-                            <X>1091</X>
+                            <X>1103</X>
                             <Y>-444</Y>
                         </Vector2>
                         <Vector2>
-                            <X>1337</X>
+                            <X>1349</X>
                             <Y>-377</Y>
                         </Vector2>
                         <Vector2>
-                            <X>1611</X>
+                            <X>1623</X>
                             <Y>-297</Y>
                         </Vector2>
                         <Vector2>
-                            <X>1817</X>
+                            <X>1829</X>
                             <Y>-244</Y>
                         </Vector2>
                         <Vector2>
-                            <X>1977</X>
+                            <X>1989</X>
                             <Y>-230</Y>
                         </Vector2>
                         <Vector2>
-                            <X>1977</X>
+                            <X>1989</X>
                             <Y>-224</Y>
                         </Vector2>
                     </WorldPoints>
@@ -1222,8 +1222,8 @@
         <NextItemNumber>50</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>-3750.431</X>
-            <Y>57.13945</Y>
+            <X>518.4577</X>
+            <Y>-660.082947</Y>
         </CameraPosition>
         <Version>1.5.0.0</Version>
     </EditorRelated>

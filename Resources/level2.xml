@@ -2321,7 +2321,7 @@
                         <PackedValue>4290283081</PackedValue>
                     </FillColor>
                 </Item>
-                <Item xsi:type="RectangleItem" Name="Rectangle_0271" Visible="false">
+                <Item xsi:type="RectangleItem" Name="Rectangle_0271" Visible="true">
                     <Position>
                         <X>-15161</X>
                         <Y>-1904</Y>
