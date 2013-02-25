@@ -46,8 +46,8 @@ bool GameEntityExit::loadNextLevel()
 
 		if (doesFileExits(tmp))
 		{
-			extern char* commandLine;
-			commandLine = _strdup((char*) tmp);
+			extern char* levelOverride;
+			levelOverride = _strdup((char*) tmp);
 		}
 		else
 			MessageBox(NULL, "Exit level path not set or file does not exit, reloading this one!", "NextLevel condition not set", MB_OK | MB_ICONWARNING);

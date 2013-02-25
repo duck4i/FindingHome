@@ -63,6 +63,9 @@ LRESULT KeyboardHelper::HookProc(int code, WPARAM wParam, LPARAM lParam)
 			if (key == VK_F9 && helper->b_F9 == KeyStateUp)
 				helper->b_F9 = KeyStateDown;
 
+			if (key == VK_F12)
+				helper->b_F12 = KeyStateDown;
+
 			break;
 		}
 		case WM_KEYUP:
@@ -91,6 +94,8 @@ LRESULT KeyboardHelper::HookProc(int code, WPARAM wParam, LPARAM lParam)
 				helper->b_F8 = KeyStateUp;
 			if (key == VK_F9)
 				helper->b_F9 = KeyStateUp;
+			if (key == VK_F12)
+				helper->b_F12 = KeyStateUp;
 
 			break;
 		}
@@ -146,6 +151,10 @@ KeyState KeyboardHelper::getF7()
 KeyState KeyboardHelper::getF8()
 {
 	return b_F8;
+}
+KeyState KeyboardHelper::getF12()
+{
+	return b_F12;
 }
 
 KeyState KeyboardHelper::getF9()

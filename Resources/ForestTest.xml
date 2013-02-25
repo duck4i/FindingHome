@@ -59,8 +59,8 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0017" Visible="true">
                     <Position>
-                        <X>-3515</X>
-                        <Y>-278</Y>
+                        <X>-3520</X>
+                        <Y>-256</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
@@ -109,6 +109,33 @@
                     <Origin>
                         <X>750</X>
                         <Y>500</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0049" Visible="true">
+                    <Position>
+                        <X>-2944</X>
+                        <Y>-576</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1</X>
+                        <Y>1</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>coin.png</texture_filename>
+                    <asset_name>coin.png</asset_name>
+                    <Origin>
+                        <X>17</X>
+                        <Y>17</Y>
                     </Origin>
                 </Item>
             </Items>
@@ -508,8 +535,8 @@
                 </Item>
                 <Item xsi:type="PlayerItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-3594</X>
-                        <Y>36</Y>
+                        <X>-3683</X>
+                        <Y>40</Y>
                     </Position>
                     <CustomProperties />
                 </Item>
@@ -1192,11 +1219,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>48</NextItemNumber>
+        <NextItemNumber>50</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>2843.508</X>
-            <Y>-536.7999</Y>
+            <X>-3750.431</X>
+            <Y>57.13945</Y>
         </CameraPosition>
         <Version>1.5.0.0</Version>
     </EditorRelated>

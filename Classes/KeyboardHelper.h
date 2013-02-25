@@ -39,6 +39,7 @@ private:
 	KeyState b_F7;
 	KeyState b_F8;
 	KeyState b_F9;
+	KeyState b_F12;
 
 	KeyboardHelper()
 	{
@@ -83,6 +84,7 @@ public:
 	KeyState getF7();
 	KeyState getF8();
 	KeyState getF9();
+	KeyState getF12();
 
 	static KeyboardHelper* sharedHelper();
 	static void purge();

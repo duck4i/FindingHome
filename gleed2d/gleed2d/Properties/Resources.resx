@@ -117,18 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="58" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphs\16x16-free-toolbar-icons\png\58.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Circle_Entered" xml:space="preserve">
     <value>(Left Click) = start new circle      (Right Click) = exit circle draw mode</value>
   </data>
   <data name="Rectangle_Entered" xml:space="preserve">
     <value>(Left Click) = start new rectangle      (Right Click) = exit rectangle draw mode</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="74" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphs\16x16-free-toolbar-icons\png\74.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="15" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphs\16x16-free-toolbar-icons\png\15.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Path_Entered" xml:space="preserve">
-    <value>(Left Click) = start new path      (Right Click) = exit path draw mode</value>
   </data>
   <data name="68" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphs\16x16-free-toolbar-icons\png\68.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,17 +139,20 @@
   <data name="Circle_Started" xml:space="preserve">
     <value>(Left Click) = add circle to level      (Right Click) = cancel circle</value>
   </data>
-  <data name="Path_Started" xml:space="preserve">
-    <value>(Left Click) = next point      (BackSpace) = delete last point      (Middle Click) = add path to level      (Right Click) = cancel path</value>
-  </data>
   <data name="77" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\glyphs\16x16-free-toolbar-icons\png\77.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ui-radio-buttons-list" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphs\fugue\png\16x16\ui-radio-buttons-list.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="No_Layer" xml:space="preserve">
     <value>Either there is no layer in the level or no layer is currently selected. Please add a new layer before adding items.</value>
   </data>
-  <data name="58" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphs\16x16-free-toolbar-icons\png\58.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Path_Started" xml:space="preserve">
+    <value>(Left Click) = next point      (BackSpace) = delete last point      (Middle Click) = add path to level      (Right Click) = cancel path</value>
+  </data>
+  <data name="Player_Exists" xml:space="preserve">
+    <value>Only one Player object is allowed per level. Remove existing one if you want to add new Player object.</value>
   </data>
   <data name="Rectangle_Started" xml:space="preserve">
     <value>(Left Click) = add rectangle to level      (LeftCtrl) = make square      (Right Click) = cancel rectangle</value>
@@ -157,10 +163,10 @@
   <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Player_Exists" xml:space="preserve">
-    <value>Only one Player object is allowed per level. Remove existing one if you want to add new Player object.</value>
+  <data name="Path_Entered" xml:space="preserve">
+    <value>(Left Click) = start new path      (Right Click) = exit path draw mode</value>
   </data>
-  <data name="74" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\glyphs\16x16-free-toolbar-icons\png\74.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="tree--plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\glyphs\fugue\png\16x16\tree--plus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -85,6 +85,8 @@ namespace GLEED2D
             }
             zoomcombo.SelectedText = "100%";
 
+            comboBox1.Items.Add("16x16");
+            comboBox1.Items.Add("32x32");
             comboBox1.Items.Add("48x48");
             comboBox1.Items.Add("64x64");
             comboBox1.Items.Add("96x96");
@@ -96,8 +98,33 @@ namespace GLEED2D
 
             pictureBox1.AllowDrop = true;
 
+            ListDirectory(folderTreeView, @"..\Resources\");
+            if (folderTreeView.Nodes[0] != null)
+                folderTreeView.Nodes[0].Expand();
+
             //treeView1.DrawNode += DrawTreeNodeHighlightSelectedEvenWithoutFocus;
             //treeView1.DrawMode = TreeViewDrawMode.OwnerDrawText;
+        }
+
+        private void ListDirectory(TreeView treeView, string path)
+        {
+            treeView.Nodes.Clear();
+            var rootDirectoryInfo = new DirectoryInfo(path);
+            treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
+        }
+
+        private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
+        {
+            var directoryNode = new TreeNode(directoryInfo.Name);
+            foreach (var directory in directoryInfo.GetDirectories())
+            {
+                try
+                {
+                    directoryNode.Nodes.Add(CreateDirectoryNode(directory));
+                }
+                catch (Exception) { }
+            }
+            return directoryNode;
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -849,6 +876,7 @@ namespace GLEED2D
         public void loadfolder(string path)
         {
             //loadfolder_background(path);
+            
             loadfolder_foreground(path);
         }
 
@@ -1264,6 +1292,39 @@ namespace GLEED2D
         private void ItemContextMenu_Opening(object sender, CancelEventArgs e)
         {
 
+        }
+
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
+
+        private void toolStripButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            //  show or hide right container
+            mainSplitContainer.Panel1Collapsed = !toggleLayersButton.Checked;
+            layersViewToolStripMenuItem.Checked = toggleLayersButton.Checked;
+        }
+
+        private void toolStripButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            //  show or hide right container            
+            innerSplitContainer.Panel2Collapsed = !assetsViewButton.Checked;
+            assetsViewToolStripMenuItem.Checked = assetsViewButton.Checked;
+        }
+
+        private void layersViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void layersViewToolStripMenuItem_CheckStateChanged(object sender, EventArgs e)
+        {
+            toggleLayersButton.Checked = layersViewToolStripMenuItem.Checked;
+        }
+
+        private void assetsViewToolStripMenuItem_CheckStateChanged(object sender, EventArgs e)
+        {
+            assetsViewButton.Checked = assetsViewToolStripMenuItem.Checked;
         }
     }
 

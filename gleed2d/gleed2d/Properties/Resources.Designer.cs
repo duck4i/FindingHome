@@ -180,5 +180,19 @@ namespace GLEED2D.Properties {
                 return ResourceManager.GetString("Rectangle_Started", resourceCulture);
             }
         }
+        
+        internal static System.Drawing.Bitmap tree__plus {
+            get {
+                object obj = ResourceManager.GetObject("tree--plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ui_radio_buttons_list {
+            get {
+                object obj = ResourceManager.GetObject("ui-radio-buttons-list", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

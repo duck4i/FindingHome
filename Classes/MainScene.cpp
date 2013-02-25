@@ -137,7 +137,7 @@ void MainScene::drawDebugControls()
 	return;
 #endif
 	
-	char* message = "[F1] Toggle debug modes\r\n[F4] Restart game\r\n[F7] Zoom in\r\n[F8] Zoom out\r\n[F9] Reset camera";
+	char* message = "[F1] Toggle debug modes\r\n[F4] Restart game\r\n[F7] Zoom in\r\n[F8] Zoom out\r\n[F9] Reset camera\r\n[F12] Exit";
 
 	int zOrder = 100000;
 	CCLabelTTF* lab = CCLabelTTF::create(message, "Consolas", 12.0f);
@@ -235,9 +235,9 @@ void MainScene::addBodies()
 
 	//	load level
 	char *level = GAME_START_LEVEL;
-	extern char* commandLine;
-	if (commandLine && strlen(commandLine))
-		level = commandLine;
+	extern char* levelOverride;
+	if (levelOverride && strlen(levelOverride))
+		level = levelOverride;
 
 	LevelLoader l(this->worldLayer, level, this->boxWorld);
 	if (l.parse())
@@ -354,6 +354,11 @@ void MainScene::updateKeyboard(float delta)
 			cameraMoveInProgress = false;
 		else
 			resetSceneZoom();
+	}
+	
+	if (key->getF12() == KeyStateDown)
+	{
+		exit(0);
 	}
 
 	//	shift key sprite
