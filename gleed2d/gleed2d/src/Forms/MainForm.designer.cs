@@ -30,14 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Circle", 1);
-            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Text", 3);
-            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Path", 2);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Bat", 0);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Crow", 1);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Rectangle", 0);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Circle", 1);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Text", 3);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Path", 2);
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Bat", 0);
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Crow", 1);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -155,6 +155,7 @@
             this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.treeView1 = new CustomTreeView();
             this.treetools = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.buttonDelete = new System.Windows.Forms.ToolStripButton();
@@ -176,7 +177,7 @@
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.folderTreeView = new System.Windows.Forms.TreeView();
             this.folderTreeImageView = new System.Windows.Forms.ImageList(this.components);
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.texturesListView = new System.Windows.Forms.ListView();
             this.imageList96 = new System.Windows.Forms.ImageList(this.components);
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listView2 = new System.Windows.Forms.ListView();
@@ -185,7 +186,7 @@
             this.entitiesListView = new System.Windows.Forms.ListView();
             this.entitiesImageList = new System.Windows.Forms.ImageList(this.components);
             this.EnemiesTabPage = new System.Windows.Forms.TabPage();
-            this.listView3 = new System.Windows.Forms.ListView();
+            this.gameEntitiesListView = new System.Windows.Forms.ListView();
             this.enemiesImageList = new System.Windows.Forms.ImageList(this.components);
             this.imageList48 = new System.Windows.Forms.ImageList(this.components);
             this.imageList64 = new System.Windows.Forms.ImageList(this.components);
@@ -199,7 +200,8 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.treeView1 = new CustomTreeView();
+            this.imageList16 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList32 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.CustomPropertyContextMenu.SuspendLayout();
@@ -1364,6 +1366,31 @@
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.treetools);
             this.toolStripContainer1.TopToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             // 
+            // treeView1
+            // 
+            this.treeView1.AllowDrop = true;
+            this.treeView1.CheckBoxes = true;
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.treeView1.HideSelection = false;
+            this.treeView1.ImageIndex = 5;
+            this.treeView1.ImageList = this.imageList2;
+            this.treeView1.LabelEdit = true;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.SelectedImageIndex = 5;
+            this.treeView1.Size = new System.Drawing.Size(235, 275);
+            this.treeView1.TabIndex = 2;
+            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
+            this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
+            this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
+            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
+            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
+            this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
+            this.treeView1.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView1_DragOver);
+            // 
             // treetools
             // 
             this.treetools.Dock = System.Windows.Forms.DockStyle.None;
@@ -1521,7 +1548,7 @@
             // 
             // chooseFolder
             // 
-            this.chooseFolder.Location = new System.Drawing.Point(48, 4);
+            this.chooseFolder.Location = new System.Drawing.Point(3, 3);
             this.chooseFolder.Name = "chooseFolder";
             this.chooseFolder.Size = new System.Drawing.Size(83, 23);
             this.chooseFolder.TabIndex = 5;
@@ -1534,9 +1561,9 @@
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(200, 4);
+            this.comboBox1.Location = new System.Drawing.Point(227, 5);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(92, 21);
+            this.comboBox1.Size = new System.Drawing.Size(65, 21);
             this.comboBox1.TabIndex = 2;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboSize_SelectedIndexChanged);
             // 
@@ -1544,7 +1571,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(164, 9);
+            this.label2.Location = new System.Drawing.Point(191, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 3;
@@ -1553,11 +1580,12 @@
             // buttonFolderUp
             // 
             this.buttonFolderUp.Image = ((System.Drawing.Image)(resources.GetObject("buttonFolderUp.Image")));
-            this.buttonFolderUp.Location = new System.Drawing.Point(10, 4);
+            this.buttonFolderUp.Location = new System.Drawing.Point(90, 4);
             this.buttonFolderUp.Name = "buttonFolderUp";
             this.buttonFolderUp.Size = new System.Drawing.Size(32, 23);
             this.buttonFolderUp.TabIndex = 4;
             this.buttonFolderUp.UseVisualStyleBackColor = true;
+            this.buttonFolderUp.Visible = false;
             this.buttonFolderUp.Click += new System.EventHandler(this.buttonFolderUp_Click);
             // 
             // textBox1
@@ -1590,7 +1618,7 @@
             // 
             // splitContainer5.Panel2
             // 
-            this.splitContainer5.Panel2.Controls.Add(this.listView1);
+            this.splitContainer5.Panel2.Controls.Add(this.texturesListView);
             this.splitContainer5.Size = new System.Drawing.Size(295, 574);
             this.splitContainer5.SplitterDistance = 127;
             this.splitContainer5.TabIndex = 7;
@@ -1606,6 +1634,7 @@
             this.folderTreeView.SelectedImageIndex = 0;
             this.folderTreeView.Size = new System.Drawing.Size(295, 127);
             this.folderTreeView.TabIndex = 1;
+            this.folderTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.folderTreeView_AfterSelect);
             // 
             // folderTreeImageView
             // 
@@ -1613,25 +1642,25 @@
             this.folderTreeImageView.TransparentColor = System.Drawing.Color.Transparent;
             this.folderTreeImageView.Images.SetKeyName(0, "53.png");
             // 
-            // listView1
+            // texturesListView
             // 
-            this.listView1.AllowDrop = true;
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.HideSelection = false;
-            this.listView1.LargeImageList = this.imageList96;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.ShowItemToolTips = true;
-            this.listView1.Size = new System.Drawing.Size(295, 443);
-            this.listView1.TabIndex = 6;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
-            this.listView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.listView1_DragDrop);
-            this.listView1.GiveFeedback += new System.Windows.Forms.GiveFeedbackEventHandler(this.listView1_GiveFeedback);
-            this.listView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listView1_ItemDrag);
-            this.listView1.DragOver += new System.Windows.Forms.DragEventHandler(this.listView1_DragOver);
-            this.listView1.Click += new System.EventHandler(this.listView1_Click);
+            this.texturesListView.AllowDrop = true;
+            this.texturesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.texturesListView.HideSelection = false;
+            this.texturesListView.LargeImageList = this.imageList96;
+            this.texturesListView.Location = new System.Drawing.Point(0, 0);
+            this.texturesListView.MultiSelect = false;
+            this.texturesListView.Name = "texturesListView";
+            this.texturesListView.ShowItemToolTips = true;
+            this.texturesListView.Size = new System.Drawing.Size(295, 443);
+            this.texturesListView.TabIndex = 6;
+            this.texturesListView.UseCompatibleStateImageBehavior = false;
+            this.texturesListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
+            this.texturesListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.listView1_DragDrop);
+            this.texturesListView.GiveFeedback += new System.Windows.Forms.GiveFeedbackEventHandler(this.listView1_GiveFeedback);
+            this.texturesListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listView1_ItemDrag);
+            this.texturesListView.DragOver += new System.Windows.Forms.DragEventHandler(this.listView1_DragOver);
+            this.texturesListView.Click += new System.EventHandler(this.listView1_Click);
             // 
             // imageList96
             // 
@@ -1645,7 +1674,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(301, 637);
+            this.tabPage2.Size = new System.Drawing.Size(301, 611);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Primitives";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1654,22 +1683,22 @@
             // 
             this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView2.HideSelection = false;
-            listViewItem9.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
+            listViewItem1.ToolTipText = "A simple rectangle defined by position, width and height. Rectangle Primitives ca" +
                 "n be scaled but not rotated.";
-            listViewItem10.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
+            listViewItem2.ToolTipText = "A simple circle defined by position and radius. Circle Primitives can be scaled b" +
                 "ut not rotated.";
-            listViewItem12.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
+            listViewItem4.ToolTipText = "A Path is an array of Vector2. Path Primitives can be rotated and scaled.";
             this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem9,
-            listViewItem10,
-            listViewItem11,
-            listViewItem12});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4});
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(3, 3);
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.ShowItemToolTips = true;
-            this.listView2.Size = new System.Drawing.Size(295, 631);
+            this.listView2.Size = new System.Drawing.Size(295, 605);
             this.listView2.TabIndex = 0;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView2_MouseDoubleClick);
@@ -1690,7 +1719,7 @@
             this.EntitiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.EntitiesTabPage.Name = "EntitiesTabPage";
             this.EntitiesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.EntitiesTabPage.Size = new System.Drawing.Size(301, 637);
+            this.EntitiesTabPage.Size = new System.Drawing.Size(301, 611);
             this.EntitiesTabPage.TabIndex = 2;
             this.EntitiesTabPage.Text = "Game Entities ";
             this.EntitiesTabPage.UseVisualStyleBackColor = true;
@@ -1701,13 +1730,13 @@
             this.entitiesListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.entitiesListView.HideSelection = false;
             this.entitiesListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem5,
+            listViewItem6});
             this.entitiesListView.LargeImageList = this.entitiesImageList;
             this.entitiesListView.Location = new System.Drawing.Point(3, 3);
             this.entitiesListView.MultiSelect = false;
             this.entitiesListView.Name = "entitiesListView";
-            this.entitiesListView.Size = new System.Drawing.Size(295, 631);
+            this.entitiesListView.Size = new System.Drawing.Size(295, 605);
             this.entitiesListView.TabIndex = 0;
             this.entitiesListView.UseCompatibleStateImageBehavior = false;
             this.entitiesListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.entitiesListView_MouseDoubleClick);
@@ -1722,29 +1751,29 @@
             // 
             // EnemiesTabPage
             // 
-            this.EnemiesTabPage.Controls.Add(this.listView3);
+            this.EnemiesTabPage.Controls.Add(this.gameEntitiesListView);
             this.EnemiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.EnemiesTabPage.Name = "EnemiesTabPage";
             this.EnemiesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.EnemiesTabPage.Size = new System.Drawing.Size(301, 637);
+            this.EnemiesTabPage.Size = new System.Drawing.Size(301, 611);
             this.EnemiesTabPage.TabIndex = 3;
             this.EnemiesTabPage.Text = "Game Enemies";
             this.EnemiesTabPage.UseVisualStyleBackColor = true;
             // 
-            // listView3
+            // gameEntitiesListView
             // 
-            this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView3.HideSelection = false;
-            this.listView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.listView3.LargeImageList = this.enemiesImageList;
-            this.listView3.Location = new System.Drawing.Point(3, 3);
-            this.listView3.MultiSelect = false;
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(295, 631);
-            this.listView3.TabIndex = 0;
-            this.listView3.UseCompatibleStateImageBehavior = false;
+            this.gameEntitiesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gameEntitiesListView.HideSelection = false;
+            this.gameEntitiesListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem7,
+            listViewItem8});
+            this.gameEntitiesListView.LargeImageList = this.enemiesImageList;
+            this.gameEntitiesListView.Location = new System.Drawing.Point(3, 3);
+            this.gameEntitiesListView.MultiSelect = false;
+            this.gameEntitiesListView.Name = "gameEntitiesListView";
+            this.gameEntitiesListView.Size = new System.Drawing.Size(295, 605);
+            this.gameEntitiesListView.TabIndex = 0;
+            this.gameEntitiesListView.UseCompatibleStateImageBehavior = false;
             // 
             // enemiesImageList
             // 
@@ -1839,30 +1868,17 @@
             this.toolStripMenuItem6.Text = "Add Custom Property";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.ActionAddCustomProperty);
             // 
-            // treeView1
+            // imageList16
             // 
-            this.treeView1.AllowDrop = true;
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.treeView1.HideSelection = false;
-            this.treeView1.ImageIndex = 5;
-            this.treeView1.ImageList = this.imageList2;
-            this.treeView1.LabelEdit = true;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.SelectedImageIndex = 5;
-            this.treeView1.Size = new System.Drawing.Size(235, 275);
-            this.treeView1.TabIndex = 2;
-            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
-            this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
-            this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
-            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
-            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
-            this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
-            this.treeView1.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView1_DragOver);
+            this.imageList16.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList16.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList16.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // imageList32
+            // 
+            this.imageList32.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList32.ImageSize = new System.Drawing.Size(32, 32);
+            this.imageList32.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // MainForm
             // 
@@ -1873,7 +1889,6 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(10, 10);
             this.MainMenuStrip = this.menuStrip1;
@@ -2008,7 +2023,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView texturesListView;
         private System.Windows.Forms.ImageList imageList48;
         private System.Windows.Forms.ImageList imageList96;
         private System.Windows.Forms.ImageList imageList64;
@@ -2055,7 +2070,7 @@
         private System.Windows.Forms.ImageList entitiesImageList;
         private System.Windows.Forms.ImageList enemiesImageList;
         internal System.Windows.Forms.ListView entitiesListView;
-        internal System.Windows.Forms.ListView listView3;
+        internal System.Windows.Forms.ListView gameEntitiesListView;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripButton zoomFitButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
@@ -2093,5 +2108,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
         private System.Windows.Forms.ToolStripMenuItem layersViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem assetsViewToolStripMenuItem;
+        private System.Windows.Forms.ImageList imageList16;
+        private System.Windows.Forms.ImageList imageList32;
     }
 }

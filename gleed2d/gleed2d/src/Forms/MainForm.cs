@@ -92,9 +92,12 @@ namespace GLEED2D
             comboBox1.Items.Add("96x96");
             comboBox1.Items.Add("128x128");
             comboBox1.Items.Add("256x256");
-            comboBox1.SelectedIndex = 1;
+            comboBox1.SelectedIndex = 2;
 
+            //  set primitives list view
             SetListViewSpacing(listView2, 128 + 8, 128 + 32);
+            SetListViewSpacing(entitiesListView, 128 + 8, 128 + 32);
+            SetListViewSpacing(gameEntitiesListView, 128 + 8, 128 + 32);
 
             pictureBox1.AllowDrop = true;
 
@@ -110,7 +113,9 @@ namespace GLEED2D
         {
             treeView.Nodes.Clear();
             var rootDirectoryInfo = new DirectoryInfo(path);
-            treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
+            TreeNode root = CreateDirectoryNode(rootDirectoryInfo);
+            root.Tag = path;
+            treeView.Nodes.Add(root);
         }
 
         private static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
@@ -120,7 +125,9 @@ namespace GLEED2D
             {
                 try
                 {
-                    directoryNode.Nodes.Add(CreateDirectoryNode(directory));
+                    TreeNode n = CreateDirectoryNode(directory);
+                    n.Tag = directory.FullName;
+                    directoryNode.Nodes.Add(n);
                 }
                 catch (Exception) { }
             }
@@ -141,14 +148,20 @@ namespace GLEED2D
         //TREEVIEW
         private void treeView1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.N) ActionNewLayer(sender, e);
-            if (e.KeyCode == Keys.Delete) ActionDelete(sender, e);
-            if (e.KeyCode == Keys.F7) ActionMoveUp(sender, e);
-            if (e.KeyCode == Keys.F8) ActionMoveDown(sender, e);
-            if (e.KeyCode == Keys.F4) ActionCenterView(sender, e);
-            if (e.KeyCode == Keys.F2) treeView1.SelectedNode.BeginEdit();
-            if (e.KeyCode == Keys.D && e.Control) ActionDuplicate(sender, e);
+            try
+            {
+                if (e.KeyCode == Keys.N) ActionNewLayer(sender, e);
+                if (e.KeyCode == Keys.Delete) ActionDelete(sender, e);
+
+                if (e.KeyCode == Keys.F7) ActionMoveUp(sender, e);
+                if (e.KeyCode == Keys.F8) ActionMoveDown(sender, e);
+                if (e.KeyCode == Keys.F4) ActionCenterView(sender, e);
+                if (e.KeyCode == Keys.F2) treeView1.SelectedNode.BeginEdit();
+                if (e.KeyCode == Keys.D && e.Control) ActionDuplicate(sender, e);
+            }
+            catch (Exception) { }
         }
+
         private void treeView1_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             if (e.Label == null) return;
@@ -187,6 +200,7 @@ namespace GLEED2D
             propertyGrid1.Refresh();
             pictureBox1.Select();
         }
+
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
             //if (e.Node.Tag is Level)
@@ -204,6 +218,7 @@ namespace GLEED2D
                 i.Visible = e.Node.Checked;
             }
         }
+
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node.Tag is Level)
@@ -221,6 +236,7 @@ namespace GLEED2D
                 Editor.Instance.selectitem(i);
             }
         }
+
         private void treeView1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -228,6 +244,7 @@ namespace GLEED2D
                 treeView1.SelectedNode = treeView1.GetNodeAt(e.X, e.Y);
             }
         }
+
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
             if (((TreeNode)e.Item).Tag is Layer) return;
@@ -235,6 +252,7 @@ namespace GLEED2D
             Editor.Instance.beginCommand("Drag Item");
             DoDragDrop(e.Item, DragDropEffects.Move);
         }
+
         private void treeView1_DragOver(object sender, DragEventArgs e)
         {
             //get source node
@@ -291,12 +309,14 @@ namespace GLEED2D
             KeyEventArgs kea = new KeyEventArgs(e.KeyData);
             treeView1_KeyDown(sender, kea);
         }
+
         private void pictureBox1_Resize(object sender, EventArgs e)
         {
             Logger.Instance.log("pictureBox1_Resize().");
             if (Game1.Instance != null) Game1.Instance.resizebackbuffer(pictureBox1.Width, pictureBox1.Height);
             if (Editor.Instance != null) Editor.Instance.camera.updateviewport(pictureBox1.Width, pictureBox1.Height);
         }
+
         private void pictureBox1_MouseEnter(object sender, EventArgs e)
         {
             pictureBox1.Select();
@@ -330,7 +350,7 @@ namespace GLEED2D
         private void pictureBox1_DragDrop(object sender, DragEventArgs e)
         {
             Editor.Instance.paintTextureBrush(false);
-            listView1.Cursor = Cursors.Default;
+            texturesListView.Cursor = Cursors.Default;
             pictureBox1.Cursor = Cursors.Default;
         }
 
@@ -479,6 +499,7 @@ namespace GLEED2D
             Editor.Instance.updatetreeview();
             DirtyFlag = false;            
         }
+
         public void saveLevel(String filename)
         {
             Editor.Instance.saveLevel(filename);
@@ -505,6 +526,7 @@ namespace GLEED2D
             }
 
         }
+
         public void loadLevel(String filename)
         {
             Level level = Level.FromFile(filename, Game1.Instance.Content);
@@ -764,24 +786,32 @@ namespace GLEED2D
             switch (comboBox1.SelectedIndex)
             {
                 case 0:
-                    listView1.LargeImageList = imageList48;
-                    SetListViewSpacing(listView1, 48 + 8, 48 + 32);
+                    texturesListView.LargeImageList = imageList16;
+                    SetListViewSpacing(texturesListView, 16 + 8, 16 + 32);
                     break;
                 case 1:
-                    listView1.LargeImageList = imageList64;
-                    SetListViewSpacing(listView1, 64 + 8, 64 + 32);
+                    texturesListView.LargeImageList = imageList32;
+                    SetListViewSpacing(texturesListView, 32 + 8, 32 + 32);
                     break;
                 case 2:
-                    listView1.LargeImageList = imageList96;
-                    SetListViewSpacing(listView1, 96 + 8, 96 + 32);
+                    texturesListView.LargeImageList = imageList48;
+                    SetListViewSpacing(texturesListView, 48 + 8, 48 + 32);
                     break;
                 case 3:
-                    listView1.LargeImageList = imageList128;
-                    SetListViewSpacing(listView1, 128 + 8, 128 + 32);
+                    texturesListView.LargeImageList = imageList64;
+                    SetListViewSpacing(texturesListView, 64 + 8, 64 + 32);
                     break;
                 case 4:
-                    listView1.LargeImageList = imageList256;
-                    SetListViewSpacing(listView1, 256 + 8, 256 + 32);
+                    texturesListView.LargeImageList = imageList96;
+                    SetListViewSpacing(texturesListView, 96 + 8, 96 + 32);
+                    break;
+                case 5:
+                    texturesListView.LargeImageList = imageList128;
+                    SetListViewSpacing(texturesListView, 128 + 8, 128 + 32);
+                    break;
+                case 6:
+                    texturesListView.LargeImageList = imageList256;
+                    SetListViewSpacing(texturesListView, 256 + 8, 256 + 32);
                     break;
             }
         }
@@ -802,18 +832,18 @@ namespace GLEED2D
         }
         private void listView1_Click(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = listView1.FocusedItem.ToolTipText;
+            toolStripStatusLabel1.Text = texturesListView.FocusedItem.ToolTipText;
         }
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string itemtype = listView1.FocusedItem.Tag.ToString();
+            string itemtype = texturesListView.FocusedItem.Tag.ToString();
             if (itemtype == "folder")
             {
-                loadfolder(listView1.FocusedItem.Name);
+                loadfolder(texturesListView.FocusedItem.Name);
             }
             if (itemtype == "file")
             {
-                Editor.Instance.createTextureBrush(listView1.FocusedItem.Name);
+                Editor.Instance.createTextureBrush(texturesListView.FocusedItem.Name);
             }
 
         }
@@ -822,9 +852,9 @@ namespace GLEED2D
             ListViewItem lvi = (ListViewItem)e.Item;
             if (lvi.Tag.ToString() == "folder") return;
             toolStripStatusLabel1.Text = lvi.ToolTipText;
-            Bitmap bmp = new Bitmap(listView1.LargeImageList.Images[lvi.ImageKey]);
+            Bitmap bmp = new Bitmap(texturesListView.LargeImageList.Images[lvi.ImageKey]);
             dragcursor = new Cursor(bmp.GetHicon());
-            listView1.DoDragDrop(e.Item, DragDropEffects.Move);
+            texturesListView.DoDragDrop(e.Item, DragDropEffects.Move);
         }
         private void listView1_DragOver(object sender, DragEventArgs e)
         {
@@ -835,19 +865,19 @@ namespace GLEED2D
             if (e.Effect == DragDropEffects.Move)
             {
                 e.UseDefaultCursors = false;
-                listView1.Cursor = dragcursor;
+                texturesListView.Cursor = dragcursor;
                 pictureBox1.Cursor = Cursors.Default;
             }
             else
             {
                 e.UseDefaultCursors = true;
-                listView1.Cursor = Cursors.Default;
+                texturesListView.Cursor = Cursors.Default;
                 pictureBox1.Cursor = Cursors.Default;
             }
         }
         private void listView1_DragDrop(object sender, DragEventArgs e)
         {
-            listView1.Cursor = Cursors.Default;
+            texturesListView.Cursor = Cursors.Default;
             pictureBox1.Cursor = Cursors.Default;
         }
 
@@ -883,6 +913,8 @@ namespace GLEED2D
 
         public void loadfolder_foreground(string path)
         {
+            imageList16.Images.Clear();
+            imageList32.Images.Clear();
             imageList48.Images.Clear();
             imageList64.Images.Clear();
             imageList96.Images.Clear();
@@ -890,16 +922,21 @@ namespace GLEED2D
             imageList256.Images.Clear();
 
             Image img = Resources.folder;
+            imageList16.Images.Add(img);
+            imageList32.Images.Add(img);
             imageList48.Images.Add(img);
             imageList64.Images.Add(img);
             imageList96.Images.Add(img);
             imageList128.Images.Add(img);
             imageList256.Images.Add(img);
 
-            listView1.Clear();
+            texturesListView.Clear();
+
 
             DirectoryInfo di = new DirectoryInfo(path);
             textBox1.Text = di.FullName;
+
+#if ENABLE_DIR_IN_TEXTURES
             DirectoryInfo[] folders = di.GetDirectories();
             foreach (DirectoryInfo folder in folders)
             {
@@ -909,8 +946,9 @@ namespace GLEED2D
                 lvi.ImageIndex = 0;
                 lvi.Tag = "folder";
                 lvi.Name = folder.FullName;
-                listView1.Items.Add(lvi);
+                texturesListView.Items.Add(lvi);
             }
+#endif
 
             string filters = "*.jpg;*.png;*.bmp;";
             List<FileInfo> fileList = new List<FileInfo>();
@@ -921,6 +959,8 @@ namespace GLEED2D
             foreach (FileInfo file in files)
             {
                 Bitmap bmp = new Bitmap(file.FullName);
+                imageList16.Images.Add(file.FullName, getThumbNail(bmp, 16, 16));
+                imageList32.Images.Add(file.FullName, getThumbNail(bmp, 32, 32));
                 imageList48.Images.Add(file.FullName, getThumbNail(bmp, 48, 48));
                 imageList64.Images.Add(file.FullName, getThumbNail(bmp, 64, 64));
                 imageList96.Images.Add(file.FullName, getThumbNail(bmp, 96, 96));
@@ -934,7 +974,7 @@ namespace GLEED2D
                 lvi.Tag = "file";
                 lvi.ToolTipText = file.Name + " (" + bmp.Width.ToString() + " x " + bmp.Height.ToString() + ")";
 
-                listView1.Items.Add(lvi);
+                texturesListView.Items.Add(lvi);
             }
         }
 
@@ -1327,6 +1367,23 @@ namespace GLEED2D
         private void assetsViewToolStripMenuItem_CheckStateChanged(object sender, EventArgs e)
         {
             assetsViewButton.Checked = assetsViewToolStripMenuItem.Checked;
+        }
+
+        private void showTextureNamesCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void folderTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            //  tag is assgigned with full path of the directory
+            TreeNode n = folderTreeView.SelectedNode;
+            if (n != null)
+            {                                
+                String path = (String) n.Tag;
+                if (Directory.Exists(path))
+                    loadfolder(path);
+            }
         }
     }
 

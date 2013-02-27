@@ -30,7 +30,7 @@ namespace GLEED2D
             imageList96.Images.Clear();
             imageList128.Images.Clear();
             imageList256.Images.Clear();
-            listView1.Clear();
+            texturesListView.Clear();
 
             DirectoryInfo di = new DirectoryInfo(path);
             textBox1.Text = di.FullName;
@@ -52,7 +52,7 @@ namespace GLEED2D
                 lvi.ImageIndex = imageList128.Images.IndexOfKey(folder.Name);
                 lvi.Tag = "folder";
                 lvi.Name = folder.FullName;
-                listView1.Items.Add(lvi);
+                texturesListView.Items.Add(lvi);
             }
 
             string filters = "*.jpg;*.png;*.gif;*.bmp;*.tga";
@@ -75,7 +75,7 @@ namespace GLEED2D
                 lvi.Text = file.Name;
                 lvi.ImageKey = "default";
                 lvi.Tag = "file";
-                listView1.Items.Add(lvi);
+                texturesListView.Items.Add(lvi);
             }
             
             sw.Start();
@@ -131,8 +131,8 @@ namespace GLEED2D
             imageList128.Images.Add(po.fileinfo.FullName, getThumbNail(po.bmp, 128, 128));
             imageList256.Images.Add(po.fileinfo.FullName, getThumbNail(po.bmp, 256, 256));
 
-            listView1.Items[po.fileinfo.FullName].ImageKey = po.fileinfo.FullName;
-            listView1.Items[po.fileinfo.FullName].ToolTipText = po.fileinfo.Name + " (" + po.bmp.Width.ToString() + " x " + po.bmp.Height.ToString() + ")";
+            texturesListView.Items[po.fileinfo.FullName].ImageKey = po.fileinfo.FullName;
+            texturesListView.Items[po.fileinfo.FullName].ToolTipText = po.fileinfo.Name + " (" + po.bmp.Width.ToString() + " x " + po.bmp.Height.ToString() + ")";
 
             /*ListViewItem lvi = new ListViewItem();
             lvi.Name = po.fileinfo.FullName;
