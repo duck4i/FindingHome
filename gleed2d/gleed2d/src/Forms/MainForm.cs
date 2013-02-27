@@ -100,13 +100,18 @@ namespace GLEED2D
             SetListViewSpacing(gameEntitiesListView, 128 + 8, 128 + 32);
 
             pictureBox1.AllowDrop = true;
+            populateTreeStructureFromPath(@"..\Resources\");
 
-            ListDirectory(folderTreeView, @"..\Resources\");
-            if (folderTreeView.Nodes[0] != null)
-                folderTreeView.Nodes[0].Expand();
 
             //treeView1.DrawNode += DrawTreeNodeHighlightSelectedEvenWithoutFocus;
             //treeView1.DrawMode = TreeViewDrawMode.OwnerDrawText;
+        }
+
+        private void populateTreeStructureFromPath(String path)
+        {
+            ListDirectory(folderTreeView, path);
+            if (folderTreeView.Nodes[0] != null)
+                folderTreeView.Nodes[0].Expand();
         }
 
         private void ListDirectory(TreeView treeView, string path)
@@ -828,7 +833,11 @@ namespace GLEED2D
         {
             FolderBrowserDialog d = new FolderBrowserDialog();
             d.SelectedPath = textBox1.Text;
-            if (d.ShowDialog() == DialogResult.OK) loadfolder(d.SelectedPath);
+            if (d.ShowDialog() == DialogResult.OK)
+            {
+                populateTreeStructureFromPath(d.SelectedPath);
+                loadfolder(d.SelectedPath);
+            }
         }
         private void listView1_Click(object sender, EventArgs e)
         {
