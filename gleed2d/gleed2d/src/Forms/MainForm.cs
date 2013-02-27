@@ -1382,7 +1382,9 @@ namespace GLEED2D
             {                                
                 String path = (String) n.Tag;
                 if (Directory.Exists(path))
+                {                    
                     loadfolder(path);
+                }
             }
         }
     }
