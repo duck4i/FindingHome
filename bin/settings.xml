@@ -61,7 +61,7 @@
     <A>255</A>
     <PackedValue>4294902015</PackedValue>
   </ColorTextureTransparent>
-  <DefaultPathItemLineWidth>8</DefaultPathItemLineWidth>
+  <DefaultPathItemLineWidth>4</DefaultPathItemLineWidth>
   <DefaultContentRootFolder>..\Resources\</DefaultContentRootFolder>
   <CameraSpeed>500</CameraSpeed>
   <CameraFastSpeed>2000</CameraFastSpeed>

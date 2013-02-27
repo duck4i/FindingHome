@@ -149,8 +149,21 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 			info.nextLevel = XMLHelper::readNodeContent(np);		
 
 		GameEntityExit* ge = GameEntityExit::create(info);
-		ge->createBody(this->boxWorld);
-		ge->createFixture();
+		if (ge)
+		{
+			ge->createBody(this->boxWorld);
+			ge->createFixture();
+		}
+	}
+	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ITEM_TYPE_COLL_PATH) == 0)
+	{
+		info.nodeType = NodeType::NodeTypeCollisionPath;
+		GameEntityCollisionPath* path = GameEntityCollisionPath::create(info);
+		if (path)
+		{
+			path->createBody(this->boxWorld);
+			path->createFixture();
+		}
 	}
 	else
 	{
@@ -174,7 +187,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 		{
 			info.nodeType = NodeTypeCircle;
 			sprite = GameEntityCircle::create(info);
-		}
+		}		
 	
 		//	then instert to view
 		if (sprite && info.nodeType != NodeType::NodeTypeUndefined)

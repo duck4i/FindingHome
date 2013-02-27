@@ -143,6 +143,7 @@
     <ClInclude Include="..\Classes\GameEntities.h" />
     <ClInclude Include="..\Classes\GameEntity.h" />
     <ClInclude Include="..\Classes\GameEntityCircle.h" />
+    <ClInclude Include="..\Classes\GameEntityCollisionPath.h" />
     <ClInclude Include="..\Classes\GameEntityExit.h" />
     <ClInclude Include="..\Classes\GameEntityPlayer.h" />
     <ClInclude Include="..\Classes\GameEntityRectangle.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="..\Classes\extern\GLES-Render.cpp" />
     <ClCompile Include="..\Classes\GameEntity.cpp" />
     <ClCompile Include="..\Classes\GameEntityCircle.cpp" />
+    <ClCompile Include="..\Classes\GameEntityCollisionPath.cpp" />
     <ClCompile Include="..\Classes\GameEntityExit.cpp" />
     <ClCompile Include="..\Classes\GameEntityPlayer.cpp" />
     <ClCompile Include="..\Classes\GameEntityRectangle.cpp" />

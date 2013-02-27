@@ -137,7 +137,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	{
 		HWND desktop = GetDesktopWindow();
 		RECT r; 
-		GetClientRect(desktop, &r);
+		//GetClientRect(desktop, &r);
+		GetWindowRect(desktop, &r);		
 		eglView->setFrameSize(r.right, r.bottom);
 		unsigned long ws = GetWindowLong(eglView->getHWnd(), GWL_STYLE);
 		SetWindowLong(eglView->getHWnd(), GWL_STYLE, ws & ~(WS_CAPTION | WS_THICKFRAME));

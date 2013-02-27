@@ -1674,7 +1674,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(301, 611);
+            this.tabPage2.Size = new System.Drawing.Size(301, 615);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Primitives";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1698,11 +1698,10 @@
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.ShowItemToolTips = true;
-            this.listView2.Size = new System.Drawing.Size(295, 605);
+            this.listView2.Size = new System.Drawing.Size(295, 609);
             this.listView2.TabIndex = 0;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView2_MouseDoubleClick);
-            this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
             // 
             // imageList1
             // 

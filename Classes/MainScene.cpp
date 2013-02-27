@@ -95,6 +95,7 @@ void MainScene::loadMap(float none)
 	if (lp && lp->WeatherActive)
 		this->weather = WeatherHelper::create(this, this->worldLayer, WEATHER_CONTROLLER_DATA);
 
+	//	add shift sprite
 	this->shiftSprite = CCSprite::create(RESOURCE_SHIFT);
 	this->shiftSprite->setAnchorPoint(ccp(0, 0));
 	this->shiftSprite->setPosition(ccp(10, 30));

@@ -47,11 +47,12 @@ bool WeatherHelper::init()
 	
 
 	//	TV scan sprite? Not for long!
+	/*
 	CCSize winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
 	CCSprite *tv_scan = CCSprite::create("..\\Resources\\tv_scan.png");
 	tv_scan->setPosition(ccp(winSize.width / 2, winSize.height / 2));
 	this->parent->addChild(tv_scan, 1000);
-
+	*/
 
 	//	My first shader lady and gentleman
 	//TintShader *shader = TintShader::create();	

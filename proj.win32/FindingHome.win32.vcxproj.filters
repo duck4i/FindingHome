@@ -130,6 +130,9 @@
     <ClInclude Include="..\Classes\LevelProperties.h">
       <Filter>include\levels</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\GameEntityCollisionPath.h">
+      <Filter>include\entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -197,6 +200,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\LevelProperties.cpp">
       <Filter>source\levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameEntityCollisionPath.cpp">
+      <Filter>source\entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

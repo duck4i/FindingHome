@@ -6,5 +6,6 @@
 #include "GameEntityRectangle.h"
 #include "GameEntityPlayer.h"
 #include "GameEntityExit.h"
+#include "GameEntityCollisionPath.h"
 
 #include "BatchManager.h"

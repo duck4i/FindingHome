@@ -995,7 +995,7 @@ namespace GLEED2D
             }
             if (listView2.FocusedItem.Text == "Path")
             {
-                Editor.Instance.createPrimitiveBrush(PrimitiveType.Path);
+                Editor.Instance.createPrimitiveBrush(PrimitiveType.CollisionPath);
             }
             if (listView2.FocusedItem.Text == "Text")
             {

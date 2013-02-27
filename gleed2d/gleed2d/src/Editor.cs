@@ -27,7 +27,7 @@ namespace GLEED2D
 
     enum PrimitiveType
     {
-        Rectangle, Circle, Path
+        Rectangle, Circle, Path, CollisionPath
     }
 
     enum EntityType
@@ -546,7 +546,9 @@ namespace GLEED2D
                 case PrimitiveType.Path:
                     MainForm.Instance.toolStripStatusLabel1.Text = Resources.Path_Entered;
                     break;
-
+                case PrimitiveType.CollisionPath:
+                    MainForm.Instance.toolStripStatusLabel1.Tag = Resources.Collision_Path_Entered;
+                    break;
             }
         }
 
@@ -579,6 +581,7 @@ namespace GLEED2D
                     endCommand();
                     MainForm.Instance.toolStripStatusLabel1.Text = Resources.Circle_Entered;
                     break;
+
                 case PrimitiveType.Path:
                     Item pi = new PathItem(clickedPoints.ToArray());
                     pi.Name = pi.getNamePrefix() + level.getNextItemNumber();
@@ -587,6 +590,16 @@ namespace GLEED2D
                     addItem(pi);
                     endCommand();
                     MainForm.Instance.toolStripStatusLabel1.Text = Resources.Path_Entered;
+                    break;
+
+                case PrimitiveType.CollisionPath:
+                    Item cpi = new CollisionPathItem(clickedPoints.ToArray());
+                    cpi.Name = cpi.getNamePrefix() + level.getNextItemNumber();
+                    cpi.layer = SelectedLayer;
+                    beginCommand("Add Item \"" + cpi.Name + "\"");
+                    addItem(cpi);
+                    endCommand();
+                    MainForm.Instance.toolStripStatusLabel1.Text = Resources.Collision_Path_Entered;
                     break;
             }
             updatetreeview();
@@ -725,7 +738,7 @@ namespace GLEED2D
                     if (item is TextureItem) imageindex = 1;
                     if (item is RectangleItem) imageindex = 2;
                     if (item is CircleItem) imageindex = 3;
-                    if (item is PathItem) imageindex = 4;
+                    if (item is PathItem || item is CollisionPathItem) imageindex = 4;
                     if (item is EntityItem) imageindex = 6;
                     itemnode.ImageIndex = itemnode.SelectedImageIndex = imageindex;
                 }
@@ -1314,11 +1327,14 @@ namespace GLEED2D
                             case PrimitiveType.Path:
                                 MainForm.Instance.toolStripStatusLabel1.Text = Resources.Path_Started;
                                 break;
+                            case PrimitiveType.CollisionPath:
+                                MainForm.Instance.toolStripStatusLabel1.Text = Resources.Path_Started;
+                                break;
                         }
                     }
                     else
                     {
-                        if (currentprimitive != PrimitiveType.Path)
+                        if (currentprimitive != PrimitiveType.Path && currentprimitive != PrimitiveType.CollisionPath)
                         {
                             paintPrimitiveBrush();
                             clickedPoints.Clear();
@@ -1328,7 +1344,7 @@ namespace GLEED2D
                 }
                 if (kstate.IsKeyDown(Keys.Back) && oldkstate.IsKeyUp(Keys.Back))
                 {
-                    if (currentprimitive == PrimitiveType.Path && clickedPoints.Count > 1)
+                    if ((currentprimitive == PrimitiveType.Path || currentprimitive == PrimitiveType.CollisionPath) && clickedPoints.Count > 1)
                     {
                         clickedPoints.RemoveAt(clickedPoints.Count-1);
                     }
@@ -1337,7 +1353,7 @@ namespace GLEED2D
                 if ((mstate.MiddleButton == ButtonState.Pressed && oldmstate.MiddleButton == ButtonState.Released) ||
                     (kstate.IsKeyDown(Keys.D2) && oldkstate.IsKeyUp(Keys.D2)))
                 {
-                    if (currentprimitive == PrimitiveType.Path && primitivestarted)
+                    if ((currentprimitive == PrimitiveType.Path || currentprimitive == PrimitiveType.CollisionPath) && primitivestarted)
                     {
                         paintPrimitiveBrush();
                         clickedPoints.Clear();
@@ -1408,6 +1424,10 @@ namespace GLEED2D
                             Primitives.Instance.drawCircleFilled(sb, clickedPoints[0], (mouseworldpos - clickedPoints[0]).Length(), Constants.Instance.ColorPrimitives);
                             break;
                         case PrimitiveType.Path:
+                            Primitives.Instance.drawPath(sb, clickedPoints.ToArray(), Constants.Instance.ColorPrimitives, Constants.Instance.DefaultPathItemLineWidth);
+                            Primitives.Instance.drawLine(sb, clickedPoints.Last(), mouseworldpos, Constants.Instance.ColorPrimitives, Constants.Instance.DefaultPathItemLineWidth);
+                            break;
+                        case PrimitiveType.CollisionPath:                        
                             Primitives.Instance.drawPath(sb, clickedPoints.ToArray(), Constants.Instance.ColorPrimitives, Constants.Instance.DefaultPathItemLineWidth);
                             Primitives.Instance.drawLine(sb, clickedPoints.Last(), mouseworldpos, Constants.Instance.ColorPrimitives, Constants.Instance.DefaultPathItemLineWidth);
                             break;

@@ -20,6 +20,8 @@ USING_NS_CC;
 #define ITEM_TYPE_RECTANGLE		"RectangleItem"
 #define ITEM_TYPE_CIRCLE		"CircleItem"
 #define ITEM_TYPE_TEXTURE		"TextureItem"
+#define ITEM_TYPE_COLL_PATH		"CollisionPathItem"
+
 #define ITEM_TYPE_PLAYER		"PlayerItem"
 #define ITEM_TYPE_ENTITY		"EntityItem"
 #define ITEM_TYPE_EXIT			"ExitItem"

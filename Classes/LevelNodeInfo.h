@@ -14,6 +14,7 @@ enum NodeType
 	NodeTypeTexture,
 	NodeTypePlayer,
 	NodeTypeExit,
+	NodeTypeCollisionPath,
 	NodeTypeUndefined
 };
 

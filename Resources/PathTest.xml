@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_01" Visible="true" WeatherActive="true" CameraZoom="0.5" PlayerThrust="0" PlayerJump="0" PlayerMaxSpeed="0" PlayerShiftModifier="0" PlayerMidAirModifier="0">
+    <Layers>
+        <Layer Name="Background" Visible="true">
+            <Items>
+                <Item xsi:type="TextureItem" Name="Texture_0003" Visible="true">
+                    <Position>
+                        <X>94</X>
+                        <Y>10</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1</X>
+                        <Y>1</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Ibrahim\forest\ground.png</texture_filename>
+                    <asset_name>ground.png</asset_name>
+                    <Origin>
+                        <X>750</X>
+                        <Y>500</Y>
+                    </Origin>
+                </Item>
+            </Items>
+            <ScrollSpeed>
+                <X>1</X>
+                <Y>1</Y>
+            </ScrollSpeed>
+            <CustomProperties />
+        </Layer>
+        <Layer Name="Main" Visible="true">
+            <Items>
+                <Item xsi:type="CollisionPathItem" Name="CollisionPath_0001" Visible="true">
+                    <Position>
+                        <X>-650</X>
+                        <Y>244</Y>
+                    </Position>
+                    <CustomProperties />
+                    <LocalPoints>
+                        <Vector2>
+                            <X>0</X>
+                            <Y>0</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>627.1534</X>
+                            <Y>-171.903259</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>835.0376</X>
+                            <Y>-172.491333</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>937.451843</X>
+                            <Y>-220.407349</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>1100.74438</X>
+                            <Y>-236.407379</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>1146.7207</X>
+                            <Y>-131.9529</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>1329.98242</X>
+                            <Y>-123.986046</Y>
+                        </Vector2>
+                    </LocalPoints>
+                    <WorldPoints>
+                        <Vector2>
+                            <X>-650</X>
+                            <Y>244</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>-22.8466187</X>
+                            <Y>72.09674</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>185.0376</X>
+                            <Y>71.50867</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>287.451843</X>
+                            <Y>23.5926514</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>450.7444</X>
+                            <Y>7.592621</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>496.7207</X>
+                            <Y>112.047104</Y>
+                        </Vector2>
+                        <Vector2>
+                            <X>679.9824</X>
+                            <Y>120.013954</Y>
+                        </Vector2>
+                    </WorldPoints>
+                    <IsPolygon>false</IsPolygon>
+                    <LineWidth>4</LineWidth>
+                    <LineColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>145</A>
+                        <PackedValue>2445279424</PackedValue>
+                    </LineColor>
+                </Item>
+                <Item xsi:type="PlayerItem" Name="Player" Visible="true">
+                    <Position>
+                        <X>-233</X>
+                        <Y>-72</Y>
+                    </Position>
+                    <CustomProperties />
+                </Item>
+            </Items>
+            <ScrollSpeed>
+                <X>1</X>
+                <Y>1</Y>
+            </ScrollSpeed>
+            <CustomProperties />
+        </Layer>
+    </Layers>
+    <CustomProperties />
+    <EditorRelated>
+        <NextItemNumber>3</NextItemNumber>
+        <ContentRootFolder>..\Resources\</ContentRootFolder>
+        <CameraPosition>
+            <X>0</X>
+            <Y>0</Y>
+        </CameraPosition>
+        <Version>1.5.0.0</Version>
+    </EditorRelated>
+</Level>

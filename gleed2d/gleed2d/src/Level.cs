@@ -172,10 +172,11 @@ namespace GLEED2D
     [XmlInclude(typeof(TextureItem))]
     [XmlInclude(typeof(RectangleItem))]
     [XmlInclude(typeof(CircleItem))]
+    [XmlInclude(typeof(CollisionPathItem))]
     [XmlInclude(typeof(PathItem))]
     [XmlInclude(typeof(EntityItem))]
     [XmlInclude(typeof(PlayerItem))]
-    [XmlInclude(typeof(ExitItem))]
+    [XmlInclude(typeof(ExitItem))]    
     public partial class Item
     {
         /// <summary>
@@ -291,7 +292,6 @@ namespace GLEED2D
             //this.texture = Texture2D.FromFile(<GraphicsDevice>, texture_filename);
             //or by using the Content Pipeline:
             //this.texture = cm.Load<Texture2D>(asset_name);
-
         }
 
         public override void draw(SpriteBatch sb)
@@ -337,6 +337,13 @@ namespace GLEED2D
         public Color LineColor;
 
         public PathItem()
+        {
+        }
+    }
+
+    public partial class CollisionPathItem : PathItem
+    {
+        public CollisionPathItem()
         {
         }
     }
