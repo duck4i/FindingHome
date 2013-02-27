@@ -114,7 +114,6 @@ void MainScene::loadMap(float none)
 	}
 
 
-
 #if defined(_DEBUG) && !defined(DISABLE_SHINY)
 	PROFILER_UPDATE();
 	PROFILER_OUTPUT("profiler_load.txt");
@@ -172,6 +171,7 @@ void MainScene::drawDebugControls()
 	stats->setAnchorPoint(ccp(0, 1));
 	this->addChild(stats, zOrder);
 
+
 #ifndef DISABLE_SHINY
 
 	PROFILER_UPDATE();
@@ -201,7 +201,6 @@ void MainScene::drawDebugControls()
 	shinyConsoleBackground->setVisible(false);
 	
 	Shiny::ProfileManager::instance.clear();	//	clear prev data
-
 
 #endif
 }
@@ -276,7 +275,7 @@ void MainScene::updateCamera(float delta)
 	PROFILE_FUNC();
 
 	//CCLog("DELTA CAMERA: %f", delta);
-	if (this->cameraMoveInProgress)
+	if (this->gamePlayer == NULL|| this->cameraMoveInProgress)
 		return;
 	
 	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());

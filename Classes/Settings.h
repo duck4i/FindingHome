@@ -17,7 +17,7 @@
 #define WEATHER_CONTROLLER_DATA		RESOURCE_DIR "weather_controller.png"
 
 #ifdef _DEBUG
-#define GAME_START_LEVEL			RESOURCE_DIR "ForestTest.xml"
+#define GAME_START_LEVEL			RESOURCE_DIR "Level5.xml"//"ForestTest.xml"
 #else
 #define GAME_START_LEVEL			RESOURCE_DIR "Level2.xml"
 #endif
