@@ -172,6 +172,11 @@ namespace GLEED2D
             return result;
         }
 
+        public override Rectangle getBoundingBox()
+        {
+            return new Rectangle(0, 0, (int) (texture.Width * Scale.X), (int) (texture.Height * Scale.Y) );
+        }
+
         public override string getNamePrefix()
         {
             return "Texture_";

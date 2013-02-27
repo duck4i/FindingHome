@@ -78,6 +78,11 @@ namespace GLEED2D
             for (int i = 0; i < WorldPoints.Length; i++) WorldPoints[i] = LocalPoints[i] + Position;
         }
 
+        public override Rectangle getBoundingBox()
+        {
+            return new Rectangle(0, 0, 0, 0);
+        }
+
 
         public override void onMouseOver(Vector2 mouseworldpos)
         {

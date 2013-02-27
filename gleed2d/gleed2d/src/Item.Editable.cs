@@ -65,6 +65,8 @@ namespace GLEED2D
 
         public abstract Item clone();
 
+        public abstract Rectangle getBoundingBox();
+
         public virtual bool loadIntoEditor()
         {
             OnTransformed();

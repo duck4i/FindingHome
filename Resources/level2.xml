@@ -2321,22 +2321,6 @@
                         <PackedValue>4290283081</PackedValue>
                     </FillColor>
                 </Item>
-                <Item xsi:type="RectangleItem" Name="Rectangle_0271" Visible="true">
-                    <Position>
-                        <X>-15161</X>
-                        <Y>-1904</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Width>40588</Width>
-                    <Height>5430</Height>
-                    <FillColor>
-                        <R>192</R>
-                        <G>0</G>
-                        <B>192</B>
-                        <A>145</A>
-                        <PackedValue>2445279424</PackedValue>
-                    </FillColor>
-                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>

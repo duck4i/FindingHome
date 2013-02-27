@@ -85,6 +85,11 @@ namespace GLEED2D
             Primitives.Instance.drawCircleFilled(sb, Position, Radius, c);
         }
 
+        public override Rectangle getBoundingBox()
+        {
+            return new Rectangle(0, 0, (int)Radius * 2, (int) Radius * 2);
+        }
+
 
         public override void drawSelectionFrame(SpriteBatch sb, Matrix matrix, Color color)
         {

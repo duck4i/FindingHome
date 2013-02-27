@@ -1008,19 +1008,22 @@ namespace GLEED2D
                         List<Item> selecteditemscopy = new List<Item>();
                         foreach (Item selitem in SelectedItems)
                         {
-                            Item i2 = (Item)selitem.clone();                            
+                            Item i2 = (Item)selitem.clone();
+                            
+                            //  move to the right
+                            i2.Position.X += selitem.getBoundingBox().Width;
+                            i2.OnTransformed();
+
                             selecteditemscopy.Add(i2);
                         }
 
                         foreach (Item selitem in selecteditemscopy)
                         {
                             selitem.Name = selitem.getNamePrefix() + level.getNextItemNumber();
-
-                            //  move to the right
-                            //selitem.Position.X += selitem.get;                            
-
-                            addItem(selitem);                            
+                            
+                            addItem(selitem);
                         }
+
                         selectitem(selecteditemscopy[0]);
                         updatetreeview();
                         for (int i = 1; i < selecteditemscopy.Count; i++) SelectedItems.Add(selecteditemscopy[i]);

@@ -121,7 +121,6 @@
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.assetsViewButton = new System.Windows.Forms.ToolStripButton();
             this.toggleLayersButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.sendToMainStripButton = new System.Windows.Forms.ToolStripButton();
             this.sendToBackStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
@@ -155,7 +154,6 @@
             this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.treeView1 = new CustomTreeView();
             this.treetools = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.buttonDelete = new System.Windows.Forms.ToolStripButton();
@@ -202,6 +200,9 @@
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList16 = new System.Windows.Forms.ImageList(this.components);
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
+            this.positionPlayerButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.treeView1 = new CustomTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.CustomPropertyContextMenu.SuspendLayout();
@@ -877,10 +878,11 @@
             this.ShowGridButton,
             this.SnapToGridButton,
             this.ShowWorldOriginButton,
+            this.toolStripSeparator20,
+            this.positionPlayerButton,
             this.toolStripSeparator12,
             this.assetsViewButton,
             this.toggleLayersButton,
-            this.toolStripSeparator20,
             this.sendToMainStripButton,
             this.sendToBackStripButton,
             this.toolStripSeparator21,
@@ -1063,12 +1065,6 @@
             this.toggleLayersButton.Size = new System.Drawing.Size(23, 22);
             this.toggleLayersButton.Text = "Toggle Layers View";
             this.toggleLayersButton.CheckedChanged += new System.EventHandler(this.toolStripButton4_CheckedChanged);
-            // 
-            // toolStripSeparator20
-            // 
-            this.toolStripSeparator20.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 25);
             // 
             // sendToMainStripButton
             // 
@@ -1365,31 +1361,6 @@
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.treetools);
             this.toolStripContainer1.TopToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            // 
-            // treeView1
-            // 
-            this.treeView1.AllowDrop = true;
-            this.treeView1.CheckBoxes = true;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
-            this.treeView1.HideSelection = false;
-            this.treeView1.ImageIndex = 5;
-            this.treeView1.ImageList = this.imageList2;
-            this.treeView1.LabelEdit = true;
-            this.treeView1.Location = new System.Drawing.Point(0, 0);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.SelectedImageIndex = 5;
-            this.treeView1.Size = new System.Drawing.Size(235, 275);
-            this.treeView1.TabIndex = 2;
-            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
-            this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
-            this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
-            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
-            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
-            this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
-            this.treeView1.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView1_DragOver);
             // 
             // treetools
             // 
@@ -1718,7 +1689,7 @@
             this.EntitiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.EntitiesTabPage.Name = "EntitiesTabPage";
             this.EntitiesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.EntitiesTabPage.Size = new System.Drawing.Size(301, 611);
+            this.EntitiesTabPage.Size = new System.Drawing.Size(301, 615);
             this.EntitiesTabPage.TabIndex = 2;
             this.EntitiesTabPage.Text = "Game Entities ";
             this.EntitiesTabPage.UseVisualStyleBackColor = true;
@@ -1735,7 +1706,7 @@
             this.entitiesListView.Location = new System.Drawing.Point(3, 3);
             this.entitiesListView.MultiSelect = false;
             this.entitiesListView.Name = "entitiesListView";
-            this.entitiesListView.Size = new System.Drawing.Size(295, 605);
+            this.entitiesListView.Size = new System.Drawing.Size(295, 609);
             this.entitiesListView.TabIndex = 0;
             this.entitiesListView.UseCompatibleStateImageBehavior = false;
             this.entitiesListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.entitiesListView_MouseDoubleClick);
@@ -1754,7 +1725,7 @@
             this.EnemiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.EnemiesTabPage.Name = "EnemiesTabPage";
             this.EnemiesTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.EnemiesTabPage.Size = new System.Drawing.Size(301, 611);
+            this.EnemiesTabPage.Size = new System.Drawing.Size(301, 615);
             this.EnemiesTabPage.TabIndex = 3;
             this.EnemiesTabPage.Text = "Game Enemies";
             this.EnemiesTabPage.UseVisualStyleBackColor = true;
@@ -1770,7 +1741,7 @@
             this.gameEntitiesListView.Location = new System.Drawing.Point(3, 3);
             this.gameEntitiesListView.MultiSelect = false;
             this.gameEntitiesListView.Name = "gameEntitiesListView";
-            this.gameEntitiesListView.Size = new System.Drawing.Size(295, 605);
+            this.gameEntitiesListView.Size = new System.Drawing.Size(295, 609);
             this.gameEntitiesListView.TabIndex = 0;
             this.gameEntitiesListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -1878,6 +1849,47 @@
             this.imageList32.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList32.ImageSize = new System.Drawing.Size(32, 32);
             this.imageList32.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // positionPlayerButton
+            // 
+            this.positionPlayerButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.positionPlayerButton.Image = ((System.Drawing.Image)(resources.GetObject("positionPlayerButton.Image")));
+            this.positionPlayerButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.positionPlayerButton.Name = "positionPlayerButton";
+            this.positionPlayerButton.Size = new System.Drawing.Size(23, 22);
+            this.positionPlayerButton.Text = "Position player where camera is";
+            this.positionPlayerButton.ToolTipText = "Position player where camera is";
+            this.positionPlayerButton.Click += new System.EventHandler(this.positionPlayerButton_Click);
+            // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 25);
+            // 
+            // treeView1
+            // 
+            this.treeView1.AllowDrop = true;
+            this.treeView1.CheckBoxes = true;
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+            this.treeView1.HideSelection = false;
+            this.treeView1.ImageIndex = 5;
+            this.treeView1.ImageList = this.imageList2;
+            this.treeView1.LabelEdit = true;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.SelectedImageIndex = 5;
+            this.treeView1.Size = new System.Drawing.Size(235, 275);
+            this.treeView1.TabIndex = 2;
+            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
+            this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
+            this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
+            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
+            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
+            this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
+            this.treeView1.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView1_DragOver);
             // 
             // MainForm
             // 
@@ -2103,11 +2115,12 @@
         private System.Windows.Forms.ImageList folderTreeImageView;
         private System.Windows.Forms.ToolStripButton toggleLayersButton;
         private System.Windows.Forms.ToolStripButton assetsViewButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator24;
         private System.Windows.Forms.ToolStripMenuItem layersViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem assetsViewToolStripMenuItem;
         private System.Windows.Forms.ImageList imageList16;
         private System.Windows.Forms.ImageList imageList32;
+        private System.Windows.Forms.ToolStripButton positionPlayerButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
     }
 }

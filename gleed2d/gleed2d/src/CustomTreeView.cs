@@ -116,7 +116,7 @@ public class CustomTreeView : TreeView
                 path.AddEllipse(baseRect);
             }
         }
-        catch (Exception ex)
+        catch (Exception )
         {
             path.AddEllipse(baseRect);
         }

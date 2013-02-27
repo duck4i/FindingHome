@@ -1387,6 +1387,29 @@ namespace GLEED2D
                 }
             }
         }
+
+        private void positionPlayerButton_Click(object sender, EventArgs e)
+        {
+            List<Layer> layers = Editor.Instance.level.Layers;
+            foreach (Layer l in layers)
+            { 
+                foreach (Item i in l.Items)
+                {
+                    if (i is PlayerItem)
+                    {
+                        //MessageBox.Show("Found player");
+                        i.Position = Editor.Instance.camera.Position;
+
+                        Microsoft.Xna.Framework.Rectangle r = i.getBoundingBox();
+
+                        i.Position.X -= r.Width / 2; //  center (we need ASAP option for bounding box retrieving)
+                        i.Position.Y -= r.Height / 2;
+                        break;
+                    }
+                }
+            }
+
+        }
     }
 
     public class BehaviorOptions

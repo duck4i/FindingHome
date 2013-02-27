@@ -56,6 +56,11 @@ namespace GLEED2D
             return false;
         }
 
+        public override Rectangle getBoundingBox()
+        {
+            return new Rectangle(0, 0, shapeWidth, shapeHeight);
+        }
+
         public override void drawInEditor(SpriteBatch sb)
         {
             if (!Visible)

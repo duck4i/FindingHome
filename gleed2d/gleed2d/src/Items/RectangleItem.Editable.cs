@@ -49,7 +49,7 @@ namespace GLEED2D
                 Height = value;
                 OnTransformed();
             }
-        } 
+        }
 
         [DisplayName("FillColor"), Category(" General")]
         [Editor(typeof(XNAColorUITypeEditor), typeof(UITypeEditor))]
@@ -75,6 +75,11 @@ namespace GLEED2D
             result.CustomProperties = new SerializableDictionary(CustomProperties);
             result.hovering = false; 
             return result;
+        }
+
+        public override Rectangle getBoundingBox()
+        {
+            return new Rectangle(0, 0, (int)Width, (int) Height);
         }
 
         public override string getNamePrefix()
