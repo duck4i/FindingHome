@@ -1010,9 +1010,11 @@ namespace GLEED2D
                         {
                             Item i2 = (Item)selitem.clone();
                             
-                            //  move to the right
-                            i2.Position.X += selitem.getBoundingBox().Width;
-                            i2.OnTransformed();
+                            //  move to the right                            
+                            i2.Position.X += selitem.getBoundingBox().Width * SelectedItems.Capacity;
+                            
+                            if (i2 is RectangleItem)                        
+                                i2.OnTransformed();
 
                             selecteditemscopy.Add(i2);
                         }
