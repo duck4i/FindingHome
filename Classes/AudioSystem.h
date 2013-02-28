@@ -11,7 +11,7 @@
 
 #include <fmod.hpp>
 
-#define MAX_CHANNELS 8
+#define MAX_CHANNELS 16
 
 class AudioSystem
 {

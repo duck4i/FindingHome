@@ -68,6 +68,7 @@ bool MainScene::init()
 	this->worldLayer->setScale(sceneScale);
 	this->addChild(worldLayer, 1000);
 
+	CCDirector::sharedDirector()->setDisplayStats(false);
 	this->audio = AudioSystem::shared();
 
 	//	add loading layer
@@ -155,7 +156,7 @@ void MainScene::drawDebugControls()
 	labOut->setAnchorPoint(ccp(0, 1));
 
 	//	calculate size
-	float extend = 30;
+	float extend = 8;
 	CCSize labOutS = lab->getContentSize();
 	labOutS.width += 6;
 	labOutS.height += extend;
@@ -165,7 +166,7 @@ void MainScene::drawDebugControls()
 	labOutPos.y += 3;
 	labOut->setPosition(labOutPos);
 	this->addChild(labOut, zOrder - 1);
-
+	/*
 	labOutS.height -= extend;
 	stats = CCLabelTTF::create("FPS:", "Consolas", 12.0f);
 
@@ -174,7 +175,7 @@ void MainScene::drawDebugControls()
 	stats->setPosition(labOutPos);
 	stats->setAnchorPoint(ccp(0, 1));
 	this->addChild(stats, zOrder);
-
+	*/
 
 #ifndef DISABLE_SHINY
 
@@ -329,6 +330,7 @@ void MainScene::updateKeyboard(float delta)
 			debugLayer->setVisible(false);
 			shinyConsole->setVisible(false);
 			shinyConsoleBackground->setVisible(false);
+			CCDirector::sharedDirector()->setDisplayStats(false);
 		}
 		//	if shiny visible show debug next
 		else if (!debugLayer->isVisible() && shinyConsole->isVisible())		
@@ -338,6 +340,7 @@ void MainScene::updateKeyboard(float delta)
 		{
 			shinyConsoleBackground->setVisible(true);
 			shinyConsole->setVisible(true);
+			CCDirector::sharedDirector()->setDisplayStats(true);
 		}
 		
 #else
@@ -377,14 +380,20 @@ void MainScene::updateKeyboard(float delta)
 void MainScene::updateFPS(float delta)
 {	
 	PROFILE_FUNC(); //- unimportant
+	//static unsigned int numtimes = 0;
+	//numtimes++;
 
-	if (stats && statsLapse == 0)
-	{
-		float times = 1.0f / delta;
+	if (/*stats &&*/ statsLapse == 0)
+	{		
+		/*float times = numtimes;
 		char tmp[50];
 		sprintf(tmp, "FPS: %.2f", times);
 		stats->setString(tmp);
+		*/
 		statsLapse += delta;
+
+		
+		
 
 #ifndef DISABLE_SHINY
 
@@ -406,8 +415,8 @@ void MainScene::updateFPS(float delta)
 #endif
 
 	}//	if time is right
-	else if (statsLapse >= 1.0f) //update every half second
-		statsLapse = 0;
+	else if (statsLapse >= 1.0f) //update every half second	
+		statsLapse = 0;	
 	else
 		statsLapse += delta;
 }

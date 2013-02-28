@@ -107,7 +107,7 @@ void AudioSystem::playHop()
 		first = true;
 	*/
 
-	system->playSound(FMOD_CHANNEL_REUSE, soundHop, false, &channelEffects);
+	system->playSound(FMOD_CHANNEL_FREE, soundHop, false, &channelEffects);
 	/*
 	if (first)
 	{		
