@@ -1419,6 +1419,18 @@ namespace GLEED2D
             }
 
         }
+
+        private void refreshDirectoryButton_Click(object sender, EventArgs e)
+        {
+            TreeNode node = folderTreeView.Nodes[0];
+            if (node != null)
+            {
+                string path = (string) node.Tag;
+                if (Directory.Exists(path))
+                    populateTreeStructureFromPath(path);
+            }
+            
+        }
     }
 
     public class BehaviorOptions

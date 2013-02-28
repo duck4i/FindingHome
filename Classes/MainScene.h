@@ -11,6 +11,7 @@
 #include "WeatherHelper.h"
 #include "ContactListener.h"
 #include "Performance.h"
+#include "AudioSystem.h"
 
 using namespace cocos2d;
 

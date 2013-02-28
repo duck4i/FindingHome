@@ -118,6 +118,8 @@
             this.ShowGridButton = new System.Windows.Forms.ToolStripButton();
             this.SnapToGridButton = new System.Windows.Forms.ToolStripButton();
             this.ShowWorldOriginButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.positionPlayerButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.assetsViewButton = new System.Windows.Forms.ToolStripButton();
             this.toggleLayersButton = new System.Windows.Forms.ToolStripButton();
@@ -200,8 +202,7 @@
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList16 = new System.Windows.Forms.ImageList(this.components);
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
-            this.positionPlayerButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.refreshDirectoryButton = new System.Windows.Forms.Button();
             this.treeView1 = new CustomTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -1033,6 +1034,22 @@
             this.ShowWorldOriginButton.ToolTipText = "Show World Origin";
             this.ShowWorldOriginButton.CheckedChanged += new System.EventHandler(this.ShowWorldOriginButton_CheckedChanged);
             // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 25);
+            // 
+            // positionPlayerButton
+            // 
+            this.positionPlayerButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.positionPlayerButton.Image = ((System.Drawing.Image)(resources.GetObject("positionPlayerButton.Image")));
+            this.positionPlayerButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.positionPlayerButton.Name = "positionPlayerButton";
+            this.positionPlayerButton.Size = new System.Drawing.Size(23, 22);
+            this.positionPlayerButton.Text = "Position player where camera is";
+            this.positionPlayerButton.ToolTipText = "Position player where camera is";
+            this.positionPlayerButton.Click += new System.EventHandler(this.positionPlayerButton_Click);
+            // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
@@ -1507,6 +1524,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.refreshDirectoryButton);
             this.panel2.Controls.Add(this.chooseFolder);
             this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Controls.Add(this.label2);
@@ -1551,7 +1569,7 @@
             // buttonFolderUp
             // 
             this.buttonFolderUp.Image = ((System.Drawing.Image)(resources.GetObject("buttonFolderUp.Image")));
-            this.buttonFolderUp.Location = new System.Drawing.Point(90, 4);
+            this.buttonFolderUp.Location = new System.Drawing.Point(130, 4);
             this.buttonFolderUp.Name = "buttonFolderUp";
             this.buttonFolderUp.Size = new System.Drawing.Size(32, 23);
             this.buttonFolderUp.TabIndex = 4;
@@ -1850,21 +1868,15 @@
             this.imageList32.ImageSize = new System.Drawing.Size(32, 32);
             this.imageList32.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // positionPlayerButton
+            // refreshDirectoryButton
             // 
-            this.positionPlayerButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.positionPlayerButton.Image = ((System.Drawing.Image)(resources.GetObject("positionPlayerButton.Image")));
-            this.positionPlayerButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.positionPlayerButton.Name = "positionPlayerButton";
-            this.positionPlayerButton.Size = new System.Drawing.Size(23, 22);
-            this.positionPlayerButton.Text = "Position player where camera is";
-            this.positionPlayerButton.ToolTipText = "Position player where camera is";
-            this.positionPlayerButton.Click += new System.EventHandler(this.positionPlayerButton_Click);
-            // 
-            // toolStripSeparator20
-            // 
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 25);
+            this.refreshDirectoryButton.Image = ((System.Drawing.Image)(resources.GetObject("refreshDirectoryButton.Image")));
+            this.refreshDirectoryButton.Location = new System.Drawing.Point(92, 3);
+            this.refreshDirectoryButton.Name = "refreshDirectoryButton";
+            this.refreshDirectoryButton.Size = new System.Drawing.Size(32, 23);
+            this.refreshDirectoryButton.TabIndex = 6;
+            this.refreshDirectoryButton.UseVisualStyleBackColor = true;
+            this.refreshDirectoryButton.Click += new System.EventHandler(this.refreshDirectoryButton_Click);
             // 
             // treeView1
             // 
@@ -2122,5 +2134,6 @@
         private System.Windows.Forms.ImageList imageList32;
         private System.Windows.Forms.ToolStripButton positionPlayerButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
+        private System.Windows.Forms.Button refreshDirectoryButton;
     }
 }

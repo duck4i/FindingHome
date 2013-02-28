@@ -1,9 +1,10 @@
 #include "cocos2d.h"
 #include "CCEGLView.h"
 #include "AppDelegate.h"
-#include "SimpleAudioEngine.h"
-
 #include "MainScene.h"
+
+//#include "SimpleAudioEngine.h"
+#include "AudioSystem.h"
 
 using namespace CocosDenshion;
 
@@ -15,7 +16,8 @@ AppDelegate::AppDelegate()
 
 AppDelegate::~AppDelegate()
 {
-    SimpleAudioEngine::end();
+    //SimpleAudioEngine::end();
+	AudioSystem::purge();
 }
 
 bool AppDelegate::applicationDidFinishLaunching()
@@ -46,7 +48,8 @@ void AppDelegate::applicationDidEnterBackground()
 {
     CCDirector::sharedDirector()->stopAnimation();
 
-    SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+    //SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+	AudioSystem::shared()->pause();
 }
 
 // this function will be called when the app is active again
@@ -54,5 +57,6 @@ void AppDelegate::applicationWillEnterForeground()
 {
     CCDirector::sharedDirector()->startAnimation();
 
-    SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+    //SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+	AudioSystem::shared()->resume();
 }
