@@ -18,15 +18,30 @@ class AudioSystem
 private:
 	
 	FMOD::System *system;
-	FMOD::Channel *channel;
-	FMOD::Sound *sound;
 	
+	FMOD::Channel *channel;
+	FMOD::Channel *channelEffects;
+	FMOD::Channel *channelStorm;
+
+	FMOD::Sound *sound;
+	FMOD::Sound *soundStorm;	
+	FMOD::Sound *soundHop;
+
+	FMOD::DSP *dsp;
+	FMOD::DSPConnection* dspConnection;	
+
 
 	AudioSystem()
 	{
-		sound = NULL;
-		channel = NULL;
 		system = NULL;
+
+		sound = NULL;
+		soundHop = NULL;
+		soundStorm = NULL;
+
+		channel = NULL;
+		channelEffects = NULL;
+		channelStorm = NULL;
 	}
 
 	~AudioSystem()
@@ -40,6 +55,7 @@ private:
 public:
 
 	//	public Audio methods
+	void playHop();
 
 	
 	//	Static methods

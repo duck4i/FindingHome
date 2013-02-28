@@ -25,6 +25,7 @@ MainScene::MainScene()
 	this->statsLapse = 0;
 	this->stats = NULL;
 	this->shinyConsole = NULL;
+	this->audio = NULL;
 }
 
 MainScene::~MainScene()
@@ -66,6 +67,8 @@ bool MainScene::init()
 	sceneScale = DEFAULT_SCALE;
 	this->worldLayer->setScale(sceneScale);
 	this->addChild(worldLayer, 1000);
+
+	this->audio = AudioSystem::shared();
 
 	//	add loading layer
 	this->loadLayer = CCSprite::create(RESOURCE_LOADING);
@@ -415,6 +418,19 @@ void MainScene::update(float delta)
 
 	//	stats update
 	updateFPS(delta);
+	
+	if (audio)
+		audio->update();
+/*
+#ifdef CC_PLATFORM_WIN32
+	HWND h = CCEGLView::sharedOpenGLView()->getHWnd();
+	if (!IsWindowVisible(h) || GetFocus() != h)
+	{
+		CCApplication::sharedApplication()->applicationDidEnterBackground();
+		return;
+	}
+#endif
+*/
 
 	//	Keyboard update
 	updateKeyboard(delta);	

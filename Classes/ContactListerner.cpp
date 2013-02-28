@@ -24,6 +24,7 @@ void ContactListener::BeginContact(b2Contact *con)
 
 		//	now check for hits
 		CollectibleHit(other);
+		MovableHit(other);
 		ExitHit(other);
 	}
 }
@@ -32,12 +33,23 @@ void ContactListener::EndContact(b2Contact *con)
 { 
 }
 
+void ContactListener::MovableHit(GameEntity* entity)
+{
+	if (!entity->getProperties().isDynamicObject())
+		return;
+
+	
+}
+
 void ContactListener::CollectibleHit(GameEntity* entity)
 {
 	if (!entity->getProperties().isCollectable())
 		return;	
-	
+		
 	PROFILE_FUNC();
+		
+	if (audio)
+		audio->playHop();
 
 	//	mark for removal
 	CCLog("Collectable hit!");

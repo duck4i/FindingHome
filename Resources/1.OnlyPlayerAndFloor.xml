@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Player and floor" Visible="true" WeatherActive="true" CameraZoom="1" PlayerSpeed="0" PlayerJump="0" PlayerShiftModifier="0">
+    <Layers>
+        <Layer Name="Main" Visible="true">
+            <Items>
+                <Item xsi:type="RectangleItem" Name="Rectangle_0001" Visible="true">
+                    <Position>
+                        <X>-690</X>
+                        <Y>84</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Width>1374</Width>
+                    <Height>82</Height>
+                    <FillColor>
+                        <R>128</R>
+                        <G>64</G>
+                        <B>0</B>
+                        <A>255</A>
+                        <PackedValue>4286595072</PackedValue>
+                    </FillColor>
+                </Item>
+                <Item xsi:type="PlayerItem" Name="Player" Visible="true">
+                    <Position>
+                        <X>-497</X>
+                        <Y>-44</Y>
+                    </Position>
+                    <CustomProperties />
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0008" Visible="true">
+                    <Position>
+                        <X>323</X>
+                        <Y>-61</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>4.67139959</X>
+                        <Y>4.67139959</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>coin.png</texture_filename>
+                    <asset_name>coin.png</asset_name>
+                    <Origin>
+                        <X>17</X>
+                        <Y>17</Y>
+                    </Origin>
+                </Item>
+            </Items>
+            <ScrollSpeed>
+                <X>1</X>
+                <Y>1</Y>
+            </ScrollSpeed>
+            <CustomProperties />
+        </Layer>
+    </Layers>
+    <CustomProperties />
+    <EditorRelated>
+        <NextItemNumber>8</NextItemNumber>
+        <ContentRootFolder>..\Resources\</ContentRootFolder>
+        <CameraPosition>
+            <X>0</X>
+            <Y>0</Y>
+        </CameraPosition>
+        <Version>1.5.0.0</Version>
+    </EditorRelated>
+</Level>

@@ -6,6 +6,7 @@
 using namespace cocos2d;
 #include "GameEntities.h"
 #include "Performance.h"
+#include "AudioSystem.h"
 
 class MainScene;
 
@@ -17,6 +18,8 @@ class ContactListener : public b2ContactListener
 {
 private:
 
+	AudioSystem* audio;
+
 	void BeginContact(b2Contact *con);
 	void EndContact(b2Contact *con);
 
@@ -25,12 +28,14 @@ private:
 
 	void CollectibleHit(GameEntity* entity);
 	void ExitHit(GameEntity* entity);
+	void MovableHit(GameEntity* entity); 
 
 public:
 
 	ContactListener(MainScene* m) : m_mainScene(m)
 	{
 		reachedEndOfTheScene = false;
+		audio = AudioSystem::shared();
 	}
 
 };

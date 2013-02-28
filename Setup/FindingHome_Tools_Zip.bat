@@ -18,6 +18,8 @@ rd bin /S /Q
 REM pack Resources
 md Resources
 xcopy /E ..\Resources\*.png Resources\*.*
+xcopy /E ..\Resources\*.mp3 Resources\*.*
+xcopy /E ..\Resources\*.wav Resources\*.*
 xcopy /E ..\Resources\*.xml Resources\*.*
 xcopy /E ..\Resources\*.json Resources\*.*
 xcopy /E ..\Resources\*.vsh Resources\*.*

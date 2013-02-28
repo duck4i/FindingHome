@@ -535,8 +535,8 @@
                 </Item>
                 <Item xsi:type="PlayerItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-3683</X>
-                        <Y>40</Y>
+                        <X>-3358.251</X>
+                        <Y>-5.909912</Y>
                     </Position>
                     <CustomProperties />
                 </Item>
@@ -929,6 +929,99 @@
                         <Y>17</Y>
                     </Origin>
                 </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0052" Visible="true">
+                    <Position>
+                        <X>-2784</X>
+                        <Y>-47</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.49730492</X>
+                        <Y>1.49730492</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>coin.png</texture_filename>
+                    <asset_name>coin.png</asset_name>
+                    <Origin>
+                        <X>17</X>
+                        <Y>17</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0053" Visible="true">
+                    <Position>
+                        <X>-2552</X>
+                        <Y>-38</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.49730492</X>
+                        <Y>1.49730492</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>coin.png</texture_filename>
+                    <asset_name>coin.png</asset_name>
+                    <Origin>
+                        <X>17</X>
+                        <Y>17</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0054" Visible="true">
+                    <Position>
+                        <X>-2668</X>
+                        <Y>-143</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="Collectable" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>1.49730492</X>
+                        <Y>1.49730492</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>coin.png</texture_filename>
+                    <asset_name>coin.png</asset_name>
+                    <Origin>
+                        <X>17</X>
+                        <Y>17</Y>
+                    </Origin>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -1110,11 +1203,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>50</NextItemNumber>
+        <NextItemNumber>54</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>2571.5957</X>
-            <Y>-578.832947</Y>
+            <X>-1032.25073</X>
+            <Y>-751.9099</Y>
         </CameraPosition>
         <Version>1.6.0.0</Version>
     </EditorRelated>
