@@ -17,9 +17,14 @@ private:
 	{
 		
 	}
+
 	~NewAudioSystem()
 	{
-		
+		if (system)
+		{
+			system->release();
+			system->unload();
+		}
 	}
 	bool init();
 

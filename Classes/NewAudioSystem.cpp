@@ -1,4 +1,5 @@
 #include "NewAudioSystem.h"
+#include "..\Resources\FMOD_DESIGNER\studio.h"
 
 static NewAudioSystem* _staticAudioSystem = NULL;
 
@@ -31,11 +32,13 @@ bool NewAudioSystem::init()
 
 		result = system->init(MAX_CHANNELS, FMOD_INIT_NORMAL, NULL);
 		if (result != FMOD_OK)
-			break;
+			break;		
 
-		result = system->load(RESOURCE_DIR "studio\\Build\\Desktop\\MasterBank.bank.strings", NULL, &project);
+		result = system->load(RESOURCE_DIR "FMOD_DESIGNER\\studio.fev", NULL, &project);
 		if (result != FMOD_OK)
 			break;
+
+		
 
 		return true;
 	} 
