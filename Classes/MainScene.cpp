@@ -69,7 +69,7 @@ bool MainScene::init()
 	this->addChild(worldLayer, 1000);
 
 	CCDirector::sharedDirector()->setDisplayStats(false);
-	this->audio = AudioSystem::shared();
+	this->audio = NewAudioSystem::shared();
 
 	//	add loading layer
 	this->loadLayer = CCSprite::create(RESOURCE_LOADING);

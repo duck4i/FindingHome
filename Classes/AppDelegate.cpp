@@ -4,7 +4,7 @@
 #include "MainScene.h"
 
 //#include "SimpleAudioEngine.h"
-#include "AudioSystem.h"
+#include "NewAudioSystem.h"
 
 using namespace CocosDenshion;
 
@@ -49,7 +49,7 @@ void AppDelegate::applicationDidEnterBackground()
     CCDirector::sharedDirector()->stopAnimation();
 
     //SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
-	AudioSystem::shared()->pause();
+	NewAudioSystem::shared()->pause();
 }
 
 // this function will be called when the app is active again
@@ -58,5 +58,5 @@ void AppDelegate::applicationWillEnterForeground()
     CCDirector::sharedDirector()->startAnimation();
 
     //SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-	AudioSystem::shared()->resume();
+	NewAudioSystem::shared()->resume();
 }

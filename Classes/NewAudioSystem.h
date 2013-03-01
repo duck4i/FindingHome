@@ -11,7 +11,7 @@ class NewAudioSystem
 private:
 
 	FMOD::EventSystem *system;
-
+	FMOD::EventProject *project;
 
 	NewAudioSystem()
 	{

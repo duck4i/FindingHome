@@ -29,6 +29,14 @@ bool NewAudioSystem::init()
 		if (result != FMOD_OK)
 			break;
 
+		result = system->init(MAX_CHANNELS, FMOD_INIT_NORMAL, NULL);
+		if (result != FMOD_OK)
+			break;
+
+		result = system->load(RESOURCE_DIR "studio\\Build\\Desktop\\MasterBank.bank.strings", NULL, &project);
+		if (result != FMOD_OK)
+			break;
+
 		return true;
 	} 
 	while (false);

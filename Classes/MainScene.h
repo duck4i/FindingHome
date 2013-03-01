@@ -11,7 +11,8 @@
 #include "WeatherHelper.h"
 #include "ContactListener.h"
 #include "Performance.h"
-#include "AudioSystem.h"
+#include "NewAudioSystem.h"
+
 
 using namespace cocos2d;
 
@@ -30,6 +31,7 @@ class MainScene : public CCLayerColor
 {
 private:
 
+	NewAudioSystem *audio;
 	void loadMap(float delta);
 	
 	void update(float delta);
