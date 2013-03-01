@@ -12,10 +12,17 @@ private:
 
 	FMOD::EventSystem *system;
 	FMOD::EventProject *project;
+	FMOD::EventGroup *eventGroup;
+
+	FMOD::Event *loopCricketsEvent;
+	FMOD::Event *loopStormEvent;
+	FMOD::Event *playHopEvent;
 
 	NewAudioSystem()
 	{
-		
+		system = NULL;
+		project = NULL;
+		eventGroup = NULL;
 	}
 
 	~NewAudioSystem()

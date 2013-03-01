@@ -25,6 +25,11 @@ xcopy /E ..\Resources\*.json Resources\*.*
 xcopy /E ..\Resources\*.vsh Resources\*.*
 xcopy /E ..\Resources\*.fsh Resources\*.*
 
+REM audio resources
+xcopy /S ..\Resources\*.fdp Resources\*.*
+xcopy /S ..\Resources\*.fev Resources\*.*
+xcopy /S ..\Resources\*.fsb Resources\*.*
+
 zip.exe -r -9 FindingHomeTools.zip "Resources\*.*"
 del Resources\*.* /f /q
 rd Resources /S /Q

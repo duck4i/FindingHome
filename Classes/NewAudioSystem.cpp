@@ -38,7 +38,25 @@ bool NewAudioSystem::init()
 		if (result != FMOD_OK)
 			break;
 
-		
+		result = project->getGroupByIndex(EVENTGROUP_STUDIO_MAIN, true, &eventGroup);
+		if (result != FMOD_OK)
+			break;
+
+		result = eventGroup->getEventByIndex(EVENTID_STUDIO_MAIN_LOOPCRICKETSEVENT, 0, &loopCricketsEvent);
+		if (result != FMOD_OK)
+			break;
+		result = eventGroup->getEventByIndex(EVENTID_STUDIO_MAIN_LOOPSTORMEVENT, 0, &loopStormEvent);
+		if (result != FMOD_OK)
+			break;
+		result = eventGroup->getEventByIndex(EVENTID_STUDIO_MAIN_PLAYHOPEVENT, 0, &playHopEvent);
+		if (result != FMOD_OK)
+			break;
+
+		loopCricketsEvent->setPaused(true);
+		loopCricketsEvent->start();
+
+		loopStormEvent->setPaused(true);
+		loopStormEvent->start();
 
 		return true;
 	} 
@@ -53,15 +71,18 @@ void NewAudioSystem::update()
 
 void NewAudioSystem::pause()
 {
-
+	loopCricketsEvent->setPaused(true);
+	loopStormEvent->setPaused(true);
 }
 
 void NewAudioSystem::resume()
 {
-
+	loopCricketsEvent->setPaused(false);
+	loopStormEvent->setPaused(false);	
 }
 
 void NewAudioSystem::playHop()
 {
-
+	playHopEvent->stop();
+	playHopEvent->start();
 }
