@@ -136,6 +136,9 @@
     <ClInclude Include="..\Classes\AudioSystem.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\NewAudioSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -208,6 +211,9 @@
       <Filter>source\entities</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AudioSystem.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NewAudioSystem.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
