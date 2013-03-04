@@ -38,13 +38,13 @@ bool ShapeHelper::init()
 	fin.open(resourcePath);
 	res = reader.parse(fin, root);
 
-	Value v;		
+	Json::Value v;		
 	rigidBodies = root.get("rigidBodies", v);
 
 	unsigned int size = rigidBodies.size();	
 	for (unsigned int i = 0; i < rigidBodies.size(); i++)
 	{
-		Value v = rigidBodies[i];
+		Json::Value v = rigidBodies[i];
 		if (v == NULL || v.empty())
 			continue;
 		
@@ -64,17 +64,17 @@ bool ShapeHelper::init()
 	return res;
 }
 
-bool ShapeHelper::defineShapeFromData(Value data, list<b2PolygonShape> *shapes)
+bool ShapeHelper::defineShapeFromData(Json::Value data, list<b2PolygonShape> *shapes)
 {
 	if (data.empty() || shapes == NULL)
 		return false;
 
 	bool res = false;
-	Value polys = data["polygons"];
+	Json::Value polys = data["polygons"];
 
 	for (unsigned int i = 0; i < polys.size(); i++)
 	{
-		Value curr = polys[(unsigned int) i];
+		Json::Value curr = polys[(unsigned int) i];
 
 		unsigned int numVertices = curr.size();
 		b2Vec2* vertices = (b2Vec2*) malloc(numVertices * sizeof(b2Vec2));
@@ -82,7 +82,7 @@ bool ShapeHelper::defineShapeFromData(Value data, list<b2PolygonShape> *shapes)
 
 		for (unsigned int j = 0; j < numVertices; j++)	//	all vertices of current poly
 		{
-			Value set = curr[j];
+			Json::Value set = curr[j];
 			float x = set["x"].asDouble();
 			float y = set["y"].asDouble();
 			vertices[j].Set(x, y);

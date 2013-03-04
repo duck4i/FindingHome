@@ -9,7 +9,6 @@
 #include "Settings.h"
 
 using namespace cocos2d;
-using namespace Json;
 using namespace std;
 
 //	JSON LIB HELP HERE
@@ -37,10 +36,10 @@ private:
 	const char* resourcePath;
 	bool init();
 
-	Value rigidBodies;
-	Value itemWithName(char* name);
+	Json::Value rigidBodies;
+	Json::Value itemWithName(char* name);
 
-	bool defineShapeFromData(Value data, __out list<b2PolygonShape> *shapes);
+	bool defineShapeFromData(Json::Value data, __out list<b2PolygonShape> *shapes);
 
 	ShapeHelper(const char* resourcePath)
 	{
