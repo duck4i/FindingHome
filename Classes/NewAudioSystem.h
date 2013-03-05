@@ -3,12 +3,15 @@
 
 #include <cocos2d.h>
 #include <fmod.hpp>
-#include <fmod_event.hpp>
 #include "AudioSystem.h"
+
+#ifdef USE_FMOD_DESIGNER
+#include <fmod_event.hpp>
 
 class NewAudioSystem
 {			
 private:
+
 
 	FMOD::EventSystem *system;
 	FMOD::EventProject *project;
@@ -47,6 +50,54 @@ public:
 	void resume();
 
 };
+
+#else
+
+#include <fmod.hpp>
+#include <fmod_studio.hpp>
+
+class NewAudioSystem
+{			
+private:
+
+	FMOD::Studio::System system;
+	FMOD::Studio::Bank bank;
+
+	FMOD::Studio::EventDescription loopCricketsEvent;
+	FMOD::Studio::EventDescription loopStormEvent;
+	FMOD::Studio::EventDescription playHopEvent;
+
+	FMOD::Studio::EventInstance cricketsInstance;
+	FMOD::Studio::EventInstance stormInstance;
+
+#endif		
+
+	NewAudioSystem()
+	{
+		//cricketsInstance = NULL;
+		//stormInstance = NULL;
+		
+	}
+
+	~NewAudioSystem()
+	{
+
+	}
+	bool init();
+
+public:	
+	
+	//	public Audio methods
+	void playHop();					
+
+	static NewAudioSystem* shared();	//	Static methods
+	static void purge();
+	void update();
+	void pause();
+	void resume();
+
+};
+
 
 
 #endif

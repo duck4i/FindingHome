@@ -133,9 +133,6 @@
     <ClInclude Include="..\Classes\GameEntityCollisionPath.h">
       <Filter>include\entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AudioSystem.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\NewAudioSystem.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -209,9 +206,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameEntityCollisionPath.cpp">
       <Filter>source\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\AudioSystem.cpp">
-      <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\NewAudioSystem.cpp">
       <Filter>source</Filter>

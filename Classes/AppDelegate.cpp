@@ -10,6 +10,7 @@
 
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib, "mozjs.lib")
+#pragma comment(lib, "libJSBinding.lib")
 
 using namespace CocosDenshion;
 
@@ -22,7 +23,7 @@ AppDelegate::AppDelegate()
 AppDelegate::~AppDelegate()
 {
     //SimpleAudioEngine::end();
-	AudioSystem::purge();
+	NewAudioSystem::purge();
 }
 
 bool AppDelegate::applicationDidFinishLaunching()
@@ -54,7 +55,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     ScriptingCore::getInstance()->runScript("tests-boot-jsb.js");
 
 	*/
-	ScriptingCore::getInstance()->runScript(RESOURCE_DIR "script.js");
+	//ScriptingCore::getInstance()->runScript(RESOURCE_DIR "script.js");
 	
 
 
