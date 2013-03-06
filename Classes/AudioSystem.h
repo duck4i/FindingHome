@@ -14,7 +14,7 @@
 #include <fmod_dsp.h>
 #include <fmod_output.h>
 
-#define MAX_CHANNELS 16
+#define MAX_CHANNELS 32
 
 /**
  *	Old audio system using native FMOD API EX

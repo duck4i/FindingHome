@@ -110,22 +110,30 @@ void NewAudioSystem::purge()
 
 bool NewAudioSystem::init()
 {
+	int success = false;
 	do
 	{
-		#define CHECK(x) if (x != FMOD_OK) break;
-		FMOD_RESULT result;		
+		#define CHECK(x) if (x != FMOD_OK) break; else ++success;
+		FMOD_RESULT result;
 
-		result = FMOD::Studio::System::create(&system);
+		system = new FMOD::Studio::System();
+		FMOD::Studio::System::create(system);
+
+		result = system->initialize(MAX_CHANNELS,  FMOD_STUDIO_INIT_NORMAL, FMOD_INIT_NORMAL, NULL);
 		CHECK(result);
 		
-		result = system.initialize(MAX_CHANNELS,  FMOD_STUDIO_INIT_NORMAL, FMOD_INIT_NORMAL, NULL);
+		result = system->getLowLevelSystem(&lowLevelSystem);
 		CHECK(result);
 
-		FMOD::System *lowLevelSystem;
-		result = system.getLowLevelSystem(&lowLevelSystem);
-		CHECK(result);
+		FMOD_SPEAKERMODE speakerMode = FMOD_SPEAKERMODE_STEREO;
+		result = lowLevelSystem->getDriverCaps(0, NULL, NULL, &speakerMode);
+		//CHECK(result);
+
+		//result = lowLevelSystem->setSpeakerMode(speakerMode);
+		//CHECK(result);
 		
-		result = system.loadBank(RESOURCE_DIR "studio\\Build\\Desktop\\MasterBank.bank", &bank);
+		bank = new FMOD::Studio::Bank();
+		result = system->loadBank(RESOURCE_DIR "studio\\Build\\Desktop\\MasterBank.bank", bank);
 		CHECK(result);
 
 		/*
@@ -142,55 +150,91 @@ bool NewAudioSystem::init()
 		FMOD::Studio::ID loopingStormID = {0};
 		FMOD::Studio::parseID(loopingStormGUID, &loopingStormID);
 
-		const char* playHopGUID = "{2a490b5b-b58a-4a97-b641-29b1cf812e91}";
+		const char* playHopGUID = "{898c0b6d-f47e-4515-9a17-c026400b97a6}";
 		FMOD::Studio::ID playHopID = {0};
 		FMOD::Studio::parseID(playHopGUID, &playHopID);
 
-
-		result = system.getEvent(&loopingCricketsID, FMOD_STUDIO_LOAD_BEGIN_NOW, &loopCricketsEvent);
+		loopCricketsEvent = new FMOD::Studio::EventDescription();
+		result = system->getEvent(&loopingCricketsID, FMOD_STUDIO_LOAD_BEGIN_NOW, loopCricketsEvent);
 		CHECK(result);
 
-		result = system.getEvent(&loopingStormID, FMOD_STUDIO_LOAD_BEGIN_NOW, &loopStormEvent);
+		loopStormEvent = new FMOD::Studio::EventDescription();
+		result = system->getEvent(&loopingStormID, FMOD_STUDIO_LOAD_BEGIN_NOW, loopStormEvent);
 		CHECK(result);
 
-		//result = system.getEvent(&playHopID, FMOD_STUDIO_LOAD_BEGIN_NOW, &playHopEvent);
-		//CHECK(result);
+		playHopEvent = new FMOD::Studio::EventDescription();
+		result = system->getEvent(&playHopID, FMOD_STUDIO_LOAD_BEGIN_NOW, playHopEvent);
+		CHECK(result);
 		
 		//	now play
-		result = loopCricketsEvent.createInstance(&cricketsInstance);
+		cricketsInstance = new FMOD::Studio::EventInstance();
+		result = loopCricketsEvent->createInstance(cricketsInstance);
 		CHECK(result);
 
-		result = loopStormEvent.createInstance(&stormInstance);
+		stormInstance = new FMOD::Studio::EventInstance();
+		result = loopStormEvent->createInstance(stormInstance);
 		CHECK(result);
-
-		cricketsInstance.start();
-		stormInstance.start();
-
-		return true;
+		
+		cricketsInstance->start();		
+		stormInstance->start();	
 	} 
 	while (false);
-	return false;
+
+	//	TODO: Cleanup
+	if (!success)
+	{
+	}
+
+
+	return success;
 }
 
 void NewAudioSystem::update()
 {
+	if (system)	
+		system->update();
+	if (lowLevelSystem)
+		lowLevelSystem->update();
 
 }
 
 void NewAudioSystem::pause()
 {
-	cricketsInstance.setPaused(true);
-	stormInstance.setPaused(true);
+	if (cricketsInstance)
+		cricketsInstance->setPaused(true);
+	if (stormInstance)
+		stormInstance->setPaused(true);
 }
 
 void NewAudioSystem::resume()
 {
-	cricketsInstance.setPaused(false);	
-	stormInstance.setPaused(false);
+	if (cricketsInstance)
+		cricketsInstance->setPaused(false);
+	if (stormInstance)
+		stormInstance->setPaused(false);
 }
 
 void NewAudioSystem::playHop()
 {
+	if (playHopEvent)
+	{
+		FMOD::Studio::EventInstance instance;
+		playHopEvent->createInstance(&instance);
+
+		FMOD::Channel *ch0 = NULL;
+		FMOD::ChannelGroup *group = NULL;
+
+		instance.getChannelGroup(&group);		
+		group->getChannel(0, &ch0);
+		
+		
+		
+
+
+		instance.start();	
+		
+
+	}
 //	playHopEvent->stop();
 //	playHopEvent->start();
 }
