@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects managedObjectVersionString="Studio.1.DeveloperPreview.0">
+    <object class="MasterBank" id="{0ca894cf-2874-4caa-88cb-978917f9b419}">
+        <property name="name">
+            <value>Master Bank</value>
+        </property>
+        <relationship name="events"/>
+        <relationship name="buildSettings">
+            <destination>{d5ffb585-70dc-4a6b-ac71-f64a3778dfaa}</destination>
+        </relationship>
+        <relationship name="banklist">
+            <destination>{51cb3619-301b-4fbf-8b35-945be13871ee}</destination>
+        </relationship>
+    </object>
+    <object class="DesktopBuildSetting" id="{d5ffb585-70dc-4a6b-ac71-f64a3778dfaa}">
+        <relationship name="compressionSettings">
+            <destination>{defac38d-63db-44dc-a6f6-064ca99e3e88}</destination>
+            <destination>{620902b2-aeff-4e5e-922b-4af1e30a506e}</destination>
+            <destination>{81fd34a1-6520-4281-961a-801d9a03ba0a}</destination>
+            <destination>{73cfa9b1-4a23-4bbf-9112-23fabafd7687}</destination>
+        </relationship>
+        <relationship name="activeCompressionSetting">
+            <destination>{defac38d-63db-44dc-a6f6-064ca99e3e88}</destination>
+        </relationship>
+    </object>
+    <object class="LossyCompressionSetting" id="{defac38d-63db-44dc-a6f6-064ca99e3e88}">
+        <property name="type">
+            <value>Vorbis</value>
+        </property>
+        <property name="quality">
+            <value>80</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+    </object>
+    <object class="LossyCompressionSetting" id="{620902b2-aeff-4e5e-922b-4af1e30a506e}">
+        <property name="type">
+            <value>MP3</value>
+        </property>
+        <property name="quality">
+            <value>80</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+    </object>
+    <object class="PCMCompressionSetting" id="{81fd34a1-6520-4281-961a-801d9a03ba0a}">
+        <property name="type">
+            <value>ADPCM</value>
+        </property>
+        <property name="sampleRate">
+            <value>44100</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+    </object>
+    <object class="PCMCompressionSetting" id="{73cfa9b1-4a23-4bbf-9112-23fabafd7687}">
+        <property name="type">
+            <value>PCM</value>
+        </property>
+        <property name="sampleRate">
+            <value>44100</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+    </object>
+</objects>

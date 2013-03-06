@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects managedObjectVersionString="Studio.1.DeveloperPreview.0">
+    <object class="AudioFile" id="{f26ad594-5b3e-42f9-a402-1366aadd6a69}">
+        <property name="frequencyInKHz">
+            <value>22.05</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>40.465</value>
+        </property>
+        <property name="audioFilePath">
+            <value>$(AUDIO_BIN_DIR)/storm {c511f976-c83f-481e-8d3a-044c57607bc3}.wav</value>
+        </property>
+        <relationship name="container">
+            <destination>{ad8de5d8-b50a-46c2-8999-7d3d0cbfd6f3}</destination>
+        </relationship>
+    </object>
+</objects>

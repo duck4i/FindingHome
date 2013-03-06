@@ -8,6 +8,10 @@
 #ifdef USE_FMOD_DESIGNER
 #include <fmod_event.hpp>
 
+#pragma comment (lib, "fmodstudio_vc.lib")
+#pragma comment (lib, "fmod_event.lib")
+#pragma comment (lib, "fmodex_vc.lib")
+
 class NewAudioSystem
 {			
 private:
@@ -55,6 +59,9 @@ public:
 
 #include <fmod.hpp>
 #include <fmod_studio.hpp>
+
+#pragma comment (lib, "fmodstudio_vc.lib")
+#pragma comment (lib, "..\\FMOD\\STUDIO2\\lowlevel\\fmod_vc.lib")
 
 class NewAudioSystem
 {			

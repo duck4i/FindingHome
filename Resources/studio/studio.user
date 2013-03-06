@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects managedObjectVersionString="Studio.1.DeveloperPreview.0">
+    <object class="Workspace" id="{e9887653-383c-4af3-935f-02b7dc4cad05}">
+        <property name="explicitSourceControl">
+            <value>false</value>
+        </property>
+        <property name="lockOnCheckout">
+            <value>false</value>
+        </property>
+    </object>
+    <object class="MasterFolder" id="{2616145e-a850-4d82-b21f-6793b3cc67d4}">
+        <relationship name="items">
+            <destination>{e7acf07a-4c9f-4477-9d4b-1f877c15f0ae}</destination>
+            <destination>{e168b827-6d12-408e-8b3d-161e3a885f95}</destination>
+            <destination>{e6807338-34e0-4b0c-ae0d-b6c5b14a92f6}</destination>
+        </relationship>
+    </object>
+    <object class="BankList" id="{51cb3619-301b-4fbf-8b35-945be13871ee}">
+        <relationship name="banks">
+            <destination>{0ca894cf-2874-4caa-88cb-978917f9b419}</destination>
+        </relationship>
+    </object>
+    <object class="MasterBank" id="{0ca894cf-2874-4caa-88cb-978917f9b419}">
+        <relationship name="events">
+            <destination>{e7acf07a-4c9f-4477-9d4b-1f877c15f0ae}</destination>
+            <destination>{e168b827-6d12-408e-8b3d-161e3a885f95}</destination>
+            <destination>{e6807338-34e0-4b0c-ae0d-b6c5b14a92f6}</destination>
+        </relationship>
+    </object>
+    <object class="MasterAudioBinFolder" id="{ad8de5d8-b50a-46c2-8999-7d3d0cbfd6f3}">
+        <relationship name="items">
+            <destination>{a19a59dd-8a08-408e-bfb9-6a146c29aafd}</destination>
+            <destination>{e3273ea2-d526-4bdd-9166-8f872d6e5b5e}</destination>
+            <destination>{f26ad594-5b3e-42f9-a402-1366aadd6a69}</destination>
+        </relationship>
+    </object>
+    <object class="MixerMaster" id="{3235a7fd-90b0-429f-9df4-a9f0694602ec}">
+        <relationship name="input">
+            <destination>{5650f01c-356d-4dd2-ad8f-a056c76bdc46}</destination>
+            <destination>{5dcc721f-ce3a-488d-a51c-3f3e8c1c232e}</destination>
+            <destination>{c739898b-6d37-497b-8023-335964c8fa68}</destination>
+            <destination>{46bdf791-dd46-4660-8562-77ff7897f430}</destination>
+        </relationship>
+    </object>
+    <object class="MasterTrack" id="{d20ad32f-d4c1-4981-b69f-aacd34129fbc}">
+        <property name="uiAutomationTracksVisible">
+            <value>false</value>
+        </property>
+    </object>
+    <object class="GroupTrack" id="{a0593a30-830c-4bf7-91cc-efe12b40ad2d}">
+        <property name="uiAutomationTracksVisible">
+            <value>false</value>
+        </property>
+    </object>
+    <object class="Timeline" id="{09c940b4-052a-4311-b829-fab0b7398bcf}">
+        <relationship name="uiParameterCursor">
+            <destination>{69ad5935-d464-49bd-b43f-aaf3ba15266c}</destination>
+        </relationship>
+    </object>
+    <object class="MasterTrack" id="{eb6894bf-692d-4e81-98af-77f3912be05b}">
+        <property name="uiAutomationTracksVisible">
+            <value>false</value>
+        </property>
+    </object>
+    <object class="GroupTrack" id="{2793da80-7345-45b1-a8ec-2ea175367aaa}">
+        <property name="uiAutomationTracksVisible">
+            <value>false</value>
+        </property>
+    </object>
+    <object class="Timeline" id="{72a6f246-0593-4b32-8895-be12d59474a8}">
+        <relationship name="uiParameterCursor">
+            <destination>{2f9c5d58-1a19-4303-b925-3e3e83258c03}</destination>
+        </relationship>
+    </object>
+    <object class="MasterTrack" id="{87dd5341-1fbf-4623-9011-474ec47999f6}">
+        <property name="uiAutomationTracksVisible">
+            <value>false</value>
+        </property>
+    </object>
+    <object class="GroupTrack" id="{36cc159e-6f99-4614-b1d5-a5e48c8461fe}">
+        <property name="uiAutomationTracksVisible">
+            <value>false</value>
+        </property>
+    </object>
+    <object class="Timeline" id="{7b82e9a6-b9a4-49e6-b1ef-2cac8963d2a3}">
+        <relationship name="uiParameterCursor">
+            <destination>{3f8115b9-fd4c-4255-9c8c-1ede79ea65b4}</destination>
+        </relationship>
+    </object>
+    <object class="EventMixerMaster" id="{94ded524-2144-4a5c-b64a-f310596638ad}">
+        <relationship name="input">
+            <destination>{134659fe-0b1c-440a-8451-1f96b72d3355}</destination>
+        </relationship>
+    </object>
+    <object class="UiParameterCursor" id="{69ad5935-d464-49bd-b43f-aaf3ba15266c}">
+        <property name="position">
+            <value>0</value>
+        </property>
+    </object>
+    <object class="EventMixerMaster" id="{b2cc7832-b152-4c36-b317-027a3518a9f8}">
+        <relationship name="input">
+            <destination>{55be3c12-48ee-46a5-9960-fad39131b1b5}</destination>
+        </relationship>
+    </object>
+    <object class="UiParameterCursor" id="{2f9c5d58-1a19-4303-b925-3e3e83258c03}">
+        <property name="position">
+            <value>5.89091</value>
+        </property>
+    </object>
+    <object class="EventMixerMaster" id="{626fe89c-4604-4eaf-8d1e-c5ce26cd1a95}">
+        <relationship name="input">
+            <destination>{32bcd46d-19bb-4bff-886d-8caf8fa0d5e7}</destination>
+        </relationship>
+    </object>
+    <object class="UiParameterCursor" id="{3f8115b9-fd4c-4255-9c8c-1ede79ea65b4}">
+        <property name="position">
+            <value>0</value>
+        </property>
+    </object>
+</objects>

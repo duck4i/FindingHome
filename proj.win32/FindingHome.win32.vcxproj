@@ -64,7 +64,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\Classes\json\;$(SolutionDir)..\..\Debug.win32;$(SolutionDir)..\Classes\VisualLeakDetector\lib\Win32;$(SolutionDir)..\Classes\Shiny\lib;$(SolutionDir)..\FMOD\;$(SolutionDir)..\FMOD\studio\;$(SolutionDir)..\FMOD\studio2\;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies> fmodstudio_vc.lib; fmod_event.lib; fmodex_vc.lib; libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;libXML2.lib;json_debug.lib;vld.lib;ShinyDebug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;libXML2.lib;json_debug.lib;vld.lib;ShinyDebug.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
     </Link>
     <ResourceCompile>

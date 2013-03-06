@@ -10,7 +10,10 @@
 
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib, "mozjs.lib")
-#pragma comment(lib, "libJSBinding.lib")
+
+#ifdef ENABLE_SCRIPTING
+	#pragma comment(lib, "libJSBinding.lib")
+#endif
 
 using namespace CocosDenshion;
 

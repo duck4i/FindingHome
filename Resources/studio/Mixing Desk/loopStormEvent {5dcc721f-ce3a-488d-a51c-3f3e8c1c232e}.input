@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects managedObjectVersionString="Studio.1.DeveloperPreview.0">
+    <object class="MixerInput" id="{5dcc721f-ce3a-488d-a51c-3f3e8c1c232e}">
+        <property name="volume">
+            <value>0</value>
+        </property>
+        <property name="pitch">
+            <value>0</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="masters"/>
+        <relationship name="snapshots"/>
+        <relationship name="effectChain">
+            <destination>{99b90c35-3ead-45f1-a8f5-bfe89f9b2741}</destination>
+        </relationship>
+        <relationship name="panner">
+            <destination>{c3ab0fe0-b678-4c70-a69b-40ec6b8b4340}</destination>
+        </relationship>
+        <relationship name="output">
+            <destination>{3235a7fd-90b0-429f-9df4-a9f0694602ec}</destination>
+        </relationship>
+        <relationship name="event">
+            <destination>{e7acf07a-4c9f-4477-9d4b-1f877c15f0ae}</destination>
+        </relationship>
+        <relationship name="inputTrack"/>
+    </object>
+    <object class="MixerBusEffectChain" id="{99b90c35-3ead-45f1-a8f5-bfe89f9b2741}">
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="owner"/>
+        <relationship name="effects">
+            <destination>{0f174eb9-9396-4f73-9f32-ce9f306b132c}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusPanner" id="{c3ab0fe0-b678-4c70-a69b-40ec6b8b4340}">
+        <property name="stereoPan">
+            <value>0</value>
+        </property>
+        <property name="stereoLeftPan">
+            <value>0</value>
+        </property>
+        <property name="stereoRightPan">
+            <value>0</value>
+        </property>
+        <property name="surroundPanDirection">
+            <value>0</value>
+        </property>
+        <property name="surroundPanExtent">
+            <value>360</value>
+        </property>
+        <property name="surroundLFELevel">
+            <value>0</value>
+        </property>
+        <property name="stereoToSurroundPanMode">
+            <value>1</value>
+        </property>
+        <property name="surroundStereoSeparation">
+            <value>60</value>
+        </property>
+        <property name="surroundStereoAxis">
+            <value>0</value>
+        </property>
+        <property name="overridingOutputFormat">
+            <value>0</value>
+        </property>
+        <property name="outputFormatOverridden">
+            <value>false</value>
+        </property>
+        <property name="enabledSurroundSpeakers">
+            <value>255</value>
+        </property>
+        <property name="LFEUpmixEnabled">
+            <value>false</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="owner"/>
+    </object>
+    <object class="MixerBusFader" id="{0f174eb9-9396-4f73-9f32-ce9f306b132c}">
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+    </object>
+</objects>

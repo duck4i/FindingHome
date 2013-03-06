@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects managedObjectVersionString="Studio.1.DeveloperPreview.0">
+    <object class="MixerGlobalReverb" id="{5650f01c-356d-4dd2-ad8f-a056c76bdc46}">
+        <property name="volume">
+            <value>0</value>
+        </property>
+        <property name="pitch">
+            <value>0</value>
+        </property>
+        <property name="name">
+            <value>Reverb</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="masters"/>
+        <relationship name="snapshots"/>
+        <relationship name="effectChain">
+            <destination>{ae990ff2-5c4e-4587-ba02-9d89052f3abd}</destination>
+        </relationship>
+        <relationship name="panner">
+            <destination>{5cbe08a8-12a2-433d-be09-dd51c248ae2a}</destination>
+        </relationship>
+        <relationship name="output">
+            <destination>{3235a7fd-90b0-429f-9df4-a9f0694602ec}</destination>
+        </relationship>
+        <relationship name="groupTrack"/>
+        <relationship name="mixer">
+            <destination>{a0ee8db2-8f0b-4a9e-b89f-6eae1eb561b3}</destination>
+        </relationship>
+        <relationship name="returnTrack"/>
+    </object>
+    <object class="MixerBusEffectChain" id="{ae990ff2-5c4e-4587-ba02-9d89052f3abd}">
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="owner"/>
+        <relationship name="effects">
+            <destination>{98e9c673-d416-4c0d-b718-c8f9f5dcd127}</destination>
+            <destination>{b42f9ca7-ddb0-4246-aea8-f9a2b41901ce}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusPanner" id="{5cbe08a8-12a2-433d-be09-dd51c248ae2a}">
+        <property name="stereoPan">
+            <value>0</value>
+        </property>
+        <property name="stereoLeftPan">
+            <value>0</value>
+        </property>
+        <property name="stereoRightPan">
+            <value>0</value>
+        </property>
+        <property name="surroundPanDirection">
+            <value>0</value>
+        </property>
+        <property name="surroundPanExtent">
+            <value>360</value>
+        </property>
+        <property name="surroundLFELevel">
+            <value>0</value>
+        </property>
+        <property name="stereoToSurroundPanMode">
+            <value>1</value>
+        </property>
+        <property name="surroundStereoSeparation">
+            <value>60</value>
+        </property>
+        <property name="surroundStereoAxis">
+            <value>0</value>
+        </property>
+        <property name="overridingOutputFormat">
+            <value>0</value>
+        </property>
+        <property name="outputFormatOverridden">
+            <value>false</value>
+        </property>
+        <property name="enabledSurroundSpeakers">
+            <value>255</value>
+        </property>
+        <property name="LFEUpmixEnabled">
+            <value>false</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="owner"/>
+    </object>
+    <object class="SFXReverbEffect" id="{98e9c673-d416-4c0d-b718-c8f9f5dcd127}">
+        <property name="decayTime">
+            <value>1500</value>
+        </property>
+        <property name="earlyDelay">
+            <value>20</value>
+        </property>
+        <property name="lateDelay">
+            <value>40</value>
+        </property>
+        <property name="HFReference">
+            <value>5000</value>
+        </property>
+        <property name="HFDecayRatio">
+            <value>50</value>
+        </property>
+        <property name="diffusion">
+            <value>100</value>
+        </property>
+        <property name="density">
+            <value>100</value>
+        </property>
+        <property name="lowShelfFrequency">
+            <value>250</value>
+        </property>
+        <property name="lowShelfGain">
+            <value>0</value>
+        </property>
+        <property name="highCut">
+            <value>5000</value>
+        </property>
+        <property name="earlyLateMix">
+            <value>50</value>
+        </property>
+        <property name="wetLevel">
+            <value>0</value>
+        </property>
+        <property name="dryLevel">
+            <value>-80</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+    </object>
+    <object class="MixerBusFader" id="{b42f9ca7-ddb0-4246-aea8-f9a2b41901ce}">
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+    </object>
+</objects>

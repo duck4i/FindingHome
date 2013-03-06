@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects managedObjectVersionString="Studio.1.DeveloperPreview.0">
+    <object class="Event" id="{e7acf07a-4c9f-4477-9d4b-1f877c15f0ae}">
+        <property name="name">
+            <value>loopStormEvent</value>
+        </property>
+        <relationship name="folder">
+            <destination>{2616145e-a850-4d82-b21f-6793b3cc67d4}</destination>
+        </relationship>
+        <relationship name="mixer">
+            <destination>{10d1a066-5b0c-4157-9c2b-c7c0eb43c505}</destination>
+        </relationship>
+        <relationship name="masterTrack">
+            <destination>{d20ad32f-d4c1-4981-b69f-aacd34129fbc}</destination>
+        </relationship>
+        <relationship name="mixerInput">
+            <destination>{5dcc721f-ce3a-488d-a51c-3f3e8c1c232e}</destination>
+        </relationship>
+        <relationship name="automatableProperties">
+            <destination>{3a0d9210-8bec-4626-975a-9aa2bb03b719}</destination>
+        </relationship>
+        <relationship name="subEvents"/>
+        <relationship name="inputTracks"/>
+        <relationship name="groupTracks">
+            <destination>{a0593a30-830c-4bf7-91cc-efe12b40ad2d}</destination>
+        </relationship>
+        <relationship name="returnTracks"/>
+        <relationship name="timeline">
+            <destination>{09c940b4-052a-4311-b829-fab0b7398bcf}</destination>
+        </relationship>
+        <relationship name="parameters"/>
+        <relationship name="tags"/>
+        <relationship name="userProperties"/>
+        <relationship name="banks">
+            <destination>{0ca894cf-2874-4caa-88cb-978917f9b419}</destination>
+        </relationship>
+    </object>
+    <object class="EventMixer" id="{10d1a066-5b0c-4157-9c2b-c7c0eb43c505}">
+        <relationship name="vca"/>
+        <relationship name="return"/>
+        <relationship name="snapshotList"/>
+        <relationship name="workspace"/>
+        <relationship name="masterBus">
+            <destination>{94ded524-2144-4a5c-b64a-f310596638ad}</destination>
+        </relationship>
+    </object>
+    <object class="MasterTrack" id="{d20ad32f-d4c1-4981-b69f-aacd34129fbc}">
+        <property name="streaming">
+            <value>false</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modules"/>
+        <relationship name="mixerGroup">
+            <destination>{94ded524-2144-4a5c-b64a-f310596638ad}</destination>
+        </relationship>
+    </object>
+    <object class="EventAutomatableProperties" id="{3a0d9210-8bec-4626-975a-9aa2bb03b719}">
+        <property name="maxVoices">
+            <value>65</value>
+        </property>
+        <property name="voiceStealing">
+            <value>true</value>
+        </property>
+        <property name="priority">
+            <value>2</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+    </object>
+    <object class="GroupTrack" id="{a0593a30-830c-4bf7-91cc-efe12b40ad2d}">
+        <property name="streaming">
+            <value>false</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modules">
+            <destination>{2f90cdec-923e-4f7a-8247-a183dd90abd0}</destination>
+        </relationship>
+        <relationship name="mixerGroup">
+            <destination>{134659fe-0b1c-440a-8451-1f96b72d3355}</destination>
+        </relationship>
+    </object>
+    <object class="Timeline" id="{09c940b4-052a-4311-b829-fab0b7398bcf}">
+        <property name="name">
+            <value>Timeline</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="modules">
+            <destination>{2f90cdec-923e-4f7a-8247-a183dd90abd0}</destination>
+        </relationship>
+        <relationship name="automationCurves"/>
+        <relationship name="markers">
+            <destination>{dcc20f1b-9345-4e3a-afa2-ccb1bdd084f1}</destination>
+        </relationship>
+    </object>
+    <object class="EventMixerMaster" id="{94ded524-2144-4a5c-b64a-f310596638ad}">
+        <property name="volume">
+            <value>0</value>
+        </property>
+        <property name="pitch">
+            <value>0</value>
+        </property>
+        <property name="name">
+            <value>Master</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="masters"/>
+        <relationship name="snapshots"/>
+        <relationship name="effectChain">
+            <destination>{8c0f99d8-d62c-44a3-b3ae-864d66f1affa}</destination>
+        </relationship>
+        <relationship name="panner">
+            <destination>{0b26af44-bc47-4f8f-93ed-e9c3c667a82d}</destination>
+        </relationship>
+        <relationship name="output"/>
+        <relationship name="input">
+            <destination>{134659fe-0b1c-440a-8451-1f96b72d3355}</destination>
+        </relationship>
+        <relationship name="mixer">
+            <destination>{10d1a066-5b0c-4157-9c2b-c7c0eb43c505}</destination>
+        </relationship>
+    </object>
+    <object class="SingleSound" id="{2f90cdec-923e-4f7a-8247-a183dd90abd0}">
+        <property name="start">
+            <value>0</value>
+        </property>
+        <property name="length">
+            <value>40.465</value>
+        </property>
+        <property name="triggerProbabilityEnabled">
+            <value>true</value>
+        </property>
+        <property name="triggerProbability">
+            <value>100</value>
+        </property>
+        <property name="delayType">
+            <value>1</value>
+        </property>
+        <property name="minimumTimeDelay">
+            <value>0</value>
+        </property>
+        <property name="maximumTimeDelay">
+            <value>0</value>
+        </property>
+        <property name="quantizationInterval">
+            <value>0</value>
+        </property>
+        <property name="color">
+            <value>Blue</value>
+        </property>
+        <property name="volume">
+            <value>0</value>
+        </property>
+        <property name="pitch">
+            <value>0</value>
+        </property>
+        <property name="looping">
+            <value>false</value>
+        </property>
+        <property name="loadingMode">
+            <value>0</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="triggerCondition"/>
+        <relationship name="fadeCurves"/>
+        <relationship name="fadeInCurve"/>
+        <relationship name="fadeOutCurve"/>
+        <relationship name="owner"/>
+        <relationship name="scatterer"/>
+        <relationship name="audioFile">
+            <destination>{f26ad594-5b3e-42f9-a402-1366aadd6a69}</destination>
+        </relationship>
+    </object>
+    <object class="EventMixerGroup" id="{134659fe-0b1c-440a-8451-1f96b72d3355}">
+        <property name="volume">
+            <value>0</value>
+        </property>
+        <property name="pitch">
+            <value>0</value>
+        </property>
+        <property name="name">
+            <value>Audio 1</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="masters"/>
+        <relationship name="snapshots"/>
+        <relationship name="effectChain">
+            <destination>{58d9ab0e-b6c4-448c-b048-8bcec5e7438f}</destination>
+        </relationship>
+        <relationship name="panner">
+            <destination>{e8a80006-d3fe-4c4c-b0b5-c3c11a8b5803}</destination>
+        </relationship>
+        <relationship name="input"/>
+    </object>
+    <object class="LoopRegion" id="{dcc20f1b-9345-4e3a-afa2-ccb1bdd084f1}">
+        <property name="position">
+            <value>0.568475</value>
+        </property>
+        <property name="length">
+            <value>39.0181</value>
+        </property>
+    </object>
+    <object class="MixerBusEffectChain" id="{8c0f99d8-d62c-44a3-b3ae-864d66f1affa}">
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="owner"/>
+        <relationship name="sidechains"/>
+        <relationship name="effects">
+            <destination>{a5a10269-5efe-47ce-bdf0-c12bcf4c7aac}</destination>
+            <destination>{2ab39b21-0e7f-455b-9226-284daf0e2822}</destination>
+            <destination>{385cb2c7-2444-49c6-ba9a-69294cf49285}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusPanner" id="{0b26af44-bc47-4f8f-93ed-e9c3c667a82d}">
+        <property name="stereoPan">
+            <value>0</value>
+        </property>
+        <property name="stereoLeftPan">
+            <value>0</value>
+        </property>
+        <property name="stereoRightPan">
+            <value>0</value>
+        </property>
+        <property name="surroundPanDirection">
+            <value>0</value>
+        </property>
+        <property name="surroundPanExtent">
+            <value>360</value>
+        </property>
+        <property name="surroundLFELevel">
+            <value>0</value>
+        </property>
+        <property name="stereoToSurroundPanMode">
+            <value>1</value>
+        </property>
+        <property name="surroundStereoSeparation">
+            <value>60</value>
+        </property>
+        <property name="surroundStereoAxis">
+            <value>0</value>
+        </property>
+        <property name="overridingOutputFormat">
+            <value>0</value>
+        </property>
+        <property name="outputFormatOverridden">
+            <value>false</value>
+        </property>
+        <property name="enabledSurroundSpeakers">
+            <value>255</value>
+        </property>
+        <property name="LFEUpmixEnabled">
+            <value>false</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="owner"/>
+        <relationship name="sidechains"/>
+    </object>
+    <object class="MixerBusEffectChain" id="{58d9ab0e-b6c4-448c-b048-8bcec5e7438f}">
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="owner"/>
+        <relationship name="sidechains"/>
+        <relationship name="effects">
+            <destination>{2d6150c8-1f04-40e2-a1bb-ecc5fc2876d6}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusPanner" id="{e8a80006-d3fe-4c4c-b0b5-c3c11a8b5803}">
+        <property name="stereoPan">
+            <value>0</value>
+        </property>
+        <property name="stereoLeftPan">
+            <value>0</value>
+        </property>
+        <property name="stereoRightPan">
+            <value>0</value>
+        </property>
+        <property name="surroundPanDirection">
+            <value>0</value>
+        </property>
+        <property name="surroundPanExtent">
+            <value>360</value>
+        </property>
+        <property name="surroundLFELevel">
+            <value>0</value>
+        </property>
+        <property name="stereoToSurroundPanMode">
+            <value>1</value>
+        </property>
+        <property name="surroundStereoSeparation">
+            <value>60</value>
+        </property>
+        <property name="surroundStereoAxis">
+            <value>0</value>
+        </property>
+        <property name="overridingOutputFormat">
+            <value>0</value>
+        </property>
+        <property name="outputFormatOverridden">
+            <value>false</value>
+        </property>
+        <property name="enabledSurroundSpeakers">
+            <value>255</value>
+        </property>
+        <property name="LFEUpmixEnabled">
+            <value>false</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="owner"/>
+        <relationship name="sidechains"/>
+    </object>
+    <object class="MixerBusFader" id="{a5a10269-5efe-47ce-bdf0-c12bcf4c7aac}">
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="sidechains"/>
+    </object>
+    <object class="SpatialiserEffect" id="{2ab39b21-0e7f-455b-9226-284daf0e2822}">
+        <property name="distanceRolloffType">
+            <value>0</value>
+        </property>
+        <property name="minimumDistance">
+            <value>1</value>
+        </property>
+        <property name="maximumDistance">
+            <value>20</value>
+        </property>
+        <property name="extentMode">
+            <value>0</value>
+        </property>
+        <property name="soundSize">
+            <value>0</value>
+        </property>
+        <property name="minimumExtent">
+            <value>0</value>
+        </property>
+        <property name="occlusionEnabled">
+            <value>true</value>
+        </property>
+        <property name="dopplerMultiplier">
+            <value>100</value>
+        </property>
+        <property name="panBlend">
+            <value>1</value>
+        </property>
+        <property name="userPanDirection">
+            <value>0</value>
+        </property>
+        <property name="userPanExtent">
+            <value>360</value>
+        </property>
+        <property name="userLFELevel">
+            <value>0</value>
+        </property>
+        <property name="stereoToSurroundUserPanMode">
+            <value>1</value>
+        </property>
+        <property name="userStereoSeparation">
+            <value>60</value>
+        </property>
+        <property name="userStereoAxis">
+            <value>0</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="sidechains"/>
+    </object>
+    <object class="MixerSend" id="{385cb2c7-2444-49c6-ba9a-69294cf49285}">
+        <property name="level">
+            <value>-80</value>
+        </property>
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="sidechains"/>
+        <relationship name="return">
+            <destination>{5650f01c-356d-4dd2-ad8f-a056c76bdc46}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusFader" id="{2d6150c8-1f04-40e2-a1bb-ecc5fc2876d6}">
+        <relationship name="automationTracks"/>
+        <relationship name="modulators"/>
+        <relationship name="snapshotProperties"/>
+        <relationship name="sidechains"/>
+    </object>
+</objects>

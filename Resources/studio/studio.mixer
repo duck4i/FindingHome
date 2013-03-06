@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects managedObjectVersionString="Studio.1.DeveloperPreview.0">
+    <object class="Mixer" id="{a0ee8db2-8f0b-4a9e-b89f-6eae1eb561b3}">
+        <relationship name="masterBus">
+            <destination>{3235a7fd-90b0-429f-9df4-a9f0694602ec}</destination>
+        </relationship>
+        <relationship name="vca"/>
+        <relationship name="workspace">
+            <destination>{e9887653-383c-4af3-935f-02b7dc4cad05}</destination>
+        </relationship>
+    </object>
+</objects>

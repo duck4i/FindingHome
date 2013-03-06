@@ -653,7 +653,7 @@
 <dsp_name>FMOD Echo</dsp_name>
 <dsp_paramindex>0</dsp_paramindex>
 <colour>#404080</colour>
-<point>0,0.09982,1,1</point>
+<point>0,0.0649,1,1</point>
 <parametername>param00</parametername>
 <controlparameter>param00</controlparameter>
 <_PC_enable>1</_PC_enable>
@@ -668,7 +668,7 @@
 <_IOS_enable>1</_IOS_enable>
 <mute>0</mute>
 <visible>1</visible>
-<hidden>1</hidden>
+<hidden>0</hidden>
 <fromtemplate>No</fromtemplate>
 <mappingmethod>0</mappingmethod>
 <flags>0</flags>

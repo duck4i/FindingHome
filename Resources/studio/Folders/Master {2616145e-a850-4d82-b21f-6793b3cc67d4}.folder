@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects managedObjectVersionString="Studio.1.DeveloperPreview.0">
+    <object class="MasterFolder" id="{2616145e-a850-4d82-b21f-6793b3cc67d4}">
+        <property name="name">
+            <value>Master</value>
+        </property>
+        <relationship name="folder"/>
+        <relationship name="workspace">
+            <destination>{e9887653-383c-4af3-935f-02b7dc4cad05}</destination>
+        </relationship>
+    </object>
+</objects>

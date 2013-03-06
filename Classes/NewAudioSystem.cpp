@@ -117,9 +117,7 @@ bool NewAudioSystem::init()
 		FMOD_RESULT result;
 
 		system = new FMOD::Studio::System();
-		FMOD::Studio::System::create(system);
-
-		result = system->initialize(MAX_CHANNELS,  FMOD_STUDIO_INIT_NORMAL, FMOD_INIT_NORMAL, NULL);
+		result = FMOD::Studio::System::create(system);
 		CHECK(result);
 		
 		result = system->getLowLevelSystem(&lowLevelSystem);
@@ -127,13 +125,16 @@ bool NewAudioSystem::init()
 
 		FMOD_SPEAKERMODE speakerMode = FMOD_SPEAKERMODE_STEREO;
 		result = lowLevelSystem->getDriverCaps(0, NULL, NULL, &speakerMode);
-		//CHECK(result);
+		CHECK(result);
+
+		result = system->initialize(MAX_CHANNELS,  FMOD_STUDIO_INIT_NORMAL, FMOD_INIT_NORMAL, NULL);
+		CHECK(result);
 
 		//result = lowLevelSystem->setSpeakerMode(speakerMode);
 		//CHECK(result);
 		
 		bank = new FMOD::Studio::Bank();
-		result = system->loadBank(RESOURCE_DIR "studio\\Build\\Desktop\\MasterBank.bank", bank);
+		result = system->loadBank(RESOURCE_DIR "studio\\Build\\Desktop\\Master Bank.bank", bank);
 		CHECK(result);
 
 		/*
@@ -142,15 +143,15 @@ bool NewAudioSystem::init()
 			{2a490b5b-b58a-4a97-b641-29b1cf812e91} /PlayHop
 		*/
 
-		const char* loopingCricketsGUID = "{9c49fc1b-c2ad-49f8-89f9-2533bb71d38a}";
+		const char* loopingCricketsGUID = "{e168b827-6d12-408e-8b3d-161e3a885f95}";
 		FMOD::Studio::ID loopingCricketsID = {0};
 		FMOD::Studio::parseID(loopingCricketsGUID, &loopingCricketsID);
 
-		const char* loopingStormGUID = "{f52ab7dd-4c03-48ac-a123-01d97a46f25a}";
+		const char* loopingStormGUID = "{e7acf07a-4c9f-4477-9d4b-1f877c15f0ae}";
 		FMOD::Studio::ID loopingStormID = {0};
 		FMOD::Studio::parseID(loopingStormGUID, &loopingStormID);
 
-		const char* playHopGUID = "{898c0b6d-f47e-4515-9a17-c026400b97a6}";
+		const char* playHopGUID = "{e6807338-34e0-4b0c-ae0d-b6c5b14a92f6}";
 		FMOD::Studio::ID playHopID = {0};
 		FMOD::Studio::parseID(playHopGUID, &playHopID);
 
@@ -221,11 +222,12 @@ void NewAudioSystem::playHop()
 		FMOD::Studio::EventInstance instance;
 		playHopEvent->createInstance(&instance);
 
-		FMOD::Channel *ch0 = NULL;
-		FMOD::ChannelGroup *group = NULL;
 
-		instance.getChannelGroup(&group);		
-		group->getChannel(0, &ch0);
+		//FMOD::Channel *ch0 = NULL;
+		//FMOD::ChannelGroup *group = NULL;
+
+		//instance.getChannelGroup(&group);		
+		//group->getChannel(0, &ch0);
 		
 		
 		
