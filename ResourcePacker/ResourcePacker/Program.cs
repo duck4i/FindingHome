@@ -26,7 +26,8 @@ namespace ResourcePacker
                 if (!File.Exists(path))
                     continue;
 
-                dirs += " " + '"' + path + '"';
+                //dirs += " " + '"' + path + '"';
+                dirs += " " + path + "\n";
             }
 
             foreach (DirectoryInfo d in resInfo.GetDirectories())
@@ -41,9 +42,10 @@ namespace ResourcePacker
             Console.WriteLine("Resource Packer 1.0");
             
 
-            String pf86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-            String path = pf86 + @"\CodeAndWeb\TexturePacker\bin\TexturePacker.exe";
-            String outData = "assetData.plist";
+            //String pf86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+            String path = @"..\Utils\sspack.exe";
+            String generatedInput = "input.data";
+            String outData = "assetData.txt";
             String outImage = "assetData.png";
 
             if (!File.Exists(path))
@@ -54,8 +56,10 @@ namespace ResourcePacker
 
             Console.WriteLine("Found TexturePacker!\r\nStarting!");
 
-            String param = @" --data " + outData + " --sheet " + outImage;
-            param += @" --max-size 8192 --format cocos2d --algorithm Basic --trim-mode None";
+            int maxWidth = 4096;
+            int maxHeight = 4096;
+            String param = @"/il:" + generatedInput +" /map:" + outData + " /image:" + outImage + " /mw:" + maxWidth + " /mh:" + maxHeight;
+            param += @" /pow2 /sqr";
 
             String dirs = "";
 
@@ -63,21 +67,21 @@ namespace ResourcePacker
             dir = Path.Combine(dir, @"..\Resources\");
             dir = Path.GetFullPath(dir);
 
-            if (!Directory.Exists(dir))
-            {
-                Console.WriteLine("Cannot find resources directory at:\r\n" + dir + "\r\n");
-                return;
-            }
+            //if (!Directory.Exists(dir))
+            //{
+            //    Console.WriteLine("Cannot find resources directory at:\r\n" + dir + "\r\n");
+            //    return;
+            //}
 
             //  now remove old instances
-            File.Delete(dir + outData);
-            File.Delete(dir + outImage);
-
+            File.Delete(outData);
+            File.Delete(outImage);
 
             RecurseDirs(dir, ref dirs);
-
-            //Console.WriteLine(dirs);
-            param += " " + dirs;
+            System.IO.File.WriteAllText(generatedInput, dirs);
+            
+            Console.WriteLine(dirs);
+            //param += " " + dirs;
 
             try
             {
@@ -85,7 +89,8 @@ namespace ResourcePacker
                 info.Arguments = param;
                 info.CreateNoWindow = true;
                 info.FileName = path;
-                info.WorkingDirectory = dir;
+                //info.WorkingDirectory = dir;
+                info.WorkingDirectory = Directory.GetCurrentDirectory();
                 info.RedirectStandardOutput = true;
                 info.UseShellExecute = false;
 
@@ -107,6 +112,8 @@ namespace ResourcePacker
 
                 Console.WriteLine(success ? "SUCCESS" : "FAILURE");
                 Console.ResetColor();
+
+                Console.Read();
 
             }
             catch (Exception)

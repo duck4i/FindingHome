@@ -12,6 +12,8 @@ bool WeatherHelper::init()
 		return false;
 	}
 
+	//CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile
+
 	CCSize s = CCSizeMake(controllerImage->getWidth(), controllerImage->getHeight());
 	controller = new CCTexture2DMutable;
 	
