@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<objects managedObjectVersionString="Studio.1.DeveloperPreview.0">
-    <object class="SnapshotList" id="{3499d4ab-e206-45ed-bb6d-52521bc5d1ce}">
-        <relationship name="mixer">
-            <destination>{a0ee8db2-8f0b-4a9e-b89f-6eae1eb561b3}</destination>
-        </relationship>
-        <relationship name="snapshots"/>
-    </object>
-</objects>

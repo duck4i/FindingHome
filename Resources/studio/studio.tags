@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<objects managedObjectVersionString="Studio.1.DeveloperPreview.0">
-    <object class="TagList" id="{2614ca97-a961-404e-ae09-f6953e9a4cc1}">
-        <relationship name="tags"/>
-        <relationship name="workspace">
-            <destination>{e9887653-383c-4af3-935f-02b7dc4cad05}</destination>
-        </relationship>
-    </object>
-</objects>

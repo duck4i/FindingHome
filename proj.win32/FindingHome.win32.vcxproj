@@ -48,7 +48,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\Classes\VisualLeakDetector\include;$(SolutionDir)..\Classes\Shiny\include;$(SolutionDir)..\FMOD\studio\include;$(SolutionDir)..\FMOD\studio2\include;$(SolutionDir)..\FMOD\studio2\lowlevel\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\Classes\VisualLeakDetector\include;$(SolutionDir)..\Classes\Shiny\include;$(SolutionDir)..\FMOD\include;$(SolutionDir)..\FMOD\designer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -63,7 +63,7 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\Classes\json\;$(SolutionDir)..\..\Debug.win32;$(SolutionDir)..\Classes\VisualLeakDetector\lib\Win32;$(SolutionDir)..\Classes\Shiny\lib;$(SolutionDir)..\FMOD\;$(SolutionDir)..\FMOD\studio\;$(SolutionDir)..\FMOD\studio2\;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\Classes\json\;$(SolutionDir)..\..\Debug.win32;$(SolutionDir)..\Classes\VisualLeakDetector\lib\Win32;$(SolutionDir)..\Classes\Shiny\lib;$(SolutionDir)..\FMOD\;$(SolutionDir)..\FMOD\designer\;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;libXML2.lib;json_debug.lib;vld.lib;ShinyDebug.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
     </Link>
@@ -90,7 +90,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;$(SolutionDir)..\Classes\Shiny\include;.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\FMOD\studio\include;$(SolutionDir)..\FMOD\studio2\lowlevel\include;$(SolutionDir)..\FMOD\studio2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;$(SolutionDir)..\Classes\Shiny\include;.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\FMOD\include;$(SolutionDir)..\FMOD\designer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -104,8 +104,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\FMOD\;$(SolutionDir)..\FMOD\studio\;$(SolutionDir)..\FMOD\studio2\;$(SolutionDir)..\Classes\Shiny\lib;$(SolutionDir)..\Classes\json\;$(SolutionDir)..\..\Release.win32;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fmodstudio_vc.lib; fmod_event.lib; fmodex_vc.lib; shiny.lib;libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;libXML2.lib;json_release.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\FMOD\;$(SolutionDir)..\FMOD\designer\;$(SolutionDir)..\Classes\Shiny\lib;$(SolutionDir)..\Classes\json\;$(SolutionDir)..\..\Release.win32;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>shiny.lib;libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;libCocosDenshion.lib;libXML2.lib;json_release.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
     </Link>
     <ResourceCompile>

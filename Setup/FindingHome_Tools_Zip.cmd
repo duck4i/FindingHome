@@ -55,14 +55,6 @@ del Utils\*.* /f /q
 rd Utils /S /Q
 
 REM add shortucts
-xcopy ..\start.bat *.*
-zip.exe -r -9 -D FindingHomeTools.zip start.bat
-del start.bat /f /q
-
-xcopy ..\start_forest_test.bat *.*
-zip.exe -r -9 -D FindingHomeTools.zip start_forest_test.bat
-del start_forest_test.bat /f /q
-
-xcopy ..\start_fullscreen.bat *.*
-zip.exe -r -9 -D FindingHomeTools.zip start_fullscreen.bat
-del start_fullscreen.bat /f /q
+xcopy ..\*.bat *.*
+zip.exe -r -9 -D FindingHomeTools.zip *.bat
+del *.bat 
