@@ -54,6 +54,7 @@ namespace sspack
 
                     /*
                      *
+            <dict>
                 <key>frame</key>
                 <string>{{707,0},{101,171}}</string>
                 <key>offset</key>
@@ -64,11 +65,12 @@ namespace sspack
                 <string>{{0,0},{101,171}}</string>
                 <key>sourceSize</key>
                 <string>{101,171}</string>
+            </dict>
                      **/
 
                     // write out the destination rectangle for this bitmap
 					writer.WriteLine(string.Format(
-	                 	"<item>{0} = {1} {2} {3} {4}", 
+	                 	"{0} = {1} {2} {3} {4}", 
 	                 	Path.GetFileNameWithoutExtension(image), 
 	                 	destination.X, 
 	                 	destination.Y, 
