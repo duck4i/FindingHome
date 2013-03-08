@@ -52,22 +52,6 @@ namespace sspack
 					// get the destination rectangle
 					Rectangle destination = map[image];
 
-                    /*
-                     *
-            <dict>
-                <key>frame</key>
-                <string>{{707,0},{101,171}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{101,171}}</string>
-                <key>sourceSize</key>
-                <string>{101,171}</string>
-            </dict>
-                     **/
-
                     // write out the destination rectangle for this bitmap
 					writer.WriteLine(string.Format(
 	                 	"{0} = {1} {2} {3} {4}", 

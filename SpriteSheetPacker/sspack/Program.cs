@@ -50,6 +50,8 @@ namespace sspack
 
 	public class Program
 	{
+        public static ProgramArguments arguments;
+
 		static int Main(string[] args)
 		{
 			return Launch(args);
@@ -57,7 +59,8 @@ namespace sspack
 
 		public static int Launch(string[] args)
 		{
-			ProgramArguments arguments = ProgramArguments.Parse(args);
+			//ProgramArguments arguments = ProgramArguments.Parse(args);
+            arguments = ProgramArguments.Parse(args);
 
 			if (arguments == null)
 			{
