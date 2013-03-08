@@ -148,9 +148,6 @@ namespace sspack
                     {
                         float width = tif.PhysicalDimension.Width;
                         float height = tif.PhysicalDimension.Height;
-                        float hresolution = tif.HorizontalResolution;
-                        float vresolution = tif.VerticalResolution;
-
                         return new Size((int)width, (int)height);
                     }
                 }

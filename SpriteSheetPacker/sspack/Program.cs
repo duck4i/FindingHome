@@ -151,6 +151,8 @@ namespace sspack
 				if (result != 0)
 				{
 					Console.WriteLine("There was an error making the image sheet.");
+                    FailCode f = (FailCode) result;
+                    Console.WriteLine("Error: " + f.ToString());
 					return result;
 				}
 
