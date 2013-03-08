@@ -62,10 +62,10 @@ namespace sspack
 			IEnumerable<string> imageFiles, 
 			bool requirePowerOfTwo, 
 			bool requireSquareImage, 
-			int maximumWidth,
-			int maximumHeight,
-			int imagePadding,
-			bool generateMap,
+			int maximumWidth, 
+			int maximumHeight, 
+			int imagePadding, 
+			bool generateMap, 
 			out Bitmap outputImage, 
 			out Dictionary<string, Rectangle> outputMap)
 		{

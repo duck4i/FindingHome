@@ -16,7 +16,12 @@ namespace ResourcePacker
         static String   packerPath = @"sspack.exe";
         static int      maxWidth = 4096;
         static int      maxHeight = 4096;
+        static int padding = 1;
         
+        static bool requireSquare = false;
+        static bool requirePow2 = true;
+        static int outputWidth = maxWidth;
+        static int outputHeight = maxHeight;
         
 
         /// <summary>
@@ -113,18 +118,146 @@ namespace ResourcePacker
             return o;
         }
 
+        /*
+        private bool TestPackingImages(int testWidth, int testHeight, Dictionary<string, Rectangle> testImagePlacement, List<String> files)
+        {
+            // create the rectangle packer
+            ArevaloRectanglePacker rectanglePacker = new ArevaloRectanglePacker(testWidth, testHeight);
+
+            foreach (var image in files)
+            {
+                // get the bitmap for this file
+                Size size = imageSizes[image];
+
+                // pack the image
+                Point origin;
+                if (!rectanglePacker.TryPack(size.Width + padding, size.Height + padding, out origin))
+                {
+                    return false;
+                }
+
+                // add the destination rectangle to our dictionary
+                testImagePlacement.Add(image, new Rectangle(origin.X, origin.Y, size.Width + padding, size.Height + padding));
+            }
+
+            return true;
+        }
+
+        // This method does some trickery type stuff where we perform the TestPackingImages method over and over, 
+        // trying to reduce the image size until we have found the smallest possible image we can fit.
+        private bool PackImageRectangles()
+        {
+            // create a dictionary for our test image placements
+            Dictionary<string, Rectangle> testImagePlacement = new Dictionary<string, Rectangle>();
+
+            // get the size of our smallest image
+            int smallestWidth = int.MaxValue;
+            int smallestHeight = int.MaxValue;
+            foreach (var size in imageSizes)
+            {
+                smallestWidth = Math.Min(smallestWidth, size.Value.Width);
+                smallestHeight = Math.Min(smallestHeight, size.Value.Height);
+            }
+
+            // we need a couple values for testing
+            int testWidth = outputWidth;
+            int testHeight = outputHeight;
+
+            bool shrinkVertical = false;
+
+            // just keep looping...
+            while (true)
+            {
+                // make sure our test dictionary is empty
+                testImagePlacement.Clear();
+
+                // try to pack the images into our current test size
+                if (!TestPackingImages(testWidth, testHeight, testImagePlacement))
+                {
+                    // if that failed...
+
+                    // if we have no images in imagePlacement, i.e. we've never succeeded at PackImages,
+                    // show an error and return false since there is no way to fit the images into our
+                    // maximum size texture
+                    if (imagePlacement.Count == 0)
+                        return false;
+
+                    // otherwise return true to use our last good results
+                    if (shrinkVertical)
+                        return true;
+
+                    shrinkVertical = true;
+                    testWidth += smallestWidth + padding + padding;
+                    testHeight += smallestHeight + padding + padding;
+                    continue;
+                }
+
+                // clear the imagePlacement dictionary and add our test results in
+                imagePlacement.Clear();
+                foreach (var pair in testImagePlacement)
+                    imagePlacement.Add(pair.Key, pair.Value);
+
+                // figure out the smallest bitmap that will hold all the images
+                testWidth = testHeight = 0;
+                foreach (var pair in imagePlacement)
+                {
+                    testWidth = Math.Max(testWidth, pair.Value.Right);
+                    testHeight = Math.Max(testHeight, pair.Value.Bottom);
+                }
+
+                // subtract the extra padding on the right and bottom
+                if (!shrinkVertical)
+                    testWidth -= padding;
+                testHeight -= padding;
+
+                // if we require a power of two texture, find the next power of two that can fit this image
+                if (requirePow2)
+                {
+                    testWidth = MiscHelper.FindNextPowerOfTwo(testWidth);
+                    testHeight = MiscHelper.FindNextPowerOfTwo(testHeight);
+                }
+
+                // if we require a square texture, set the width and height to the larger of the two
+                if (requireSquare)
+                {
+                    int max = Math.Max(testWidth, testHeight);
+                    testWidth = testHeight = max;
+                }
+
+                // if the test results are the same as our last output results, we've reached an optimal size,
+                // so we can just be done
+                if (testWidth == outputWidth && testHeight == outputHeight)
+                {
+                    if (shrinkVertical)
+                        return true;
+
+                    shrinkVertical = true;
+                }
+
+                // save the test results as our last known good results
+                outputWidth = testWidth;
+                outputHeight = testHeight;
+
+                // subtract the smallest image size out for the next test iteration
+                if (!shrinkVertical)
+                    testWidth -= smallestWidth;
+                testHeight -= smallestHeight;
+            }
+        }
+        */
+
         static List<List<String>> GetSheetsFromList(List<String> list)
         {
             List<List<String>> o = new List<List<String>>();
-            int maxSurface = maxWidth * maxHeight;
-            int separator = 1;  // 1px
+            float maxSurface = maxWidth * maxHeight;
+            float separator = 1;  // 1px
 
             List<String> curr = new List<String>();
-            int currSurface = 0;           
+            float currSurface = 0;           
             foreach (String s in list)
             {
                 Size ss = GetDimensions(s);
-                int ssurf = (ss.Width + separator) * (ss.Height + separator);
+                float ssurf = (ss.Width + separator) * (ss.Height + separator);
 
                 if (currSurface + ssurf >= maxSurface)
                 {                    
@@ -150,7 +283,7 @@ namespace ResourcePacker
         {
 
             String param = @"/il:" + infile + " /map:" + outmapfile + " /image:" + outfile + " /mw:" + maxWidth + " /mh:" + maxHeight;
-            param += @" /pow2 /sqr";
+            param += (requirePow2 ? " /pow2" : "") + (requireSquare ? " /sqr" : "");
 
             try
             {
@@ -214,7 +347,12 @@ namespace ResourcePacker
             }
             else if (sheetLists.Count == 1)
             {
-                File.WriteAllText(packerInputFile, sheetLists[0].ToString());
+                File.Delete(packerInputFile);
+                File.Delete(packerImageFile);
+                File.Delete(packerMapFile);
+
+                String cs = String.Join("\n", sheetLists[0].ToArray());
+                File.WriteAllText(packerInputFile, cs);
                 bool ok = StartPacker(packerInputFile, packerImageFile, packerMapFile);
             }
             else
@@ -226,8 +364,11 @@ namespace ResourcePacker
                     String outfile = Path.GetFileNameWithoutExtension(packerImageFile) + counter + Path.GetExtension(packerImageFile);
                     String outmapfile = Path.GetFileNameWithoutExtension(packerMapFile) + counter + Path.GetExtension(packerMapFile);
 
-                    String cs = String.Join("\n", sheet.ToArray());
+                    File.Delete(infile);
+                    File.Delete(outfile);
+                    File.Delete(outmapfile);
 
+                    String cs = String.Join("\n", sheet.ToArray());
                     File.WriteAllText(infile, cs);
 
                     bool ok = StartPacker(infile, outfile, outmapfile);
