@@ -43,9 +43,9 @@ namespace ResourcePacker
             
 
             //String pf86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-            String path = @"..\Utils\sspack.exe";
+            String path = @"sspack.exe";
             String generatedInput = "input.data";
-            String outData = "assetData.txt";
+            String outData = "assetData.plist";
             String outImage = "assetData.png";
 
             if (!File.Exists(path))
