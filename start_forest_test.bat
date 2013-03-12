@@ -1,2 +1,2 @@
 cd bin
-FindingHome.win32.exe "..\Resources\ForestTest.xml"
+start FindingHome.win32.exe "..\Resources\ForestTest.xml"

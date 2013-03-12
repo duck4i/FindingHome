@@ -1,2 +1,2 @@
 cd bin
-FindingHome.win32.exe -fullscreen
+start FindingHome.win32.exe -fullscreen

@@ -1,0 +1,1 @@
+cc.log("Main menu loaded");

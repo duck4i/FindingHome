@@ -1,2 +1,2 @@
 cd bin
-FindingHome.win32.exe
+start FindingHome.win32.exe -nosound

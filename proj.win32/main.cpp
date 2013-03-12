@@ -18,8 +18,8 @@ USING_NS_CC;
 
 //	command line options
 bool fullScreen = false;
+bool disableSound = false;
 char* levelOverride = NULL;
-
 
 bool alreadyRunning()
 {
@@ -72,6 +72,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			//	fullscreen ;)
 			if (_strcmpi(linec, "-fullscreen") == 0)
 			{
+				CCLog("Full-screen mode ON.");
 				fullScreen = true;
 				line.erase(line.find_first_of("-fullscreen"));				
 				linec = line.c_str();				
@@ -80,7 +81,15 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			//	empty level from editor
 			if (_strcmpi(linec, "\"untitled\"") == 0)
 			{
+				CCLog("Input is untitled file from editor.\r\nExiting....");
 				return 0;
+			}
+
+			//	no sound
+			if (_strcmpi(linec, "-nosound") == 0)
+			{
+				CCLog("Sound engine is DISABLED.");
+				disableSound = true;
 			}
 
 

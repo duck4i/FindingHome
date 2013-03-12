@@ -1,5 +1,5 @@
 //
-// Javascript Bindigns helper file
+// Javascript Bindings helper file
 //
 
 // DO NOT ALTER THE ORDER

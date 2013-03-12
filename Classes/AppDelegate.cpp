@@ -77,11 +77,24 @@ bool AppDelegate::applicationDidFinishLaunching()
 	
 #endif
 
-    // create a scene. it's an autorelease object
-    CCScene *pScene = MainScene::scene();
+	extern char* levelOverride;
+	if (levelOverride)
+	{
+		CCLog("Level override is ENABLED.");
+		std::string path = levelOverride;
 
-    // run
+		if (path.find(".js") != path.npos)
+		{
+			CCLog("");
+			sc->runScript(path.c_str());
+			return true;	//	END HERE - special case when JS is loaded only
+		}
+	}
+
+    // create a scene. it's an autorelease object
+    CCScene *pScene = MainScene::scene();    
     pDirector->runWithScene(pScene);
+
     return true;
 }
 
@@ -91,7 +104,9 @@ void AppDelegate::applicationDidEnterBackground()
     CCDirector::sharedDirector()->stopAnimation();
 
     //SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
-	NewAudioSystem::shared()->pause();
+	extern bool disableSound;
+	if (!disableSound)
+		NewAudioSystem::shared()->pause();
 }
 
 // this function will be called when the app is active again
@@ -100,5 +115,7 @@ void AppDelegate::applicationWillEnterForeground()
     CCDirector::sharedDirector()->startAnimation();
 
     //SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-	NewAudioSystem::shared()->resume();
+	extern bool disableSound;
+	if (!disableSound)
+		NewAudioSystem::shared()->resume();
 }
