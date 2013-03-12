@@ -34,8 +34,8 @@ private:
 	{
 		if (system)
 		{
-			system->release();
 			system->unload();
+			system->release();			
 		}
 	}
 	bool init();

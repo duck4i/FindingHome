@@ -12,6 +12,7 @@
 
 //	resource dirs and static files
 #define RESOURCE_DIR		"..\\Resources\\"
+#define SCRIPT_DIR			RESOURCE_DIR "scripting\\"
 
 #define SHAPE_DATA					RESOURCE_DIR "ShapeData.json"
 #define WEATHER_CONTROLLER_DATA		RESOURCE_DIR "weather_controller.png"

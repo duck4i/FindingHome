@@ -142,12 +142,14 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		eglView->setFrameSize(r.right, r.bottom);
 		unsigned long ws = GetWindowLong(eglView->getHWnd(), GWL_STYLE);
 		SetWindowLong(eglView->getHWnd(), GWL_STYLE, ws & ~(WS_CAPTION | WS_THICKFRAME));
+
+		//	no matter what resolution design size is the same.
+		eglView->setDesignResolutionSize(WINDOW_WIDTH, WINDOW_HEIGHT, kResolutionNoBorder);
 	}
 	else
 		eglView->setFrameSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	//	no matter what resolution design size is the same.
-	eglView->setDesignResolutionSize(WINDOW_WIDTH, WINDOW_HEIGHT, kResolutionNoBorder);
+	
 	
 	//	set window name
 	SetWindowText(eglView->getHWnd(), WINDOW_TITLE);
