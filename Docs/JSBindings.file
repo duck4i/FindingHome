@@ -1,0 +1,17 @@
+JS binding code has to be generated via:
+https://github.com/funkaster/cxx-generator (included in tools\tojs)
+
+More about:
+(http://www.cocos2d-x.org/boards/20/topics/20324)
+
+Forum for help:
+http://www.cocos2d-x.org/projects/cocos2d-x/boards/20
+
+
+If you need LIBCLANG from LLVM:
+http://clang.llvm.org/get_started.html
+
+
+
+
+
