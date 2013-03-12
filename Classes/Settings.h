@@ -33,6 +33,7 @@
 
 #define RESOURCE_SHIFT		RESOURCE_DIR	"shift.png"
 
+#define JS_INCLUDE_SCRIPT	SCRIPT_DIR "include.js"
 
 inline static bool doesFileExits(char* file)
 {

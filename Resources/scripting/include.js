@@ -12,4 +12,4 @@ require("scripting/system/jsb.js");
 cc.log("JavaScript scripting support ON-LINE.");
 if (debug)
 	cc.dumpConfig();
-	
+

@@ -49,7 +49,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
                        int       nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
+    UNREFERENCED_PARAMETER(lpCmdLine);	
 
 	//	check double run
 	if (alreadyRunning())
@@ -122,12 +122,20 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		}
 	}
 
-#ifdef USE_WIN32_CONSOLE
-    AllocConsole();
-    freopen("CONIN$", "r", stdin);
-    freopen("CONOUT$", "w", stdout);
-    freopen("CONOUT$", "w", stderr);
+	//	Check console output
+	bool enableConsoleOutput = false;
+
+#if defined(ENABLE_CONSOLE)
+	enableConsoleOutput = true;
 #endif
+
+	if (enableConsoleOutput)
+	{
+		AllocConsole();
+		freopen("CONIN$", "r", stdin);
+		freopen("CONOUT$", "w", stdout);
+		freopen("CONOUT$", "w", stderr);
+	}
 
     // create the application instance
     AppDelegate app;
@@ -158,16 +166,11 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     int ret = CCApplication::sharedApplication()->run();
 
-#ifdef USE_WIN32_CONSOLE
-    FreeConsole();
-#endif
+	if (enableConsoleOutput)
+	{
+		FreeConsole();
+	}
 
-	/*
-#if defined(_DEBUG) && !defined(DISABLE_SHINY)
-	PROFILER_UPDATE();
-	PROFILER_OUTPUT("profiler_out.txt");
-#endif
-	*/
 
     return ret;
 }

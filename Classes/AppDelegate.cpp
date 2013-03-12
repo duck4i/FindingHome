@@ -69,14 +69,11 @@ bool AppDelegate::applicationDidFinishLaunching()
 	
 	CCScriptEngineProtocol* p = sc;
 	CCScriptEngineManager::sharedManager()->setScriptEngine(p);	
-	
-	const char* script = SCRIPT_DIR "include.js";
-
-	char msg[500];
-	sprintf(msg, "Running JS: %s", script);
+			
+	char* msg = "Running JS:" JS_INCLUDE_SCRIPT;
 	js_log(msg);
 
-	sc->runScript(script);
+	sc->runScript(JS_INCLUDE_SCRIPT);
 	
 #endif
 
