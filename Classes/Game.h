@@ -8,6 +8,8 @@ public:
 
 	float sceneScale;
 	char* nextLevel;
+	
+	int doSomething();
 
 };
 

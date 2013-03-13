@@ -6,10 +6,8 @@
 //	Include SYSTEM libraries
 require("scripting/system/jsb.js");
 
-
-
 //	Include USER libraries
-//	TODO:
+require("scripting/generated/gameapi.js");
 
 
 

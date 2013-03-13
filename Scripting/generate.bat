@@ -7,9 +7,7 @@ echo.
 
 set PATH=%PATH%;%cd%
 
-if defined VS110COMNTOOLS (
-	set VSTOOLS="%VS100COMNTOOLS%"
-) else if defined VS100COMNTOOLS (
+if defined VS100COMNTOOLS (
 	set VSTOOLS="%VS100COMNTOOLS%"
 )
 
@@ -19,7 +17,7 @@ set "VSTOOLS=%VSTOOLS:\=/%"
 set VSVARS="%VSTOOLS%vsvars32.bat"
 
 if not defined VSVARS (
-    echo Can't find VC2010 or VC2012 installed!
+    echo Can't find VC2010 installed!
     goto ERROR
 )
 
@@ -48,9 +46,11 @@ echo ---
 echo [DEFAULT] > %_CONF_INI_FILE%
 echo cxxgeneratordir=%CXX_GENERATOR_ROOT% >> %_CONF_INI_FILE%
 echo cocosdir=%COCOS2DX_ROOT% >> %_CONF_INI_FILE%
-echo vs_headers="%VS_ROOT%/VC/include" >> %_CONF_INI_FILE%
+
 echo cxxinclude=%CLASS_DIR% >> %_CONF_INI_FILE%
+
 echo vs_flags= >> %_CONF_INI_FILE%
+echo vs_headers="%VS_ROOT%/VC/include" >> %_CONF_INI_FILE%
 
 echo ---
 

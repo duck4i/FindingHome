@@ -1,10 +1,7 @@
-#ifndef _GENERATE_H_
-#define _GENERATE_H_
-
-#include <cocos2d.h>
-#include <cocos-ext.h>
+#ifndef _GENERATE_GAME_H_
+#define _GENERATE_GAME_H_
 
 #include "Game.h"
-//#include "LevelNodeInfo.h"
+#include "LevelNodeInfo.h"
 
 #endif

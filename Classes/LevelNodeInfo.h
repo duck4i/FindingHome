@@ -33,8 +33,8 @@ enum EnemyType
 ///
 class NODEINFO
 {
-public:
-
+public:	
+	
 	NodeType nodeType;
 	EnemyType enemyType;
 
