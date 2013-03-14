@@ -118,7 +118,18 @@ var MainMenuLayer = cc.LayerColor.extend(
 	},
 	animateMenu: function()
 	{
+		//no animation
+		return;
 		
+		var anim, anim2;
+		var skew = -1, scale = 0.99, time = gg.AnimationLong;			
+		
+		anim = cc.RepeatForever.create(cc.Sequence.create(cc.EaseBackInOut.create(cc.SkewBy.create(time, skew, skew)), cc.EaseBackInOut.create(cc.SkewBy.create(time, -skew, -skew))));
+		anim2 = cc.RepeatForever.create(cc.Sequence.create(cc.EaseBackInOut.create(cc.ScaleTo.create(time, scale, scale)), cc.EaseBackInOut.create(cc.ScaleTo.create(time, 1, 1))));
+		
+		cc.log("Running animation: " + anim);		
+		menu.runAction(anim);
+		menu.runAction(anim2);
 	},
 	update : function()
 	{

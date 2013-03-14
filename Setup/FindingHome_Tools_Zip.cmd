@@ -24,6 +24,7 @@ xcopy /E ..\Resources\*.xml Resources\*.*
 xcopy /E ..\Resources\*.json Resources\*.*
 xcopy /E ..\Resources\*.vsh Resources\*.*
 xcopy /E ..\Resources\*.fsh Resources\*.*
+xcopy /E ..\Resources\*.js Resources\*.*
 
 REM audio resources
 xcopy /S ..\Resources\*.fdp Resources\*.*
