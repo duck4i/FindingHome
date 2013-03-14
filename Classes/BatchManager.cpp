@@ -1,6 +1,6 @@
 #include "BatchManager.h"
 
-
+#if 0
 static BatchManager* _smanager = NULL;
 
 BatchManager* BatchManager::sharedManager()
@@ -19,6 +19,7 @@ void BatchManager::purge()
 {
 	CC_SAFE_DELETE(_smanager);
 }
+#endif
 
 BatchManager::~BatchManager()
 {
@@ -26,14 +27,8 @@ BatchManager::~BatchManager()
 	for (ptr = items.begin(); ptr != items.end(); ptr++)
 	{
 		BatchManagerItem* item = *ptr;
-		if (item)
-		{
-			delete item;
-			*ptr = NULL;
-		}
-	}
-
-	_smanager = NULL;
+		CC_SAFE_DELETE(item);
+	}	
 }
 
 bool BatchManager::addItem(GameEntitySprite* entity, CCNode* layer, CCPoint parallax)
@@ -44,9 +39,11 @@ bool BatchManager::addItem(GameEntitySprite* entity, CCNode* layer, CCPoint para
 	std::list<BatchManagerItem*>::iterator item;
 	for (item = items.begin(); item != items.end(); item++)
 	{
-		BatchManagerItem* i = *item;
-		char* iName = i->sprite->getNodeInfo().texture;
+		BatchManagerItem* i = dynamic_cast<BatchManagerItem*>(*item);
+		if (!i)
+			continue;
 
+		char* iName = i->sprite->getNodeInfo().texture;
 		if (xmlStrcasecmp((xmlChar*) iName, (xmlChar*) name) == 0 && parallax.equals(i->parallax) )
 		{
 			found = true;
@@ -71,11 +68,6 @@ bool BatchManager::addItem(GameEntitySprite* entity, CCNode* layer, CCPoint para
 
 		layer->addChild(mgr->batchNode);
 	}
-
-
-	//layer =
-	//CCSpriteBatchNode *n = CCSpriteBatchNode::create(sprite->m_no);
-
 
 	return false;
 }

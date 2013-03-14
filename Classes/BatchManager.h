@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 class BatchManagerItem : CCObject
 {
 public:
@@ -21,19 +20,19 @@ class BatchManager
 {
 private:
 
-	
-	BatchManager();
-
-public:
-	
 	list<BatchManagerItem*> items;	
 
+public:
+#if 0	
 	static BatchManager* sharedManager();
 	static void purge();
+#endif
 
 	bool addItem(GameEntitySprite* entity, CCNode* layer, CCPoint parallax);
 
-
+	BatchManager()
+	{
+	}
 	~BatchManager();
 };
 

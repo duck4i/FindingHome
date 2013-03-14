@@ -197,7 +197,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 		if (sprite && info.nodeType != NodeType::NodeTypeUndefined)
 		{
 			//layer->addChild(sprite->getSprite());
-			BatchManager* manager = BatchManager::sharedManager();
+			//BatchManager* manager = BatchManager::sharedManager();
 			if (manager)
 			{
 				manager->addItem(sprite, layer, parallax);

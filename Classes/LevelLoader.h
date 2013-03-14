@@ -60,7 +60,7 @@ public:
 	CCNode* playerNode;
 	b2Body* playerBody;	
 	CCNode* finishNode;
-
+	BatchManager* manager;
 	GameEntityPlayer* player;
 	
 private:
@@ -85,7 +85,7 @@ private:
 
 public:
 
-	LevelLoader(CCNode* world, const char* path, b2World* boxWorld)
+	LevelLoader(CCNode* world, const char* path, b2World* boxWorld, BatchManager* manager)
 	{
 		worldNode = world;
 		levelPath = path;		
@@ -94,15 +94,14 @@ public:
 		this->playerBody = NULL;
 		this->playerNode = NULL;
 		loadedPlayer = false;		
-
+		this->manager = manager;
 		createLevelLayers();
 	}
 
 	~LevelLoader()
 	{
 		if (sharedDoc)
-			xmlFreeDoc(sharedDoc);
-
+			xmlFreeDoc(sharedDoc);				
 	}
 
 	bool parse();

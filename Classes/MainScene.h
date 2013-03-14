@@ -49,6 +49,9 @@ private:
 	GameEntityPlayer* gamePlayer;
 	CCSprite* shiftSprite;
 	
+	//	BatchManager
+	BatchManager* batchManager;
+
 	//	world
 	CCSize winSize;
 	CCNode *loadLayer;

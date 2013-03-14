@@ -24,6 +24,8 @@ MainScene::MainScene()
 	this->stats = NULL;
 	this->shinyConsole = NULL;
 	this->audio = NULL;
+	
+	this->batchManager = NULL;
 }
 
 MainScene::~MainScene()
@@ -45,8 +47,8 @@ MainScene::~MainScene()
 	CC_SAFE_DELETE(worldListener);
 	CC_SAFE_DELETE(boxWorld);
 	CC_SAFE_DELETE(weather);
+	CC_SAFE_DELETE(batchManager);	
 	
-	BatchManager::purge();
 	LevelProperties::purge();
 	KeyboardHelper::purge();
 	ShapeHelper::purge();	
@@ -142,6 +144,7 @@ void MainScene::loadMap(float none)
 	//	now do UPDATE schedule	
 	//((CCLayer*) this)->setTouchEnabled(true);
 	this->setTouchEnabled(true);
+	//this->schedule(schedule_selector(MainScene::updateKeyboard));
 	this->scheduleUpdate();
 }
 
@@ -252,20 +255,15 @@ bool MainScene::loadLevel()
 	extern char* levelOverride;
 	
 	if (levelOverride && strlen(levelOverride))
-		level = levelOverride;	
-		
-	LevelLoader* l = new LevelLoader(this->worldLayer, level, this->boxWorld);
-	if (!l)
-	{
-		CCLog("Cannot init LevelLoader");
-		return false;
-	}
-
-	bool loaded = l->parse();
+		level = levelOverride;
+	
+	batchManager = new BatchManager();
+	LevelLoader l(this->worldLayer, level, this->boxWorld, this->batchManager);	
+	bool loaded = l.parse();
 
 	if (loaded)
 	{
-		gamePlayer = l->player;
+		gamePlayer = l.player;
 
 		//	set rotation and friction damping and gravity scale
 		this->gamePlayer->getBody()->SetFixedRotation(true);
@@ -287,8 +285,7 @@ bool MainScene::loadLevel()
 			MessageBox(NULL, "Player object is not found in this level.", "How are you gona play?", MB_ICONWARNING | MB_OK);
 		#endif
 	}
-
-	delete l;	
+	
 	return loaded;
 }
 
@@ -298,22 +295,22 @@ void MainScene::toggleCameraProgress()
 }
 
 void MainScene::updateCamera(float delta)
-{	
+{		
 	PROFILE_FUNC();
 
 	//CCLog("DELTA CAMERA: %f", delta);
-	if (this->gamePlayer == NULL || this->cameraMoveInProgress)
+	if (this->gamePlayer == NULL || this->cameraMoveInProgress || !this->worldLayer)
 		return;
 	
-	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());
+	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());	
 	CCPoint prevPos = this->worldLayer->getPosition();
-	CCRect sceneSize = LevelProperties::sharedProperties()->SceneSize;	
+
+	CCSize winSize = CCDirector::sharedDirector()->getWinSizeInPixels();	
 
 	float rightMargin = winSize.width - winSize.width * SCREEN_MARGIN_FRONT;
 	float leftMargin = winSize.width * SCREEN_MARGIN_LEFT;
 	float modifier = ((delta - 1/60.0f));
-	float timeDelay = 1 ;
-
+	float timeDelay = 1;
 
 	float topMargin = winSize.height - winSize.height * SCREEN_MARGIN_TOP;
 	float bottomMargin = winSize.height * SCREEN_MARGIN_BOTTOM;
@@ -332,7 +329,6 @@ void MainScene::updateCamera(float delta)
 		ym -= realPos.y - topMargin;
 
 	this->worldLayer->setPosition(xm, ym);
-
 }
 
 void MainScene::updateKeyboard(float delta)
