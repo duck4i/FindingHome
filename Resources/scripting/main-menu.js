@@ -1,31 +1,27 @@
 cc.log("Main menu loaded");
 
-//	defines
-var director = cc.Director.getInstance();
-var winSize = director.getWinSize();
-var font = "Arial";
-var scene = null;
+//	Include file
+require("scripting/credits.js")
+
 
 //	Actions controller
 var MenuItemActions = {
-	doPlay : function() 
+	doPlay : function()
 	{
-		cc.log("TODO: PLAY");
-		scene =  gg.MainScene.scene();
-		cc.log("SCENE: " + scene);
-		director.replaceScene(scene);
+		var scene =  gg.MainScene.scene();
+		gg.Director.replaceScene(scene);
 	},
 	doLoad: function() {
 		cc.log("TODO: LOAD");
 	},
 	doSave: function() {
 		cc.log("TODO: SAVE");
-	},	
+	},
 	doCredits : function()
 	{
-		cc.log("TODO: CREDITS");
-		var g = new gg.Game();
-		g.doSomething();
+		var sc = cc.Scene.create();
+		sc.addChild(new CreditsMenuLayer());
+		gg.Director.replaceScene(sc);
 	},
 	doExit : function()
 	{
@@ -33,6 +29,10 @@ var MenuItemActions = {
 		g.exit();
 	}
 };
+
+//
+//	VIEW CODE BELLOW
+//
 
 var menuItems = [
 	["Play", MenuItemActions.doPlay],
@@ -59,29 +59,25 @@ var MainMenuLayer = cc.LayerColor.extend(
 	},
 	load : function()
 	{
-		var title = cc.LabelTTF.create("Finding Home", font, 64);		
+		var title = cc.LabelTTF.create("Finding Home", gg.Font, 64);		
 		title.setColor(cc.c3b(255, 255, 255));
-		title.setPosition(cc.p(winSize.width / 2.0, winSize.height / 2.0));
+		title.setPosition(cc.p(gg.Width / 2.0, gg.Height / 2.0));
 		this.addChild(title);							
-							
-		this.createMenuItems();		
-	
-		//this.setTouchEnabled(true);
+
+		this.createMenuItems();
 		this.scheduleUpdate();
 	},
 	createMenuItems: function()
 	{
 		cc.log("Found " + menuItems.length + " items");
-		menu = cc.Menu.create();		
+		menu = cc.Menu.create();
 		
 		for (var i =0; i < menuItems.length; i++)
 		{
 			var item = menuItems[i][0];
 			var action = menuItems[i][1];
-			if (item == "")
-			{			
-				continue;
-			}
+			if (item == "")			
+				continue;			
 			
 			cc.log("Item " + item);
 			var text = cc.MenuItemFont.create(item, action, MenuItemActions);
@@ -90,8 +86,8 @@ var MainMenuLayer = cc.LayerColor.extend(
 		
 		menu.alignItemsVertically();
 		
-		var posx = winSize.width / 2;
-		var posy = winSize.height / 2 - menuItems.length * 20;
+		var posx = gg.Width / 2;
+		var posy = gg.Height / 2 - menuItems.length * 20;
 		
 		menu.setPosition(cc.p(posx, posy));
 		this.addChild(menu);
@@ -104,9 +100,7 @@ var MainMenuLayer = cc.LayerColor.extend(
 
 //	create scene and add main layer
 var scene = cc.Scene.create();
-
-var layer = new MainMenuLayer();
-scene.addChild(layer);
+scene.addChild(new MainMenuLayer());
 
 //	then run it
-director.runWithScene(scene);
+gg.Director.runWithScene(scene);

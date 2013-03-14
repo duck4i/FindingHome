@@ -1,2 +1,2 @@
 cd bin
-start FindingHome.win32.exe "..\Resources\main-menu.js" -nosound
+start FindingHome.win32.exe "..\Resources\scripting\main-menu.js" -nosound

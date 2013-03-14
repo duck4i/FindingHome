@@ -35,9 +35,12 @@ AppDelegate::AppDelegate()
 }
 
 AppDelegate::~AppDelegate()
-{
-    //SimpleAudioEngine::end();
+{    
 	NewAudioSystem::purge();
+
+#ifdef ENABLE_SCRIPTING
+	CCScriptEngineManager::sharedManager()->purgeSharedManager();
+#endif
 }
 
 bool AppDelegate::applicationDidFinishLaunching()
@@ -69,11 +72,10 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 	//	register private JS calls
 	sc->addRegisterCallback(register_all_game);
-
 	sc->start();
 	
-	CCScriptEngineProtocol* p = sc;
-	CCScriptEngineManager::sharedManager()->setScriptEngine(p);	
+	CCScriptEngineProtocol* p = ScriptingCore::getInstance();
+	CCScriptEngineManager::sharedManager()->setScriptEngine(p);
 			
 	char* msg = "Running JS:" JS_INCLUDE_SCRIPT;
 	js_log(msg);
