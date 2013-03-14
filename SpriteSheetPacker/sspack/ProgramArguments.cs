@@ -66,7 +66,7 @@ namespace sspack
 		[DefaultArgument(ArgumentType.Multiple, HelpText = "Images to pack.")]
 		public string[] input;
 
-		private ProgramArguments() { }
+		public ProgramArguments() { }
 
 		public static ProgramArguments Parse(params string[] args)
 		{
