@@ -26,7 +26,11 @@ var CreditsMenuLayer = cc.LayerColor.extend(
 	},
 	loadItems: function()
 	{
-		var label = cc.LabelTTF.create("Credits screen", gg.Font, 32);
+		var l = new MainMenuLayer();
+		var b = l.setBackground(this);
+		b.setFlipX(true);
+		
+		var label = cc.LabelTTF.create("Credits screen", gg.Font, 64);
 		label.setPosition(cc.p(10, gg.Height - 20));
 		label.setAnchorPoint(cc.p(0, 1));
 		this.addChild(label);

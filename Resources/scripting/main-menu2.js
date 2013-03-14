@@ -1,6 +1,6 @@
 //	Include file
-require(SYS_FOLDER + "credits.js")
-require(SYS_FOLDER + "settings.js")
+require(SYS_FOLDER + "credits2.js")
+require(SYS_FOLDER + "settings2.js")
 
 cc.log("Main menu loaded");
 
@@ -9,6 +9,7 @@ var MenuItemActions = {
 	doPlay : function()
 	{
 		var scene =  gg.MainScene.scene();
+		cc.log("MainScene loaded from JS");
 		var anim = cc.TransitionFade.create(gg.AnimationMedium, scene);
 		gg.Director.replaceScene(anim);
 	},
@@ -81,10 +82,11 @@ var MainMenuLayer = cc.LayerColor.extend(
 	
 		var title = cc.LabelTTF.create("Finding Home", gg.Font, 64);		
 		title.setColor(cc.c3b(255, 255, 255));
-		title.setPosition(cc.p(gg.Width / 2.0, gg.Height / 2.0));
+		title.setPosition(cc.p(gg.Width / 2, (gg.Height * 0.85)));		
 		this.addChild(title);							
 
 		this.createMenuItems();
+		this.animateMenu();
 		
 		this.scheduleUpdate();
 	},
@@ -102,16 +104,21 @@ var MainMenuLayer = cc.LayerColor.extend(
 			
 			cc.log("Item " + item);
 			var text = cc.MenuItemFont.create(item, action, MenuItemActions);
+			text.setAnchorPoint(cc.p(0, 0.5));					
 			menu.addChild(text);			
 		}
 		
 		menu.alignItemsVertically();
 		
-		var posx = gg.Width / 2;
-		var posy = gg.Height / 2 - menuItems.length * 20;
+		var posx = 30;
+		var posy = menuItems.length * 15;
 		
 		menu.setPosition(cc.p(posx, posy));
 		this.addChild(menu);
+	},
+	animateMenu: function()
+	{
+		
 	},
 	update : function()
 	{

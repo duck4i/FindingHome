@@ -1,19 +1,21 @@
 cc.log("Credits scene loaded");
 
 //	Logic
-var SettingsActions = 
+var CreditsMenuActions = 
 {
 	doBack: function()
 	{
 		var sc = cc.Scene.create();
 		sc.addChild(new MainMenuLayer());
-		var anim = cc.TransitionSlideInR.create(gg.AnimationShort, sc);		
+		var anim = cc.TransitionSlideInL.create(gg.AnimationShort, sc);		
 		gg.Director.replaceScene(anim);
 	}
 };
 
+
+
 //	View Code Bellow
-var SettingsMenuLayer = cc.LayerColor.extend(
+var CreditsMenuLayer = cc.LayerColor.extend(
 {
 	ctor: function()
 	{
@@ -28,15 +30,15 @@ var SettingsMenuLayer = cc.LayerColor.extend(
 		var b = l.setBackground(this);
 		b.setFlipX(true);
 		
-		var label = cc.LabelTTF.create("Game options", gg.Font, 64);
+		var label = cc.LabelTTF.create("Credits screen", gg.Font, 64);
 		label.setPosition(cc.p(10, gg.Height - 20));
 		label.setAnchorPoint(cc.p(0, 1));
 		this.addChild(label);
 		
-		var back = cc.MenuItemFont.create("Back", SettingsActions.doBack, SettingsActions);				
+		var back = cc.MenuItemFont.create("Back", CreditsMenuActions.doBack, CreditsMenuActions);
 		
 		var menu = cc.Menu.create(back);
-		menu.setPosition(cc.p(gg.Width / 2, 50));
+		menu.setPosition(cc.p(/*gg.Width -*/ 100, 50));
 		this.addChild(menu);
 	}
 });

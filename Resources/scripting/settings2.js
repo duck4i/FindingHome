@@ -36,7 +36,7 @@ var SettingsMenuLayer = cc.LayerColor.extend(
 		var back = cc.MenuItemFont.create("Back", SettingsActions.doBack, SettingsActions);				
 		
 		var menu = cc.Menu.create(back);
-		menu.setPosition(cc.p(gg.Width / 2, 50));
+		menu.setPosition(cc.p(100, 50));
 		this.addChild(menu);
 	}
 });

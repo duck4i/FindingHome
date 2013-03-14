@@ -166,8 +166,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	}
 	else
 		eglView->setFrameSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-
-	
+		
 	
 	//	set window name
 	SetWindowText(eglView->getHWnd(), WINDOW_TITLE);
