@@ -21,7 +21,7 @@ bool fullScreen = false;
 bool disableSound = false;
 
 char* levelOverride =	NULL;
-						//"..\\Resources\\main-menu.js";
+						//"..\\Resources\\Scripting\\main-menu.js";
 
 bool alreadyRunning()
 {

@@ -25,7 +25,7 @@ using namespace cocos2d;
 #define ZOOM_TIME			0.5f
 
 
-class MainScene : public CCLayerColor
+class MainScene : public CCLayer
 {
 private:
 
@@ -59,7 +59,7 @@ private:
 	
 	//	initialization and setup
 	void setupPhysics();
-	void addBodies();
+	bool loadLevel();
 
 	//	touch events
 	bool touchesInProgress;

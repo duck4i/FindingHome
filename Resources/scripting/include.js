@@ -3,11 +3,13 @@
 	Paths are dependant on set working directory which is .\Resources
 */
 
+var SYS_FOLDER = "Scripting/";
+
 //	Include SYSTEM libraries
-require("scripting/system/jsb.js");
+require(SYS_FOLDER + "system/jsb.js");
 
 //	Include USER libraries
-require("scripting/generated/gameapi.js");
+require(SYS_FOLDER + "generated/gameapi.js");
 
 //	SET DEFAULT SHORTCUTS AND SETTINGS
 

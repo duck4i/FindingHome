@@ -18,7 +18,11 @@ bool LevelLoader::parse()
 	bool success = false;
 
 	sharedDoc = xmlReadFile(this->levelPath, "utf-8", XML_PARSE_RECOVER);
-	CCAssert(sharedDoc, "Cannot load level file");	
+	if (!sharedDoc)
+	{
+		CCLog("Cannot init XML from file %s", this->levelPath);
+		return false;
+	}
 
 	//	now parse level properties
 	parseLevelProperties();

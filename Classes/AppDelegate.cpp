@@ -59,7 +59,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     pDirector->setAnimationInterval(1.0 / 60);
 
 	//	set resource directory
-	SetCurrentDirectory(RESOURCE_DIR);
+	SetCurrentDirectory(RESOURCE_DIR);	
+
 	
 #ifdef ENABLE_SCRIPTING
 
@@ -93,6 +94,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 		if (path.find(".js") != path.npos)
 		{
 			CCLog("");
+			levelOverride = NULL;	//	reset override in that case
 			sc->runScript(path.c_str());
 			return true;	//	END HERE - special case when JS is loaded only
 		}

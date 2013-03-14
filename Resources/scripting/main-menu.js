@@ -1,8 +1,7 @@
-cc.log("Main menu loaded");
-
 //	Include file
-require("scripting/credits.js")
+require(SYS_FOLDER + "credits.js")
 
+cc.log("Main menu loaded");
 
 //	Actions controller
 var MenuItemActions = {

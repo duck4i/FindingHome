@@ -11,7 +11,10 @@ MainScene::MainScene()
 	this->debugLayer = NULL;
 	this->boxWorld = NULL;	
 	this->weather = NULL;
+	this->worldLayer = NULL;
 	this->gamePlayer = NULL;
+	this->prevPlayerPos = ccp(0, 0);
+	
 	this->worldListener = NULL;
 	this->disableKeyboard = false;
 	this->touchesInProgress = false;
@@ -32,7 +35,7 @@ MainScene::~MainScene()
 	//	release all physics references created in world
 	b2Body* list = boxWorld->GetBodyList();
 	while (list)
-	{		
+	{
 		GameEntity* e = (GameEntity*) list->GetUserData();		
 		CC_SAFE_RELEASE(e);
 		
@@ -53,8 +56,7 @@ bool MainScene::init()
 {
 	PROFILE_FUNC();
 
-	CCLayerColor::initWithColor(ccc4(0, 0, 0, 255));
-	
+	CCLayer::init();
 	winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
 	
 	//	Create world layer
@@ -70,9 +72,10 @@ bool MainScene::init()
 	this->loadLayer = CCSprite::create(RESOURCE_LOADING);
 	loadLayer->setPosition(ccp(winSize.width / 2, winSize.height / 2));
 	this->addChild(loadLayer, 10000);
-
+	
 	//	load map after 1 second
-	this->scheduleOnce(schedule_selector(MainScene::loadMap), 0.0f);
+	//this->scheduleOnce(schedule_selector(MainScene::loadMap), 0.0f);
+	loadMap(0);
 
 	return true;
 }
@@ -82,24 +85,35 @@ void MainScene::loadMap(float none)
 	PROFILE_FUNC();
 
 	//	setup physics object 
-	this->setupPhysics();
-	this->addBodies();	//	<-- load level!!!
-
+	this->setupPhysics();		
+	bool loaded = this->loadLevel();	//	<-- load level!!!
+	if (!loaded)
+	{
+		CCLog("Could not load level %s", __FUNCTION__);
+		return;
+	}
+	
 	//level settings
 	LevelProperties* lp = LevelProperties::sharedProperties();
-	if (lp->CameraZoom)
-		this->worldLayer->setScale(lp->CameraZoom);
+	if (!lp)
+	{
+		CCLog("Could not load LevelProperties %s", __FUNCTION__);
+		return;
+	}
+
+	if (lp->CameraZoom )
+		this->worldLayer->setScale(lp->CameraZoom);	
 
 	//	weather data
 	if (lp && lp->WeatherActive)
-		this->weather = WeatherHelper::create(this, this->worldLayer, WEATHER_CONTROLLER_DATA);
+		this->weather = WeatherHelper::create(this, this->worldLayer, WEATHER_CONTROLLER_DATA);	
 
 	//	add shift sprite
 	this->shiftSprite = CCSprite::create(RESOURCE_SHIFT);
 	this->shiftSprite->setAnchorPoint(ccp(0, 0));
 	this->shiftSprite->setPosition(ccp(10, 30));
 	this->shiftSprite->setVisible(false);
-	this->addChild(this->shiftSprite, 100000);	
+	this->addChild(this->shiftSprite, 100000);		
 
 	//	schedule camera update
 	if (this->gamePlayer)
@@ -125,7 +139,8 @@ void MainScene::loadMap(float none)
 	//	remove loading layer
 	this->loadLayer->runAction(CCFadeTo::create(1.0f, 0));
 
-	//	now do UPDATE schedule
+	//	now do UPDATE schedule	
+	//((CCLayer*) this)->setTouchEnabled(true);
 	this->setTouchEnabled(true);
 	this->scheduleUpdate();
 }
@@ -161,6 +176,7 @@ void MainScene::drawDebugControls()
 	labOutPos.y += 3;
 	labOut->setPosition(labOutPos);
 	this->addChild(labOut, zOrder - 1);
+
 	/*
 	labOutS.height -= extend;
 	stats = CCLabelTTF::create("FPS:", "Consolas", 12.0f);
@@ -196,7 +212,6 @@ void MainScene::drawDebugControls()
 	shinyConsoleBackground->setAnchorPoint(shinyConsole->getAnchorPoint());
 	this->addChild(shinyConsoleBackground, zOrder - 1);
 
-
 	shinyConsole->setVisible(false);
 	shinyConsoleBackground->setVisible(false);
 	
@@ -228,20 +243,29 @@ void MainScene::setupPhysics()
 	}
 }
 
-void MainScene::addBodies()
-{
+bool MainScene::loadLevel()
+{	
 	PROFILE_FUNC();
-
+	
 	//	load level
 	char *level = GAME_START_LEVEL;
 	extern char* levelOverride;
+	
 	if (levelOverride && strlen(levelOverride))
-		level = levelOverride;
-
-	LevelLoader l(this->worldLayer, level, this->boxWorld);
-	if (l.parse())
+		level = levelOverride;	
+		
+	LevelLoader* l = new LevelLoader(this->worldLayer, level, this->boxWorld);
+	if (!l)
 	{
-		gamePlayer = l.player;
+		CCLog("Cannot init LevelLoader");
+		return false;
+	}
+
+	bool loaded = l->parse();
+
+	if (loaded)
+	{
+		gamePlayer = l->player;
 
 		//	set rotation and friction damping and gravity scale
 		this->gamePlayer->getBody()->SetFixedRotation(true);
@@ -256,13 +280,16 @@ void MainScene::addBodies()
 		l->setContentSize(r.size);
 		this->worldLayer->addChild(l);
 		*/
-		return;
 	}
-	
-#ifdef CC_PLATFORM_WIN32
-	MessageBox(NULL, "Player object is not found in this level.", "How are you gona play?", MB_ICONWARNING | MB_OK);
-#endif
+	else
+	{
+		#ifdef CC_PLATFORM_WIN32
+			MessageBox(NULL, "Player object is not found in this level.", "How are you gona play?", MB_ICONWARNING | MB_OK);
+		#endif
+	}
 
+	delete l;	
+	return loaded;
 }
 
 void MainScene::toggleCameraProgress()
@@ -275,7 +302,7 @@ void MainScene::updateCamera(float delta)
 	PROFILE_FUNC();
 
 	//CCLog("DELTA CAMERA: %f", delta);
-	if (this->gamePlayer == NULL|| this->cameraMoveInProgress)
+	if (this->gamePlayer == NULL || this->cameraMoveInProgress)
 		return;
 	
 	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());
@@ -373,51 +400,42 @@ void MainScene::updateKeyboard(float delta)
 }
 
 void MainScene::updateFPS(float delta)
-{	
-	PROFILE_FUNC(); //- unimportant
-	//static unsigned int numtimes = 0;
-	//numtimes++;
-
-	if (/*stats &&*/ statsLapse == 0)
-	{		
-		/*float times = numtimes;
-		char tmp[50];
-		sprintf(tmp, "FPS: %.2f", times);
-		stats->setString(tmp);
-		*/
-		statsLapse += delta;
-
-		
-		
-
+{
 #ifndef DISABLE_SHINY
 
-	//	update Shiny data if debug layer ON
-	if (this->shinyConsole && this->shinyConsole->isVisible())
-	{
-		PROFILER_UPDATE();
-		std::string out = PROFILER_OUTPUT_TREE_STRING();
-		shinyConsole->setString(out.c_str());
-		Shiny::ProfileManager::instance.clear();
+	PROFILE_FUNC(); //- unimportant
 
-		//	resize console if needed
-		CCSize sc = shinyConsole->getContentSize();
-		CCSize scb = shinyConsoleBackground->getContentSize();
-		if (sc.width != scb.width || sc.height != scb.height)
-			shinyConsoleBackground->setContentSize(sc);
-	}
 
-#endif
+	if (statsLapse == 0)
+	{		
+		statsLapse += delta;
+
+		//	update Shiny data if debug layer ON
+		if (this->shinyConsole && this->shinyConsole->isVisible())
+		{
+			PROFILER_UPDATE();
+			std::string out = PROFILER_OUTPUT_TREE_STRING();
+			shinyConsole->setString(out.c_str());
+			Shiny::ProfileManager::instance.clear();
+
+			//	resize console if needed
+			CCSize sc = shinyConsole->getContentSize();
+			CCSize scb = shinyConsoleBackground->getContentSize();
+			if (sc.width != scb.width || sc.height != scb.height)
+				shinyConsoleBackground->setContentSize(sc);
+		}
 
 	}//	if time is right
 	else if (statsLapse >= 1.0f) //update every half second	
 		statsLapse = 0;	
 	else
 		statsLapse += delta;
+
+#endif
 }
 
 void MainScene::update(float delta)
-{
+{	
 	PROFILE_FUNC();
 
 	//	stats update
@@ -425,16 +443,6 @@ void MainScene::update(float delta)
 	
 	if (audio)
 		audio->update();
-/*
-#ifdef CC_PLATFORM_WIN32
-	HWND h = CCEGLView::sharedOpenGLView()->getHWnd();
-	if (!IsWindowVisible(h) || GetFocus() != h)
-	{
-		CCApplication::sharedApplication()->applicationDidEnterBackground();
-		return;
-	}
-#endif
-*/
 
 	//	Keyboard update
 	updateKeyboard(delta);	
@@ -445,9 +453,7 @@ void MainScene::update(float delta)
 		{
 			playerDied();
 			return;	//	stop update
-		}
-
-		//	
+		}		
 		gamePlayer->updatePlayerMovement();
 	}
 
@@ -458,6 +464,7 @@ void MainScene::update(float delta)
 	//	Update camera here
 	updateCamera(delta);
 #endif	
+
 	//	And weather ofcourse
 	if (weather)
 		weather->update(delta);
