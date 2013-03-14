@@ -13,12 +13,24 @@ require(SYS_FOLDER + "generated/gameapi.js");
 
 //	SET DEFAULT SHORTCUTS AND SETTINGS
 
+//	Global Vars
 gg.Font = "Arial";
 gg.Director = cc.Director.getInstance();
 
 gg.WinSize = gg.Director.getWinSize();
 gg.Width = gg.WinSize.width;
 gg.Height = gg.WinSize.height;
+
+//	Animation settings
+gg.AnimationLong = 2;
+gg.AnimationMedium = 1.5;
+gg.AnimationShort = 1;
+
+
+
+
+
+
 
 
 //	Say its all OK if you get this far

@@ -1,5 +1,6 @@
 //	Include file
 require(SYS_FOLDER + "credits.js")
+require(SYS_FOLDER + "settings.js")
 
 cc.log("Main menu loaded");
 
@@ -8,7 +9,8 @@ var MenuItemActions = {
 	doPlay : function()
 	{
 		var scene =  gg.MainScene.scene();
-		gg.Director.replaceScene(scene);
+		var anim = cc.TransitionFade.create(gg.AnimationMedium, scene);
+		gg.Director.replaceScene(anim);
 	},
 	doLoad: function() {
 		cc.log("TODO: LOAD");
@@ -18,9 +20,14 @@ var MenuItemActions = {
 	},
 	doCredits : function()
 	{
-		var sc = cc.Scene.create();
-		sc.addChild(new CreditsMenuLayer());
-		gg.Director.replaceScene(sc);
+		var sc = new CreditsMenuLayer();
+		var anim = cc.TransitionSlideInR.create(gg.AnimationShort, sc);		
+		gg.Director.replaceScene(anim);
+	},
+	doSettings: function(){
+		var sc = new SettingsMenuLayer();
+		var anim = cc.TransitionSlideInL.create(gg.AnimationShort, sc);		
+		gg.Director.replaceScene(anim);
 	},
 	doExit : function()
 	{
@@ -34,13 +41,16 @@ var MenuItemActions = {
 //
 
 var menuItems = [
+	["", null],
+	["", null],
 	["Play", MenuItemActions.doPlay],
 	["", null],
-	["Load game", MenuItemActions.doLoad],
-	["Save game", MenuItemActions.doSave],
-	["", null],
+	//["Load game", MenuItemActions.doLoad],
+	//["Save game", MenuItemActions.doSave],
+	//["", null],
 	["Credits", MenuItemActions.doCredits],
 	["", null],
+	["Settings", MenuItemActions.doSettings],
 	["Exit", MenuItemActions.doExit]
 ];
 
@@ -98,8 +108,7 @@ var MainMenuLayer = cc.LayerColor.extend(
 });
 
 //	create scene and add main layer
-var scene = cc.Scene.create();
-scene.addChild(new MainMenuLayer());
+var scene = new MainMenuLayer();
 
 //	then run it
 gg.Director.runWithScene(scene);
