@@ -20,10 +20,13 @@ var MenuItemActions = {
 	doCredits : function()
 	{
 		cc.log("TODO: CREDITS");
+		var g = new gg.Game();
+		g.doSomething();
 	},
 	doExit : function()
 	{
-		cc.log("TODO: EXIT");
+		var g = new gg.Game();
+		g.exit();
 	}
 };
 

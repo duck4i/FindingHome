@@ -9,7 +9,5 @@ require("scripting/system/jsb.js");
 //	Include USER libraries
 require("scripting/generated/gameapi.js");
 
-
-
 //	Say its all OK if you get this far
 cc.log("JavaScript scripting support ON-LINE.");

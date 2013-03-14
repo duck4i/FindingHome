@@ -14,6 +14,7 @@
 	#include "js_bindings_system_registration.h"
 	#include "js_bindings_chipmunk_registration.h"
 	#include "js_bindings_ccbreader.h"
+	#include "game.hpp"
 
 	#pragma comment(lib, "pthreadVCE2.lib")
 	#pragma comment(lib, "libExtensions.lib")
@@ -65,6 +66,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     sc->addRegisterCallback(register_CCBuilderReader);
     sc->addRegisterCallback(jsb_register_chipmunk);
     sc->addRegisterCallback(jsb_register_system);
+
+	//	register private JS calls
+	sc->addRegisterCallback(register_all_game);
+
 	sc->start();
 	
 	CCScriptEngineProtocol* p = sc;

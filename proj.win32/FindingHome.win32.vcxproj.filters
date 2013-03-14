@@ -31,6 +31,12 @@
     <Filter Include="source\entities">
       <UniqueIdentifier>{65747940-06d6-4fa6-a2ff-d0cfa9700c44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\scripting">
+      <UniqueIdentifier>{e03feca5-a957-4f67-b097-5bb138d761c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scripting">
+      <UniqueIdentifier>{826c3a18-c309-42ab-a114-9f62d3dff149}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\FindingHome.ico">
@@ -136,6 +142,9 @@
     <ClInclude Include="..\Classes\NewAudioSystem.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\Resources\scripting\generated\game.hpp">
+      <Filter>include\scripting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -209,6 +218,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\NewAudioSystem.cpp">
       <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Resources\scripting\generated\game.cpp">
+      <Filter>source\scripting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

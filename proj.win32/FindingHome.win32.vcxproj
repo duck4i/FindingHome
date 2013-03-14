@@ -48,7 +48,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\extensions;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\Classes\VisualLeakDetector\include;$(SolutionDir)..\Classes\Shiny\include;$(SolutionDir)..\FMOD\include;$(SolutionDir)..\FMOD\designer\include;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\external\chipmunk\include\chipmunk;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\extensions;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\Classes\VisualLeakDetector\include;$(SolutionDir)..\Classes\Shiny\include;$(SolutionDir)..\FMOD\include;$(SolutionDir)..\FMOD\designer\include;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\Resources\scripting\generated\;$(SolutionDir)..\Scripting;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -56,7 +56,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>ENABLE_SCRIPTING;ENABLE_CONSOLE;DISABLE_MEMORY_TRACE;DISABLE_SHINYxxx;DISABLE_CAMERAx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVEx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_DEBUG;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;XP_WIN;JS_HAVE___INTN;JS_INTPTR_TYPE=int;COCOS2D_JAVASCRIPT=1;CC_ENABLE_CHIPMUNK_INTEGRATION=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_SCRIPTING;ENABLE_CONSOLE;DISABLE_MEMORY_TRACE;DISABLE_SHINYxxx;DISABLE_CAMERAx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVEx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_DEBUG;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;XP_WIN;JS_HAVE___INTN;JS_INTPTR_TYPE=int;COCOS2D_JAVASCRIPTx;CC_ENABLE_CHIPMUNK_INTEGRATION=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4800; 4068;4267;4251;4244;4099;4700;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -91,7 +91,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;$(SolutionDir)..\Classes\Shiny\include;.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\extensions;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\FMOD\include;$(SolutionDir)..\FMOD\designer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;$(SolutionDir)..\Classes\Shiny\include;.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\extensions;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\FMOD\include;$(SolutionDir)..\FMOD\designer\include;$(SolutionDir)..\Resources\scripting\generated\;$(SolutionDir)..\Scripting;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -162,6 +162,7 @@
     <ClInclude Include="..\Classes\TintShader.h" />
     <ClInclude Include="..\Classes\WeatherHelper.h" />
     <ClInclude Include="..\Classes\XMLHelper.h" />
+    <ClInclude Include="..\Resources\scripting\generated\game.hpp" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -189,6 +190,7 @@
     <ClCompile Include="..\Classes\TintShader.cpp" />
     <ClCompile Include="..\Classes\WeatherHelper.cpp" />
     <ClCompile Include="..\Classes\XMLHelper.cpp" />
+    <ClCompile Include="..\Resources\scripting\generated\game.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

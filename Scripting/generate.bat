@@ -64,3 +64,4 @@ echo Generating bindings successfully.
 :ERROR
 pause
 
+
