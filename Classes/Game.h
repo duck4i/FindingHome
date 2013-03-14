@@ -2,29 +2,40 @@
 #define _GAME_H_
 
 #include <cocos2d.h>
-
 using namespace cocos2d;
 
+
+/*
+ *	Singleton holder of game data and state.
+ *	SCRIPTABLE
+ */
 class Game
 {
 private:
 	
-public:
-
-	CCPoint p;
+public:	
 	
 	float sceneScale;
 	char* nextLevel;
 	
-	int doSomething()
+	void doSomething()
 	{
-		CCLog("HELLO FROM Game CLASS!");
-		return 0;
+		CCLog("HELLO FROM Game CLASS!");		
 	}
 
-	void exit()
+	/*
+	 *	
+	 */
+	void newGame()
 	{
-		//	exit game
+		
+	}
+
+	/*
+	 *	Exit from game
+	 */
+	void exit()
+	{		
 		::exit(0);
 	}
 

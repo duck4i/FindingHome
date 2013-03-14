@@ -1,14 +1,9 @@
 #include "MainScene.h"
 
 CCScene* MainScene::scene()
-{
-	CCScene* scene = CCScene::create();	
-
-	MainScene *ms = MainScene::create();
-	if (scene && ms)
-		scene->addChild(ms);
-
-	return scene;
+{	
+	CCScene *ms = (CCScene*) MainScene::create();
+	return ms;
 }
 
 MainScene::MainScene()

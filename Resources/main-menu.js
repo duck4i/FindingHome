@@ -4,12 +4,16 @@ cc.log("Main menu loaded");
 var director = cc.Director.getInstance();
 var winSize = director.getWinSize();
 var font = "Arial";
+var scene = null;
 
 //	Actions controller
 var MenuItemActions = {
 	doPlay : function() 
 	{
 		cc.log("TODO: PLAY");
+		scene =  gg.MainScene.scene();
+		cc.log("SCENE: " + scene);
+		director.replaceScene(scene);
 	},
 	doLoad: function() {
 		cc.log("TODO: LOAD");
@@ -62,7 +66,7 @@ var MainMenuLayer = cc.LayerColor.extend(
 							
 		this.createMenuItems();		
 	
-		this.setTouchEnabled(true);
+		//this.setTouchEnabled(true);
 		this.scheduleUpdate();
 	},
 	createMenuItems: function()

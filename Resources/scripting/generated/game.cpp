@@ -30,6 +30,21 @@ static JSBool empty_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
 JSClass  *js_game_Game_class;
 JSObject *js_game_Game_prototype;
 
+JSBool js_game_Game_newGame(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	JSObject *obj = JS_THIS_OBJECT(cx, vp);
+	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
+	Game* cobj = (Game *)(proxy ? proxy->ptr : NULL);
+	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
+
+	if (argc == 0) {
+		cobj->newGame();
+		JS_SET_RVAL(cx, vp, JSVAL_VOID);
+		return JS_TRUE;
+	}
+	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
+	return JS_FALSE;
+}
 JSBool js_game_Game_exit(JSContext *cx, uint32_t argc, jsval *vp)
 {
 	JSObject *obj = JS_THIS_OBJECT(cx, vp);
@@ -53,10 +68,8 @@ JSBool js_game_Game_doSomething(JSContext *cx, uint32_t argc, jsval *vp)
 	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
 
 	if (argc == 0) {
-		int ret = cobj->doSomething();
-		jsval jsret;
-		jsret = int32_to_jsval(cx, ret);
-		JS_SET_RVAL(cx, vp, jsret);
+		cobj->doSomething();
+		JS_SET_RVAL(cx, vp, JSVAL_VOID);
 		return JS_TRUE;
 	}
 	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
@@ -115,6 +128,7 @@ void js_register_game_Game(JSContext *cx, JSObject *global) {
 	};
 
 	static JSFunctionSpec funcs[] = {
+		JS_FN("newGame", js_game_Game_newGame, 0, JSPROP_PERMANENT | JSPROP_SHARED),
 		JS_FN("exit", js_game_Game_exit, 0, JSPROP_PERMANENT | JSPROP_SHARED),
 		JS_FN("doSomething", js_game_Game_doSomething, 0, JSPROP_PERMANENT | JSPROP_SHARED),
 		JS_FS_END
@@ -151,21 +165,70 @@ void js_register_game_Game(JSContext *cx, JSObject *global) {
 }
 
 
-JSClass  *js_game_NODEINFO_class;
-JSObject *js_game_NODEINFO_prototype;
+JSClass  *js_game_MainScene_class;
+JSObject *js_game_MainScene_prototype;
 
-JSBool js_game_NODEINFO_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+JSBool js_game_MainScene_init(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	JSObject *obj = JS_THIS_OBJECT(cx, vp);
+	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
+	MainScene* cobj = (MainScene *)(proxy ? proxy->ptr : NULL);
+	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
+
+	if (argc == 0) {
+		bool ret = cobj->init();
+		jsval jsret;
+		jsret = BOOLEAN_TO_JSVAL(ret);
+		JS_SET_RVAL(cx, vp, jsret);
+		return JS_TRUE;
+	}
+	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
+	return JS_FALSE;
+}
+JSBool js_game_MainScene_create(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	MainScene* ret = MainScene::create();
+	jsval jsret;
+	do {
+		if (ret) {
+			js_proxy_t *proxy = js_get_or_create_proxy<MainScene>(cx, ret);
+			jsret = OBJECT_TO_JSVAL(proxy->obj);
+		} else {
+			jsret = JSVAL_NULL;
+		}
+	} while (0);
+	JS_SET_RVAL(cx, vp, jsret);
+	return JS_TRUE;
+}
+
+JSBool js_game_MainScene_scene(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	cocos2d::CCScene* ret = MainScene::scene();
+	jsval jsret;
+	do {
+		if (ret) {
+			js_proxy_t *proxy = js_get_or_create_proxy<cocos2d::CCScene>(cx, ret);
+			jsret = OBJECT_TO_JSVAL(proxy->obj);
+		} else {
+			jsret = JSVAL_NULL;
+		}
+	} while (0);
+	JS_SET_RVAL(cx, vp, jsret);
+	return JS_TRUE;
+}
+
+JSBool js_game_MainScene_constructor(JSContext *cx, uint32_t argc, jsval *vp)
 {
 
 	if (argc == 0) {
-		NODEINFO* cobj = new NODEINFO();
+		MainScene* cobj = new MainScene();
 #ifdef COCOS2D_JAVASCRIPT
 		cocos2d::CCObject *_ccobj = dynamic_cast<cocos2d::CCObject *>(cobj);
 		if (_ccobj) {
 			_ccobj->autorelease();
 		}
 #endif
-		TypeTest<NODEINFO> t;
+		TypeTest<MainScene> t;
 		js_type_class_t *typeClass;
 		uint32_t typeId = t.s_id();
 		HASH_FIND_INT(_js_global_type_ht, &typeId, typeClass);
@@ -176,7 +239,7 @@ JSBool js_game_NODEINFO_constructor(JSContext *cx, uint32_t argc, jsval *vp)
 		js_proxy_t *p;
 		JS_NEW_PROXY(p, cobj, obj);
 #ifdef COCOS2D_JAVASCRIPT
-		JS_AddNamedObjectRoot(cx, &p->obj, "NODEINFO");
+		JS_AddNamedObjectRoot(cx, &p->obj, "MainScene");
 #endif
 		return JS_TRUE;
 	}
@@ -186,53 +249,60 @@ JSBool js_game_NODEINFO_constructor(JSContext *cx, uint32_t argc, jsval *vp)
 
 
 
-void js_game_NODEINFO_finalize(JSFreeOp *fop, JSObject *obj) {
+void js_game_MainScene_finalize(JSFreeOp *fop, JSObject *obj) {
 }
 
-void js_register_game_NODEINFO(JSContext *cx, JSObject *global) {
-	js_game_NODEINFO_class = (JSClass *)calloc(1, sizeof(JSClass));
-	js_game_NODEINFO_class->name = "NODEINFO";
-	js_game_NODEINFO_class->addProperty = JS_PropertyStub;
-	js_game_NODEINFO_class->delProperty = JS_PropertyStub;
-	js_game_NODEINFO_class->getProperty = JS_PropertyStub;
-	js_game_NODEINFO_class->setProperty = JS_StrictPropertyStub;
-	js_game_NODEINFO_class->enumerate = JS_EnumerateStub;
-	js_game_NODEINFO_class->resolve = JS_ResolveStub;
-	js_game_NODEINFO_class->convert = JS_ConvertStub;
-	js_game_NODEINFO_class->finalize = js_game_NODEINFO_finalize;
-	js_game_NODEINFO_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+void js_register_game_MainScene(JSContext *cx, JSObject *global) {
+	js_game_MainScene_class = (JSClass *)calloc(1, sizeof(JSClass));
+	js_game_MainScene_class->name = "MainScene";
+	js_game_MainScene_class->addProperty = JS_PropertyStub;
+	js_game_MainScene_class->delProperty = JS_PropertyStub;
+	js_game_MainScene_class->getProperty = JS_PropertyStub;
+	js_game_MainScene_class->setProperty = JS_StrictPropertyStub;
+	js_game_MainScene_class->enumerate = JS_EnumerateStub;
+	js_game_MainScene_class->resolve = JS_ResolveStub;
+	js_game_MainScene_class->convert = JS_ConvertStub;
+	js_game_MainScene_class->finalize = js_game_MainScene_finalize;
+	js_game_MainScene_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
 	};
 
-	JSFunctionSpec *funcs = NULL;
+	static JSFunctionSpec funcs[] = {
+		JS_FN("init", js_game_MainScene_init, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FS_END
+	};
 
-	JSFunctionSpec *st_funcs = NULL;
+	static JSFunctionSpec st_funcs[] = {
+		JS_FN("create", js_game_MainScene_create, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("scene", js_game_MainScene_scene, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FS_END
+	};
 
-	js_game_NODEINFO_prototype = JS_InitClass(
+	js_game_MainScene_prototype = JS_InitClass(
 		cx, global,
 		NULL, // parent proto
-		js_game_NODEINFO_class,
-		js_game_NODEINFO_constructor, 0, // constructor
+		js_game_MainScene_class,
+		js_game_MainScene_constructor, 0, // constructor
 		properties,
 		funcs,
 		NULL, // no static properties
 		st_funcs);
 	// make the class enumerable in the registered namespace
 	JSBool found;
-	JS_SetPropertyAttributes(cx, global, "NODEINFO", JSPROP_ENUMERATE | JSPROP_READONLY, &found);
+	JS_SetPropertyAttributes(cx, global, "MainScene", JSPROP_ENUMERATE | JSPROP_READONLY, &found);
 
 	// add the proto and JSClass to the type->js info hash table
-	TypeTest<NODEINFO> t;
+	TypeTest<MainScene> t;
 	js_type_class_t *p;
 	uint32_t typeId = t.s_id();
 	HASH_FIND_INT(_js_global_type_ht, &typeId, p);
 	if (!p) {
 		p = (js_type_class_t *)malloc(sizeof(js_type_class_t));
 		p->type = typeId;
-		p->jsclass = js_game_NODEINFO_class;
-		p->proto = js_game_NODEINFO_prototype;
+		p->jsclass = js_game_MainScene_class;
+		p->proto = js_game_MainScene_prototype;
 		p->parentProto = NULL;
 		HASH_ADD_INT(_js_global_type_ht, type, p);
 	}
@@ -252,7 +322,7 @@ void register_all_game(JSContext* cx, JSObject* obj) {
 	}
 	obj = ns;
 
-	js_register_game_NODEINFO(cx, obj);
+	js_register_game_MainScene(cx, obj);
 	js_register_game_Game(cx, obj);
 }
 

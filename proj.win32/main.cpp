@@ -19,7 +19,9 @@ USING_NS_CC;
 //	command line options
 bool fullScreen = false;
 bool disableSound = false;
-char* levelOverride = NULL;
+
+char* levelOverride =	NULL;
+						//"..\\Resources\\main-menu.js";
 
 bool alreadyRunning()
 {

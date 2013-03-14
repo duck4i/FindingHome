@@ -9,13 +9,17 @@ var gg = gg = gg || {};
 gg.Game = {
 
 /**
+ * @method newGame
+ */
+newGame : function () {},
+
+/**
  * @method exit
  */
 exit : function () {},
 
 /**
  * @method doSomething
- * @return A value converted from C/C++ "int"
  */
 doSomething : function () {},
 
@@ -28,14 +32,32 @@ Game : function () {},
 };
 
 /**
- * @class NODEINFO
+ * @class MainScene
  */
-gg.NODEINFO = {
+gg.MainScene = {
 
 /**
- * @method NODEINFO
+ * @method init
+ * @return A value converted from C/C++ "bool"
+ */
+init : function () {},
+
+/**
+ * @method create
+ * @return A value converted from C/C++ "MainScene*"
+ */
+create : function () {},
+
+/**
+ * @method scene
+ * @return A value converted from C/C++ "cocos2d::CCScene*"
+ */
+scene : function () {},
+
+/**
+ * @method MainScene
  * @constructor
  */
-NODEINFO : function () {},
+MainScene : function () {},
 
 };
