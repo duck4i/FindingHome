@@ -19,6 +19,7 @@ USING_NS_CC;
 //	command line options
 bool fullScreen = false;
 bool disableSound = false;
+bool enableConsole = false;
 
 char* levelOverride =	NULL;
 						//"..\\Resources\\Scripting\\main-menu.js";
@@ -94,6 +95,11 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 				disableSound = true;
 			}
 
+			if (_strcmpi(linec, "-console") == 0)
+			{
+				CCLog("Sound engine is DISABLED.");
+				enableConsole = true;
+			}
 
 			//	check for file path - if split across multiple lines join it
 			if (line.find_first_of('"') != line.npos)
@@ -133,14 +139,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		}
 	}
 
-	//	Check console output
-	bool enableConsoleOutput = false;
-
-#if defined(ENABLE_CONSOLE)
-	enableConsoleOutput = true;
-#endif
-
-	if (enableConsoleOutput)
+	if (enableConsole)
 	{
 		AllocConsole();
 		freopen("CONIN$", "r", stdin);
@@ -177,7 +176,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     int ret = CCApplication::sharedApplication()->run();
 
-	if (enableConsoleOutput)
+	if (enableConsole)
 	{
 		FreeConsole();
 	}
