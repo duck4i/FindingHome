@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("sspack")]
 [assembly: AssemblyDescription("Command line utility for packing images into a sprite sheet.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Nick Gravelyn")]
+[assembly: AssemblyCompany("Nick Gravelyn + MihailoGazda")]
 [assembly: AssemblyProduct("sspack")]
-[assembly: AssemblyCopyright("Copyright © Nick Gravelyn 2010")]
+[assembly: AssemblyCopyright("Copyright © Nick Gravelyn 2010, MihailoGazda 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
