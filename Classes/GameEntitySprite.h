@@ -27,6 +27,8 @@ protected:
 		
 	}
 
+	virtual bool isReallyVisible();
+
 	///	overridePath is used for Block and Circle sprites to override texture
 	virtual bool init(char* overidePath = NULL);
 

@@ -24,7 +24,7 @@ void EnemyChipmunk::updatePosition(b2Vec2 pos)
 {
 	if (m_sprite && m_b2Body)
 	{
-		if (/*wasVisible ||*/ m_sprite->isVisible())
+		if (/*wasVisible ||*/isReallyVisible())
 		{
 			wasVisible = true;
 			if (abs(m_b2Body->GetLinearVelocity().x) <= 10.0f)
