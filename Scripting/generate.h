@@ -2,7 +2,7 @@
 #define _GENERATE_GAME_H_
 
 //	Include files to parse
-#include "Game.h"
+#include "GameInstance.h"
 #include "MainScene.h"
 
 

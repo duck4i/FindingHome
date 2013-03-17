@@ -312,7 +312,7 @@ void MainScene::runLevelScript(std::string level)
 
 		if (doesFileExits((char*) tmp.c_str()))
 		{
-			CCLog("Found it! Running script!");
+			CCLog("Found it! Running script!\r\n");
 			monkey->runScript(tmp.c_str());
 		}
 	}

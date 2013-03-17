@@ -4,9 +4,15 @@
 var gg = gg = gg || {};
 
 /**
- * @class Game
+ * @class GameInstance
  */
-gg.Game = {
+gg.GameInstance = {
+
+/**
+ * @method setScene
+ * @param {cocos2d::CCScene*}
+ */
+setScene : function () {},
 
 /**
  * @method newGame
@@ -14,20 +20,68 @@ gg.Game = {
 newGame : function () {},
 
 /**
+ * @method setScale
+ * @param {float}
+ */
+setScale : function () {},
+
+/**
+ * @method purge
+ */
+purge : function () {},
+
+/**
+ * @method getPlayer
+ * @return A value converted from C/C++ "GameEntityPlayer*"
+ */
+getPlayer : function () {},
+
+/**
+ * @method getNextLevel
+ * @return A value converted from C/C++ "std::string"
+ */
+getNextLevel : function () {},
+
+/**
+ * @method getScene
+ * @return A value converted from C/C++ "cocos2d::CCScene*"
+ */
+getScene : function () {},
+
+/**
  * @method exit
  */
 exit : function () {},
 
 /**
- * @method doSomething
+ * @method getScale
+ * @return A value converted from C/C++ "float"
  */
-doSomething : function () {},
+getScale : function () {},
 
 /**
- * @method Game
+ * @method setPlayer
+ * @param {GameEntityPlayer*}
+ */
+setPlayer : function () {},
+
+/**
+ * @method setNextLevel
+ * @param {std::string}
+ */
+setNextLevel : function () {},
+
+/**
+ * @method sharedInstance
+ * @return A value converted from C/C++ "GameInstance*"
+ */
+sharedInstance : function () {},
+
+/**
+ * @method GameInstance
  * @constructor
  */
-Game : function () {},
+GameInstance : function () {},
 
 };
 

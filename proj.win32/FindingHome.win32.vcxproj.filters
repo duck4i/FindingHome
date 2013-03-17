@@ -124,9 +124,6 @@
     <ClInclude Include="..\Classes\GameEntityExit.h">
       <Filter>include\entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Game.h">
-      <Filter>include\entities</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\BatchManager.h">
       <Filter>include\entities</Filter>
     </ClInclude>
@@ -144,6 +141,9 @@
     </ClInclude>
     <ClInclude Include="..\Resources\scripting\generated\game.hpp">
       <Filter>include\scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameInstance.h">
+      <Filter>include\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="..\Resources\scripting\generated\game.cpp">
       <Filter>source\scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameInstance.cpp">
+      <Filter>source\entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

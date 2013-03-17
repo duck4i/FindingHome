@@ -140,7 +140,6 @@
     <ClInclude Include="..\Classes\extern\B2DebugDrawLayer.h" />
     <ClInclude Include="..\Classes\extern\CCTexture2DMutable.h" />
     <ClInclude Include="..\Classes\extern\GLES-Render.h" />
-    <ClInclude Include="..\Classes\Game.h" />
     <ClInclude Include="..\Classes\GameEntities.h" />
     <ClInclude Include="..\Classes\GameEntity.h" />
     <ClInclude Include="..\Classes\GameEntityCircle.h" />
@@ -149,6 +148,7 @@
     <ClInclude Include="..\Classes\GameEntityPlayer.h" />
     <ClInclude Include="..\Classes\GameEntityRectangle.h" />
     <ClInclude Include="..\Classes\GameEntitySprite.h" />
+    <ClInclude Include="..\Classes\GameInstance.h" />
     <ClInclude Include="..\Classes\KeyboardHelper.h" />
     <ClInclude Include="..\Classes\LevelLoader.h" />
     <ClInclude Include="..\Classes\LevelNodeInfo.h" />
@@ -181,6 +181,7 @@
     <ClCompile Include="..\Classes\GameEntityPlayer.cpp" />
     <ClCompile Include="..\Classes\GameEntityRectangle.cpp" />
     <ClCompile Include="..\Classes\GameEntitySprite.cpp" />
+    <ClCompile Include="..\Classes\GameInstance.cpp" />
     <ClCompile Include="..\Classes\KeyboardHelper.cpp" />
     <ClCompile Include="..\Classes\LevelLoader.cpp" />
     <ClCompile Include="..\Classes\LevelProperties.cpp" />

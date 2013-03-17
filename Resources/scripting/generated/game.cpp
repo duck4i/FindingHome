@@ -27,14 +27,40 @@ static JSBool empty_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
 }
 
 
-JSClass  *js_game_Game_class;
-JSObject *js_game_Game_prototype;
+JSClass  *js_game_GameInstance_class;
+JSObject *js_game_GameInstance_prototype;
 
-JSBool js_game_Game_newGame(JSContext *cx, uint32_t argc, jsval *vp)
+JSBool js_game_GameInstance_setScene(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	jsval *argv = JS_ARGV(cx, vp);
+	JSBool ok = JS_TRUE;
+	JSObject *obj = JS_THIS_OBJECT(cx, vp);
+	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
+	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
+
+	if (argc == 1) {
+		cocos2d::CCScene* arg0;
+		do {
+			js_proxy_t *proxy;
+			JSObject *tmpObj = JSVAL_TO_OBJECT(argv[0]);
+			JS_GET_NATIVE_PROXY(proxy, tmpObj);
+			arg0 = (cocos2d::CCScene*)(proxy ? proxy->ptr : NULL);
+			JSB_PRECONDITION2( arg0, cx, JS_FALSE, "Invalid Native Object");
+		} while (0);
+		JSB_PRECONDITION2(ok, cx, JS_FALSE, "Error processing arguments");
+		cobj->setScene(arg0);
+		JS_SET_RVAL(cx, vp, JSVAL_VOID);
+		return JS_TRUE;
+	}
+	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 1);
+	return JS_FALSE;
+}
+JSBool js_game_GameInstance_newGame(JSContext *cx, uint32_t argc, jsval *vp)
 {
 	JSObject *obj = JS_THIS_OBJECT(cx, vp);
 	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
-	Game* cobj = (Game *)(proxy ? proxy->ptr : NULL);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
 	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
 
 	if (argc == 0) {
@@ -45,11 +71,111 @@ JSBool js_game_Game_newGame(JSContext *cx, uint32_t argc, jsval *vp)
 	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
 	return JS_FALSE;
 }
-JSBool js_game_Game_exit(JSContext *cx, uint32_t argc, jsval *vp)
+JSBool js_game_GameInstance_setScale(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	jsval *argv = JS_ARGV(cx, vp);
+	JSBool ok = JS_TRUE;
+	JSObject *obj = JS_THIS_OBJECT(cx, vp);
+	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
+	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
+
+	if (argc == 1) {
+		double arg0;
+		ok &= JS_ValueToNumber(cx, argv[0], &arg0);
+		JSB_PRECONDITION2(ok, cx, JS_FALSE, "Error processing arguments");
+		cobj->setScale(arg0);
+		JS_SET_RVAL(cx, vp, JSVAL_VOID);
+		return JS_TRUE;
+	}
+	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 1);
+	return JS_FALSE;
+}
+JSBool js_game_GameInstance_purge(JSContext *cx, uint32_t argc, jsval *vp)
 {
 	JSObject *obj = JS_THIS_OBJECT(cx, vp);
 	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
-	Game* cobj = (Game *)(proxy ? proxy->ptr : NULL);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
+	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
+
+	if (argc == 0) {
+		cobj->purge();
+		JS_SET_RVAL(cx, vp, JSVAL_VOID);
+		return JS_TRUE;
+	}
+	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
+	return JS_FALSE;
+}
+JSBool js_game_GameInstance_getPlayer(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	JSObject *obj = JS_THIS_OBJECT(cx, vp);
+	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
+	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
+
+	if (argc == 0) {
+		GameEntityPlayer* ret = cobj->getPlayer();
+		jsval jsret;
+		do {
+			if (ret) {
+				js_proxy_t *proxy = js_get_or_create_proxy<GameEntityPlayer>(cx, ret);
+				jsret = OBJECT_TO_JSVAL(proxy->obj);
+			} else {
+				jsret = JSVAL_NULL;
+			}
+		} while (0);
+		JS_SET_RVAL(cx, vp, jsret);
+		return JS_TRUE;
+	}
+	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
+	return JS_FALSE;
+}
+JSBool js_game_GameInstance_getNextLevel(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	JSObject *obj = JS_THIS_OBJECT(cx, vp);
+	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
+	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
+
+	if (argc == 0) {
+		std::string ret = cobj->getNextLevel();
+		jsval jsret;
+		jsret = std_string_to_jsval(cx, ret);
+		JS_SET_RVAL(cx, vp, jsret);
+		return JS_TRUE;
+	}
+	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
+	return JS_FALSE;
+}
+JSBool js_game_GameInstance_getScene(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	JSObject *obj = JS_THIS_OBJECT(cx, vp);
+	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
+	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
+
+	if (argc == 0) {
+		cocos2d::CCScene* ret = cobj->getScene();
+		jsval jsret;
+		do {
+			if (ret) {
+				js_proxy_t *proxy = js_get_or_create_proxy<cocos2d::CCScene>(cx, ret);
+				jsret = OBJECT_TO_JSVAL(proxy->obj);
+			} else {
+				jsret = JSVAL_NULL;
+			}
+		} while (0);
+		JS_SET_RVAL(cx, vp, jsret);
+		return JS_TRUE;
+	}
+	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
+	return JS_FALSE;
+}
+JSBool js_game_GameInstance_exit(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	JSObject *obj = JS_THIS_OBJECT(cx, vp);
+	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
 	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
 
 	if (argc == 0) {
@@ -60,33 +186,97 @@ JSBool js_game_Game_exit(JSContext *cx, uint32_t argc, jsval *vp)
 	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
 	return JS_FALSE;
 }
-JSBool js_game_Game_doSomething(JSContext *cx, uint32_t argc, jsval *vp)
+JSBool js_game_GameInstance_getScale(JSContext *cx, uint32_t argc, jsval *vp)
 {
 	JSObject *obj = JS_THIS_OBJECT(cx, vp);
 	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
-	Game* cobj = (Game *)(proxy ? proxy->ptr : NULL);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
 	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
 
 	if (argc == 0) {
-		cobj->doSomething();
-		JS_SET_RVAL(cx, vp, JSVAL_VOID);
+		float ret = cobj->getScale();
+		jsval jsret;
+		jsret = DOUBLE_TO_JSVAL(ret);
+		JS_SET_RVAL(cx, vp, jsret);
 		return JS_TRUE;
 	}
 	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 0);
 	return JS_FALSE;
 }
-JSBool js_game_Game_constructor(JSContext *cx, uint32_t argc, jsval *vp)
+JSBool js_game_GameInstance_setPlayer(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	jsval *argv = JS_ARGV(cx, vp);
+	JSBool ok = JS_TRUE;
+	JSObject *obj = JS_THIS_OBJECT(cx, vp);
+	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
+	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
+
+	if (argc == 1) {
+		GameEntityPlayer* arg0;
+		do {
+			js_proxy_t *proxy;
+			JSObject *tmpObj = JSVAL_TO_OBJECT(argv[0]);
+			JS_GET_NATIVE_PROXY(proxy, tmpObj);
+			arg0 = (GameEntityPlayer*)(proxy ? proxy->ptr : NULL);
+			JSB_PRECONDITION2( arg0, cx, JS_FALSE, "Invalid Native Object");
+		} while (0);
+		JSB_PRECONDITION2(ok, cx, JS_FALSE, "Error processing arguments");
+		cobj->setPlayer(arg0);
+		JS_SET_RVAL(cx, vp, JSVAL_VOID);
+		return JS_TRUE;
+	}
+	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 1);
+	return JS_FALSE;
+}
+JSBool js_game_GameInstance_setNextLevel(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	jsval *argv = JS_ARGV(cx, vp);
+	JSBool ok = JS_TRUE;
+	JSObject *obj = JS_THIS_OBJECT(cx, vp);
+	js_proxy_t *proxy; JS_GET_NATIVE_PROXY(proxy, obj);
+	GameInstance* cobj = (GameInstance *)(proxy ? proxy->ptr : NULL);
+	JSB_PRECONDITION2( cobj, cx, JS_FALSE, "Invalid Native Object");
+
+	if (argc == 1) {
+		std::string arg0;
+		ok &= jsval_to_std_string(cx, argv[0], &arg0);
+		JSB_PRECONDITION2(ok, cx, JS_FALSE, "Error processing arguments");
+		cobj->setNextLevel(arg0);
+		JS_SET_RVAL(cx, vp, JSVAL_VOID);
+		return JS_TRUE;
+	}
+	JS_ReportError(cx, "wrong number of arguments: %d, was expecting %d", argc, 1);
+	return JS_FALSE;
+}
+JSBool js_game_GameInstance_sharedInstance(JSContext *cx, uint32_t argc, jsval *vp)
+{
+	GameInstance* ret = GameInstance::sharedInstance();
+	jsval jsret;
+	do {
+		if (ret) {
+			js_proxy_t *proxy = js_get_or_create_proxy<GameInstance>(cx, ret);
+			jsret = OBJECT_TO_JSVAL(proxy->obj);
+		} else {
+			jsret = JSVAL_NULL;
+		}
+	} while (0);
+	JS_SET_RVAL(cx, vp, jsret);
+	return JS_TRUE;
+}
+
+JSBool js_game_GameInstance_constructor(JSContext *cx, uint32_t argc, jsval *vp)
 {
 
 	if (argc == 0) {
-		Game* cobj = new Game();
+		GameInstance* cobj = new GameInstance();
 #ifdef COCOS2D_JAVASCRIPT
 		cocos2d::CCObject *_ccobj = dynamic_cast<cocos2d::CCObject *>(cobj);
 		if (_ccobj) {
 			_ccobj->autorelease();
 		}
 #endif
-		TypeTest<Game> t;
+		TypeTest<GameInstance> t;
 		js_type_class_t *typeClass;
 		uint32_t typeId = t.s_id();
 		HASH_FIND_INT(_js_global_type_ht, &typeId, typeClass);
@@ -97,7 +287,7 @@ JSBool js_game_Game_constructor(JSContext *cx, uint32_t argc, jsval *vp)
 		js_proxy_t *p;
 		JS_NEW_PROXY(p, cobj, obj);
 #ifdef COCOS2D_JAVASCRIPT
-		JS_AddNamedObjectRoot(cx, &p->obj, "Game");
+		JS_AddNamedObjectRoot(cx, &p->obj, "GameInstance");
 #endif
 		return JS_TRUE;
 	}
@@ -107,58 +297,69 @@ JSBool js_game_Game_constructor(JSContext *cx, uint32_t argc, jsval *vp)
 
 
 
-void js_game_Game_finalize(JSFreeOp *fop, JSObject *obj) {
+void js_game_GameInstance_finalize(JSFreeOp *fop, JSObject *obj) {
 }
 
-void js_register_game_Game(JSContext *cx, JSObject *global) {
-	js_game_Game_class = (JSClass *)calloc(1, sizeof(JSClass));
-	js_game_Game_class->name = "Game";
-	js_game_Game_class->addProperty = JS_PropertyStub;
-	js_game_Game_class->delProperty = JS_PropertyStub;
-	js_game_Game_class->getProperty = JS_PropertyStub;
-	js_game_Game_class->setProperty = JS_StrictPropertyStub;
-	js_game_Game_class->enumerate = JS_EnumerateStub;
-	js_game_Game_class->resolve = JS_ResolveStub;
-	js_game_Game_class->convert = JS_ConvertStub;
-	js_game_Game_class->finalize = js_game_Game_finalize;
-	js_game_Game_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
+void js_register_game_GameInstance(JSContext *cx, JSObject *global) {
+	js_game_GameInstance_class = (JSClass *)calloc(1, sizeof(JSClass));
+	js_game_GameInstance_class->name = "GameInstance";
+	js_game_GameInstance_class->addProperty = JS_PropertyStub;
+	js_game_GameInstance_class->delProperty = JS_PropertyStub;
+	js_game_GameInstance_class->getProperty = JS_PropertyStub;
+	js_game_GameInstance_class->setProperty = JS_StrictPropertyStub;
+	js_game_GameInstance_class->enumerate = JS_EnumerateStub;
+	js_game_GameInstance_class->resolve = JS_ResolveStub;
+	js_game_GameInstance_class->convert = JS_ConvertStub;
+	js_game_GameInstance_class->finalize = js_game_GameInstance_finalize;
+	js_game_GameInstance_class->flags = JSCLASS_HAS_RESERVED_SLOTS(2);
 
 	static JSPropertySpec properties[] = {
 		{0, 0, 0, 0, 0}
 	};
 
 	static JSFunctionSpec funcs[] = {
-		JS_FN("newGame", js_game_Game_newGame, 0, JSPROP_PERMANENT | JSPROP_SHARED),
-		JS_FN("exit", js_game_Game_exit, 0, JSPROP_PERMANENT | JSPROP_SHARED),
-		JS_FN("doSomething", js_game_Game_doSomething, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("setScene", js_game_GameInstance_setScene, 1, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("newGame", js_game_GameInstance_newGame, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("setScale", js_game_GameInstance_setScale, 1, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("purge", js_game_GameInstance_purge, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("getPlayer", js_game_GameInstance_getPlayer, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("getNextLevel", js_game_GameInstance_getNextLevel, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("getScene", js_game_GameInstance_getScene, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("exit", js_game_GameInstance_exit, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("getScale", js_game_GameInstance_getScale, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("setPlayer", js_game_GameInstance_setPlayer, 1, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FN("setNextLevel", js_game_GameInstance_setNextLevel, 1, JSPROP_PERMANENT | JSPROP_SHARED),
 		JS_FS_END
 	};
 
-	JSFunctionSpec *st_funcs = NULL;
+	static JSFunctionSpec st_funcs[] = {
+		JS_FN("sharedInstance", js_game_GameInstance_sharedInstance, 0, JSPROP_PERMANENT | JSPROP_SHARED),
+		JS_FS_END
+	};
 
-	js_game_Game_prototype = JS_InitClass(
+	js_game_GameInstance_prototype = JS_InitClass(
 		cx, global,
 		NULL, // parent proto
-		js_game_Game_class,
-		js_game_Game_constructor, 0, // constructor
+		js_game_GameInstance_class,
+		js_game_GameInstance_constructor, 0, // constructor
 		properties,
 		funcs,
 		NULL, // no static properties
 		st_funcs);
 	// make the class enumerable in the registered namespace
 	JSBool found;
-	JS_SetPropertyAttributes(cx, global, "Game", JSPROP_ENUMERATE | JSPROP_READONLY, &found);
+	JS_SetPropertyAttributes(cx, global, "GameInstance", JSPROP_ENUMERATE | JSPROP_READONLY, &found);
 
 	// add the proto and JSClass to the type->js info hash table
-	TypeTest<Game> t;
+	TypeTest<GameInstance> t;
 	js_type_class_t *p;
 	uint32_t typeId = t.s_id();
 	HASH_FIND_INT(_js_global_type_ht, &typeId, p);
 	if (!p) {
 		p = (js_type_class_t *)malloc(sizeof(js_type_class_t));
 		p->type = typeId;
-		p->jsclass = js_game_Game_class;
-		p->proto = js_game_Game_prototype;
+		p->jsclass = js_game_GameInstance_class;
+		p->proto = js_game_GameInstance_prototype;
 		p->parentProto = NULL;
 		HASH_ADD_INT(_js_global_type_ht, type, p);
 	}
@@ -323,6 +524,6 @@ void register_all_game(JSContext* cx, JSObject* obj) {
 	obj = ns;
 
 	js_register_game_MainScene(cx, obj);
-	js_register_game_Game(cx, obj);
+	js_register_game_GameInstance(cx, obj);
 }
 
