@@ -149,20 +149,25 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     // create the application instance
     AppDelegate app;
-    CCEGLView* eglView = CCEGLView::sharedOpenGLView();
+    CCEGLView* eglView = CCEGLView::sharedOpenGLView();	
 	
 	if (fullScreen)
 	{
 		HWND desktop = GetDesktopWindow();
-		RECT r; 
-		//GetClientRect(desktop, &r);
+		RECT r;
 		GetWindowRect(desktop, &r);		
 		eglView->setFrameSize(r.right, r.bottom);
+		
+#ifdef CC_PLATFORM_WIN32
+		//	hide cursor for app
+		ClipCursor(&r);
+#endif
+
 		unsigned long ws = GetWindowLong(eglView->getHWnd(), GWL_STYLE);
 		SetWindowLong(eglView->getHWnd(), GWL_STYLE, ws & ~(WS_CAPTION | WS_THICKFRAME));
 
 		//	no matter what resolution design size is the same.
-		eglView->setDesignResolutionSize(WINDOW_WIDTH, WINDOW_HEIGHT, kResolutionNoBorder);
+		eglView->setDesignResolutionSize(WINDOW_WIDTH, WINDOW_HEIGHT, kResolutionShowAll);
 	}
 	else
 		eglView->setFrameSize(WINDOW_WIDTH, WINDOW_HEIGHT);

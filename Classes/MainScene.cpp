@@ -464,6 +464,14 @@ void MainScene::update(float delta)
 	//	And weather ofcourse
 	if (weather)
 		weather->update(delta);
+
+
+#ifdef CC_PLATFORM_WIN32
+	//	hide cursor for app
+	extern bool fullScreen;
+	if (fullScreen)
+		SetCursor(NULL);
+#endif
 }
 
 void MainScene::updatePhysics(float delta)

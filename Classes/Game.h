@@ -26,22 +26,18 @@ public:
 	/*
 	 *	
 	 */
-	void newGame()
-	{
-		
-	}
+	void newGame() {}
 
 	/*
 	 *	Exit from game
 	 */
-	void exit()
-	{		
+	void exit() 
+	{
 		::exit(0);
 	}
 
 	Game()
-	{
-		
+	{		
 	}
 };
 

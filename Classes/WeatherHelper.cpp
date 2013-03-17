@@ -47,15 +47,6 @@ bool WeatherHelper::init()
 	this->createMoon();
 	this->createClouds();	
 	
-
-	//	TV scan sprite? Not for long!
-	/*
-	CCSize winSize = CCDirector::sharedDirector()->getWinSizeInPixels();
-	CCSprite *tv_scan = CCSprite::create("..\\Resources\\tv_scan.png");
-	tv_scan->setPosition(ccp(winSize.width / 2, winSize.height / 2));
-	this->parent->addChild(tv_scan, 1000);
-	*/
-
 	//	My first shader lady and gentleman
 	//TintShader *shader = TintShader::create();	
 	//this->parent->addChild(shader, 100000);
@@ -137,13 +128,13 @@ void WeatherHelper::createClouds()
 	this->clouds->setPosition(0, size.height - 200);		
 	this->parent->addChild(clouds);
 
-	CCTexture2D *cloudBig = CCTextureCache::sharedTextureCache()->addImage(RESOURCE_DIR "cloudBig.png");
-	CCTexture2D *cloudMedium = CCTextureCache::sharedTextureCache()->addImage(RESOURCE_DIR "cloudMedium.png");
-	CCTexture2D *cloudSmall = CCTextureCache::sharedTextureCache()->addImage(RESOURCE_DIR "cloudSmall.png");
+	CCTexture2D *cloudBig = CCTextureCache::sharedTextureCache()->addImage(RESOURCE_WH_DIR "cloudBig.png");
+	CCTexture2D *cloudMedium = CCTextureCache::sharedTextureCache()->addImage(RESOURCE_WH_DIR "cloudMedium.png");
+	CCTexture2D *cloudSmall = CCTextureCache::sharedTextureCache()->addImage(RESOURCE_WH_DIR "cloudSmall.png");
 
-	bigOnes = CCSpriteBatchNode::create(RESOURCE_DIR "cloudBig.png");
-	mediumOnes = CCSpriteBatchNode::create(RESOURCE_DIR "cloudMedium.png");
-	smallOnes = CCSpriteBatchNode::create(RESOURCE_DIR "cloudSmall.png");
+	bigOnes = CCSpriteBatchNode::create(RESOURCE_WH_DIR "cloudBig.png");
+	mediumOnes = CCSpriteBatchNode::create(RESOURCE_WH_DIR "cloudMedium.png");
+	smallOnes = CCSpriteBatchNode::create(RESOURCE_WH_DIR "cloudSmall.png");
 	float scale = 1;
 
 	ccColor3B color = tintColorAtThisTime();

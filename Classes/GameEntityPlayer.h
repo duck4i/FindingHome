@@ -13,10 +13,10 @@
 
 #define IN_AIR_BEFORE_DEATH		2.5f
 
-#define RESOURCE_PLAYER			RESOURCE_DIR	"dog.png"
-#define RESOURCE_PLAYER2		RESOURCE_DIR	"dog2.png"
-#define RESOURCE_PLAYER3		RESOURCE_DIR	"dog3.png"
-#define RESOURCE_PLAYER4		RESOURCE_DIR	"dog4.png"
+#define RESOURCE_PLAYER			RESOURCE_PL_DIR	"dog.png"
+#define RESOURCE_PLAYER2		RESOURCE_PL_DIR	"dog2.png"
+#define RESOURCE_PLAYER3		RESOURCE_PL_DIR	"dog3.png"
+#define RESOURCE_PLAYER4		RESOURCE_PL_DIR	"dog4.png"
 
 ///	Player direction
 enum PlayerDirection

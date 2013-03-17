@@ -7,7 +7,7 @@
 #include "Performance.h"
 using namespace cocos2d;
 
-#define MOON_RESOURCE RESOURCE_DIR "moon.png"
+#define MOON_RESOURCE RESOURCE_WH_DIR "moon.png"
 
 //	Get pixel from image - IOS
 //	http://stackoverflow.com/questions/448125/how-to-get-pixel-data-from-a-uiimage-cocoa-touch-or-cgimage-core-graphics

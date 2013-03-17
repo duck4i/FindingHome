@@ -27,7 +27,7 @@ bool TintShader::start(CCNode* target)
 	this->addChild(s);
 
 	CCGLProgram *shaderProgram = new CCGLProgram();
-	shaderProgram->initWithVertexShaderFilename(RESOURCE_DIR "TintShader.vsh", RESOURCE_DIR "TintShader.fsh");
+	shaderProgram->initWithVertexShaderFilename(RESOURCE_SH_DIR "TintShader.vsh", RESOURCE_SH_DIR "TintShader.fsh");
 	s->setShaderProgram(shaderProgram);
 
 	shaderProgram->addAttribute(kCCAttributeNameColor, kCCVertexAttribFlag_Color);

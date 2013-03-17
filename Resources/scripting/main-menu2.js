@@ -70,7 +70,7 @@ var MainMenuLayer = cc.LayerColor.extend(
 	
 	setBackground: function(parent)
 	{
-		var back = cc.Sprite.create("background.png");
+		var back = cc.Sprite.create("system/background.png");
 		back.setAnchorPoint(cc.p(0, 0));
 		back.setScale(0.7);
 		parent.addChild(back);
