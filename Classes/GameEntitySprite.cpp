@@ -86,7 +86,7 @@ bool GameEntitySprite::createBody(b2World* world)
 	def.userData = this;
 	this->retain();
 
-	def.type = m_customProps.isDynamicObject() ? b2_dynamicBody : b2_staticBody;
+	def.type = m_customProps.isDynamicObject() || m_nodeInfo.enemyType != EnemyTypeUndefined ? b2_dynamicBody : b2_staticBody;
 	def.position.Set(SCREEN_TO_WORLD(m_nodeInfo.position.x), SCREEN_TO_WORLD(m_nodeInfo.position.y));
 	def.angle = -1 * m_nodeInfo.rotation;
 	
@@ -100,7 +100,7 @@ bool GameEntitySprite::createBody(b2World* world)
 		m_b2FixtureDef.restitution = 0.5f;
 	
 	//	collectable
-	if (m_customProps.isCollectable())	
+	if (m_customProps.isCollectable() /*|| m_nodeInfo.enemyType != EnemyTypeUndefined*/)
 		m_b2FixtureDef.isSensor = true;
 
 	return createFixture();

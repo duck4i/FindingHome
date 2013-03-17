@@ -178,8 +178,9 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 		EnemyChipmunk * chipmunk = EnemyChipmunk::create(info);
 
 		CCSprite* s = chipmunk->getSprite();
-
 		parent->addChild(s);
+
+		chipmunk->createBody(this->boxWorld);
 	}
 	else
 	{

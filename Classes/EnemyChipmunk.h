@@ -11,13 +11,18 @@ using namespace cocos2d;
 class EnemyChipmunk : public GameEntitySprite
 {
 private:
+	bool wasVisible;
+
 public:
 
 	virtual bool init();
 	virtual bool postInit();
+	virtual void updatePosition(b2Vec2 pos);
+
 
 	EnemyChipmunk(NODEINFO info) : GameEntitySprite(info)
 	{
+		wasVisible = false;
 	}
 
 	NINFO_CREATE_FUNC(EnemyChipmunk);
