@@ -127,7 +127,6 @@
             this.sendToMainStripButton = new System.Windows.Forms.ToolStripButton();
             this.sendToBackStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.addBehaviorStripButton = new System.Windows.Forms.ToolStripButton();
             this.toggleBehaviorButton = new System.Windows.Forms.ToolStripButton();
             this.removeBehaviorButton = new System.Windows.Forms.ToolStripButton();
@@ -888,7 +887,6 @@
             this.sendToMainStripButton,
             this.sendToBackStripButton,
             this.toolStripSeparator21,
-            this.toolStripLabel2,
             this.addBehaviorStripButton,
             this.toggleBehaviorButton,
             this.removeBehaviorButton,
@@ -1108,12 +1106,6 @@
             // 
             this.toolStripSeparator21.Name = "toolStripSeparator21";
             this.toolStripSeparator21.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(61, 22);
-            this.toolStripLabel2.Text = "Behaviors:";
             // 
             // addBehaviorStripButton
             // 
@@ -2102,7 +2094,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.ToolStripButton addBehaviorStripButton;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripButton toggleBehaviorButton;
         private System.Windows.Forms.ToolStripMenuItem updatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
