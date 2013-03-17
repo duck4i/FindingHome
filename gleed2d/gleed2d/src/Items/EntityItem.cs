@@ -109,7 +109,7 @@ namespace GLEED2D
         /// <param name="font"></param>
         /// <param name="strToDraw"></param>
         /// <param name="boundaries"></param>
-        static public void DrawString(SpriteBatch spriteBatch, SpriteFont font, string strToDraw, Rectangle boundaries)
+        static public void DrawString(SpriteBatch spriteBatch, SpriteFont font, string strToDraw, Rectangle boundaries, Color color)
         {
             Vector2 size = font.MeasureString(strToDraw);
 
@@ -133,22 +133,21 @@ namespace GLEED2D
             SpriteEffects spriteEffects = new SpriteEffects();
 
             // Draw the string to the sprite batch!
-            spriteBatch.DrawString(font, strToDraw, position, Color.White, rotation, spriteOrigin, scale, spriteEffects, spriteLayer);
+            spriteBatch.DrawString(font, strToDraw, position, color, rotation, spriteOrigin, scale, spriteEffects, spriteLayer);
         } // end DrawString()
 
-        public virtual void drawStringInCenter(SpriteBatch sb, string text, Rectangle rc)
-        {
+        public static void drawStringInCenter(SpriteBatch sb, string text, Rectangle rc)
+        {            
             //  measure, center and draw string on shape
             SpriteFont sf = Game1.Instance.entitiesFont;
-            Vector2 smes = sf.MeasureString(Name);
 
-            Vector2 pos = Position;
-            pos.X += rc.Width / 2 - smes.X / 2;
-            pos.Y += rc.Height / 2 - smes.Y / 2;
+            int margin = 5;
+            rc.X += margin;            
+            rc.Width -= 2 * margin;            
 
-            sb.DrawString(Game1.Instance.entitiesFont, text, pos, Color.Navy);
-            //Rectangle rec = new Rectangle((int)pos.X, (int)pos.Y, (int)smes.X * 2, (int)smes.Y * 2);
-            //DrawString(sb, sf, text, rec);
+            DrawString(sb, sf, text, rc, Color.Navy);            
         }
+
+
     }
 }

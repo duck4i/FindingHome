@@ -31,7 +31,7 @@ var MenuItemActions = {
 	},
 	doExit : function()
 	{
-		var g = new gg.Game();
+		var g = new gg.GameInstance();
 		g.exit();
 	}
 };

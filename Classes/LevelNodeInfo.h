@@ -19,6 +19,7 @@ enum NodeType
 	NodeTypePlayer,
 	NodeTypeExit,
 	NodeTypeCollisionPath,
+	NodeTypeEnemy,
 	NodeTypeUndefined
 };
 

@@ -169,6 +169,18 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 			path->createFixture();
 		}
 	}
+	else if (xmlStrcasecmp(nodeType, (const xmlChar*) ENEMY_TYPE_CHIPMUNK) == 0)
+	{
+		CCLog("Fouund chipmunk");
+
+		info.nodeType = NodeTypeEnemy;
+		info.enemyType = EnemyTypeSquirel;
+		EnemyChipmunk * chipmunk = EnemyChipmunk::create(info);
+
+		CCSprite* s = chipmunk->getSprite();
+
+		parent->addChild(s);
+	}
 	else
 	{
 		//	select layer to insert it into

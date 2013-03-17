@@ -22,7 +22,8 @@ namespace GLEED2D
         scaling,        //user is scaling an item
         selecting,      //user has opened a select box by dragging the mouse (windows style)
         brush_primitive, //user is adding a primitive item
-        entity          // user is adding entity item type
+        entity,          // user is adding entity item type
+        enemy
     }
 
     enum PrimitiveType
@@ -32,14 +33,22 @@ namespace GLEED2D
 
     enum EntityType
     {
-        Player, Exit
+        Unknown, Player, Exit
+    }
+
+    enum EnemyType
+    {
+        Unknown, Chipmunk
     }
 
     class Editor
     {
         public static Editor Instance;
         EditorState state;
-        EntityType entityType;
+        
+        EntityType entityType = EntityType.Unknown;
+        EnemyType enemyType = EnemyType.Unknown;
+
         Brush currentbrush;
         PrimitiveType currentprimitive;
         bool primitivestarted;
@@ -443,11 +452,23 @@ namespace GLEED2D
             return true;
         }
 
+        public void createEnemyType(EnemyType type)
+        {
+            if (!checkLayerIsSelected())
+                return;
+
+            entityType = EntityType.Unknown;
+            state = EditorState.enemy;
+            enemyType = type;
+            clickedPoints.Clear();
+        }
+
+
         public void createPlayerItem()
         {
             if (!checkLayerIsSelected())
                 return;
-                        
+            
             state = EditorState.entity;
             entityType = EntityType.Player;
             clickedPoints.Clear();
@@ -480,6 +501,15 @@ namespace GLEED2D
             }
             else if (entityType == EntityType.Exit)
                 i = new ExitItem();
+            
+            
+            //  now enemies
+            else if (enemyType == EnemyType.Chipmunk)
+            {
+                i = new EnemyChipmunk();
+            }
+
+
 
             //  insert item
             if (i != null)
@@ -494,6 +524,7 @@ namespace GLEED2D
             }
 
             releaseEntity(clearSelection);
+            state = EditorState.idle;
         }
 
         public void releaseEntity(bool unfocus)
@@ -739,7 +770,7 @@ namespace GLEED2D
                     if (item is RectangleItem) imageindex = 2;
                     if (item is CircleItem) imageindex = 3;
                     if (item is PathItem || item is CollisionPathItem) imageindex = 4;
-                    if (item is EntityItem) imageindex = 6;
+                    if (item is EntityItem) imageindex = 6;                    
                     itemnode.ImageIndex = itemnode.SelectedImageIndex = imageindex;
                 }
                 layernode.Expand();
@@ -1288,7 +1319,7 @@ namespace GLEED2D
                 if (mstate.LeftButton == ButtonState.Pressed && oldmstate.LeftButton == ButtonState.Released) paintTextureBrush(true);
             }
 
-            if (state == EditorState.entity)
+            if (state == EditorState.entity || state == EditorState.enemy)
             {
                 if (Constants.Instance.SnapToGrid || kstate.IsKeyDown(Keys.G))
                 {

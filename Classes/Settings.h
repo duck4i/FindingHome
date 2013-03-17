@@ -19,13 +19,14 @@
 #define RESOURCE_SH_DIR		RESOURCE_SYS_DIR "shaders\\"
 #define RESOURCE_WH_DIR		RESOURCE_SYS_DIR "weather\\"
 #define RESOURCE_PL_DIR		RESOURCE_SYS_DIR "player\\"
+#define RESOURCE_EM_DIR		RESOURCE_SYS_DIR "enemies\\"
 
 
 #define SHAPE_DATA					RESOURCE_SYS_DIR "ShapeData.json"
 #define WEATHER_CONTROLLER_DATA		RESOURCE_WH_DIR "weather_controller.png"
 
 #ifdef _DEBUG
-#define GAME_START_LEVEL			RESOURCE_DIR "ForestTest.xml"//"ForestTest.xml"
+#define GAME_START_LEVEL			RESOURCE_DIR "Level6.xml"//"ForestTest.xml"
 #else
 #define GAME_START_LEVEL			RESOURCE_DIR "Level2.xml"
 #endif

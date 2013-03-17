@@ -97,7 +97,7 @@ namespace GLEED2D
             //  set primitives list view
             SetListViewSpacing(listView2, 128 + 8, 128 + 32);
             SetListViewSpacing(entitiesListView, 128 + 8, 128 + 32);
-            SetListViewSpacing(gameEntitiesListView, 128 + 8, 128 + 32);
+            SetListViewSpacing(gameEnemiesListView, 128 + 8, 128 + 32);
 
             pictureBox1.AllowDrop = true;
             populateTreeStructureFromPath(@"..\Resources\");
@@ -1130,11 +1130,6 @@ namespace GLEED2D
             //propertyGrid1.Refresh();
         }
 
-        private void listView3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void entitiesListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             String selected = entitiesListView.FocusedItem.Text;
@@ -1431,6 +1426,16 @@ namespace GLEED2D
             }
             
         }
+
+        private void gameEnemiesListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            String selected = gameEnemiesListView.FocusedItem.Text;
+
+            if (selected == "Chipmunk")
+                Editor.Instance.createEnemyType(EnemyType.Chipmunk);
+        }
+
+
     }
 
     public class BehaviorOptions

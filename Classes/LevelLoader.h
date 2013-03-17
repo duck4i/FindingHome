@@ -11,6 +11,7 @@
 #include "GameEntities.h"
 #include "LevelProperties.h"
 #include "Performance.h"
+#include "Enemies.h"
 
 USING_NS_CC;
 
@@ -25,6 +26,8 @@ USING_NS_CC;
 #define ITEM_TYPE_PLAYER		"PlayerItem"
 #define ITEM_TYPE_ENTITY		"EntityItem"
 #define ITEM_TYPE_EXIT			"ExitItem"
+
+#define ENEMY_TYPE_CHIPMUNK		"EnemyChipmunk"
 
 
 //	Z-INDEX IS DEFINED USING ORDER IN XML FILE > THE LATEST WE PARSE IT THE HIGHER IS Z-ORDER

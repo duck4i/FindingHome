@@ -176,7 +176,8 @@ namespace GLEED2D
     [XmlInclude(typeof(PathItem))]
     [XmlInclude(typeof(EntityItem))]
     [XmlInclude(typeof(PlayerItem))]
-    [XmlInclude(typeof(ExitItem))]    
+    [XmlInclude(typeof(ExitItem))]
+    [XmlInclude(typeof(EnemyChipmunk))]
     public partial class Item
     {
         /// <summary>
@@ -341,6 +342,11 @@ namespace GLEED2D
         }
     }
 
+    public partial class EnemyChipmunk : EntityItem
+    {
+
+    }
+
     public partial class CollisionPathItem : PathItem
     {
         public CollisionPathItem()
@@ -350,7 +356,6 @@ namespace GLEED2D
 
     public partial class EntityItem : Item
     {
-
     }
 
     public partial class ExitItem : EntityItem

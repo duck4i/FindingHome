@@ -137,6 +137,8 @@
     <ClInclude Include="..\Classes\BatchManager.h" />
     <ClInclude Include="..\Classes\ContactListener.h" />
     <ClInclude Include="..\Classes\CustomProperty.h" />
+    <ClInclude Include="..\Classes\Enemies.h" />
+    <ClInclude Include="..\Classes\EnemyChipmunk.h" />
     <ClInclude Include="..\Classes\extern\B2DebugDrawLayer.h" />
     <ClInclude Include="..\Classes\extern\CCTexture2DMutable.h" />
     <ClInclude Include="..\Classes\extern\GLES-Render.h" />
@@ -171,6 +173,7 @@
     <ClCompile Include="..\Classes\BatchManager.cpp" />
     <ClCompile Include="..\Classes\ContactListerner.cpp" />
     <ClCompile Include="..\Classes\CustomProperty.cpp" />
+    <ClCompile Include="..\Classes\EnemyChipmunk.cpp" />
     <ClCompile Include="..\Classes\extern\B2DebugDrawLayer.cpp" />
     <ClCompile Include="..\Classes\extern\CCTexture2DMutable.cpp" />
     <ClCompile Include="..\Classes\extern\GLES-Render.cpp" />

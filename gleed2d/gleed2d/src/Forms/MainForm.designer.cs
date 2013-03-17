@@ -36,8 +36,9 @@
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Path", 2);
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Player", "EntityPlayer.png");
             System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Exit", "EntityExit.png");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Bat", 0);
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Chipmunk", 2);
             System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Crow", 1);
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Bat", 0);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -168,6 +169,7 @@
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.refreshDirectoryButton = new System.Windows.Forms.Button();
             this.chooseFolder = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -186,7 +188,7 @@
             this.entitiesListView = new System.Windows.Forms.ListView();
             this.entitiesImageList = new System.Windows.Forms.ImageList(this.components);
             this.EnemiesTabPage = new System.Windows.Forms.TabPage();
-            this.gameEntitiesListView = new System.Windows.Forms.ListView();
+            this.gameEnemiesListView = new System.Windows.Forms.ListView();
             this.enemiesImageList = new System.Windows.Forms.ImageList(this.components);
             this.imageList48 = new System.Windows.Forms.ImageList(this.components);
             this.imageList64 = new System.Windows.Forms.ImageList(this.components);
@@ -202,7 +204,6 @@
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList16 = new System.Windows.Forms.ImageList(this.components);
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
-            this.refreshDirectoryButton = new System.Windows.Forms.Button();
             this.treeView1 = new CustomTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -1535,6 +1536,16 @@
             this.panel2.Size = new System.Drawing.Size(295, 30);
             this.panel2.TabIndex = 6;
             // 
+            // refreshDirectoryButton
+            // 
+            this.refreshDirectoryButton.Image = ((System.Drawing.Image)(resources.GetObject("refreshDirectoryButton.Image")));
+            this.refreshDirectoryButton.Location = new System.Drawing.Point(92, 3);
+            this.refreshDirectoryButton.Name = "refreshDirectoryButton";
+            this.refreshDirectoryButton.Size = new System.Drawing.Size(32, 23);
+            this.refreshDirectoryButton.TabIndex = 6;
+            this.refreshDirectoryButton.UseVisualStyleBackColor = true;
+            this.refreshDirectoryButton.Click += new System.EventHandler(this.refreshDirectoryButton_Click);
+            // 
             // chooseFolder
             // 
             this.chooseFolder.Location = new System.Drawing.Point(3, 3);
@@ -1728,7 +1739,6 @@
             this.entitiesListView.TabIndex = 0;
             this.entitiesListView.UseCompatibleStateImageBehavior = false;
             this.entitiesListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.entitiesListView_MouseDoubleClick);
-            this.entitiesListView.SelectedIndexChanged += new System.EventHandler(this.listView3_SelectedIndexChanged);
             // 
             // entitiesImageList
             // 
@@ -1739,7 +1749,7 @@
             // 
             // EnemiesTabPage
             // 
-            this.EnemiesTabPage.Controls.Add(this.gameEntitiesListView);
+            this.EnemiesTabPage.Controls.Add(this.gameEnemiesListView);
             this.EnemiesTabPage.Location = new System.Drawing.Point(4, 22);
             this.EnemiesTabPage.Name = "EnemiesTabPage";
             this.EnemiesTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -1748,20 +1758,22 @@
             this.EnemiesTabPage.Text = "Game Enemies";
             this.EnemiesTabPage.UseVisualStyleBackColor = true;
             // 
-            // gameEntitiesListView
+            // gameEnemiesListView
             // 
-            this.gameEntitiesListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gameEntitiesListView.HideSelection = false;
-            this.gameEntitiesListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            this.gameEnemiesListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gameEnemiesListView.HideSelection = false;
+            this.gameEnemiesListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem7,
-            listViewItem8});
-            this.gameEntitiesListView.LargeImageList = this.enemiesImageList;
-            this.gameEntitiesListView.Location = new System.Drawing.Point(3, 3);
-            this.gameEntitiesListView.MultiSelect = false;
-            this.gameEntitiesListView.Name = "gameEntitiesListView";
-            this.gameEntitiesListView.Size = new System.Drawing.Size(295, 609);
-            this.gameEntitiesListView.TabIndex = 0;
-            this.gameEntitiesListView.UseCompatibleStateImageBehavior = false;
+            listViewItem8,
+            listViewItem9});
+            this.gameEnemiesListView.LargeImageList = this.enemiesImageList;
+            this.gameEnemiesListView.Location = new System.Drawing.Point(3, 3);
+            this.gameEnemiesListView.MultiSelect = false;
+            this.gameEnemiesListView.Name = "gameEnemiesListView";
+            this.gameEnemiesListView.Size = new System.Drawing.Size(295, 609);
+            this.gameEnemiesListView.TabIndex = 0;
+            this.gameEnemiesListView.UseCompatibleStateImageBehavior = false;
+            this.gameEnemiesListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gameEnemiesListView_MouseDoubleClick);
             // 
             // enemiesImageList
             // 
@@ -1769,6 +1781,7 @@
             this.enemiesImageList.TransparentColor = System.Drawing.Color.Transparent;
             this.enemiesImageList.Images.SetKeyName(0, "EnemyBat.png");
             this.enemiesImageList.Images.SetKeyName(1, "EnemyCrow.png");
+            this.enemiesImageList.Images.SetKeyName(2, "EnemyChipmunk.png");
             // 
             // imageList48
             // 
@@ -1867,16 +1880,6 @@
             this.imageList32.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList32.ImageSize = new System.Drawing.Size(32, 32);
             this.imageList32.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // refreshDirectoryButton
-            // 
-            this.refreshDirectoryButton.Image = ((System.Drawing.Image)(resources.GetObject("refreshDirectoryButton.Image")));
-            this.refreshDirectoryButton.Location = new System.Drawing.Point(92, 3);
-            this.refreshDirectoryButton.Name = "refreshDirectoryButton";
-            this.refreshDirectoryButton.Size = new System.Drawing.Size(32, 23);
-            this.refreshDirectoryButton.TabIndex = 6;
-            this.refreshDirectoryButton.UseVisualStyleBackColor = true;
-            this.refreshDirectoryButton.Click += new System.EventHandler(this.refreshDirectoryButton_Click);
             // 
             // treeView1
             // 
@@ -2093,7 +2096,7 @@
         private System.Windows.Forms.ImageList entitiesImageList;
         private System.Windows.Forms.ImageList enemiesImageList;
         internal System.Windows.Forms.ListView entitiesListView;
-        internal System.Windows.Forms.ListView gameEntitiesListView;
+        internal System.Windows.Forms.ListView gameEnemiesListView;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripButton zoomFitButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;

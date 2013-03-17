@@ -312,6 +312,7 @@
       <DependentUpon>SelectBehavior.cs</DependentUpon>
     </Compile>
     <Compile Include="src\Items\CollisionPathItem.cs" />
+    <Compile Include="src\Items\EnemyChipmunk.cs" />
     <Compile Include="src\Items\ExitItem.Editable.cs" />
     <Compile Include="src\SendFileTo.cs" />
   </ItemGroup>
