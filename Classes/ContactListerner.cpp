@@ -25,6 +25,7 @@ void ContactListener::BeginContact(b2Contact *con)
 		//	now check for hits
 		CollectibleHit(other);
 		MovableHit(other);
+		EnemyHit(other);
 		ExitHit(other);
 	}
 }
@@ -35,10 +36,18 @@ void ContactListener::EndContact(b2Contact *con)
 
 void ContactListener::MovableHit(GameEntity* entity)
 {
-	if (!entity->getProperties().isDynamicObject())
-		return;
+	//if (!entity->getProperties().isDynamicObject())
+	//	return;	
+}
 
-	
+void ContactListener::EnemyHit(GameEntity* entity)
+{
+	EnemyChipmunk *chip =  dynamic_cast<EnemyChipmunk*> (entity);
+	if (chip)
+	{
+		chip->removeAtNextUpdate();
+		chip->getSprite()->runAction(CCSequence::createWithTwoActions(CCBlink::create(0.5, 3), CCFadeOut::create(0)));
+	}
 }
 
 void ContactListener::CollectibleHit(GameEntity* entity)

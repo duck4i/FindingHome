@@ -2,7 +2,62 @@
 <Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_01" Visible="true" WeatherActive="true" CameraZoom="0.6" PlayerThrust="0" PlayerJump="0" PlayerMaxSpeed="0" PlayerShiftModifier="0" PlayerMidAirModifier="0">
     <Layers>
         <Layer Name="Background" Visible="true">
-            <Items />
+            <Items>
+                <Item xsi:type="TextureItem" Name="Texture_0014" Visible="true">
+                    <Position>
+                        <X>54</X>
+                        <Y>-81</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>4.300733</X>
+                        <Y>4.300733</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\palm\palm_3.png</texture_filename>
+                    <asset_name>palm_3.png</asset_name>
+                    <Origin>
+                        <X>36</X>
+                        <Y>66</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0013" Visible="true">
+                    <Position>
+                        <X>823</X>
+                        <Y>-67</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>4.300733</X>
+                        <Y>4.300733</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>tropical\palm\palm_3.png</texture_filename>
+                    <asset_name>palm_3.png</asset_name>
+                    <Origin>
+                        <X>36</X>
+                        <Y>66</Y>
+                    </Origin>
+                </Item>
+            </Items>
             <ScrollSpeed>
                 <X>1</X>
                 <Y>1</Y>
@@ -58,7 +113,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>12</NextItemNumber>
+        <NextItemNumber>15</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>700</X>

@@ -7,6 +7,7 @@ using namespace cocos2d;
 #include "GameEntities.h"
 #include "Performance.h"
 #include "NewAudioSystem.h"
+#include "Enemies.h"
 
 class MainScene;
 
@@ -29,6 +30,7 @@ private:
 	void CollectibleHit(GameEntity* entity);
 	void ExitHit(GameEntity* entity);
 	void MovableHit(GameEntity* entity); 
+	void EnemyHit(GameEntity* entity);
 
 public:
 

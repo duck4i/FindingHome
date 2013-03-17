@@ -22,17 +22,18 @@ bool EnemyChipmunk::postInit()
 
 void EnemyChipmunk::updatePosition(b2Vec2 pos)
 {
-	if (m_sprite && m_b2Body && (wasVisible || m_sprite->isVisible()))
-	{
-		wasVisible = true;
-		if (abs(m_b2Body->GetLinearVelocity().x) <= 10.0f)
-		{
-			m_b2Body->ApplyLinearImpulse(b2Vec2(-3.0f, 0), m_b2Body->GetWorldCenter());						
-		}
-	}
-
 	if (m_sprite && m_b2Body)
 	{
+		if (/*wasVisible ||*/ m_sprite->isVisible())
+		{
+			wasVisible = true;
+			if (abs(m_b2Body->GetLinearVelocity().x) <= 10.0f)
+			{
+				m_b2Body->ApplyLinearImpulse(b2Vec2(-3.0f, 0), m_b2Body->GetWorldCenter());						
+			}
+		}		
+	
+		//	update position
 		CCPoint p = ccp(WORLD_TO_SCREEN(m_b2Body->GetPosition().x), WORLD_TO_SCREEN(m_b2Body->GetPosition().y));
 		p.x -= m_nodeInfo.size.width / 2;
 		p.y += m_nodeInfo.size.height / 2;
