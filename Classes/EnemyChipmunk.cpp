@@ -9,7 +9,7 @@ bool EnemyChipmunk::init()
 
 bool EnemyChipmunk::postInit()
 {
-	m_sprite->setPosition(m_nodeInfo.position);
-	m_sprite->setScale(1.5f);
+	m_sprite->setPosition(m_nodeInfo.position);	
+	m_sprite->setAnchorPoint(ccp(0, 1)); // position is calculated differently in editor
 	return true;
 }
