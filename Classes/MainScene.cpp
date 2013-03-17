@@ -146,7 +146,13 @@ void MainScene::loadMap(float none)
 	this->setTouchEnabled(true);
 	//this->schedule(schedule_selector(MainScene::updateKeyboard));
 	this->scheduleUpdate();
+
+
+	//	now run level script
 }
+
+
+
 
 void MainScene::drawDebugControls()
 {
@@ -218,7 +224,7 @@ void MainScene::drawDebugControls()
 	shinyConsole->setVisible(false);
 	shinyConsoleBackground->setVisible(false);
 	
-	Shiny::ProfileManager::instance.clear();	//	clear prev data
+	Shiny::ProfileManager::instance.clear();	//	clear prev data	
 
 #endif
 }
@@ -270,6 +276,8 @@ bool MainScene::loadLevel()
 		this->gamePlayer->getBody()->SetLinearDamping(0.5f);
 		this->gamePlayer->getBody()->SetGravityScale(2);
 
+		this->runLevelScript(level);
+
 		/*CCRect r = LevelProperties::sharedProperties()->SceneSize;
 		CCLayerColor* l = CCLayerColor::create(ccc4(255, 255, 255, 255));
 		l->ignoreAnchorPointForPosition(false);
@@ -287,6 +295,28 @@ bool MainScene::loadLevel()
 	}
 	
 	return loaded;
+}
+
+void MainScene::runLevelScript(std::string level)
+{
+	PROFILE_FUNC();
+
+#ifdef ENABLE_SCRIPTING
+	ScriptingCore* monkey = ScriptingCore::getInstance();	
+	if (monkey)
+	{
+		std::string tmp = level.substr(0, level.find_last_of("."));
+		tmp += ".js";
+
+		CCLog("Looking for script: %s", tmp.c_str());
+
+		if (doesFileExits((char*) tmp.c_str()))
+		{
+			CCLog("Found it! Running script!");
+			monkey->runScript(tmp.c_str());
+		}
+	}
+#endif
 }
 
 void MainScene::toggleCameraProgress()

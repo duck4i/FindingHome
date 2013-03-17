@@ -6,6 +6,8 @@
 #include "LevelProperties.h"
 #include "Settings.h"
 
+using namespace cocos2d;
+
 ///
 ///	GameEntity with sprite attached
 ///

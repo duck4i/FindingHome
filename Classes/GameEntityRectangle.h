@@ -2,6 +2,7 @@
 #define _GAME_ENTITY_RECTANGLE_H_
 
 #include "GameEntitySprite.h"
+using namespace cocos2d;
 
 ///
 ///	Rectangle Primitive Entity

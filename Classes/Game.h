@@ -4,6 +4,7 @@
 #include <cocos2d.h>
 using namespace cocos2d;
 
+#include "GameEntities.h"
 
 /*
  *	Singleton holder of game data and state.
@@ -12,6 +13,8 @@ using namespace cocos2d;
 class Game
 {
 private:
+
+	GameEntityPlayer* player;
 	
 public:	
 	

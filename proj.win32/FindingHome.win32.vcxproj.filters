@@ -223,12 +223,4 @@
       <Filter>source\scripting</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Resources\TintShader.fsh">
-      <Filter>resource</Filter>
-    </None>
-    <None Include="..\Resources\TintShader.vsh">
-      <Filter>resource</Filter>
-    </None>
-  </ItemGroup>
 </Project>

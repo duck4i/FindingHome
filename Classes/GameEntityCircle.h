@@ -2,6 +2,7 @@
 #define _GAME_ENTITY_CIRCLE_H_
 
 #include "GameEntitySprite.h"
+using namespace cocos2d;
 
 ///
 ///	Circle Primitive Entity

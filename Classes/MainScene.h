@@ -12,6 +12,10 @@
 #include "Performance.h"
 #include "NewAudioSystem.h"
 
+#ifdef ENABLE_SCRIPTING
+	#include "ScriptingCore.h"
+#endif
+
 using namespace cocos2d;
 
 #define DEFAULT_SCALE			0.5f
@@ -94,6 +98,8 @@ private:
 
 	//	contact listener
 	ContactListener* worldListener;
+
+	void runLevelScript(std::string level);
 
 public:
 
