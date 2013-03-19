@@ -24,14 +24,14 @@ void EnemyChipmunk::updatePosition(b2Vec2 pos)
 {
 	if (m_sprite && m_b2Body)
 	{
-		if (/*wasVisible ||*/isReallyVisible())
+		if (wasVisible || isReallyVisible())
 		{
 			wasVisible = true;
 			if (abs(m_b2Body->GetLinearVelocity().x) <= 10.0f)
 			{
 				m_b2Body->ApplyLinearImpulse(b2Vec2(-3.0f, 0), m_b2Body->GetWorldCenter());						
 			}
-		}		
+		}
 	
 		//	update position
 		CCPoint p = ccp(WORLD_TO_SCREEN(m_b2Body->GetPosition().x), WORLD_TO_SCREEN(m_b2Body->GetPosition().y));

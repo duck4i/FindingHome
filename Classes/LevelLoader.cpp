@@ -116,6 +116,8 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 	info.flipHorizontally = parseNodeFlip(node);
 	info.flipVertically = parseNodeFlip(node, true);
 	info.visible = parseNodeVisible(node);	
+	info.worldLayerNode = this->worldNode;
+	info.boxWorldNode = this->boxWorld;
 
 	//	copy allocated string and free it
 	char* tmp = parseNodeTexture(node);
@@ -337,11 +339,8 @@ char* LevelLoader::parseNodeAssetName(xmlNodePtr node)
 	return read;
 }
 
-
 void LevelLoader::parseLevelProperties()
-{
-	LevelProperties::purge();
-
+{	
 	LevelProperties* l = LevelProperties::sharedProperties(sharedDoc->children);
 	if (l)
 		l->WorldLayer = this->worldNode;

@@ -187,17 +187,18 @@ void GameEntitySprite::bodyRemovedFromWorld()
 }
 
 bool GameEntitySprite::isReallyVisible()
-{
-	bool isVisible = true;
-	LevelProperties* pr = LevelProperties::sharedProperties();
-	if (pr && pr->WorldLayer)
+{	
+	CCNode* WorldLayer = m_nodeInfo.worldLayerNode;
+	if (WorldLayer)
 	{
-		CCNode* world = pr->WorldLayer;				
-		CCPoint pos = world->convertToWorldSpace(m_sprite->getPosition());
-
 		CCSize screen = CCDirector::sharedDirector()->getWinSizeInPixels();
+		CCPoint pos = WorldLayer->convertToWorldSpace(m_sprite->getPosition());
+		
 		if (pos.x >= screen.width || pos.x <= 0 || pos.y >= screen.height || pos.y <= 0)
-			isVisible = false; 					
-	}
-	return isVisible;
+			return false;
+		
+		return true;
+	}	
+
+	return false;
 }

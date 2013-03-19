@@ -1,32 +1,26 @@
 #include "LevelProperties.h"
 
-LevelProperties* _sLevelProperties;
+LevelProperties* _sLevelProperties = NULL;
 
 LevelProperties* LevelProperties::sharedProperties(xmlNodePtr node)
 {
 	if (_sLevelProperties == NULL && node != NULL)
 	{
 		_sLevelProperties = new LevelProperties(node);
-		bool ok = _sLevelProperties->init();
-		if (!ok)
-		{
-			delete _sLevelProperties;
-		}
+		if (!_sLevelProperties->init())
+			CC_SAFE_DELETE(_sLevelProperties);		
 	}
 	return _sLevelProperties;
 }
 
 void LevelProperties::purge()
 {
-	if (_sLevelProperties)
-	{
-		delete _sLevelProperties;
-		_sLevelProperties = NULL;
-	}
+	CC_SAFE_DELETE(_sLevelProperties);
 }
 
 LevelProperties::~LevelProperties()
 {	
+	
 }
 
 //Name="Tutorial Level" Visible="true" WeatherActive="true" 

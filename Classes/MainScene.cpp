@@ -51,7 +51,7 @@ MainScene::~MainScene()
 	
 	LevelProperties::purge();
 	KeyboardHelper::purge();
-	ShapeHelper::purge();	
+	ShapeHelper::purge();		
 }
 
 bool MainScene::init()
@@ -63,6 +63,8 @@ bool MainScene::init()
 	
 	//	Create world layer
 	this->worldLayer = CCLayer::create();
+	this->worldLayer->setTag(WORLD_NODE_ID);
+
 	sceneScale = DEFAULT_SCALE;
 	this->worldLayer->setScale(sceneScale);
 	this->addChild(worldLayer, 1000);

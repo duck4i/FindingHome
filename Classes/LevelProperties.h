@@ -6,7 +6,7 @@
 
 #define STRING_TRUE(s) xmlStrcasecmp(s, (xmlChar*) "true") == 0
 
-class LevelProperties
+class LevelProperties : CCObject
 {
 public:
 		
@@ -36,7 +36,7 @@ public:
 		WorldLayer = NULL;
 	}
 
-	LevelProperties(xmlNodePtr node)
+	LevelProperties(xmlNodePtr node) : CCObject()
 	{
 		reset();
 		m_node = node;

@@ -63,6 +63,10 @@ public:
 	xmlNodePtr xmlNode;
 	CCNode* cocosNode;
 
+	CCNode* worldLayerNode;
+	b2World* boxWorldNode;
+
+
 	NODEINFO()
 	{		
 		nodeType = NodeTypeUndefined;
@@ -81,6 +85,9 @@ public:
 		cocosNode = NULL;
 		nextLevel = NULL;
 		enemyType = EnemyTypeUndefined;
+
+		worldLayerNode = NULL;
+		boxWorldNode = NULL;
 	}
 
 };

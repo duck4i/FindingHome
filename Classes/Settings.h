@@ -3,10 +3,10 @@
 #include "Physics.h"
 
 
-
-
 #define WINDOW_WIDTH	960
 #define WINDOW_HEIGHT	640
+
+#define WORLD_NODE_ID	11234
 
 #define WINDOW_TITLE	"Finding Home Alpha"
 
