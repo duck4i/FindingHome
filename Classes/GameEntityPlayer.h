@@ -5,14 +5,15 @@
 #include "KeyboardHelper.h"
 
 #define PLAYER_SPEED			14.0f
-#define PLAYER_JUMP_VALUE		230.0f
-#define PLAYER_STEP_VALUE		35.0f
+#define PLAYER_JUMP_VALUE		200.0f
+#define PLAYER_STEP_VALUE		25.0f
 
 #define PLAYER_MID_AIR_FACTOR	0.3f
 #define PLAYER_SHIFT_FACTOR		1.45f
 
-#define PLAYER_JUMP_HALFSTEP	0.3f
-#define PLAYER_HALFSTEP_VALUE	120.0f
+#define PLAYER_JUMP_HALFSTEP	0.1f
+#define PLAYER_HALFSTEP_VALUE	30.0f
+#define PLAYER_HALFSTEP_TIMES	3.0f
 
 #define IN_AIR_BEFORE_DEATH		2.5f
 
@@ -45,6 +46,7 @@ protected:
 
 	float m_bForwardTrustWasOn;
 	float m_bVerticalThrustWasOn;
+	float m_bVerticalThrustCounter;
 
 	float stepValue;
 	float jumpValue;
@@ -65,6 +67,7 @@ protected:
 		midAirFactor = PLAYER_MID_AIR_FACTOR;
 		m_bForwardTrustWasOn = 0;
 		m_bVerticalThrustWasOn = 0;
+		m_bVerticalThrustCounter = 0;
 	}
 	
 	virtual bool init();

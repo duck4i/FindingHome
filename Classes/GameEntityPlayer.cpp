@@ -118,7 +118,10 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 	KeyState kup = key->getUp();
 	
 	if (kup == KeyStateUp)
+	{
 		m_bVerticalThrustWasOn = 0;
+		m_bVerticalThrustCounter = 0;
+	}
 
 	if (kup == KeyStateDown || kup == KeyStateUndefined && m_bVerticalThrustWasOn >= 0)
 		m_bVerticalThrustWasOn += delta;
@@ -127,12 +130,16 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 	if (kup == KeyStateUndefined && m_bVerticalThrustWasOn != -1 && m_bVerticalThrustWasOn >= PLAYER_JUMP_HALFSTEP)
 	{
 		kup = KeyStateDown;
-		m_bVerticalThrustWasOn = -1;
-		y = PLAYER_HALFSTEP_VALUE;
+		if (m_bVerticalThrustCounter++ > PLAYER_HALFSTEP_TIMES)
+			m_bVerticalThrustWasOn = -1;
+		else
+			m_bVerticalThrustWasOn = 0;
+
+		y = PLAYER_HALFSTEP_VALUE;		
 	}
 	else
 		if (kup == KeyStateDown )
-			y += jumpValue;
+			y += jumpValue;		
 	
 
 	float isMidAir = isPlayerMidAir();
@@ -157,7 +164,8 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 		if (isMidAir)
 		{
 			x *= midAirFactor;
-			if (m_bVerticalThrustWasOn != -1)
+			if (m_bVerticalThrustWasOn == -1 || m_bVerticalThrustCounter > 0);
+			else
 				y = 0;	//	no jumping when mid air
 		}
 		
@@ -179,15 +187,15 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 			//y = 0;	//	now vertical speed is speed limited too
 		}
 		
-		if (x && y)
+		if (y)
 		{
 			//	if jumping here we need to add some angle to our player
 			//	TODO:
-
-			m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), m_b2Body->GetWorldCenter());
+			b2Vec2 vec = m_b2Body->GetWorldCenter();
+			m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), vec);
 		}
 		else		
-			m_b2Body->ApplyLinearImpulse(b2Vec2(0, y), m_b2Body->GetWorldCenter());		
+			m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), m_b2Body->GetWorldCenter());		
 	}
 	else if (m_bForwardTrustWasOn)
 	{
