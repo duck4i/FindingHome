@@ -4,12 +4,15 @@
 #include "GameEntitySprite.h"
 #include "KeyboardHelper.h"
 
-#define PLAYER_SPEED			10.0f
-#define PLAYER_JUMP_VALUE		280.0f
-#define PLAYER_STEP_VALUE		25.0f
+#define PLAYER_SPEED			14.0f
+#define PLAYER_JUMP_VALUE		230.0f
+#define PLAYER_STEP_VALUE		35.0f
 
 #define PLAYER_MID_AIR_FACTOR	0.3f
 #define PLAYER_SHIFT_FACTOR		1.45f
+
+#define PLAYER_JUMP_HALFSTEP	0.3f
+#define PLAYER_HALFSTEP_VALUE	120.0f
 
 #define IN_AIR_BEFORE_DEATH		2.5f
 
@@ -40,6 +43,9 @@ protected:
 	///	Keeps permanent record of player death state in case of tunneling
 	bool m_bPlayerDied;
 
+	float m_bForwardTrustWasOn;
+	float m_bVerticalThrustWasOn;
+
 	float stepValue;
 	float jumpValue;
 	float maxSpeed;
@@ -57,6 +63,8 @@ protected:
 		maxSpeed = PLAYER_SPEED;
 		shiftFactor = PLAYER_SHIFT_FACTOR;
 		midAirFactor = PLAYER_MID_AIR_FACTOR;
+		m_bForwardTrustWasOn = 0;
+		m_bVerticalThrustWasOn = 0;
 	}
 	
 	virtual bool init();
@@ -82,7 +90,7 @@ public:
 	virtual void updatePosition(b2Vec2 pos);
 	virtual void updateRotation(float32 angle);
 
-	virtual void updatePlayerMovement();
+	virtual void updatePlayerMovement(float delta);
 
 	virtual CCNode* getSkin() { return m_skin; } 
 

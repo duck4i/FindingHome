@@ -62,7 +62,7 @@ namespace GLEED2D
         }
 
         [XmlIgnore()]
-        [DisplayName("Forward Thrust"), Category(" Player Settings"), Description("(D: 25.0) Maximum speed of the player.")]
+        [DisplayName("Forward Thrust"), Category(" Player Settings"), Description("(D: 25.0) Forward trhust force on player.")]
         public float pPlayerThrust
         {
             get { return PlayerThrust; }

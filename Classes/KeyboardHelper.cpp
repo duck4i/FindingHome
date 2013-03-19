@@ -110,7 +110,8 @@ LRESULT KeyboardHelper::HookProc(int code, WPARAM wParam, LPARAM lParam)
 KeyState KeyboardHelper::getUp()
 {
 	KeyState s = b_up;
-	if (s == KeyStateDown) b_up = KeyStateUndefined;
+	if (s == KeyStateDown) 
+		b_up = KeyStateUndefined;
 	return s;
 }
 KeyState KeyboardHelper::getLeft()

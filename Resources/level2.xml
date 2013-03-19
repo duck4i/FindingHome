@@ -2321,6 +2321,20 @@
                         <PackedValue>4290283081</PackedValue>
                     </FillColor>
                 </Item>
+                <Item xsi:type="EnemyChipmunk" Name="Chipmunk_0272" Visible="true">
+                    <Position>
+                        <X>-4535</X>
+                        <Y>-1157</Y>
+                    </Position>
+                    <CustomProperties />
+                </Item>
+                <Item xsi:type="EnemyChipmunk" Name="Chipmunk_0273" Visible="true">
+                    <Position>
+                        <X>-229</X>
+                        <Y>-123</Y>
+                    </Position>
+                    <CustomProperties />
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -2332,8 +2346,8 @@
             <Items>
                 <Item xsi:type="PlayerItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-13418</X>
-                        <Y>-1189</Y>
+                        <X>7864.14844</X>
+                        <Y>157.580322</Y>
                     </Position>
                     <CustomProperties />
                 </Item>
@@ -4969,6 +4983,13 @@
                     </Scale>
                     <NextLevel>Level3.xml</NextLevel>
                 </Item>
+                <Item xsi:type="EnemyChipmunk" Name="Chipmunk_0274" Visible="true">
+                    <Position>
+                        <X>5196</X>
+                        <Y>-188</Y>
+                    </Position>
+                    <CustomProperties />
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -4979,11 +5000,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>271</NextItemNumber>
+        <NextItemNumber>274</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>8522.261</X>
-            <Y>-2303.88818</Y>
+            <X>8194.148</X>
+            <Y>1667.58032</Y>
         </CameraPosition>
         <Version>1.6.0.0</Version>
     </EditorRelated>

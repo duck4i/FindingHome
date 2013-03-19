@@ -21,12 +21,12 @@ var MenuItemActions = {
 	doCredits : function()
 	{
 		var sc = new CreditsMenuLayer();
-		var anim = cc.TransitionSlideInR.create(gg.AnimationShort, sc);		
+		var anim = cc.TransitionFade.create(gg.AnimationShort, sc);		
 		gg.Director.replaceScene(anim);
 	},
 	doSettings: function(){
 		var sc = new SettingsMenuLayer();
-		var anim = cc.TransitionSlideInL.create(gg.AnimationShort, sc);		
+		var anim = cc.TransitionFade.create(gg.AnimationShort, sc);		
 		gg.Director.replaceScene(anim);
 	},
 	doExit : function()

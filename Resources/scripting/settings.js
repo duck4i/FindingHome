@@ -7,7 +7,7 @@ var SettingsActions =
 	{
 		var sc = cc.Scene.create();
 		sc.addChild(new MainMenuLayer());
-		var anim = cc.TransitionSlideInR.create(gg.AnimationShort, sc);		
+		var anim = cc.TransitionFade.create(gg.AnimationShort, sc);		
 		gg.Director.replaceScene(anim);
 	}
 };

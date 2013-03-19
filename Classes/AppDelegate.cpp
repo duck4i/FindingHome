@@ -30,7 +30,8 @@
 USING_NS_CC;
 using namespace CocosDenshion;
 
-bool doneLoading = false;
+extern bool disableSound;
+
 AppDelegate::AppDelegate()
 {	
 	
@@ -104,35 +105,25 @@ bool AppDelegate::applicationDidFinishLaunching()
     // create a scene. it's an autorelease object
     CCScene *pScene = MainScene::scene();    
     pDirector->runWithScene(pScene);
-
-	doneLoading = true;
+	
     return true;
 }
 
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground()
 {
-	if (!doneLoading)
-		return;
-
-    CCDirector::sharedDirector()->stopAnimation();
-
-    //SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
-	extern bool disableSound;
+    CCDirector::sharedDirector()->stopAnimation();	
+	
 	if (!disableSound)
 		NewAudioSystem::shared()->pause();
+
 }
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground()
 {
-	if (!doneLoading)
-		return;
-
-    CCDirector::sharedDirector()->startAnimation();
-
-    //SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-	extern bool disableSound;
+	CCDirector::sharedDirector()->startAnimation();
+	
 	if (!disableSound)
 		NewAudioSystem::shared()->resume();
 }

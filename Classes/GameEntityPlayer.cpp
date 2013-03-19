@@ -64,7 +64,7 @@ bool GameEntityPlayer::createBody(b2World *world)
 	doggyShape.m_radius = SCREEN_TO_WORLD(playerSize.height * m_skin->getScale() / 2 + 5);
 	
 	m_b2FixtureDef.density = 3.0f;
-	m_b2FixtureDef.friction = 0.8f;
+	m_b2FixtureDef.friction = 1.0f;
 	m_b2FixtureDef.restitution = 0;
 	m_b2FixtureDef.shape = &doggyShape;	
 	m_b2FixtureDef.filter.categoryBits = 0x0002;
@@ -101,7 +101,7 @@ void GameEntityPlayer::updateRotation(float32 angle)
 	///	todo rotation when on steep hils etc
 }
 
-void GameEntityPlayer::updatePlayerMovement()
+void GameEntityPlayer::updatePlayerMovement(float delta)
 {
 	KeyboardHelper *key = KeyboardHelper::sharedHelper();
 	float x = 0;
@@ -115,12 +115,32 @@ void GameEntityPlayer::updatePlayerMovement()
 	if (rightDown)
 		x += stepValue;
 
-	if (key->getUp() == KeyStateDown)
-		y += jumpValue;
+	KeyState kup = key->getUp();
+	
+	if (kup == KeyStateUp)
+		m_bVerticalThrustWasOn = 0;
+
+	if (kup == KeyStateDown || kup == KeyStateUndefined && m_bVerticalThrustWasOn >= 0)
+		m_bVerticalThrustWasOn += delta;
+
+	//CCLog("TIME: %f", m_bVerticalThrustWasOn);
+	if (kup == KeyStateUndefined && m_bVerticalThrustWasOn != -1 && m_bVerticalThrustWasOn >= PLAYER_JUMP_HALFSTEP)
+	{
+		kup = KeyStateDown;
+		m_bVerticalThrustWasOn = -1;
+		y = PLAYER_HALFSTEP_VALUE;
+	}
+	else
+		if (kup == KeyStateDown )
+			y += jumpValue;
+	
 
 	float isMidAir = isPlayerMidAir();
 	if (x || y)
 	{
+		if (x)
+			m_bForwardTrustWasOn += delta;
+
 		//	
 		//	Calculate and apply forces for movement
 		//
@@ -137,7 +157,8 @@ void GameEntityPlayer::updatePlayerMovement()
 		if (isMidAir)
 		{
 			x *= midAirFactor;
-			y = 0;	//	no jumping when mid air
+			if (m_bVerticalThrustWasOn != -1)
+				y = 0;	//	no jumping when mid air
 		}
 		
 		///
@@ -153,10 +174,28 @@ void GameEntityPlayer::updatePlayerMovement()
 		//	apply horizontal force - take care of max velocity
 		const float speed = abs(velocity.x);
 		if (speed >= maxSpeed)
+		{
 			x = 0;
-				
-		m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), m_b2Body->GetWorldCenter());
+			//y = 0;	//	now vertical speed is speed limited too
+		}
+		
+		if (x && y)
+		{
+			//	if jumping here we need to add some angle to our player
+			//	TODO:
+
+			m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), m_b2Body->GetWorldCenter());
+		}
+		else		
+			m_b2Body->ApplyLinearImpulse(b2Vec2(0, y), m_b2Body->GetWorldCenter());		
 	}
+	else if (m_bForwardTrustWasOn)
+	{
+		m_bForwardTrustWasOn = 0.0f;
+		b2Vec2 linearVel = m_b2Body->GetLinearVelocity();
+		m_b2Body->SetLinearVelocity(b2Vec2(linearVel.x * 0.5f, linearVel.y /** 0.5f*/));
+	}
+
 
 	//	in any case constrol the jump velocity to look more real
 	b2Vec2 vel = this->m_b2Body->GetLinearVelocity();

@@ -482,7 +482,7 @@ void MainScene::update(float delta)
 			playerDied();
 			return;	//	stop update
 		}		
-		gamePlayer->updatePlayerMovement();
+		gamePlayer->updatePlayerMovement(delta);
 	}
 
 	//	PHYSICS UPDATE

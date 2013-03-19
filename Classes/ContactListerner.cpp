@@ -46,6 +46,9 @@ void ContactListener::EnemyHit(GameEntity* entity)
 	if (chip)
 	{
 		chip->removeAtNextUpdate();
+		
+		//NewAudioSystem::shared()->playHop();//	play bark sound event
+
 		chip->getSprite()->runAction(CCSequence::createWithTwoActions(CCBlink::create(0.5, 3), CCFadeOut::create(0)));
 	}
 }

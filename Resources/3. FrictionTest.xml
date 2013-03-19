@@ -2,7 +2,15 @@
 <Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Friction Test" Visible="true" WeatherActive="false" CameraZoom="0.8" PlayerThrust="0" PlayerJump="0" PlayerMaxSpeed="0" PlayerShiftModifier="0" PlayerMidAirModifier="0">
     <Layers>
         <Layer Name="Background" Visible="true">
-            <Items />
+            <Items>
+                <Item xsi:type="EnemyChipmunk" Name="Chipmunk_0006" Visible="true">
+                    <Position>
+                        <X>2325</X>
+                        <Y>-621</Y>
+                    </Position>
+                    <CustomProperties />
+                </Item>
+            </Items>
             <ScrollSpeed>
                 <X>1</X>
                 <Y>1</Y>
@@ -212,7 +220,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>5</NextItemNumber>
+        <NextItemNumber>6</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
             <X>1450.00012</X>
