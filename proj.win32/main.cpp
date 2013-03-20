@@ -9,6 +9,7 @@
 #include "LevelProperties.h"
 #include <vector>
 #include <string>
+#include "resource.h"
 
 USING_NS_CC;
 
@@ -161,20 +162,28 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 #ifdef CC_PLATFORM_WIN32
 		//	hide cursor for app
 		ClipCursor(&r);
-#endif
 
 		unsigned long ws = GetWindowLong(eglView->getHWnd(), GWL_STYLE);
 		SetWindowLong(eglView->getHWnd(), GWL_STYLE, ws & ~(WS_CAPTION | WS_THICKFRAME));
+#endif
 
 		//	no matter what resolution design size is the same.
 		eglView->setDesignResolutionSize(WINDOW_WIDTH, WINDOW_HEIGHT, kResolutionShowAll);
 	}
 	else
 		eglView->setFrameSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-		
+	
+
+#ifdef CC_PLATFORM_WIN32	
 	
 	//	set window name
 	SetWindowText(eglView->getHWnd(), WINDOW_TITLE);
+	
+	//	set window icon
+	HICON ico = LoadIcon(hInstance, MAKEINTRESOURCE(IDR_MAINFRAME));
+	SendMessage(eglView->getHWnd(), WM_SETICON, (WPARAM) ICON_SMALL, (LPARAM) ico);
+
+#endif
 
 	srand(GetTickCount());
 

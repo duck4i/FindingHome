@@ -4,9 +4,8 @@
 //
 
 #define IDS_PROJNAME                100
-#define IDR_FINDINGHOME    100
-
-#define ID_FILE_NEW_WINDOW            32771
+#define IDR_FINDINGHOME				101
+#define IDR_MAINFRAME				102
 
 // Next default values for new objects
 // 

@@ -135,11 +135,11 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 		else
 			m_bVerticalThrustWasOn = 0;
 
-		y = PLAYER_HALFSTEP_VALUE;		
+		y = PLAYER_HALFSTEP_VALUE / m_bVerticalThrustCounter;		
 	}
 	else
 		if (kup == KeyStateDown )
-			y += jumpValue;		
+			y += jumpValue;
 	
 
 	float isMidAir = isPlayerMidAir();
@@ -164,7 +164,9 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 		if (isMidAir)
 		{
 			x *= midAirFactor;
-			if (m_bVerticalThrustWasOn == -1 || m_bVerticalThrustCounter > 0);
+
+			bool specialJumpCase = (m_bVerticalThrustWasOn == -1 || m_bVerticalThrustCounter > 0);
+			if (specialJumpCase && vel.y > 0 /* in jump - not falling yet*/);
 			else
 				y = 0;	//	no jumping when mid air
 		}
