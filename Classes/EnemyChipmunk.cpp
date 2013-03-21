@@ -40,4 +40,16 @@ void EnemyChipmunk::updatePosition(b2Vec2 pos)
 
 		m_sprite->setPosition(p);
 	}
+
+	if (wasVisible && !isReallyVisible())
+	{
+		timeSinceInvisible += 1.0f / 60.0f;
+		
+		if (timeSinceInvisible >= DESTROY_CHIPMUNK_AFTER)
+		{
+			CCLog("Chipmunk destroyed (expired).");
+			removeAtNextUpdate();
+		}
+	}	
+
 }

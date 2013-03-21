@@ -68,8 +68,8 @@
             <Items>
                 <Item xsi:type="PlayerItem" Name="Player" Visible="true">
                     <Position>
-                        <X>-443</X>
-                        <Y>-65</Y>
+                        <X>-1209</X>
+                        <Y>-56</Y>
                     </Position>
                     <CustomProperties />
                 </Item>
@@ -82,11 +82,11 @@
                 </Item>
                 <Item xsi:type="RectangleItem" Name="Rectangle_0005" Visible="true">
                     <Position>
-                        <X>-515</X>
+                        <X>-1331</X>
                         <Y>63</Y>
                     </Position>
                     <CustomProperties />
-                    <Width>1932</Width>
+                    <Width>3665</Width>
                     <Height>69</Height>
                     <FillColor>
                         <R>192</R>
@@ -98,8 +98,15 @@
                 </Item>
                 <Item xsi:type="EnemyChipmunk" Name="Entity_0012" Visible="true">
                     <Position>
-                        <X>390</X>
+                        <X>-344</X>
                         <Y>-62</Y>
+                    </Position>
+                    <CustomProperties />
+                </Item>
+                <Item xsi:type="EnemyChipmunk" Name="Entity_0016" Visible="true">
+                    <Position>
+                        <X>1633</X>
+                        <Y>-44</Y>
                     </Position>
                     <CustomProperties />
                 </Item>
@@ -113,11 +120,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>15</NextItemNumber>
+        <NextItemNumber>16</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>700</X>
-            <Y>0</Y>
+            <X>474.999054</X>
+            <Y>141.666946</Y>
         </CameraPosition>
         <Version>1.6.0.0</Version>
     </EditorRelated>

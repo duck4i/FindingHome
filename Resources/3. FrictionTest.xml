@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Friction Test" Visible="true" WeatherActive="false" CameraZoom="0.8" PlayerThrust="0" PlayerJump="0" PlayerMaxSpeed="0" PlayerShiftModifier="0" PlayerMidAirModifier="0">
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Friction Test" Visible="true" WeatherActive="false" CameraZoom="0.6" PlayerThrust="0" PlayerJump="0" PlayerMaxSpeed="0" PlayerShiftModifier="0" PlayerMidAirModifier="0">
     <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
@@ -223,7 +223,7 @@
         <NextItemNumber>6</NextItemNumber>
         <ContentRootFolder>..\Resources\</ContentRootFolder>
         <CameraPosition>
-            <X>1450.00012</X>
+            <X>1166.66541</X>
             <Y>166.66684</Y>
         </CameraPosition>
         <Version>1.6.0.0</Version>
