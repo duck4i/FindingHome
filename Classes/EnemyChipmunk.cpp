@@ -48,8 +48,14 @@ void EnemyChipmunk::updatePosition(b2Vec2 pos)
 		if (timeSinceInvisible >= DESTROY_CHIPMUNK_AFTER)
 		{
 			CCLog("Chipmunk destroyed (expired).");
-			removeAtNextUpdate();
+
+			removeAtNextUpdate();			
+			hide();
 		}
 	}	
+}
 
+void EnemyChipmunk::hide()
+{
+	this->m_sprite->removeFromParentAndCleanup(true);
 }

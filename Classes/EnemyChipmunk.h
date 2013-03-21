@@ -17,6 +17,7 @@ private:
 	bool wasVisible;
 	float timeSinceInvisible;
 
+	void hide();
 public:
 
 	virtual bool init();

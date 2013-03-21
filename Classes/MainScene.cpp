@@ -331,7 +331,7 @@ void MainScene::updateCamera(float delta)
 	PROFILE_FUNC();
 
 	//CCLog("DELTA CAMERA: %f", delta);
-	if (this->gamePlayer == NULL || this->cameraMoveInProgress || !this->worldLayer)
+	if (this->gamePlayer == NULL || this->touchesInProgress  || !this->worldLayer)
 		return;
 	
 	CCPoint realPos = this->worldLayer->convertToWorldSpace(this->gamePlayer->getSkin()->getPosition());	
@@ -350,17 +350,39 @@ void MainScene::updateCamera(float delta)
 	float xm = prevPos.x;
 	float ym = prevPos.y;
 
+	//	check for X axis
 	if (realPos.x >= rightMargin)
 		xm -= realPos.x - rightMargin;
 	else if (realPos.x <= leftMargin)
 		xm += leftMargin - realPos.x;
 
-	if (realPos.y <= bottomMargin)
-		ym += bottomMargin - realPos.y;
-	else if (realPos.y >= topMargin)
-		ym -= realPos.y - topMargin;
-
+	//	Set X axis independently	
 	this->worldLayer->setPosition(xm, ym);
+
+	//	check for Y axis (only if player is not in air)
+	if ( !this->gamePlayer->isPlayerMidAir() && !cameraMoveInProgress )
+	{
+		float lastYM = ym;
+
+		if (realPos.y <= bottomMargin)
+			ym += bottomMargin - realPos.y;
+		else if (realPos.y >= topMargin)
+			ym -= realPos.y - topMargin;
+
+		//	If needed ajdust position on Y axis animated 
+		if (ym != lastYM)
+		{
+			this->cameraMoveInProgress = true;
+
+			CCMoveTo* m1 = CCMoveTo::create(ZOOM_TIME, ccp(xm, ym));
+			CCCallFunc* f1 = CCCallFunc::create(this, callfunc_selector(MainScene::toggleCameraProgress));
+
+			CCSequence* seq = CCSequence::createWithTwoActions(m1, f1);
+			this->worldLayer->runAction(seq);
+		}
+	}
+
+	
 }
 
 void MainScene::updateKeyboard(float delta)
@@ -406,8 +428,10 @@ void MainScene::updateKeyboard(float delta)
 		descSceneZoom();
 	else if (key->getF9() == KeyStateDown)
 	{
-		if (cameraMoveInProgress)
-			cameraMoveInProgress = false;
+		if (touchesInProgress)
+		{
+			touchesInProgress = false;
+		}
 		else
 			resetSceneZoom();
 	}
@@ -540,6 +564,7 @@ void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 {
 	PROFILE_FUNC();
 	CCLog("Touches began");	
+	this->touchesInProgress = true;
 }
 
 void MainScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
@@ -556,8 +581,7 @@ void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)
 	PROFILE_FUNC();
 
 	CCLog("Touch moved");
-	this->touchesInProgress = true;
-	this->cameraMoveInProgress = true;
+	this->touchesInProgress = true;	
 
 	CCTouch *t = (CCTouch*) touches->anyObject();
 	if (!t)
