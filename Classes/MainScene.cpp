@@ -564,14 +564,14 @@ void MainScene::ccTouchesBegan(CCSet* touches, CCEvent* event)
 {
 	PROFILE_FUNC();
 	CCLog("Touches began");	
-	this->touchesInProgress = true;
+	//this->touchesInProgress = true;
 }
 
 void MainScene::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
 	PROFILE_FUNC();
 	CCLog("Touches ended");
-	this->touchesInProgress = false;	
+	//this->touchesInProgress = false;	
 }
 
 void MainScene::ccTouchesMoved(CCSet* touches, CCEvent* event)

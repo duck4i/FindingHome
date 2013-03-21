@@ -52,7 +52,7 @@ void EnemyChipmunk::updatePosition(b2Vec2 pos)
 			removeAtNextUpdate();			
 			hide();
 		}
-	}	
+	}
 }
 
 void EnemyChipmunk::hide()
