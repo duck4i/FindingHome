@@ -12,20 +12,20 @@
 ///	Movement modifiers
 ///
 #define PLAYER_SPEED			14.0f
-#define PLAYER_JUMP_VALUE		200.0f
+#define PLAYER_JUMP_VALUE		400.0f
 #define PLAYER_STEP_VALUE		25.0f
 
 #define PLAYER_MID_AIR_FACTOR	0.3f
 #define PLAYER_SHIFT_FACTOR		1.45f
 
 #define PLAYER_JUMP_HALFSTEP	0.1f
-#define PLAYER_HALFSTEP_VALUE	60.0f
-#define PLAYER_HALFSTEP_TIMES	2.0f
+#define PLAYER_HALFSTEP_VALUE	170.0f
+#define PLAYER_HALFSTEP_TIMES	3.0f
 
 //	Make arch when jumping
-#define PLAYER_JUMP_PUSH		15.0f
+#define PLAYER_JUMP_PUSH		-11.0f
 
-//	How long player has to be in air before claimed dead
+//	How long player has to be in air before claimed dead (in seconds)
 #define IN_AIR_BEFORE_DEATH		4.0f
 
 
@@ -91,6 +91,7 @@ protected:
 	
 	//	Helper methods
 	virtual void checkPlayerDirection(bool left, bool right);
+
 
 public:
 	

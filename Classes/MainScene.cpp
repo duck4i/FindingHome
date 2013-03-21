@@ -236,7 +236,7 @@ void MainScene::setupPhysics()
 	PROFILE_FUNC();
 
 	//	setup Physics
-	const b2Vec2 gravity(0.0f, -10.0f);
+	const b2Vec2 gravity(0.0f, BOX_WORLD_GRAVITY);
 	this->boxWorldSleep = true;
 
 	this->boxWorld = new b2World(gravity);

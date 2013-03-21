@@ -34,7 +34,7 @@
 ///	Starting level settings
 ///
 #ifdef _DEBUG
-	#define GAME_START_LEVEL			RESOURCE_DIR "ForestTest.xml"//"ForestTest.xml"
+	#define GAME_START_LEVEL			RESOURCE_DIR "ForestTest2.xml"//"ForestTest.xml"
 #else
 	#define GAME_START_LEVEL			RESOURCE_DIR "Level2.xml"
 #endif
@@ -66,6 +66,12 @@ inline static bool doesFileExits(char* file)
 
 #endif
 	return true;
+}
+
+///	TODO: Move to utilites
+static ccColor3B cc4to3(ccColor4B c)
+{
+	return ccc3(c.r, c.g, c.b);
 }
 
 #endif

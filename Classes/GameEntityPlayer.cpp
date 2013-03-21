@@ -63,7 +63,7 @@ bool GameEntityPlayer::createBody(b2World *world)
 	b2CircleShape doggyShape;
 	doggyShape.m_radius = SCREEN_TO_WORLD(playerSize.height * m_skin->getScale() / 2 + 5);
 	
-	m_b2FixtureDef.density = 3.0f;
+	m_b2FixtureDef.density = 4.0f;
 	m_b2FixtureDef.friction = 1.0f;
 	m_b2FixtureDef.restitution = 0;
 	m_b2FixtureDef.shape = &doggyShape;	
@@ -195,27 +195,14 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 			//y = 0;	//	now vertical speed is speed limited too
 		}
 		
-		if (false/*y && x*/)
-		{
-			//	if jumping here we need to add some angle to our player
-			//	TODO:
 
-			b2Vec2 pos = m_b2Body->GetWorldCenter();
-			float diffx = PLAYER_JUMP_PUSH * (PlayerDirectionRight ? -1 : 1);
-			b2Vec2 thrust = b2Vec2(x - diffx, y);
+		//	TODOs:
+		//	- Player is too light, needs to fall faster
+		//	- Arc that is made looks like /----------\ but should be sharper corner like /----\ (no long jumps if not used shift)
+		//	- Camera only needs to have affect when player is not MID-AIR??? (super mario style)
 
-			//	apply pressure
-			m_b2Body->ApplyLinearImpulse(thrust, pos);
-		}
-		else
-		{
-			//	TODOs:
-			//	- Player is too light, needs to fall faster
-			//	- Arc that is made looks like /----------\ but should be sharper corner like /----\ (no long jumps if not used shift)
-			//	- Camera only needs to have affect when player is not MID-AIR??? (super mario style)
-
-			m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), m_b2Body->GetWorldCenter());
-		}
+		m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), m_b2Body->GetWorldCenter());
+		
 	}
 	else if (m_bForwardTrustWasOn)
 	{
@@ -224,12 +211,12 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 	}
 
 
-	//	in any case constrol the jump velocity to look more real	
-	//if (playerVelocity.y < 0)
-	//{		
-	//	b2Vec2 newVelocity(playerVelocity.x, playerVelocity.y - 0.2f);
-	//	this->m_b2Body->SetLinearVelocity(newVelocity);
-	//}
+	//	Pull down on player to give more natural jumping feel
+	if (isMidAir /*&& playerVelocity.y <= 0*/)
+	{
+		//CCLog("Velocity: y: %f", playerVelocity.y);
+		m_b2Body->ApplyLinearImpulse(b2Vec2(0, PLAYER_JUMP_PUSH), m_b2Body->GetWorldCenter());
+	}
 
 	//	Check and adjust player direction
 	checkPlayerDirection(leftDown, rightDown);
