@@ -1,6 +1,30 @@
 #include "WeatherHelper.h"
 #include "Settings.h"
 
+static inline bool ccc4BEqual(ccColor4B a, ccColor4B b)
+{
+	return a.a == b.a && a.b == b.b && a.g == b.g && a.r == b.r;
+}
+
+static inline ccColor4B Blend(ccColor4B c1, ccColor4B c2)
+{
+    ccColor4B result;
+	double a1 = c1.a / 255.0;
+    double a2 = c2.a / 255.0;
+
+    result.r = (int) (a1 * c1.r + a2 * (1 - a1) * c2.r);
+    result.g = (int) (a1 * c1.g + a2 * (1 - a1) * c2.g);
+    result.b = (int) (a1 * c1.b + a2 * (1 - a1) * c2.b);
+    result.a = (int) (255 * (a1 + a2 * (1 - a1)));
+    return result;
+}
+
+static float random(float min, float max)
+{
+	float r = (float)rand() / (float)RAND_MAX;
+	return min + r * (max - min);
+}
+
 bool WeatherHelper::init()
 {
 	PROFILE_FUNC();

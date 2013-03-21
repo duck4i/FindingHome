@@ -10,28 +10,36 @@
 
 #define WINDOW_TITLE	"Finding Home Alpha"
 
-//	resource dirs and static files
+///
+///	resource dirs and static files
+///
 #define RESOURCE_DIR		"..\\Resources\\"
 #define RESOURCE_SYS_DIR	RESOURCE_DIR "system\\"
 
-#define SCRIPT_DIR			RESOURCE_DIR "scripting\\"
+///
+///	Special Directories
+///
+#define SCRIPT_DIR			RESOURCE_DIR		"scripting\\"
+#define RESOURCE_SH_DIR		RESOURCE_SYS_DIR	"shaders\\"
+#define RESOURCE_WH_DIR		RESOURCE_SYS_DIR	"weather\\"
+#define RESOURCE_PL_DIR		RESOURCE_SYS_DIR	"player\\"
+#define RESOURCE_EM_DIR		RESOURCE_SYS_DIR	"enemies\\"
 
-#define RESOURCE_SH_DIR		RESOURCE_SYS_DIR "shaders\\"
-#define RESOURCE_WH_DIR		RESOURCE_SYS_DIR "weather\\"
-#define RESOURCE_PL_DIR		RESOURCE_SYS_DIR "player\\"
-#define RESOURCE_EM_DIR		RESOURCE_SYS_DIR "enemies\\"
-
-
+///
+///	Shape controller position
+///
 #define SHAPE_DATA					RESOURCE_SYS_DIR "ShapeData.json"
-#define WEATHER_CONTROLLER_DATA		RESOURCE_WH_DIR "weather_controller.png"
 
+///
+///	Starting level settings
+///
 #ifdef _DEBUG
-#define GAME_START_LEVEL			RESOURCE_DIR "Level6.xml"//"ForestTest.xml"
+	#define GAME_START_LEVEL			RESOURCE_DIR "ForestTest.xml"//"ForestTest.xml"
 #else
-#define GAME_START_LEVEL			RESOURCE_DIR "Level2.xml"
+	#define GAME_START_LEVEL			RESOURCE_DIR "Level2.xml"
 #endif
 
-#define STAR_PATH					RESOURCE_DIR "star.png"
+
 
 #define PLAYER_TAG			1001
 
@@ -43,6 +51,10 @@
 
 #define JS_INCLUDE_SCRIPT	SCRIPT_DIR "include.js"
 
+///
+///	Checks if file exists on multiplatform
+///	TODO: Move it from here to somewhere else
+///
 inline static bool doesFileExits(char* file)
 {
 #ifdef CC_PLATFORM_WIN32

@@ -103,7 +103,14 @@ void GameEntityPlayer::updateRotation(float32 angle)
 
 void GameEntityPlayer::updatePlayerMovement(float delta)
 {
-	KeyboardHelper *key = KeyboardHelper::sharedHelper();
+	PROFILE_FUNC();
+
+	float isMidAir = isPlayerMidAir();
+	b2Vec2 playerVelocity = m_b2Body->GetLinearVelocity();
+
+	//	Get key states
+	KeyboardHelper *key = KeyboardHelper::sharedHelper();		
+
 	float x = 0;
 	float y = 0;
 
@@ -127,7 +134,9 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 		m_bVerticalThrustWasOn += delta;
 
 	//CCLog("TIME: %f", m_bVerticalThrustWasOn);
-	if (kup == KeyStateUndefined && m_bVerticalThrustWasOn != -1 && m_bVerticalThrustWasOn >= PLAYER_JUMP_HALFSTEP)
+	bool halfstepCase = kup == KeyStateUndefined && m_bVerticalThrustWasOn != -1;
+	bool enoughTimePassed = m_bVerticalThrustWasOn >= PLAYER_JUMP_HALFSTEP / (m_bVerticalThrustCounter > 0 ? m_bVerticalThrustCounter : 1);
+	if (halfstepCase && enoughTimePassed)
 	{
 		kup = KeyStateDown;
 		if (m_bVerticalThrustCounter++ > PLAYER_HALFSTEP_TIMES)
@@ -138,11 +147,10 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 		y = PLAYER_HALFSTEP_VALUE / m_bVerticalThrustCounter;		
 	}
 	else
-		if (kup == KeyStateDown )
-			y += jumpValue;
-	
+		if ( kup == KeyStateDown )
+			y += jumpValue;	
 
-	float isMidAir = isPlayerMidAir();
+	
 	if (x || y)
 	{
 		if (x)
@@ -150,15 +158,13 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 
 		//	
 		//	Calculate and apply forces for movement
-		//
-		b2Vec2 vel = m_b2Body->GetLinearVelocity();
+		//		
 
 		//	http://www.box2d.org/forum/viewtopic.php?f=3&t=4733
 		//	http://www.ikbentomas.nl/other/box2d/
 		//	http://www.cocos2d-iphone.org/forum/topic/13501				
 
-		float maxSpeed = this->maxSpeed;
-		const b2Vec2 velocity = m_b2Body->GetLinearVelocity();
+		float maxSpeed = this->maxSpeed;		
 
 		//	no more jumping and only slight adjustment of direction when in air			
 		if (isMidAir)
@@ -166,7 +172,7 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 			x *= midAirFactor;
 
 			bool specialJumpCase = (m_bVerticalThrustWasOn == -1 || m_bVerticalThrustCounter > 0);
-			if (specialJumpCase && vel.y > 0 /* in jump - not falling yet*/);
+			if (specialJumpCase && playerVelocity.y > 0 /* in jump - not falling yet*/);
 			else
 				y = 0;	//	no jumping when mid air
 		}
@@ -182,47 +188,62 @@ void GameEntityPlayer::updatePlayerMovement(float delta)
 		}
 
 		//	apply horizontal force - take care of max velocity
-		const float speed = abs(velocity.x);
+		const float speed = abs(playerVelocity.x);
 		if (speed >= maxSpeed)
 		{
 			x = 0;
 			//y = 0;	//	now vertical speed is speed limited too
 		}
 		
-		if (y)
+		if (false/*y && x*/)
 		{
 			//	if jumping here we need to add some angle to our player
 			//	TODO:
-			b2Vec2 vec = m_b2Body->GetWorldCenter();
-			m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), vec);
+
+			b2Vec2 pos = m_b2Body->GetWorldCenter();
+			float diffx = PLAYER_JUMP_PUSH * (PlayerDirectionRight ? -1 : 1);
+			b2Vec2 thrust = b2Vec2(x - diffx, y);
+
+			//	apply pressure
+			m_b2Body->ApplyLinearImpulse(thrust, pos);
 		}
-		else		
-			m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), m_b2Body->GetWorldCenter());		
+		else
+		{
+			//	TODOs:
+			//	- Player is too light, needs to fall faster
+			//	- Arc that is made looks like /----------\ but should be sharper corner like /----\ (no long jumps if not used shift)
+			//	- Camera only needs to have affect when player is not MID-AIR??? (super mario style)
+
+			m_b2Body->ApplyLinearImpulse(b2Vec2(x, y), m_b2Body->GetWorldCenter());
+		}
 	}
 	else if (m_bForwardTrustWasOn)
 	{
 		m_bForwardTrustWasOn = 0.0f;
-		b2Vec2 linearVel = m_b2Body->GetLinearVelocity();
-		m_b2Body->SetLinearVelocity(b2Vec2(linearVel.x * 0.5f, linearVel.y /** 0.5f*/));
+		m_b2Body->SetLinearVelocity(b2Vec2(playerVelocity.x * 0.5f, playerVelocity.y /** 0.5f*/));
 	}
 
 
-	//	in any case constrol the jump velocity to look more real
-	b2Vec2 vel = this->m_b2Body->GetLinearVelocity();
-	if (vel.y <= 0)
-	{
-		vel.y -= 0.2f;
-		this->m_b2Body->SetLinearVelocity(vel);
-	}
+	//	in any case constrol the jump velocity to look more real	
+	//if (playerVelocity.y < 0)
+	//{		
+	//	b2Vec2 newVelocity(playerVelocity.x, playerVelocity.y - 0.2f);
+	//	this->m_b2Body->SetLinearVelocity(newVelocity);
+	//}
 
-	//	Check player direction
-	if (leftDown && rightDown); // do nothing if both directions on
-	else if (key->getLeft() == KeyStateDown && direction == PlayerDirectionRight)
+	//	Check and adjust player direction
+	checkPlayerDirection(leftDown, rightDown);
+}
+
+void GameEntityPlayer::checkPlayerDirection(bool left, bool right)
+{
+	if (left && right); // do nothing if both directions on
+	else if (left && direction == PlayerDirectionRight)
 	{
 		direction = PlayerDirectionLeft;
 		this->m_skin->runAction(CCFlipX::create(true));
 	}
-	else if (key->getRight() == KeyStateDown && direction == PlayerDirectionLeft)
+	else if (right && direction == PlayerDirectionLeft)
 	{
 		direction = PlayerDirectionRight;
 		this->m_skin->runAction(CCFlipX::create(false));

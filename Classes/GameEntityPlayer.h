@@ -3,7 +3,14 @@
 
 #include "GameEntitySprite.h"
 #include "KeyboardHelper.h"
+#include "Performance.h"
 
+//	Good movement mechanics example
+//http://www.miniclip.com/games/dale-and-peakot/en/#tag-cat-anim-2289
+
+///
+///	Movement modifiers
+///
 #define PLAYER_SPEED			14.0f
 #define PLAYER_JUMP_VALUE		200.0f
 #define PLAYER_STEP_VALUE		25.0f
@@ -13,10 +20,18 @@
 
 #define PLAYER_JUMP_HALFSTEP	0.1f
 #define PLAYER_HALFSTEP_VALUE	60.0f
-#define PLAYER_HALFSTEP_TIMES	3.0f
+#define PLAYER_HALFSTEP_TIMES	2.0f
 
-#define IN_AIR_BEFORE_DEATH		2.5f
+//	Make arch when jumping
+#define PLAYER_JUMP_PUSH		15.0f
 
+//	How long player has to be in air before claimed dead
+#define IN_AIR_BEFORE_DEATH		4.0f
+
+
+///
+///	Assets used for player
+///
 #define RESOURCE_PLAYER			RESOURCE_PL_DIR	"dog.png"
 #define RESOURCE_PLAYER2		RESOURCE_PL_DIR	"dog2.png"
 #define RESOURCE_PLAYER3		RESOURCE_PL_DIR	"dog3.png"
@@ -37,8 +52,8 @@ class GameEntityPlayer : public GameEntity
 protected:
 
 	CCNode* m_skin;
-	CCAnimation* m_animationStill;
-	
+	CCAnimation* m_animationStill;	
+
 	b2Fixture* m_sensorFixture;
 	
 	///	Keeps permanent record of player death state in case of tunneling
@@ -53,6 +68,8 @@ protected:
 	float maxSpeed;
 	float shiftFactor;
 	float midAirFactor;
+
+	float m_secondsInAir;
 
 	GameEntityPlayer(NODEINFO info) : GameEntity(info) 
 	{
@@ -71,6 +88,9 @@ protected:
 	}
 	
 	virtual bool init();
+	
+	//	Helper methods
+	virtual void checkPlayerDirection(bool left, bool right);
 
 public:
 	
@@ -86,7 +106,7 @@ public:
 		return p;
 	}
 
-	PlayerDirection direction;	
+	PlayerDirection direction;
 
 	virtual bool createBody(b2World* world);
 
@@ -98,9 +118,9 @@ public:
 	virtual CCNode* getSkin() { return m_skin; } 
 
 	///	Checks if player is touching the ground
-	float m_secondsInAir;
+	
 	virtual bool isPlayerMidAir();	
-	virtual bool checkForDeath();	
+	virtual bool checkForDeath();
 
 };
 

@@ -7,7 +7,6 @@
 #include "Performance.h"
 using namespace cocos2d;
 
-#define MOON_RESOURCE RESOURCE_WH_DIR "moon.png"
 
 //	Get pixel from image - IOS
 //	http://stackoverflow.com/questions/448125/how-to-get-pixel-data-from-a-uiimage-cocoa-touch-or-cgimage-core-graphics
@@ -27,29 +26,15 @@ using namespace cocos2d;
 
 //	colors? http://es.appbrain.com/app/winter-snow-cartoon-lwp-pro/com.electricseed.cartoonwinterlandscape
 
-static inline bool ccc4BEqual(ccColor4B a, ccColor4B b)
-{
-	return a.a == b.a && a.b == b.b && a.g == b.g && a.r == b.r;
-}
 
-static inline ccColor4B Blend(ccColor4B c1, ccColor4B c2)
-{
-    ccColor4B result;
-	double a1 = c1.a / 255.0;
-    double a2 = c2.a / 255.0;
 
-    result.r = (int) (a1 * c1.r + a2 * (1 - a1) * c2.r);
-    result.g = (int) (a1 * c1.g + a2 * (1 - a1) * c2.g);
-    result.b = (int) (a1 * c1.b + a2 * (1 - a1) * c2.b);
-    result.a = (int) (255 * (a1 + a2 * (1 - a1)));
-    return result;
-}
+///
+///	Resources and controller
+///	
+#define STAR_PATH					RESOURCE_DIR	"star.png"
+#define MOON_RESOURCE				RESOURCE_WH_DIR "moon.png"
+#define WEATHER_CONTROLLER_DATA		RESOURCE_WH_DIR "weather_controller.png"
 
-static float random(float min, float max)
-{
-	float r = (float)rand() / (float)RAND_MAX;
-	return min + r * (max - min);
-}
 
 
 ///
