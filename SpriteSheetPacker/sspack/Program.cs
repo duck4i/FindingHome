@@ -211,7 +211,11 @@ namespace sspack
 
 		static int Main(string[] args)
 		{
-            if (args.Length != 0)
+            String directory = @"..\Resources\";
+
+            if (args.Length == 1)
+                directory = args[0];
+            else if (args.Length != 0)
 			    return Launch(args);
 
             Console.Clear();
@@ -220,7 +224,7 @@ namespace sspack
             Helper.Write("Call with /? for help", ConsoleColor.Magenta);
 
             arguments = new ProgramArguments();
-            PNGFiles = Helper.GetPNGFilesInDirectory(@"..\Resources\");
+            PNGFiles = Helper.GetPNGFilesInDirectory(directory);
 
             Helper.WriteSUCCESS("\r\nFound files counted: " + PNGFiles.Count);
          
