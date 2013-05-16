@@ -1160,7 +1160,9 @@ namespace GLEED2D
 
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            featureNotImplemented();
+            //featureNotImplemented();
+            Thread.Sleep(new Random().Next(1000, 2000));
+            MessageBox.Show("You already have the latest version", "Update not needed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void sendErrorLogFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1173,10 +1175,7 @@ namespace GLEED2D
             featureNotImplemented();
         }
 
-        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
 
 
 
@@ -1309,13 +1308,7 @@ namespace GLEED2D
 
         private void reportAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Process.Start("http://recapture.freeforums.net/board/13/support-improvements");
-            }
-            catch (Exception)
-            {
-            }
+            Logger.Instance.emailFeatureRequest();
         }
 
         private void runPhysicsEditorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1433,6 +1426,8 @@ namespace GLEED2D
 
             if (selected == "Chipmunk")
                 Editor.Instance.createEnemyType(EnemyType.Chipmunk);
+            else
+                featureNotImplemented();
         }
 
 

@@ -6,7 +6,7 @@
   <SaveLevelStartApplication>false</SaveLevelStartApplication>
   <SaveLevelApplicationToStart />
   <SaveLevelAppendLevelFilename>false</SaveLevelAppendLevelFilename>
-  <CustomCommandLine>-console</CustomCommandLine>
+  <CustomCommandLine>-console -nosound</CustomCommandLine>
   <ShowGrid>true</ShowGrid>
   <SnapToGrid>false</SnapToGrid>
   <ShowWorldOrigin>true</ShowWorldOrigin>

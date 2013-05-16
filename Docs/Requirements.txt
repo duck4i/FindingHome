@@ -1,5 +1,8 @@
 
-[GAME] Microsoft VC++ Redistributable 
+[GAME] Microsoft VC++ 2010 Redistributable 
+http://goo.gl/FbZK6
+
+[GAME] Microsoft VC++ 2012 Redistributable 
 Download: goo.gl/TUQcK
 
 [EDITOR] Microsoft .NET 3.5 

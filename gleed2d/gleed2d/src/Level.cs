@@ -62,7 +62,7 @@ namespace GLEED2D
             Layers = new List<Layer>();
             CustomProperties = new SerializableDictionary();
             WeatherActive = true;
-            CameraZoom = 1.0f;
+            CameraZoom = 0;
 
             //  player zeros - no override
             PlayerThrust = 0;

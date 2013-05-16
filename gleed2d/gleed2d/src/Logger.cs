@@ -61,6 +61,15 @@ namespace GLEED2D
             return DateTime.Now + "." + DateTime.Now.Millisecond.ToString("000") + " - " + message;
         }
 
+        private String getPublicSignature()
+        {
+            return "\r\nEditor Version: " + Editor.Instance.Version
+                    + "\r\nOperating System: " + Environment.OSVersion.ToString() 
+                    //+ (IntPtr.Size == 8 ? " x64" : " x86")
+                    + "\r\n";
+                    
+        }
+
         public void emailToDevelopers()
         {
             try
@@ -71,8 +80,26 @@ namespace GLEED2D
                 String subject = "[LevelEditor] Please review my error log";
                 String body = "";
 
-                body += "\r\nOperating System: " + Environment.OSVersion.ToString();
-                body += "\r\nEditor Version: " + Editor.Instance.Version + "\r\n";
+                body += getPublicSignature();
+
+                m.SendMailPopup(subject, body);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Hmmm... Something bad happened...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void emailFeatureRequest()
+        {
+            try
+            {
+                MAPI m = new MAPI();                
+                m.AddRecipientTo("vasamajka@gmail.com");
+                String subject = "[LevelEditor] New feature request";
+                String body = "\r\r\n";
+
+                body += getPublicSignature();
 
                 m.SendMailPopup(subject, body);
             }
