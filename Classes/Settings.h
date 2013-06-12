@@ -34,7 +34,7 @@
 ///	Starting level settings
 ///
 #ifdef _DEBUG
-	#define GAME_START_LEVEL			RESOURCE_DIR "ForestTest2.xml"//"ForestTest.xml"
+	#define GAME_START_LEVEL			RESOURCE_DIR "ForestTest.xml"//"ForestTest.xml"
 #else
 	#define GAME_START_LEVEL			RESOURCE_DIR "Level2.xml"
 #endif

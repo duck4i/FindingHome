@@ -76,3 +76,31 @@ void XMLHelper::logNode(xmlNodePtr node)
 		CCLog("XML Node log: Name: %s Properties: %s", name, s.c_str());
 		
 }
+
+/*
+unsigned int XMLHelper::getChildCount(tinyxml2::XMLNode* parent, const char* tag)
+{
+	unsigned int count = 0;
+	if (parent && tag)
+	{
+		tinyxml2::XMLNode* nptr = parent->FirstChildElement(LEVEL_TAG);
+		while (nptr != NULL)
+		{
+			nptr = nptr->NextSiblingElement(LEVEL_TAG);
+			++count;
+		}
+	}
+	return count;
+}
+*/
+
+char* XMLHelper::readNodeAttribute(xmlNodePtr node, const char* name)
+{	
+	char* at = (char*) xmlGetProp(node, (const xmlChar*) name);
+	return at;
+}
+
+xmlDocPtr XMLHelper::loadFile(const char* filename)
+{
+	return xmlReadFile(filename, "utf-8", XML_PARSE_RECOVER);
+}

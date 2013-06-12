@@ -14,11 +14,18 @@ class XMLHelper
 {
 public:
 	static xmlNodePtr	findChildNodeWithName(xmlNodePtr parent, char* name);
+
 	static char*		readNodeContent(xmlNodePtr node);
+
 	static float		readNodeContentF(xmlNodePtr node);
 	static bool			readNodeContentB(xmlNodePtr node);
 	static unsigned int	readNodeContentU(xmlNodePtr node);
+
 	static void			logNode(xmlNodePtr node);
+
+	//static unsigned int getChildCount(tinyxml2::XMLNode* parent, const char* tag);
+	static char*		readNodeAttribute(xmlNodePtr node, const char* name);
+	static xmlDocPtr	loadFile(const char* filename);
 };
 
 

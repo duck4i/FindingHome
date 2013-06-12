@@ -17,7 +17,7 @@ bool LevelLoader::parse()
 
 	bool success = false;
 
-	sharedDoc = xmlReadFile(this->levelPath, "utf-8", XML_PARSE_RECOVER);
+	sharedDoc = XMLHelper::loadFile(this->levelPath);
 	if (!sharedDoc)
 	{
 		CCLog("Cannot init XML from file %s", this->levelPath);
@@ -27,62 +27,58 @@ bool LevelLoader::parse()
 	//	now parse level properties
 	parseLevelProperties();
 	
-	xmlNodePtr currNode = sharedDoc->children->children;
-	
-	while (currNode)
-	{		
-		if (xmlStrcasecmp(currNode->name, (const xmlChar*) "Layers") == 0)
-		{
-			xmlNodePtr layers = currNode->children;
-
-			while (layers)
-			{
-				bool visible = parseNodeVisible(layers);
-				const xmlChar* name = xmlGetProp(layers, (const xmlChar*) "Name");
-				bool main = xmlStrcasecmp(name, (const xmlChar*) MAIN_LAYER_NAME) == 0;
-				
-				//	get paralax info
-				CCPoint parallax = ccp(1, 1);	//default
-				CCLayer *parent = NULL;
-				
-				parent = CCLayer::create();
-
-				if (main)
-					mainLayer = parent;
-				
-				xmlNodePtr speed = XMLHelper::findChildNodeWithName(layers, "ScrollSpeed");
-				if (speed)
-				{
-					xmlNodePtr xn = XMLHelper::findChildNodeWithName(speed, "X");
-					if (xn)
-						parallax.x = XMLHelper::readNodeContentF(xn);
-					xmlNodePtr yn = XMLHelper::findChildNodeWithName(speed, "Y");
-					if (yn)
-						parallax.y = XMLHelper::readNodeContentF(yn);
-				}
-
-				paralaxNode->addChild(parent, 0, parallax, ccp(0, 0));						
-
-				if (layers->children)
-				{
-					xmlNodePtr subLayers = layers->children->next;
-					if (subLayers)
-					{
-						xmlNodePtr ptr = subLayers->children;
-						while (ptr)
-						{
-							parseCurrentNode(ptr, parallax, parent, main);
-							ptr = ptr->next;
-						}
-					}
-				}
-				layers = layers->next;
-			}
-
-			break;	//	we are not interested in custom stuff for now, only layers part
-		}
-		currNode = currNode->next;
+	//xmlNodePtr currNode = sharedDoc->children->children;
+	xmlNodePtr layers = XMLHelper::findChildNodeWithName((xmlNodePtr) sharedDoc, "Level");
+	if (layers){
+		layers = XMLHelper::findChildNodeWithName(layers, "Layers");
+		if (layers)
+			layers = layers->children;
 	}
+
+	while (layers)
+	{
+		bool visible = parseNodeVisible(layers);
+		const xmlChar* name = xmlGetProp(layers, (const xmlChar*) "Name");
+		bool main = xmlStrcasecmp(name, (const xmlChar*) MAIN_LAYER_NAME) == 0;
+				
+		//	get paralax info
+		CCPoint parallax = ccp(1, 1);	//default
+		CCLayer *parent = NULL;
+				
+		parent = CCLayer::create();
+
+		if (main)
+			mainLayer = parent;
+				
+		xmlNodePtr speed = XMLHelper::findChildNodeWithName(layers, "ScrollSpeed");
+		if (speed)
+		{
+			xmlNodePtr xn = XMLHelper::findChildNodeWithName(speed, "X");
+			if (xn)
+				parallax.x = XMLHelper::readNodeContentF(xn);
+			xmlNodePtr yn = XMLHelper::findChildNodeWithName(speed, "Y");
+			if (yn)
+				parallax.y = XMLHelper::readNodeContentF(yn);
+		}
+
+		paralaxNode->addChild(parent, 0, parallax, ccp(0, 0));						
+
+		if (layers->children)
+		{
+			xmlNodePtr subLayers = layers->children->next;
+			if (subLayers)
+			{
+				xmlNodePtr ptr = subLayers->children;
+				while (ptr)
+				{
+					parseCurrentNode(ptr, parallax, parent, main);
+					ptr = ptr->next;
+				}
+			}
+		}
+		layers = layers->next;
+	}
+
 
 	success = this->playerNode != NULL && this->playerBody != NULL;
 
@@ -93,8 +89,8 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 {
 	PROFILE_FUNC();
 
-	xmlChar* nodeName = xmlGetProp(node, (const xmlChar*) "Name");
-	xmlChar* nodeType = xmlGetProp(node, (const xmlChar*) "type");
+	xmlChar* nodeName = (xmlChar*) XMLHelper::readNodeAttribute(node, "Name");
+	xmlChar* nodeType = (xmlChar*) XMLHelper::readNodeAttribute(node, "type");
 
 	if (nodeType == NULL)
 		return;	//	skipp unknown or closing elements
