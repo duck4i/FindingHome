@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Forest Test - Ibrahim" Visible="true" WeatherActive="true" CameraZoom="0.5" PlayerThrust="0" PlayerJump="0" PlayerMaxSpeed="0" PlayerShiftModifier="0" PlayerMidAirModifier="0">
-    <Layerss>
+    <Layers>
         <Layer Name="Background" Visible="true">
             <Items>
                 <Item xsi:type="TextureItem" Name="Texture_0002" Visible="true">

@@ -19,37 +19,47 @@ bool GameEntityCollisionPath::createFixture()
 	xmlNodePtr root = m_nodeInfo.xmlNode;
 	xmlNodePtr points = XMLHelper::findChildNodeWithName(root, "LocalPoints");
 	
-	unsigned int childCount = xmlChildElementCount(points);
-	xmlNodePtr child = points->children;
+	unsigned int childCount = XMLHelper::getChildCount(points);
+	xmlNodePtr child = points->FirstChild();
 
-	b2Vec2 *vecarray = (b2Vec2*) malloc(sizeof(b2Vec2) * childCount);
+	
+	b2Vec2 *vecarray = new b2Vec2[childCount];//(b2Vec2*) malloc(sizeof(b2Vec2) * childCount);
 	if (!vecarray)
 		return false;
-
+	
 	unsigned int counter = 0;
+
+	
 	while (child)
 	{
 		xmlNodePtr x = XMLHelper::findChildNodeWithName(child, "X");
 		xmlNodePtr y = XMLHelper::findChildNodeWithName(child, "Y");
 		
 		if (x && y)
-		{
+		{			
 			float xv = SCREEN_TO_WORLD(XMLHelper::readNodeContentF(x));
-			float yv = SCREEN_TO_WORLD(1.0 - XMLHelper::readNodeContentF(y));	//invert Y 
-
+			float yv = SCREEN_TO_WORLD(1.0 - XMLHelper::readNodeContentF(y));	//invert Y
 			b2Vec2 vec = b2Vec2(xv, yv);
 			vecarray[counter++] = vec;
-		}		
+		}
 
-		child = child->next;
+		child = child->NextSibling();
 	}
 	
-	b2ChainShape cs;
-	cs.CreateChain(vecarray, counter);	
-	m_b2FixtureDef.shape = &cs;
 
-	b2Fixture *fx = m_b2Body->CreateFixture(&m_b2FixtureDef);
+	if (counter > 0)
+	{
+		b2ChainShape cs;
+		cs.CreateChain(vecarray, counter);	
+		m_b2FixtureDef.shape = &cs;
 
-	free(vecarray);
-	return fx != NULL;
+		b2Fixture *fx = m_b2Body->CreateFixture(&m_b2FixtureDef);
+
+		if (vecarray)
+			delete vecarray;
+
+		return fx != NULL;
+	}
+	
+	return false;
 }

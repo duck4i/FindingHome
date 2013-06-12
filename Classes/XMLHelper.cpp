@@ -8,25 +8,19 @@ xmlNodePtr XMLHelper::findChildNodeWithName(xmlNodePtr parent, char* name)
 {
 	if (parent == NULL)
 		return NULL;
-
-	xmlNodePtr subs = parent->children, ret = NULL;
-	while (subs != NULL)
-	{
-		if (xmlStrcasecmp(subs->name, (const xmlChar*) name) == 0)
-		{
-			ret = subs;
-			break;
-		}
-		subs = subs->next;
-	}
-	return ret;
+	return parent->FirstChildElement(name);
 }
 
 char* XMLHelper::readNodeContent(xmlNodePtr node)
 {
-	if (node == NULL)
-		return NULL;
-	return (char*) xmlNodeGetContent(node);
+	char* ret = NULL;
+	if (node)
+	{
+		tinyxml2::XMLElement* u = node->ToElement();
+		if (u)
+			ret = (char*) u->GetText();
+	}	
+	return ret;
 }
 
 float XMLHelper::readNodeContentF(xmlNodePtr node)
@@ -39,7 +33,10 @@ float XMLHelper::readNodeContentF(xmlNodePtr node)
 
 bool XMLHelper::readNodeContentB(xmlNodePtr node)
 {
-	return xmlStrcasecmp((const xmlChar*) readNodeContent(node), (const xmlChar*) "true") == 0;
+	const xmlChar* content= (const xmlChar*) readNodeContent(node);
+	if (!content)
+		return false;
+	return xmlStrcasecmp(content, (const xmlChar*) "true") == 0;
 }
 
 unsigned int XMLHelper::readNodeContentU(xmlNodePtr node)
@@ -55,8 +52,9 @@ unsigned int XMLHelper::readNodeContentU(xmlNodePtr node)
 
 void XMLHelper::logNode(xmlNodePtr node)
 {
+	/*
 	bool consoleOutput = false;
-
+	
 	char* name = (char*) node->name;
 	std::string s = "";
 
@@ -74,33 +72,45 @@ void XMLHelper::logNode(xmlNodePtr node)
 		MessageBox(NULL, s.c_str(), name, MB_OK);
 	else
 		CCLog("XML Node log: Name: %s Properties: %s", name, s.c_str());
-		
+	*/
 }
 
-/*
+
 unsigned int XMLHelper::getChildCount(tinyxml2::XMLNode* parent, const char* tag)
 {
 	unsigned int count = 0;
-	if (parent && tag)
+	if (parent)
 	{
-		tinyxml2::XMLNode* nptr = parent->FirstChildElement(LEVEL_TAG);
+		tinyxml2::XMLNode* nptr = parent->FirstChildElement(tag);
 		while (nptr != NULL)
 		{
-			nptr = nptr->NextSiblingElement(LEVEL_TAG);
+			nptr = nptr->NextSiblingElement(tag);
 			++count;
 		}
 	}
 	return count;
 }
-*/
+
 
 char* XMLHelper::readNodeAttribute(xmlNodePtr node, const char* name)
 {	
-	char* at = (char*) xmlGetProp(node, (const xmlChar*) name);
+	char* at = (char*) node->ToElement()->Attribute(name);//(char*) xmlGetProp(node, (const xmlChar*) name);
 	return at;
 }
 
 xmlDocPtr XMLHelper::loadFile(const char* filename)
 {
-	return xmlReadFile(filename, "utf-8", XML_PARSE_RECOVER);
+	xmlDocPtr p = new tinyxml2::XMLDocument();
+	if (p)
+	{
+		tinyxml2::XMLError e = p->LoadFile(filename);
+		if (e == tinyxml2::XML_NO_ERROR)
+			return p;
+		else
+		{
+			delete p;
+			p = NULL;
+		}
+	}
+	return p;
 }

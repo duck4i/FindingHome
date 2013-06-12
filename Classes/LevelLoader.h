@@ -104,7 +104,8 @@ public:
 	~LevelLoader()
 	{
 		if (sharedDoc)
-			xmlFreeDoc(sharedDoc);				
+			delete sharedDoc;
+		
 	}
 
 	bool parse();

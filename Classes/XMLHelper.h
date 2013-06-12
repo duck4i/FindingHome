@@ -2,10 +2,18 @@
 #define _XML_HELPER_H__
 
 #include <cocos2d.h>
-#include <libxml/parser.h>
-#include <libxml/tree.h>
+#include <tinyxml2.h>
 
 using namespace cocos2d;
+
+typedef char					xmlChar;
+typedef tinyxml2::XMLNode		xmlNode ;
+typedef xmlNode*				xmlNodePtr;
+typedef tinyxml2::XMLDocument*	xmlDocPtr;
+
+//	Define comparng mthood
+typedef int (*LEGACY_BYPASS)(const char*, const char*);
+static const LEGACY_BYPASS xmlStrcasecmp = _strcmpi;
 
 //
 //	XML helper utilities class. Makes XML code easier to read and work with.
@@ -23,7 +31,7 @@ public:
 
 	static void			logNode(xmlNodePtr node);
 
-	//static unsigned int getChildCount(tinyxml2::XMLNode* parent, const char* tag);
+	static unsigned int getChildCount(tinyxml2::XMLNode* parent, const char* tag  = NULL);
 	static char*		readNodeAttribute(xmlNodePtr node, const char* name);
 	static xmlDocPtr	loadFile(const char* filename);
 };

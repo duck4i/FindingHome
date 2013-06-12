@@ -4,14 +4,14 @@ bool CustomProperties::parseFromNode(xmlNodePtr node)
 {
 	//	skip if no properties 
 	xmlNodePtr customProps = XMLHelper::findChildNodeWithName(node, "CustomProperties");
-	if (!customProps || xmlChildElementCount(customProps) == 0)
+	if (!customProps || XMLHelper::getChildCount(customProps) == 0)
 		return false;
 
-	customProps = customProps->children;
+	customProps = customProps->FirstChild();
 	while (customProps)
-	{		
-		xmlChar* name = xmlGetProp(customProps, (const xmlChar*) "Name");
-		xmlChar* type = xmlGetProp(customProps, (const xmlChar*) "Type");
+	{	
+		xmlChar* name = XMLHelper::readNodeAttribute(customProps, "Name");
+		xmlChar* type = XMLHelper::readNodeAttribute(customProps,  "Type");
 		
 		//	skip unknowns
 		if (type != NULL && name != NULL)
@@ -27,7 +27,7 @@ bool CustomProperties::parseFromNode(xmlNodePtr node)
 				foundPropNamedCollectable = true;
 		}
 
-		customProps = customProps->next;
+		customProps = customProps->NextSibling();
 	}
 
 	return true;

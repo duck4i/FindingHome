@@ -2,10 +2,9 @@
 #define __LEVEL_NODE_INFO_H__
 
 #include <cocos2d.h>
-using namespace cocos2d;
+#include "XMLHelper.h"
 
-#include <libxml/parser.h>
-#include <libxml/tree.h>
+using namespace cocos2d;
 
 #ifndef MAX_PATH
 	#define MAX_PATH 255

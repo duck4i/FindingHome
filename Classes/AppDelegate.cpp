@@ -28,7 +28,6 @@
 #endif
 
 USING_NS_CC;
-using namespace CocosDenshion;
 
 extern bool disableSound;
 
@@ -97,7 +96,11 @@ bool AppDelegate::applicationDidFinishLaunching()
 		{
 			CCLog("");
 			levelOverride = NULL;	//	reset override in that case
+
+#ifdef ENABLE_SCRIPTING
 			sc->runScript(path.c_str());
+#endif
+
 			return true;	//	END HERE - special case when JS is loaded only
 		}
 	}

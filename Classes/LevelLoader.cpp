@@ -32,15 +32,15 @@ bool LevelLoader::parse()
 	if (layers){
 		layers = XMLHelper::findChildNodeWithName(layers, "Layers");
 		if (layers)
-			layers = layers->children;
+			layers = layers->FirstChild();
 	}
 
 	while (layers)
 	{
 		bool visible = parseNodeVisible(layers);
-		const xmlChar* name = xmlGetProp(layers, (const xmlChar*) "Name");
+		const xmlChar* name = XMLHelper::readNodeAttribute(layers, "Name");
 		bool main = xmlStrcasecmp(name, (const xmlChar*) MAIN_LAYER_NAME) == 0;
-				
+		
 		//	get paralax info
 		CCPoint parallax = ccp(1, 1);	//default
 		CCLayer *parent = NULL;
@@ -49,7 +49,7 @@ bool LevelLoader::parse()
 
 		if (main)
 			mainLayer = parent;
-				
+		
 		xmlNodePtr speed = XMLHelper::findChildNodeWithName(layers, "ScrollSpeed");
 		if (speed)
 		{
@@ -61,22 +61,22 @@ bool LevelLoader::parse()
 				parallax.y = XMLHelper::readNodeContentF(yn);
 		}
 
-		paralaxNode->addChild(parent, 0, parallax, ccp(0, 0));						
+		paralaxNode->addChild(parent, 0, parallax, ccp(0, 0));
 
-		if (layers->children)
+		if (layers->FirstChild())
 		{
-			xmlNodePtr subLayers = layers->children->next;
+			xmlNodePtr subLayers = layers->FirstChild();
 			if (subLayers)
 			{
-				xmlNodePtr ptr = subLayers->children;
+				xmlNodePtr ptr = subLayers->FirstChild();
 				while (ptr)
 				{
 					parseCurrentNode(ptr, parallax, parent, main);
-					ptr = ptr->next;
+					ptr = ptr->NextSibling();
 				}
 			}
 		}
-		layers = layers->next;
+		layers = layers->NextSibling();
 	}
 
 
@@ -90,7 +90,7 @@ void LevelLoader::parseCurrentNode(xmlNodePtr node, CCPoint parallax, CCLayer* p
 	PROFILE_FUNC();
 
 	xmlChar* nodeName = (xmlChar*) XMLHelper::readNodeAttribute(node, "Name");
-	xmlChar* nodeType = (xmlChar*) XMLHelper::readNodeAttribute(node, "type");
+	xmlChar* nodeType = (xmlChar*) XMLHelper::readNodeAttribute(node, "xsi:type");
 
 	if (nodeType == NULL)
 		return;	//	skipp unknown or closing elements
@@ -294,7 +294,7 @@ bool LevelLoader::parseNodeFlip(xmlNodePtr node, bool vertical)
 
 bool LevelLoader::parseNodeVisible(xmlNodePtr node)
 {	
-	const xmlChar* res = xmlGetProp(node, (const xmlChar*) "Visible");
+	const xmlChar* res = XMLHelper::readNodeAttribute(node, "Visible");
 	return xmlStrcasecmp(res, (const xmlChar*) "true") == 0;
 }
 
@@ -337,7 +337,7 @@ char* LevelLoader::parseNodeAssetName(xmlNodePtr node)
 
 void LevelLoader::parseLevelProperties()
 {	
-	LevelProperties* l = LevelProperties::sharedProperties(sharedDoc->children);
+	LevelProperties* l = LevelProperties::sharedProperties(sharedDoc);
 	if (l)
 		l->WorldLayer = this->worldNode;
 }

@@ -43,6 +43,12 @@
     <Filter Include="include\entities\enemies">
       <UniqueIdentifier>{5ea10b85-f4da-4d19-9861-d083330d327f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\support\xml">
+      <UniqueIdentifier>{2aff582b-f178-45e5-a0ea-7a5b31874370}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\support\xml">
+      <UniqueIdentifier>{c3520020-dca3-4a3e-9e37-8f79068d80c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\FindingHome.ico">
@@ -157,6 +163,9 @@
     <ClInclude Include="..\Classes\Enemies.h">
       <Filter>include\entities\enemies</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\cocos2dx\support\tinyxml2\tinyxml2.h">
+      <Filter>include\support\xml</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -239,6 +248,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\EnemyChipmunk.cpp">
       <Filter>source\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cocos2dx\support\tinyxml2\tinyxml2.cpp">
+      <Filter>source\support\xml</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

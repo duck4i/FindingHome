@@ -48,7 +48,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\extensions;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\Classes\VisualLeakDetector\include;$(SolutionDir)..\Classes\Shiny\include;$(SolutionDir)..\FMOD\include;$(SolutionDir)..\FMOD\designer\include;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\Resources\scripting\generated\;$(SolutionDir)..\Scripting;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\support\tinyxml2;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\extensions;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\Classes\VisualLeakDetector\include;$(SolutionDir)..\Classes\Shiny\include;$(SolutionDir)..\FMOD\include;$(SolutionDir)..\FMOD\designer\include;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\Resources\scripting\generated\;$(SolutionDir)..\Scripting;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -56,7 +56,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>ENABLE_SCRIPTING;DISABLE_MEMORY_TRACE;DISABLE_SHINYxxx;DISABLE_CAMERAx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVEx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_DEBUG;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;XP_WIN;JS_HAVE___INTN;JS_INTPTR_TYPE=int;COCOS2D_JAVASCRIPTx;CC_ENABLE_CHIPMUNK_INTEGRATION=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_SCRIPTINGxxx;DISABLE_MEMORY_TRACE;DISABLE_SHINYxxx;DISABLE_CAMERAx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVEx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_DEBUG;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;XP_WIN;JS_HAVE___INTN;JS_INTPTR_TYPE=int;COCOS2D_JAVASCRIPTx;CC_ENABLE_CHIPMUNK_INTEGRATION=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4800; 4068;4267;4251;4244;4099;4700;4101;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -64,7 +64,7 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\Classes\json\;$(SolutionDir)..\..\Debug.win32;$(SolutionDir)..\Classes\VisualLeakDetector\lib\Win32;$(SolutionDir)..\Classes\Shiny\lib;$(SolutionDir)..\FMOD\;$(SolutionDir)..\FMOD\designer\;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\lib;$(SolutionDir)..\..\external\sqlite3\libraries\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;libXML2.lib;json_debug.lib;vld.lib;ShinyDebug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;json_debug.lib;vld.lib;ShinyDebug.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
       <IgnoreSpecificDefaultLibraries>MSVCRT</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -91,13 +91,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;$(SolutionDir)..\Classes\Shiny\include;.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\extensions;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\FMOD\include;$(SolutionDir)..\FMOD\designer\include;$(SolutionDir)..\Resources\scripting\generated\;$(SolutionDir)..\Scripting;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\external\chipmunk\include\chipmunk;$(SolutionDir)..\..\scripting\javascript\bindings;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\include;$(SolutionDir)..\..\cocos2dx\support\tinyxml2;$(SolutionDir)..\Classes\Shiny\include;.;..\Classes;$(SolutionDir)..\..\cocos2dx;$(SolutionDir)..\..\cocos2dx\include;$(SolutionDir)..\..\cocos2dx\kazmath\include;$(SolutionDir)..\..\cocos2dx\platform\win32;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\iconv;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\libxml2;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\;$(SolutionDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(SolutionDir)..\..\extensions;$(SolutionDir)..\..\external;$(SolutionDir)..\..\CocosDenshion\include;$(SolutionDir)..\FMOD\include;$(SolutionDir)..\FMOD\designer\include;$(SolutionDir)..\Resources\scripting\generated\;$(SolutionDir)..\Scripting;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <ExceptionHandling>Async</ExceptionHandling>
       <DebugInformationFormat />
-      <PreprocessorDefinitions>ENABLE_SCRIPTING;DISABLE_MEMORY_TRACE;DISABLE_SHINYxx;DISABLE_CAMERAxxx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVExxx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_SCRIPTINGxxx;DISABLE_MEMORY_TRACE;DISABLE_SHINYxx;DISABLE_CAMERAxxx;DISABLE_FLOAT_CAMERA;NO_MOUSE_MOVExxx;START_ONLY_AT_NIGHTxxx;WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGSNDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4800; 4068;4267;4251;4244;4099;4700%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -106,7 +106,7 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalLibraryDirectories>$(OutDir);$(SolutionDir)..\FMOD\;$(SolutionDir)..\FMOD\designer\;$(SolutionDir)..\Classes\Shiny\lib;$(SolutionDir)..\Classes\json\;$(SolutionDir)..\..\Release.win32;$(SolutionDir)..\..\scripting\javascript\spidermonkey-win32\lib;$(SolutionDir)..\..\external\sqlite3\libraries\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>shiny.lib;libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;libXML2.lib;json_release.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shiny.lib;libcocos2d.lib;opengl32.lib;glew32.lib;libBox2d.lib;json_release.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
     </Link>
     <ResourceCompile>
@@ -133,6 +133,7 @@
     <ResourceCompile Include="FindingHome.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\cocos2dx\support\tinyxml2\tinyxml2.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BatchManager.h" />
     <ClInclude Include="..\Classes\ContactListener.h" />
@@ -164,11 +165,15 @@
     <ClInclude Include="..\Classes\TintShader.h" />
     <ClInclude Include="..\Classes\WeatherHelper.h" />
     <ClInclude Include="..\Classes\XMLHelper.h" />
-    <ClInclude Include="..\Resources\scripting\generated\game.hpp" />
+    <ClInclude Include="..\Resources\scripting\generated\game.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\cocos2dx\support\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BatchManager.cpp" />
     <ClCompile Include="..\Classes\ContactListerner.cpp" />
@@ -194,7 +199,10 @@
     <ClCompile Include="..\Classes\TintShader.cpp" />
     <ClCompile Include="..\Classes\WeatherHelper.cpp" />
     <ClCompile Include="..\Classes\XMLHelper.cpp" />
-    <ClCompile Include="..\Resources\scripting\generated\game.cpp" />
+    <ClCompile Include="..\Resources\scripting\generated\game.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
